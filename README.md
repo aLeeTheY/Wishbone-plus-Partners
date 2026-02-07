@@ -185,7 +185,7 @@ Alternatively, to launch a local development server, use the following command:
 * npm
 
   ```sh
-  npm run server
+  npm run serve
   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
