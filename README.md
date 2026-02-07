@@ -37,9 +37,9 @@
     <br />
     <a href="https://verstaem.online/projects/wishbone/">Original Layout</a>
     &middot;
-    <a href="https://ableeweean.github.io/Wishbone-plus-Partners/">View Demo</a>
+    <a href="https://aLeeTheY.github.io/Wishbone-plus-Partners/">View Demo</a>
     &middot;
-    <a href="https://github.com/aBLeeWeeAN/Wishbone-plus-Partners/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="https://github.com/aLeeTheY/Wishbone-plus-Partners/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
   </p>
 </div>
 
@@ -92,7 +92,7 @@ Key technical notes:
 
 You can see a **preview of the website** in the image below:
 
-[![Wishbone+Partners (Website) Preview][website-preview]](https://ableeweean.github.io/Wishbone-plus-Partners/)
+[![Wishbone+Partners (Website) Preview][website-preview]](https://aLeeTheY.github.io/Wishbone-plus-Partners/)
 
 
 
@@ -148,7 +148,7 @@ First, install [Node.js][Node.js-url]. Then, download this repository as a ZIP a
 * git
 
   ```sh
-  git clone https://github.com/aBLeeWeeAN/Wishbone-plus-Partners
+  git clone https://github.com/aLeeTheY/Wishbone-plus-Partners
   ```
 
 Navigate to the project folder in your terminal and run the following command to install all project dependencies:
@@ -195,7 +195,7 @@ Alternatively, to launch a local development server, use the following command:
 <!-- LICENSE -->
 ## License
 
-Copyright © 2025 [Vladimir Nikulin](https://github.com/aBLeeWeeAN).<br />
+Copyright © 2025 [Vladimir Nikulin](https://github.com/aLeeTheY).<br />
 This project is [MIT][license-url] licensed.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -207,7 +207,7 @@ This project is [MIT][license-url] licensed.
 
 👤 **Vladimir Nikulin**
 
-* Github: [@aBLeeWeeAN](https://github.com/aBLeeWeeAN)
+* Github: [@aLeeTheY](https://github.com/aLeeTheY)
 * Email: [mail.jorey@gmail.com](mailto:mail.jorey@gmail.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -242,20 +242,20 @@ This project is [MIT][license-url] licensed.
 
 
 
-[contributors-shield]: https://img.shields.io/github/contributors/aBLeeWeeAN/Wishbone-plus-Partners.svg?style=for-the-badge
-[contributors-url]: https://github.com/aBLeeWeeAN/Wishbone-plus-Partners/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/aLeeTheY/Wishbone-plus-Partners.svg?style=for-the-badge
+[contributors-url]: https://github.com/aLeeTheY/Wishbone-plus-Partners/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/aBLeeWeeAN/Wishbone-plus-Partners.svg?style=for-the-badge
-[forks-url]: https://github.com/aBLeeWeeAN/Wishbone-plus-Partners/network/members
+[forks-shield]: https://img.shields.io/github/forks/aLeeTheY/Wishbone-plus-Partners.svg?style=for-the-badge
+[forks-url]: https://github.com/aLeeTheY/Wishbone-plus-Partners/network/members
 
-[stars-shield]: https://img.shields.io/github/stars/aBLeeWeeAN/Wishbone-plus-Partners.svg?style=for-the-badge
-[stars-url]: https://github.com/aBLeeWeeAN/Wishbone-plus-Partners/stargazers
+[stars-shield]: https://img.shields.io/github/stars/aLeeTheY/Wishbone-plus-Partners.svg?style=for-the-badge
+[stars-url]: https://github.com/aLeeTheY/Wishbone-plus-Partners/stargazers
 
-[issues-shield]: https://img.shields.io/github/issues/aBLeeWeeAN/Wishbone-plus-Partners.svg?style=for-the-badge
-[issues-url]: https://github.com/aBLeeWeeAN/Wishbone-plus-Partners/issues
+[issues-shield]: https://img.shields.io/github/issues/aLeeTheY/Wishbone-plus-Partners.svg?style=for-the-badge
+[issues-url]: https://github.com/aLeeTheY/Wishbone-plus-Partners/issues
 
-[license-shield]: https://img.shields.io/github/license/aBLeeWeeAN/Wishbone-plus-Partners.svg?style=for-the-badge
-[license-url]: https://github.com/aBLeeWeeAN/Wishbone-plus-Partners/blob/master/LICENSE
+[license-shield]: https://img.shields.io/github/license/aLeeTheY/Wishbone-plus-Partners.svg?style=for-the-badge
+[license-url]: https://github.com/aLeeTheY/Wishbone-plus-Partners/blob/master/LICENSE
 
 
 
