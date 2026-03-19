@@ -36,3 +36,6 @@ build/
 
 # Ignore original/ folder
 original/
+
+# Ignore old/ folder
+old/
