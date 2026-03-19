@@ -33,3 +33,6 @@ js/
 # Ignore all build folders
 dist/
 build/
+
+# Ignore original/ folder
+original/
