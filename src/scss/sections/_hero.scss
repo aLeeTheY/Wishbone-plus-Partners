@@ -1,9 +1,5 @@
 @use "../base/typography";
 
-// #hero {
-//     background-color: #ece7e4;
-// }
-
 .hero {
     background-color: #ece7e4;
 
@@ -11,8 +7,9 @@
         // max-width: 600px;
         // max-width: 37.5em;
 
-        max-width: clamp(340px, 60vw, 600px);
-        min-width: 340px;
+        width: clamp(320px, 41.666vw, 600px);
+        // max-width: clamp(340px, 60vw, 600px);
+        // min-width: 340px;
 
         // flex: 1 1 600px;
 
@@ -25,7 +22,10 @@
 
         // padding: 60px 50px 40px 40px;
         // padding: top right bottom left
-        padding: clamp(40px, 4vw, 60px) clamp(30px, 4vw, 50px) clamp(20px, 4vw, 40px) clamp(20px, 4vw, 40px);
+        // padding: clamp(40px, 4vw, 60px) clamp(30px, 4vw, 50px) clamp(20px, 4vw, 40px) clamp(20px, 4vw, 40px);
+
+        // clamp(20px, 2.777vw, 40px) + clamp(16px, 4.166vw, 60px) = clamp(36px, 6.943vw, 100px)
+        padding: clamp(40px, 4.166vw, 60px) clamp(30px, 3.472vw, 50px) clamp(20px, 2.777vw, 40px) clamp(20px, 2.777vw, 40px);
     }
 
     &__pg {
@@ -39,12 +39,12 @@
         color: #403e3b;
 
         // margin-top: 18px;
-        margin-top: clamp(9px, 2vw, 18px);
+        margin-top: clamp(9px, 1.25vw, 18px);
     }
 
     &__button-link {
         // margin-top: 30px;
-        margin-top: clamp(15px, 3vw, 30px);
+        margin-top: clamp(15px, 2.083vw, 30px);
     }
 
     &__img-wrapper {
@@ -65,7 +65,8 @@
         // min-width: 300px;
         // min-height: 570px;
 
-        min-height: clamp(160px, 40vw, 720px);
+        min-height: clamp(160px, 50vw, 720px);
+        // min-height: 720px;
     }
 
     //todo  Доделать scale при уменьшении ширины окна
@@ -110,44 +111,57 @@
     }
 }
 
+//? --- LAPTOP X ---
+//? --------------
+// @media (max-width: 1440px) {
+//     .hero {
+//         &__img-wrapper {
+//             // min-height: clamp(160px, 50vw, 720px);
+//             // min-height: 720px;
+//         }
+//     }
+// }
+
 //? --- LAPTOP ---
 //? --------------
-@media (max-width: 1024px) {
-}
+// @media (max-width: 1024px) {
+// }
 
 //? --- TABLET ---
 //? --------------
-@media (max-width: 768px) {
-    .hero {
-        &__text {
-        }
+// @media (max-width: 768px) {
+//     .hero {
+//         &__text {
+//         }
 
-        &__pg {
-        }
+//         &__pg {
+//         }
 
-        &__button-link {
-        }
+//         &__button-link {
+//         }
 
-        &__img-wrapper {
-            // flex: 0.5 1 500px;
-            // min-height: clamp(200px, 5vw, 500px);
-        }
+//         &__img-wrapper {
+//             // flex: 0.5 1 500px;
+//             // min-height: clamp(200px, 5vw, 500px);
+//         }
 
-        &__img {
-        }
-    }
-}
+//         &__img {
+//         }
+//     }
+// }
 
 //? --- MOBILE ---
 //? --------------
 @media (max-width: 425px) {
     .hero {
         &__text {
-            max-width: 100%;
-            min-width: 0;
-            // padding: clamp(50px, 2vw, 60px) clamp(40px, 2vw, 50px) clamp(30px, 2vw, 40px) clamp(16px, 2vw, 40px);
-            padding: clamp(40px, 4vw, 60px) clamp(16px, 4vw, 50px) clamp(20px, 4vw, 40px) clamp(16px, 4vw, 40px);
-            // padding: clamp(40px, 4vw, 40px) clamp(16px, 4vw, 30px) clamp(20px, 4vw, 20px) clamp(16px, 4vw, 20px);
+            width: 100%;
+
+            // max-width: 100%;
+            // min-width: 0;
+
+            // padding: clamp(40px, 4vw, 60px) clamp(16px, 4vw, 50px) clamp(20px, 4vw, 40px) clamp(16px, 4vw, 40px);
+            padding: clamp(40px, 4.166vw, 60px) clamp(16px, 3.472vw, 50px) clamp(20px, 2.777vw, 40px) clamp(16px, 2.777vw, 40px);
         }
 
         &__pg {

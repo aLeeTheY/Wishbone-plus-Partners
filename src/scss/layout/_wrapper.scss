@@ -32,18 +32,22 @@
         justify-content: space-between;
         // align-items: center;
 
-        padding: 0 0 0 clamp(16px, 4vw, 60px);
+        padding: 0 0 0 clamp(16px, 4.166vw, 60px);
     }
 
     &--our-firm {
         max-width: 768px;
 
         display: flex;
-        justify-content: space-between;
-        align-items: start;
+        justify-content: center;
+        align-items: stretch;
+
+        column-gap: clamp(28px, 9.166vw, 132px);
+        // gap: clamp(28px, 9.166vw, 132px);
 
         // padding: 0 0 0 60px;
-        padding: 100px 0;
+        // padding: 100px 0;
+        padding: clamp(40px, 6.944vw, 100px) 0;
     }
 
     &--reeding-house-and-marble-staircase {
@@ -164,13 +168,22 @@
 
 //? --- TABLET ---
 //? --------------
-// @media (max-width: 1024px) {
-//     .wrapper {
-//         &--header {
-//             column-gap: 28px;
-//         }
-//     }
-// }
+@media (max-width: 1024px) {
+    .wrapper {
+        &--our-firm {
+            flex-direction: column;
+
+            // justify-content: stretch;
+            align-items: start;
+
+            row-gap: clamp(16px, 2.734vw, 28px);
+            // padding: clamp(40px, 4vw, 100px) clamp(36px, 6.943vw, 100px);
+            padding: clamp(40px, 6.944vw, 100px) clamp(36px, 6.943vw, 100px);
+            // max-width: 100%;
+            // padding: clamp(16px, 4vw, 100px) clamp(16px, 4vw, 80px);
+        }
+    }
+}
 
 //? --- MOBILE ---
 //? --------------
@@ -183,6 +196,11 @@
         &--hero {
             padding: 0;
             flex-wrap: wrap;
+        }
+
+        &--our-firm {
+            // row-gap: clamp(16px, 4vw, 32px);
+            padding: clamp(40px, 6.944vw, 100px) 16px;
         }
     }
 }

@@ -24,7 +24,7 @@
 
     &--hero {
         // row-gap: 20px;
-        row-gap: clamp(14px, 2vw, 20px);
+        row-gap: clamp(14px, 1.388vw, 20px);
 
         .block-header__header {
             @include typography.poppins--64px;
@@ -51,7 +51,9 @@
     &--our-firm {
         @include typography.poppins--32px;
 
-        line-height: 38px;
+        // line-height: 38px;
+        line-height: 1.1875em;
+
         letter-spacing: 0;
 
         color: #403e3b;
