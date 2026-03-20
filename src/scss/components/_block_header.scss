@@ -5,13 +5,17 @@
     flex-direction: column;
 
     &__header {
+        //* nothing
     }
 
     &__tagline {
         @include typography.poppins--14px;
 
-        line-height: 20px;
-        letter-spacing: 2px;
+        line-height: 1.429em;
+        letter-spacing: 0.143em;
+
+        // line-height: 20px;
+        // letter-spacing: 2px;
 
         color: #645c55;
 
@@ -19,12 +23,16 @@
     }
 
     &--hero {
-        row-gap: 20px;
+        // row-gap: 20px;
+        row-gap: clamp(14px, 2vw, 20px);
 
         .block-header__header {
             @include typography.poppins--64px;
+            // font-size: clamp(16px, 5vw, 64px);
 
-            line-height: 70px;
+            line-height: 1.09375em;
+            // line-height: 70px;
+
             letter-spacing: 0;
 
             color: #1b1a1a;

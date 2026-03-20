@@ -13,47 +13,103 @@
 @mixin poppins--14px {
     @include poppins();
 
-    font-size: 14px;
+    // font-size: 14px;
+    font-size: clamp(12px, 5vw, 14px);
+
+    //? --- MOBILE ---
+    //? --------------
+    // @media (max-width: 425px) {
+    //     font-size: clamp(12px, 2vw, 14px);
+    // }
 }
 
 @mixin poppins--16px {
     @include poppins();
 
-    font-size: 16px;
+    // font-size: 16px;
+    font-size: clamp(14px, 5vw, 16px);
+
+    //? --- MOBILE ---
+    //? --------------
+    // @media (max-width: 425px) {
+    //     font-size: clamp(12px, 2vw, 16px);
+    // }
 }
 
 @mixin poppins--18px {
     @include poppins();
 
-    font-size: 18px;
+    // font-size: 18px;
+    font-size: clamp(16px, 5vw, 18px);
+
+    //? --- MOBILE ---
+    //? --------------
+    // @media (max-width: 425px) {
+    //     font-size: clamp(16px, 2vw, 18px);
+    // }
 }
 
 @mixin poppins--20px {
     @include poppins();
 
-    font-size: 20px;
+    // font-size: 20px;
+    font-size: clamp(18px, 5vw, 20px);
+
+    //? --- MOBILE ---
+    //? --------------
+    // @media (max-width: 425px) {
+    //     font-size: clamp(18px, 2vw, 20px);
+    // }
 }
 
 @mixin poppins--24px {
     @include poppins();
 
-    font-size: 24px;
+    // font-size: 24px;
+    font-size: clamp(20px, 5vw, 24px);
+
+    //? --- MOBILE ---
+    //? --------------
+    // @media (max-width: 425px) {
+    //     font-size: clamp(20px, 2vw, 24px);
+    // }
 }
 
 @mixin poppins--32px {
     @include poppins();
 
-    font-size: 32px;
+    // font-size: 32px;
+    font-size: clamp(24px, 5vw, 32px);
+
+    //? --- MOBILE ---
+    //? --------------
+    // @media (max-width: 425px) {
+    //     font-size: clamp(24px, 2vw, 32px);
+    // }
 }
 
 @mixin poppins--40px {
     @include poppins();
 
-    font-size: 40px;
+    // font-size: 40px;
+    font-size: clamp(32px, 5vw, 40px);
+
+    //? --- MOBILE ---
+    //? --------------
+    // @media (max-width: 425px) {
+    //     font-size: clamp(32px, 2vw, 40px);
+    // }
 }
 
 @mixin poppins--64px {
     @include poppins();
 
-    font-size: 64px;
+    // font-size: 64px;
+    font-size: clamp(36px, 5vw, 64px);
+
+    //? --- MOBILE ---
+    //? --------------
+    // @media (max-width: 425px) {
+    //     font-size: clamp(36px, 2vw, 64px);
+    // }
 }

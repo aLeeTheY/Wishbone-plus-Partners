@@ -27,10 +27,12 @@
         max-width: 1440px;
 
         display: flex;
-        justify-content: space-between;
-        align-items: center;
 
-        padding: 0 0 0 60px;
+        align-items: stretch;
+        justify-content: space-between;
+        // align-items: center;
+
+        padding: 0 0 0 clamp(16px, 4vw, 60px);
     }
 
     &--our-firm {
@@ -172,10 +174,15 @@
 
 //? --- MOBILE ---
 //? --------------
-// @media (max-width: 425px) {
-//     .wrapper {
-//         &--header {
-//             column-gap: 16px;
-//         }
-//     }
-// }
+@media (max-width: 425px) {
+    .wrapper {
+        &--header {
+            column-gap: 16px;
+        }
+
+        &--hero {
+            padding: 0;
+            flex-wrap: wrap;
+        }
+    }
+}
