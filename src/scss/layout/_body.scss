@@ -8,8 +8,8 @@ body {
     overflow-y: auto;
 }
 
-/* Вместо этого — инвертируем логику */
-body:has(.navigation__mobile-menu-container:target) {
+//todo Develop JS variant for scroll block
+body:has(#mobile-navigation:target) {
     overflow: hidden;
     position: fixed;
 }
