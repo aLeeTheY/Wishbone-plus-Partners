@@ -18,8 +18,13 @@
     }
 
     &__link {
-        &:hover {
-            text-decoration: underline;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
+
+        @media (hover: hover) {
+            &:hover {
+                text-decoration: underline;
+            }
         }
 
         &--icon {
@@ -52,8 +57,10 @@
         transform: translateZ(0);
         backface-visibility: hidden;
 
-        &:hover {
-            transform: scale(1.1);
+        @media (hover: hover) {
+            &:hover {
+                transform: scale(1.1);
+            }
         }
 
         &:active {

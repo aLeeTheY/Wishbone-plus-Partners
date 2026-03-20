@@ -33,16 +33,25 @@
 
     //todo  Доделать scale при уменьшении ширины окна
     &__img {
+        display: block;
+
+        object-fit: contain;
+        object-position: center center;
+
         aspect-ratio: 1 / 1;
 
+        // min-width: 0;
+        width: 100%;
+        // max-width: max-content;
+
         height: auto;
+        min-height: 596px;
 
         // max-height: max-content;
         // min-height: 100%;
 
-        max-width: max-content;
-
-        min-width: 572px;
+        // min-width: 0;
+        // min-width: 572px;
         // min-width: 596px;
 
         // object-fit: scale-down;

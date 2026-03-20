@@ -28,6 +28,12 @@
     font-size: 18px;
 }
 
+@mixin poppins--20px {
+    @include poppins();
+
+    font-size: 20px;
+}
+
 @mixin poppins--24px {
     @include poppins();
 

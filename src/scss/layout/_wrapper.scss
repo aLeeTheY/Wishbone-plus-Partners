@@ -10,16 +10,17 @@
 
 .wrapper {
     margin: 0 auto;
-    height: auto;
-    width: auto;
 
     &--header {
         max-width: 1200px;
 
         display: flex;
+        // column-gap: 32px;
+        column-gap: clamp(16px, 4vw, 40px);
         justify-content: space-between;
 
-        padding: 20px;
+        // padding: 20px;
+        padding: clamp(16px, 3vw, 20px);
     }
 
     &--hero {
@@ -149,22 +150,32 @@
     // }
 }
 
-// .wrapper {
-//     margin: 0 auto;
-//     height: auto;
-//     width: auto;
-
-//     max-width: 1440px;
-
-//     &--ph120 {
-//         padding: 120px 0;
+//? --- LAPTOP ---
+//? --------------
+// @media (max-width: 1024px) {
+//     .wrapper {
+//         &--header {
+//             column-gap: 28px;
+//         }
 //     }
+// }
 
-//     &--ph60 {
-//         padding: 60px 0;
+//? --- TABLET ---
+//? --------------
+// @media (max-width: 1024px) {
+//     .wrapper {
+//         &--header {
+//             column-gap: 28px;
+//         }
 //     }
+// }
 
-//     &--ph336 {
-//         padding: 336px 0;
+//? --- MOBILE ---
+//? --------------
+// @media (max-width: 425px) {
+//     .wrapper {
+//         &--header {
+//             column-gap: 16px;
+//         }
 //     }
 // }

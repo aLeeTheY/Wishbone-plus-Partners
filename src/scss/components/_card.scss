@@ -41,9 +41,11 @@
         max-width: 300px;
     }
 
-    &:hover {
-        .card__img {
-            transform: scale(1.05);
+    @media (hover: hover) {
+        &:hover {
+            .card__img {
+                transform: scale(1.05);
+            }
         }
     }
 
@@ -106,7 +108,9 @@
         .card__img {
             opacity: 0.78;
 
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            transition:
+                transform 0.3s ease-in-out,
+                opacity 0.3s ease-in-out;
             will-change: transform, opacity;
 
             transform: translateZ(0);
@@ -119,14 +123,16 @@
         transform: translateZ(0);
         backface-visibility: hidden;
 
-        &:hover {
-            .card__content {
-                opacity: 1;
-            }
+        @media (hover: hover) {
+            &:hover {
+                .card__content {
+                    opacity: 1;
+                }
 
-            .card__img {
-                transform: scale(1.0125);
-                opacity: 1;
+                .card__img {
+                    transform: scale(1.0125);
+                    opacity: 1;
+                }
             }
         }
     }

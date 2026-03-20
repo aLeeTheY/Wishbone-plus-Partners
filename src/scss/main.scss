@@ -9,6 +9,9 @@
 @use "base/fonts";
 @use "base/typography";
 
+//? --- SERVICE
+@use "service/disabled";
+
 //? --- UTILITIES
 @use "utilities/spacing";
 @use "utilities/visibility";
@@ -25,12 +28,14 @@
 // @use "layout/footer";
 
 //? --- BLOCKS
-@use "blocks/logo";
-@use "blocks/navigation";
-@use "blocks/button_link";
-@use "blocks/block_header";
-@use "blocks/team_member";
-@use "blocks/card";
+@use "components/hamburger_menu_btn";
+@use "components/close_menu_btn";
+@use "components/logo";
+@use "components/navigation";
+@use "components/button_link";
+@use "components/block_header";
+@use "components/team_member";
+@use "components/card";
 
 //? --- SECTIONS
 @use "sections/header";

@@ -1,0 +1,27 @@
+.close-menu-btn {
+    display: flex;
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+
+    &__img {
+        object-fit: contain;
+        object-position: center center;
+
+        aspect-ratio: 1 / 1;
+        width: clamp(30px, 7vw, 38px);
+
+        min-width: 30px;
+        max-width: 38px;
+    }
+}
+
+// //? --- MOBILE ---
+// //? --------------
+// @media (max-width: 425px) {
+//     .hamburger-menu {
+//         &__img {
+//             width: 30px;
+//         }
+//     }
+// }

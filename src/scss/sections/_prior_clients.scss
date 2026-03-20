@@ -24,6 +24,9 @@
     }
 
     &__img-link {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
+
         display: flex;
 
         justify-content: center;
@@ -38,8 +41,10 @@
         transform: translateZ(0);
         backface-visibility: hidden;
 
-        &:hover {
-            transform: scale(1.05);
+        @media (hover: hover) {
+            &:hover {
+                transform: scale(1.05);
+            }
         }
 
         &:active {

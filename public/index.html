@@ -9,27 +9,58 @@
 
         <!--* CSS code imports --->
         <link rel="stylesheet" href="./css/main.min.css" />
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+        <!-- <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" /> -->
     </head>
     <body>
         <header id="header" class="header" data-aos="zoom-out">
             <div class="wrapper wrapper--header">
                 <a class="logo" href="#header">
-                    <img class="logo__img" src="./assets/images/icons/header/logo.svg" alt="Logo" />
+                    <img class="logo__img" src="./assets/icons/header/logo.svg" alt="Logo" />
                 </a>
                 <nav class="navigation">
-                    <ul class="navigation__menu">
-                        <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">Projects</a></li>
-                        <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">About</a></li>
-                        <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">News</a></li>
-                        <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">Team</a></li>
-                        <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">Contact</a></li>
-                    </ul>
-                    <a class="navigation__button-link button-link">Get template</a>
+                    <div class="navigation__desktop">
+                        <ul class="navigation__menu">
+                            <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">Projects</a></li>
+                            <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">About</a></li>
+                            <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">News</a></li>
+                            <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">Team</a></li>
+                            <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">Contact</a></li>
+                        </ul>
+                        <a class="navigation__button-link button-link">Get template</a>
+                    </div>
+                    <div class="navigation__mobile">
+                        <a href="#mobile-navigation" class="hamburger-menu-btn">
+                            <img class="hamburger-menu-btn__img" src="./assets/icons/header/hamburger.svg" alt="Hamburger menu" />
+                        </a>
+                        <div class="navigation__mobile-menu-container" id="mobile-navigation">
+                            <div class="navigation__mobile-menu-header">
+                                <a class="logo" href="#header">
+                                    <img class="logo__img" src="./assets/icons/header/logo.svg" alt="Logo" />
+                                </a>
+                                <a href="#" class="close-menu-btn">
+                                    <img class="close-menu-btn__img" src="./assets/icons/header/close.svg" alt="Close menu" />
+                                </a>
+                            </div>
+                            <div class="navigation__mobile-menu-content">
+                                <ul class="navigation__menu">
+                                    <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">Projects</a></li>
+                                    <li class="navigation__menu-item navigation__menu-item--dot">&middot;</li>
+                                    <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">About</a></li>
+                                    <li class="navigation__menu-item navigation__menu-item--dot">&middot;</li>
+                                    <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">News</a></li>
+                                    <li class="navigation__menu-item navigation__menu-item--dot">&middot;</li>
+                                    <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">Team</a></li>
+                                    <li class="navigation__menu-item navigation__menu-item--dot">&middot;</li>
+                                    <li class="navigation__menu-item"><a href="#!" class="navigation__menu-link">Contact</a></li>
+                                </ul>
+                                <a class="navigation__button-link button-link button-link--mobile">Get template</a>
+                            </div>
+                        </div>
+                    </div>
                 </nav>
             </div>
         </header>
-        <section id="hero" class="hero">
+        <section id="hero" class="hero disabled">
             <div class="wrapper wrapper--hero">
                 <div class="hero__text" data-aos="fade-right">
                     <div class="block-header block-header--hero">
@@ -46,7 +77,7 @@
                 <img class="hero__img" src="./assets/images/hero/main_image.webp" alt="Hero main image" data-aos="fade-left" />
             </div>
         </section>
-        <section id="our-firm" class="our-firm" data-aos="fade-up">
+        <section id="our-firm" class="our-firm disabled" data-aos="fade-up">
             <div class="wrapper wrapper--our-firm">
                 <h2 class="block-header block-header--our-firm">Our firm</h2>
                 <div class="our-firm__content">
@@ -75,7 +106,7 @@
                 </div>
             </div>
         </section>
-        <section id="reeding-house" class="reeding-house" data-aos="zoom-out-up">
+        <section id="reeding-house" class="reeding-house disabled" data-aos="zoom-out-up">
             <div class="wrapper wrapper--reeding-house-and-marble-staircase">
                 <div class="block-header block-header--house-and-staircase">
                     <h3 class="block-header__header">Reeding house</h3>
@@ -83,7 +114,7 @@
                 </div>
             </div>
         </section>
-        <section id="our-process" class="our-process" data-aos="fade-up">
+        <section id="our-process" class="our-process disabled" data-aos="fade-up">
             <div class="wrapper wrapper--our-process">
                 <div class="block-header block-header--our-process">
                     <h3 class="block-header__tagline">Our process</h3>
@@ -91,7 +122,7 @@
                 </div>
                 <div class="our-process__content">
                     <div class="card">
-                        <img src="./assets/images/icons/our_process/sketching.svg" alt="Sketching icon" class="card__img" />
+                        <img src="./assets/icons/our_process/sketching.svg" alt="Sketching icon" class="card__img" />
                         <h4 class="card__header">Sketching</h4>
                         <p class="card__pg">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut tristique libero. Nulla luctus sapien ac arcu
@@ -99,14 +130,14 @@
                         </p>
                     </div>
                     <div class="card">
-                        <img src="./assets/images/icons/our_process/finalizing.svg" alt="Finalizing icon" class="card__img" />
+                        <img src="./assets/icons/our_process/finalizing.svg" alt="Finalizing icon" class="card__img" />
                         <h4 class="card__header">Finalizing</h4>
                         <p class="card__pg">
                             Adipiscing elit. Nulla ut tristique libero. Nulla vitae tempor leo iaculis luctus sapien ac arcu tempor, vitae.
                         </p>
                     </div>
                     <div class="card">
-                        <img src="./assets/images/icons/our_process/building.svg" alt="Building icon" class="card__img" />
+                        <img src="./assets/icons/our_process/building.svg" alt="Building icon" class="card__img" />
                         <h4 class="card__header">Building</h4>
                         <p class="card__pg">
                             Nulla ut tristique libero. Lorem ipsum ut tristique libero. Nulla luctus sapien ac arcu tempor, vitae lorem
@@ -116,7 +147,7 @@
                 </div>
             </div>
         </section>
-        <section id="the-marble-staircase" class="the-marble-staircase" data-aos="zoom-out-up">
+        <section id="the-marble-staircase" class="the-marble-staircase disabled" data-aos="zoom-out-up">
             <div class="wrapper wrapper--reeding-house-and-marble-staircase">
                 <div class="block-header block-header--house-and-staircase">
                     <h3 class="block-header__header">The marble staircase</h3>
@@ -124,7 +155,7 @@
                 </div>
             </div>
         </section>
-        <section id="prior-clients" class="prior-clients">
+        <section id="prior-clients" class="prior-clients disabled">
             <div class="wrapper wrapper--prior-clients">
                 <div class="prior-clients__text-block" data-aos="zoom-out-right">
                     <div class="block-header block-header--prior-clients">
@@ -138,24 +169,21 @@
                 </div>
                 <div class="prior-clients__icons-block" data-aos="zoom-out-left">
                     <a href="#!" class="prior-clients__img-link">
-                        <img class="prior-clients__img" src="./assets/images/icons/prior_clients/hill_and_hayes.svg" alt="Hill & Hayes"
+                        <img class="prior-clients__img" src="./assets/icons/prior_clients/hill_and_hayes.svg" alt="Hill & Hayes"
                     /></a>
                     <a href="#!" class="prior-clients__img-link">
-                        <img class="prior-clients__img" src="./assets/images/icons/prior_clients/riksgransen.svg" alt="RIKSGRANSEN"
+                        <img class="prior-clients__img" src="./assets/icons/prior_clients/riksgransen.svg" alt="RIKSGRANSEN"
                     /></a>
                     <a href="#!" class="prior-clients__img-link">
-                        <img lass="prior-clients__img" src="./assets/images/icons/prior_clients/studio_cai.svg" alt="Studio Cai"
+                        <img lass="prior-clients__img" src="./assets/icons/prior_clients/studio_cai.svg" alt="Studio Cai"
                     /></a>
                     <a href="#!" class="prior-clients__img-link">
-                        <img
-                            class="prior-clients__img"
-                            src="./assets/images/icons/prior_clients/chill_industries.svg"
-                            alt="Chill Industries"
+                        <img class="prior-clients__img" src="./assets/icons/prior_clients/chill_industries.svg" alt="Chill Industries"
                     /></a>
                 </div>
             </div>
         </section>
-        <section id="the-swirling-staircase" class="the-swirling-staircase" data-aos="zoom-out-up">
+        <section id="the-swirling-staircase" class="the-swirling-staircase disabled" data-aos="zoom-out-up">
             <div class="wrapper wrapper--swirling-staircase">
                 <div class="block-header block-header--house-and-staircase">
                     <h3 class="block-header__header">The swirling staircase</h3>
@@ -163,7 +191,7 @@
                 </div>
             </div>
         </section>
-        <section id="featured-projects" class="featured-projects" data-aos="fade-up">
+        <section id="featured-projects" class="featured-projects disabled" data-aos="fade-up">
             <div class="wrapper wrapper--featured-projects">
                 <div class="block-header block-header--featured-projects">
                     <h2 class="block-header__header">Featured projects</h2>
@@ -299,7 +327,7 @@
                 </div>
             </div>
         </section>
-        <section id="meet-our-team" class="meet-our-team">
+        <section id="meet-our-team" class="meet-our-team disabled">
             <div class="wrapper wrapper--meet-our-team">
                 <div class="meet-our-team__text-block" data-aos="fade-down-right">
                     <div class="block-header block-header--meet-our-team">
@@ -350,7 +378,7 @@
                 </div>
             </div>
         </section>
-        <section id="get-in-touch" class="get-in-touch" data-aos="fade-up">
+        <section id="get-in-touch" class="get-in-touch disabled" data-aos="fade-up">
             <div class="wrapper wrapper--get-in-touch">
                 <div class="block-header block-header--get-in-touch">
                     <h3 class="block-header__tagline">Get in touch</h3>
@@ -359,11 +387,11 @@
                 <a href="#!" class="button-link button-link--hero">Get in touch</a>
             </div>
         </section>
-        <footer id="footer" class="footer" data-aos="zoom-out-up">
+        <footer id="footer" class="footer disabled" data-aos="zoom-out-up">
             <div class="wrapper wrapper--footer">
                 <div class="footer__text-block">
                     <a class="logo logo--footer" href="#header"
-                        ><img class="logo__img" src="./assets/images/icons/header/logo.svg" alt="Logo"
+                        ><img class="logo__img" src="./assets/icons/header/logo.svg" alt="Logo"
                     /></a>
                     <div class="footer__copyright-block">
                         <p class="footer__pg">Powered by Webflow.</p>
@@ -374,29 +402,29 @@
                 </div>
                 <div class="footer__social-icons-block">
                     <a class="footer__link--icon" href="https://x.com/">
-                        <img class="footer__icon" src="./assets/images/icons/footer/twitter.svg" alt="Twitter"
+                        <img class="footer__icon" src="./assets/icons/footer/twitter.svg" alt="Twitter"
                     /></a>
                     <a class="footer__link--icon" href="https://www.instagram.com/">
-                        <img class="footer__icon" src="./assets/images/icons/footer/instagram.svg" alt="Instagram"
+                        <img class="footer__icon" src="./assets/icons/footer/instagram.svg" alt="Instagram"
                     /></a>
                     <a class="footer__link--icon" href="https://www.facebook.com/">
-                        <img class="footer__icon" src="./assets/images/icons/footer/facebook.svg" alt="Facebook"
+                        <img class="footer__icon" src="./assets/icons/footer/facebook.svg" alt="Facebook"
                     /></a>
                 </div>
             </div>
         </footer>
 
         <!--* JS code imports --->
-        <script src="./js/main.js" defer></script>
+        <!-- <script src="./js/main.js" defer></script>
 
         <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
         <script>
             window.addEventListener("load", () => {
                 AOS.init({ once: true });
             });
-        </script>
+        </script> -->
 
-        <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script> -->
     </body>
 </html>

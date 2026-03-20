@@ -16,8 +16,10 @@
 
     transform-origin: 0 0;
 
-    &:hover {
-        transform: scale(1.025);
+    @media (hover: hover) {
+        &:hover {
+            transform: scale(1.025);
+        }
     }
 
     &:active {
