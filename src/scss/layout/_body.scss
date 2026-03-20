@@ -7,3 +7,9 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
 }
+
+/* Вместо этого — инвертируем логику */
+body:has(.navigation__mobile-menu-container:target) {
+    overflow: hidden;
+    position: fixed;
+}
