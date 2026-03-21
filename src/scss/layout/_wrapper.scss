@@ -16,11 +16,11 @@
 
         display: flex;
         // column-gap: 32px;
-        column-gap: clamp(16px, 4vw, 40px);
+        column-gap: clamp(16px, 3.333vw, 40px);
         justify-content: space-between;
 
         // padding: 20px;
-        padding: clamp(16px, 3vw, 20px);
+        padding: clamp(16px, 3.765vw, 20px);
     }
 
     &--hero {
@@ -33,6 +33,8 @@
         // align-items: center;
 
         padding: 0 0 0 clamp(16px, 4.166vw, 60px);
+        // padding: 0 0 0 clamp(8px, 4.166vw, 60px);
+        // padding: 0 0 0 clamp(0.01px, 0.0024vw, 60px);
     }
 
     &--our-firm {
@@ -189,12 +191,13 @@
 //? --------------
 @media (max-width: 425px) {
     .wrapper {
-        &--header {
-            column-gap: 16px;
-        }
+        // &--header {
+        //     column-gap: 16px;
+        // }
 
         &--hero {
             padding: 0;
+            // padding: clamp(0.01px, 0.0007vw, 16px);
             flex-wrap: wrap;
         }
 
