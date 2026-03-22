@@ -24,7 +24,7 @@
 
     &--hero {
         // row-gap: 20px;
-        row-gap: clamp(14px, 1.388vw, 20px);
+        row-gap: clamp(8px, 1.388vw, 20px);
 
         .block-header__header {
             @include typography.poppins--64px;
@@ -94,14 +94,17 @@
     }
 
     &--our-process {
+        // row-gap: clamp(10px, 1.388vw, 20px);
+        row-gap: clamp(8px, 1.388vw, 20px);
         text-align: center;
-        row-gap: 14px;
 
         .block-header__header {
             @include typography.poppins--40px;
 
-            line-height: 42px;
+            line-height: 1.05em;
             letter-spacing: 0;
+
+            text-wrap: nowrap;
 
             color: #1b1a1a;
         }

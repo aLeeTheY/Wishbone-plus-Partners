@@ -106,10 +106,13 @@
         justify-content: center;
         align-items: center;
 
+        // row-gap: clamp(20px, 0.037 * 100vw - 4.444px, 40px);
         row-gap: 40px;
+        // row-gap: clamp(36px, 0.012 * 100vw + 31.044px, 40px);
 
         // padding: 0 0 0 60px;
-        padding: 100px 0;
+        // padding: 100px 0;
+        padding: clamp(40px, 6.944vw, 100px) 100px;
     }
 
     &--prior-clients {
@@ -183,16 +186,6 @@
 
 //? --- LAPTOP ---
 //? --------------
-// @media (max-width: 1024px) {
-//     .wrapper {
-//         &--header {
-//             column-gap: 28px;
-//         }
-//     }
-// }
-
-//? --- TABLET ---
-//? --------------
 @media (max-width: 1024px) {
     .wrapper {
         &--our-firm {
@@ -206,6 +199,19 @@
             padding: clamp(40px, 6.944vw, 100px) clamp(36px, 6.943vw, 100px);
             // max-width: 100%;
             // padding: clamp(16px, 4vw, 100px) clamp(16px, 4vw, 80px);
+        }
+    }
+}
+
+//? --- TABLET ---
+//? --------------
+@media (max-width: 768px) {
+    .wrapper {
+        &--our-process {
+            // row-gap: 40px;
+
+            // padding: clamp(40px, 6.944vw, 100px) clamp(36px, 0.083 * 100vw + 0.775px, 100px);
+            padding: clamp(40px, 6.944vw, 100px) 16px;
         }
     }
 }

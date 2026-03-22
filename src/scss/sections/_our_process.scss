@@ -1,9 +1,24 @@
 .our-process {
     &__content {
         display: flex;
-        width: 100%;
+        // width: fit-content;
 
-        align-items: start;
+        // column-gap: 104px;
+        column-gap: clamp(16px, 0.172 * 100vw - 116px, 104px);
+
+        // align-items: center;
         justify-content: space-between;
+    }
+}
+
+//? --- TABLET ---
+//? --------------
+@media (max-width: 768px) {
+    .our-process {
+        &__content {
+            flex-direction: column;
+            row-gap: 40px;
+            // row-gap: clamp(36px, 0.012 * 100vw + 31.044px, 40px);
+        }
     }
 }
