@@ -1,9 +1,12 @@
 #the-marble-staircase {
+    display: flex;
+    align-items: center;
+
     height: 600px;
 
     background: url("../assets/images/the_marble_staircase/background.webp");
 
-    background-position: 50% 0;
+    background-position: clamp(28%, 0.022 * 100vw + 18.788%, 50%) center;
     background-size: cover;
     background-repeat: no-repeat;
 }
