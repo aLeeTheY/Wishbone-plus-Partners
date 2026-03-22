@@ -70,8 +70,11 @@
         .block-header__header {
             @include typography.poppins--14px;
 
-            line-height: 20px;
-            letter-spacing: 2px;
+            // line-height: 20px;
+            // letter-spacing: 2px;
+
+            line-height: 1.429em;
+            letter-spacing: 0.143em;
 
             color: #403e3b;
 
@@ -81,7 +84,9 @@
         .block-header__pg {
             @include typography.poppins--16px;
 
-            line-height: 24px;
+            // line-height: 24px;
+            line-height: 1.5em;
+
             letter-spacing: 0;
 
             color: #645c55;
