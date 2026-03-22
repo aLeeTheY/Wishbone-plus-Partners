@@ -124,7 +124,9 @@
         align-items: center;
 
         // padding: 0 0 0 60px;
-        padding: 100px 144px 100px 0;
+        // padding: 100px 144px 100px 100px;
+        // padding: 100px 0;
+        padding: clamp(40px, 6.944vw, 100px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
     }
 
     &--get-in-touch {
@@ -200,6 +202,23 @@
             // max-width: 100%;
             // padding: clamp(16px, 4vw, 100px) clamp(16px, 4vw, 80px);
         }
+
+        &--prior-clients {
+            // max-width: 1168px;
+
+            // display: flex;
+            flex-direction: column;
+            // row-gap: 80px;
+            row-gap: 40px;
+
+            justify-content: space-between;
+            align-items: center;
+
+            // padding: 0 0 0 60px;
+            // padding: 100px 144px 100px 100px;
+            // padding: 100px 0;
+            padding: clamp(40px, 6.944vw, 100px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
+        }
     }
 }
 
@@ -212,6 +231,10 @@
 
             // padding: clamp(40px, 6.944vw, 100px) clamp(36px, 0.083 * 100vw + 0.775px, 100px);
             padding: clamp(40px, 6.944vw, 100px) 16px;
+        }
+
+        &--prior-clients {
+            padding: clamp(40px, 6.944vw, 100px) clamp(16px, 0.128 * 100vw - 38.519px, 60px);
         }
     }
 }

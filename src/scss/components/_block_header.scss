@@ -130,7 +130,7 @@
         .block-header__header {
             @include typography.poppins--32px;
 
-            line-height: 38px;
+            line-height: 1.1875em;
             letter-spacing: 0;
 
             color: #fff;
@@ -138,6 +138,13 @@
 
         .block-header__tagline {
             color: #ece7e4;
+        }
+
+        //? --- LAPTOP ---
+        //? --------------
+        @media (max-width: 1024px) {
+            row-gap: clamp(8px, 1.388vw, 20px);
+            text-align: center;
         }
     }
 
