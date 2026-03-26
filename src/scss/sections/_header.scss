@@ -1,3 +1,33 @@
 #header {
     background-color: #fff;
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+        will-change: opacity;
+        opacity: 0;
+
+        transition: opacity 300ms ease;
+        pointer-events: none;
+    }
+}
+
+//? --- TABLET ---
+//? --------------
+@media (max-width: 768px) {
+    #header {
+        position: fixed;
+        z-index: 1000;
+
+        width: 100%;
+
+        &::after {
+            opacity: 1;
+        }
+    }
 }

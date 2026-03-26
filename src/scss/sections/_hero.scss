@@ -129,26 +129,11 @@
 
 //? --- TABLET ---
 //? --------------
-// @media (max-width: 768px) {
-//     .hero {
-//         &__text {
-//         }
-
-//         &__pg {
-//         }
-
-//         &__button-link {
-//         }
-
-//         &__img-wrapper {
-//             // flex: 0.5 1 500px;
-//             // min-height: clamp(200px, 5vw, 500px);
-//         }
-
-//         &__img {
-//         }
-//     }
-// }
+@media (max-width: 768px) {
+    .hero {
+        padding-top: clamp(62.28px, 0.046 * 100vw + 42.802px, 78px);
+    }
+}
 
 //? --- MOBILE ---
 //? --------------

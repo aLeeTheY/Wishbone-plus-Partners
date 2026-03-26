@@ -9,7 +9,12 @@ body {
 }
 
 //todo Develop JS variant for scroll block
-body:has(#mobile-navigation:target) {
+// body:has(#mobile-navigation:target) {
+//     overflow: hidden;
+//     position: fixed;
+// }
+
+body:has(#menu-toggle:checked) {
     overflow: hidden;
-    position: fixed;
+    // position: fixed;
 }

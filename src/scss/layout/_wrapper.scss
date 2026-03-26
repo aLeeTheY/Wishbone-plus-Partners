@@ -20,7 +20,7 @@
         justify-content: space-between;
 
         // padding: 20px;
-        padding: clamp(16px, 3.765vw, 20px);
+        padding: clamp(16px, 0.012 * 100vw + 11.044px, 20px);
     }
 
     &--hero {
