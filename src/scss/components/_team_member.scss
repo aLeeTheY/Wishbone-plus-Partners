@@ -2,19 +2,20 @@
 
 .team-member {
     display: flex;
-    column-gap: 30px;
+    // column-gap: 30px;
+    column-gap: clamp(15px, 2.083vw, 30px);
 
+    justify-content: flex-start;
     align-items: center;
 
     cursor: pointer;
 
-    transition: transform 0.3s ease-in-out;
     will-change: transform;
-
     transform: translateZ(0);
-    backface-visibility: hidden;
-
     transform-origin: 0 0;
+
+    transition: transform 300ms ease-in-out;
+    backface-visibility: hidden;
 
     @media (hover: hover) {
         &:hover {
@@ -34,22 +35,52 @@
     &__full-name {
         @include typography.poppins--18px;
 
-        line-height: 26px;
+        line-height: 1.444em;
         letter-spacing: 0;
 
         color: #1b1a1a;
+
+        min-width: 140px;
     }
 
     &__work-position {
         @include typography.poppins--14px;
 
-        line-height: 14px;
+        line-height: 1em;
         letter-spacing: 0;
 
         color: #645c55;
+
+        min-width: 140px;
     }
 
     &--meet-our-team {
         transform-origin: 50% 50%;
     }
 }
+
+//? --- LAPTOP ---
+//? --------------
+@media (max-width: 1024px) {
+    .team-member {
+        column-gap: clamp(15px, 2.083vw, 30px);
+
+        &--meet-our-team {
+            // transform-origin: 50% 50%;
+            justify-content: center;
+        }
+    }
+}
+
+// //? --- MOBILE ---
+// //? --------------
+// @media (max-width: 425px) {
+//     .team-member {
+//         // column-gap: clamp(15px, 2.083vw, 30px);
+
+//         &--meet-our-team {
+//             // transform-origin: 50% 50%;
+//             justify-content: start;
+//         }
+//     }
+// }

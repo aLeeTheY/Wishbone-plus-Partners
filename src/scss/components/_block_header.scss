@@ -95,7 +95,7 @@
 
     &--our-process {
         // row-gap: clamp(10px, 1.388vw, 20px);
-        row-gap: clamp(8px, 1.388vw, 20px);
+        row-gap: clamp(8px, 0.868vw, 12.5px);
         text-align: center;
 
         .block-header__header {
@@ -143,7 +143,7 @@
         //? --- LAPTOP ---
         //? --------------
         @media (max-width: 1024px) {
-            row-gap: clamp(8px, 1.388vw, 20px);
+            row-gap: clamp(8px, 0.694vw, 10px);
             text-align: center;
         }
     }
@@ -175,12 +175,13 @@
 
     &--meet-our-team {
         text-align: left;
-        row-gap: 14px;
+        // row-gap: 14px;
+        row-gap: clamp(12px, 1.367vw, 14px);
 
         .block-header__header {
             @include typography.poppins--32px;
 
-            line-height: 38px;
+            line-height: 1.1875em;
             letter-spacing: 0;
 
             color: #403e3b;
@@ -189,12 +190,29 @@
         .block-header__pg {
             @include typography.poppins--16px;
 
-            line-height: 24px;
+            line-height: 1.5em;
             letter-spacing: 0;
 
             color: #645c55;
 
             max-width: 374px;
         }
+
+        //? --- LAPTOP ---
+        //? --------------
+        @media (max-width: 1024px) {
+            // row-gap: clamp(8px, 0.694vw, 10px);
+            text-align: center;
+
+            .block-header__pg {
+                max-width: 100%;
+            }
+        }
+
+        // //? --- MOBILE ---
+        // //? --------------
+        // @media (max-width: 425px) {
+        //     text-align: left;
+        // }
     }
 }
