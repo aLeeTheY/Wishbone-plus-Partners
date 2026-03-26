@@ -112,16 +112,30 @@
 
     &--get-in-touch {
         max-width: 570px;
+
         text-align: left;
+        row-gap: clamp(12px, 1.367vw, 14px);
 
         .block-header__header {
             @include typography.poppins--40px;
 
-            line-height: 42px;
+            line-height: 1.05em;
             letter-spacing: 0;
 
             color: #1b1a1a;
         }
+
+        //? --- BOOTSTRAP SMALL ---
+        //? -----------------------
+        @media (max-width: 576px) {
+            text-align: center;
+        }
+
+        // //? --- MOBILE ---
+        // //? --------------
+        // @media (max-width: 425px) {
+        //     text-align: center;
+        // }
     }
 
     &--prior-clients {
