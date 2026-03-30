@@ -52,10 +52,15 @@
 // @media (max-width: 1024px) {
 // }
 
-// //? --- TABLET ---
-// //? --------------
-// @media (max-width: 768px) {
-// }
+//? --- TABLET ---
+//? --------------
+@media (max-width: 768px) {
+    .logo {
+        &--footer {
+            justify-content: center;
+        }
+    }
+}
 
 //? --- MOBILE ---
 //? --------------

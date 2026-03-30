@@ -7,11 +7,12 @@
         display: flex;
         flex-direction: column;
 
-        row-gap: 20px;
+        // row-gap: 20px;
+        row-gap: calc(20 / 14 * 1em);
 
         @include typography.poppins--14px;
 
-        line-height: 20px;
+        line-height: calc(20 / 14 * 1em);
         letter-spacing: 0;
 
         color: #645c55;
@@ -51,7 +52,7 @@
     &__icon {
         aspect-ratio: 1 / 1;
 
-        transition: transform 0.3s ease-in-out;
+        transition: transform 300ms ease-in-out;
         will-change: transform;
 
         transform: translateZ(0);
@@ -65,6 +66,20 @@
 
         &:active {
             transform: scale(1.05);
+        }
+    }
+}
+
+//? --- TABLET ---
+//? --------------
+@media (max-width: 768px) {
+    .footer {
+        &__pg {
+            text-align: center;
+        }
+
+        &__social-icons-block {
+            justify-content: center;
         }
     }
 }
