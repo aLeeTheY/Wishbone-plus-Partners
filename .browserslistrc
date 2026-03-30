@@ -1,0 +1,9 @@
+# Browsers that we support
+
+[production]
+last 4 versions
+> 0.2%
+not dead
+
+[development]
+last 1 version

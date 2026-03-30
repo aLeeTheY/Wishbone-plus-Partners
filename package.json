@@ -1,48 +1,66 @@
 {
-    "name": "basic-website-template",
+    "name": "wishbone-plus-partners",
     "version": "1.0.0",
-    "description": "Одностраничный сайт, сверстанный по макету из Figma. Реализована статическая кроссбраузерная верстка.",
+    "description": "A desktop-focused single-page website built with HTML and Sass, using Alpine.js for collapsible sections and AOS for scroll animations. Features custom CSS transitions and is not optimized for mobile.",
     "private": true,
-    "homepage": "https://github.com/npm/example#readme",
+    "homepage": "https://github.com/aLeeTheY/Wishbone-plus-Partners#readme",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/npm/example.git"
+        "url": "git+https://github.com/aLeeTheY/Wishbone-plus-Partners.git"
+    },
+    "bugs": {
+        "url": "https://github.com/aLeeTheY/Wishbone-plus-Partners/issues"
     },
     "author": {
         "name": "Vladimir Nikulin",
-        "email": "mail.jorey@gmail.com",
-        "url": "https://github.com/aBLeeWeeAN"
+        "email": "aleethey@gmail.com",
+        "url": "https://github.com/aLeeTheY"
     },
-    "license": "ISC",
+    "license": "MIT",
     "type": "module",
     "devDependencies": {
+        "chokidar-cli": "^3.0.0",
+        "cross-env": "^10.1.0",
+        "cssnano": "^7.1.4",
+        "cssnano-preset-advanced": "^7.0.12",
         "npm-run-all": "^4.1.5",
-        "rimraf": "^6.0.1",
-        "sass": "^1.90.0",
-        "typescript": "^5.9.2"
+        "postcss": "^8.5.8",
+        "postcss-cli": "^11.0.1",
+        "postcss-preset-env": "^11.2.0",
+        "postcss-sort-media-queries": "^6.3.3",
+        "rimraf": "^6.1.3",
+        "sass": "^1.98.0",
+        "stylelint": "^17.6.0",
+        "stylelint-no-unsupported-browser-features": "^8.1.1",
+        "typescript": "^6.0.2"
     },
     "scripts": {
         "clean": "rimraf public/css public/js",
-        "build:ts": "tsc",
-        "build:ts:min": "esbuild src/ts/main.ts --bundle --minify --outfile=public/js/main.js",
-        "build:ts:all": "npm run build:ts && npm run build:ts:min",
-        "build:scss": "sass src/scss/main.scss:public/css/main.css --no-source-map",
-        "build:scss:min": "sass src/scss/main.scss:public/css/main.css --style=compressed --no-source-map",
-        "build:scss:all": "npm run build:scss && npm run build:scss:min",
-        "build:debug": "npm run build:ts:all && npm run build:scss:all",
-        "build:release": "npm run clean && npm run build:ts:min && npm run build:scss:min",
-        "watch:ts:dev": "esbuild src/ts/main.ts --bundle --outfile=public/js/main.js --watch",
-        "watch:ts:min": "esbuild src/ts/main.ts --bundle --minify --outfile=public/js/main.js --watch",
-        "watch:ts": "npm-run-all --parallel watch:ts:dev watch:ts:min",
-        "watch:scss:dev": "sass --watch src/scss/main.scss:public/css/main.css --no-source-map",
-        "watch:scss:min": "sass --watch src/scss/main.scss:public/css/main.css --style=compressed --no-source-map",
-        "watch:scss": "npm-run-all --parallel watch:scss:dev watch:scss:min",
-        "watch": "npm-run-all --parallel watch:ts watch:scss",
+        "__SCSS__": "",
+        "build:scss": "sass src/scss:public/css --no-source-map && postcss public/css/*.css --env development -d public/css",
+        "build:scss:min": "sass src/scss:public/css/min --style=compressed --source-map && postcss public/css/min/*.css --env production --dir public/css/min --map",
+        "__TYPESCRIPT__": "",
+        "build:ts": "esbuild src/ts/*.ts --bundle --target=es2015 --outdir=public/js",
+        "build:ts:min": "esbuild src/ts/*.ts --bundle --minify --sourcemap --target=es2015 --outdir=public/js/min",
+        "__WATCH__": "",
+        "watch:scss": "chokidar \"src/scss/**/*.scss\" -c \"npm run build:scss\"",
+        "watch:scss:min": "chokidar \"src/scss/**/*.scss\" -c \"npm run build:scss:min\"",
+        "watch:ts": "chokidar \"src/ts/**/*.ts\" -c \"npm run build:ts\"",
+        "watch:ts:min": "chokidar \"src/ts/**/*.ts\" -c \"npm run build:ts:min\"",
+        "watch": "npm-run-all --parallel watch:scss watch:ts watch:scss:min watch:ts:min",
+        "__ANALYZE__": "",
+        "lint:scss": "stylelint \"src/scss/**/*.scss\"",
+        "lint:scss:watch": "stylelint \"src/scss/**/*.scss\" --watch",
+        "__BUILD__": "",
+        "build:debug": "npm-run-all --serial build:scss build:ts build:scss:min build:ts:min",
+        "build:release": "npm-run-all --serial clean build:scss:min build:ts:min",
+        "__SERVER__": "",
         "serve": "browser-sync start --server \"public\" --files \"public/**/*\"",
-        "start": "npm run build:release && npm run serve"
+        "start": "npm-run-all --serial build:release serve"
     },
     "dependencies": {
         "browser-sync": "^3.0.4",
-        "esbuild": "^0.25.9"
+        "esbuild": "^0.27.4",
+        "stylelint-config-standard": "^40.0.0"
     }
 }
