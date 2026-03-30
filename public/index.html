@@ -195,7 +195,7 @@
                 </div>
             </div>
         </section>
-        <section id="featured-projects" class="featured-projects disabled" data-aos="fade-up">
+        <section id="featured-projects" class="featured-projects" data-aos="fade-up">
             <div class="wrapper wrapper--featured-projects">
                 <div class="block-header block-header--featured-projects">
                     <h2 class="block-header__header">Featured projects</h2>
@@ -210,7 +210,7 @@
                                     <h4 class="card__tagline">New York</h4>
                                     <h3 class="card__header">Big Road Brewery</h3>
                                 </div>
-                                <a href="#!" class="button-link">Read more</a>
+                                <a href="#!" class="button-link button-link--card">Read more</a>
                             </div>
                         </div>
                         <div class="card card--project" data-aos="flip-up">
@@ -220,7 +220,7 @@
                                     <h4 class="card__tagline">New York</h4>
                                     <h3 class="card__header">Big Road Brewery</h3>
                                 </div>
-                                <a href="#!" class="button-link">Read more</a>
+                                <a href="#!" class="button-link button-link--card">Read more</a>
                             </div>
                         </div>
                         <div class="card card--project" data-aos="flip-up">
@@ -230,102 +230,105 @@
                                     <h4 class="card__tagline">New York</h4>
                                     <h3 class="card__header">Big Road Brewery</h3>
                                 </div>
-                                <a href="#!" class="button-link">Read more</a>
+                                <a href="#!" class="button-link button-link--card">Read more</a>
                             </div>
                         </div>
                     </div>
                     <button class="button-link button-link--hero" @click="expanded = !expanded">View all projects</button>
-                    <div class="featured-projects__projects-block" x-show="expanded" x-collapse.duration.500ms>
-                        <div class="card card--project">
-                            <img src="./assets/images/featured_projects/first.webp" alt="First project photo" class="card__img" />
-                            <div class="card__content">
-                                <div class="card__header-block">
-                                    <h4 class="card__tagline">New York</h4>
-                                    <h3 class="card__header">Big Road Brewery</h3>
+                    <div class="featured-projects__expanded-block" x-show="expanded" x-collapse.duration.500ms>
+                        <div class="featured-projects__projects-block">
+                            <div class="card card--project">
+                                <img src="./assets/images/featured_projects/first.webp" alt="First project photo" class="card__img" />
+                                <div class="card__content">
+                                    <div class="card__header-block">
+                                        <h4 class="card__tagline">New York</h4>
+                                        <h3 class="card__header">Big Road Brewery</h3>
+                                    </div>
+                                    <a href="#!" class="button-link button-link--card">Read more</a>
                                 </div>
-                                <a href="#!" class="button-link">Read more</a>
+                            </div>
+                            <div class="card card--project">
+                                <img src="./assets/images/featured_projects/second.webp" alt="Second project photo" class="card__img" />
+                                <div class="card__content">
+                                    <div class="card__header-block">
+                                        <h4 class="card__tagline">New York</h4>
+                                        <h3 class="card__header">Big Road Brewery</h3>
+                                    </div>
+                                    <a href="#!" class="button-link button-link--card">Read more</a>
+                                </div>
+                            </div>
+                            <div class="card card--project">
+                                <img src="./assets/images/featured_projects/third.webp" alt="Third project photo" class="card__img" />
+                                <div class="card__content">
+                                    <div class="card__header-block">
+                                        <h4 class="card__tagline">New York</h4>
+                                        <h3 class="card__header">Big Road Brewery</h3>
+                                    </div>
+                                    <a href="#!" class="button-link button-link--card">Read more</a>
+                                </div>
+                            </div>
+                            <div class="card card--project">
+                                <img src="./assets/images/featured_projects/first.webp" alt="First project photo" class="card__img" />
+                                <div class="card__content">
+                                    <div class="card__header-block">
+                                        <h4 class="card__tagline">New York</h4>
+                                        <h3 class="card__header">Big Road Brewery</h3>
+                                    </div>
+                                    <a href="#!" class="button-link button-link--card">Read more</a>
+                                </div>
+                            </div>
+                            <div class="card card--project">
+                                <img src="./assets/images/featured_projects/second.webp" alt="Second project photo" class="card__img" />
+                                <div class="card__content">
+                                    <div class="card__header-block">
+                                        <h4 class="card__tagline">New York</h4>
+                                        <h3 class="card__header">Big Road Brewery</h3>
+                                    </div>
+                                    <a href="#!" class="button-link button-link--card">Read more</a>
+                                </div>
+                            </div>
+                            <div class="card card--project">
+                                <img src="./assets/images/featured_projects/third.webp" alt="Third project photo" class="card__img" />
+                                <div class="card__content">
+                                    <div class="card__header-block">
+                                        <h4 class="card__tagline">New York</h4>
+                                        <h3 class="card__header">Big Road Brewery</h3>
+                                    </div>
+                                    <a href="#!" class="button-link button-link--card">Read more</a>
+                                </div>
+                            </div>
+                            <div class="card card--project">
+                                <img src="./assets/images/featured_projects/first.webp" alt="First project photo" class="card__img" />
+                                <div class="card__content">
+                                    <div class="card__header-block">
+                                        <h4 class="card__tagline">New York</h4>
+                                        <h3 class="card__header">Big Road Brewery</h3>
+                                    </div>
+                                    <a href="#!" class="button-link button-link--card">Read more</a>
+                                </div>
+                            </div>
+                            <div class="card card--project">
+                                <img src="./assets/images/featured_projects/second.webp" alt="Second project photo" class="card__img" />
+                                <div class="card__content">
+                                    <div class="card__header-block">
+                                        <h4 class="card__tagline">New York</h4>
+                                        <h3 class="card__header">Big Road Brewery</h3>
+                                    </div>
+                                    <a href="#!" class="button-link button-link--card">Read more</a>
+                                </div>
+                            </div>
+                            <div class="card card--project">
+                                <img src="./assets/images/featured_projects/third.webp" alt="Third project photo" class="card__img" />
+                                <div class="card__content">
+                                    <div class="card__header-block">
+                                        <h4 class="card__tagline">New York</h4>
+                                        <h3 class="card__header">Big Road Brewery</h3>
+                                    </div>
+                                    <a href="#!" class="button-link button-link--card">Read more</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="card card--project">
-                            <img src="./assets/images/featured_projects/second.webp" alt="Second project photo" class="card__img" />
-                            <div class="card__content">
-                                <div class="card__header-block">
-                                    <h4 class="card__tagline">New York</h4>
-                                    <h3 class="card__header">Big Road Brewery</h3>
-                                </div>
-                                <a href="#!" class="button-link">Read more</a>
-                            </div>
-                        </div>
-                        <div class="card card--project">
-                            <img src="./assets/images/featured_projects/third.webp" alt="Third project photo" class="card__img" />
-                            <div class="card__content">
-                                <div class="card__header-block">
-                                    <h4 class="card__tagline">New York</h4>
-                                    <h3 class="card__header">Big Road Brewery</h3>
-                                </div>
-                                <a href="#!" class="button-link">Read more</a>
-                            </div>
-                        </div>
-                        <div class="card card--project">
-                            <img src="./assets/images/featured_projects/first.webp" alt="First project photo" class="card__img" />
-                            <div class="card__content">
-                                <div class="card__header-block">
-                                    <h4 class="card__tagline">New York</h4>
-                                    <h3 class="card__header">Big Road Brewery</h3>
-                                </div>
-                                <a href="#!" class="button-link">Read more</a>
-                            </div>
-                        </div>
-                        <div class="card card--project">
-                            <img src="./assets/images/featured_projects/second.webp" alt="Second project photo" class="card__img" />
-                            <div class="card__content">
-                                <div class="card__header-block">
-                                    <h4 class="card__tagline">New York</h4>
-                                    <h3 class="card__header">Big Road Brewery</h3>
-                                </div>
-                                <a href="#!" class="button-link">Read more</a>
-                            </div>
-                        </div>
-                        <div class="card card--project">
-                            <img src="./assets/images/featured_projects/third.webp" alt="Third project photo" class="card__img" />
-                            <div class="card__content">
-                                <div class="card__header-block">
-                                    <h4 class="card__tagline">New York</h4>
-                                    <h3 class="card__header">Big Road Brewery</h3>
-                                </div>
-                                <a href="#!" class="button-link">Read more</a>
-                            </div>
-                        </div>
-                        <div class="card card--project">
-                            <img src="./assets/images/featured_projects/first.webp" alt="First project photo" class="card__img" />
-                            <div class="card__content">
-                                <div class="card__header-block">
-                                    <h4 class="card__tagline">New York</h4>
-                                    <h3 class="card__header">Big Road Brewery</h3>
-                                </div>
-                                <a href="#!" class="button-link">Read more</a>
-                            </div>
-                        </div>
-                        <div class="card card--project">
-                            <img src="./assets/images/featured_projects/second.webp" alt="Second project photo" class="card__img" />
-                            <div class="card__content">
-                                <div class="card__header-block">
-                                    <h4 class="card__tagline">New York</h4>
-                                    <h3 class="card__header">Big Road Brewery</h3>
-                                </div>
-                                <a href="#!" class="button-link">Read more</a>
-                            </div>
-                        </div>
-                        <div class="card card--project">
-                            <img src="./assets/images/featured_projects/third.webp" alt="Third project photo" class="card__img" />
-                            <div class="card__content">
-                                <div class="card__header-block">
-                                    <h4 class="card__tagline">New York</h4>
-                                    <h3 class="card__header">Big Road Brewery</h3>
-                                </div>
-                                <a href="#!" class="button-link">Read more</a>
-                            </div>
-                        </div>
+                        <button class="button-link button-link--hero" @click="expanded = !expanded">Close</button>
                     </div>
                     <!-- <a class="button-link button-link--hero" href="#!">View all projects</a> -->
                 </div>
@@ -428,7 +431,7 @@
             });
         </script> -->
 
-        <!-- <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     </body>
 </html>

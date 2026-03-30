@@ -145,15 +145,34 @@
     }
 
     &--featured-projects {
+        // max-width: 1200px;
+
+        // display: flex;
+        // flex-direction: column;
+
+        // row-gap: 42px;
+
+        // // padding: 0 0 0 60px;
+        // padding: 120px 16px 100px 16px;
+
         max-width: 1200px;
 
         display: flex;
         flex-direction: column;
 
+        // row-gap: clamp(16px, 3.333vw, 42px);
         row-gap: 42px;
+        // justify-content: space-between;
 
-        // padding: 0 0 0 60px;
-        padding: 120px 16px 100px 16px;
+        // padding: 20px;
+        // padding: clamp(16px, 0.012 * 100vw + 11.044px, 20px);
+        // padding: clamp(40px, 6.944vw, 100px) clamp(0px, -22.1vw + 317.647px, 60px);
+
+        padding-top: clamp(40px, 120 / 1200 * 100vw, 120px);
+        padding-bottom: clamp(40px, 100 / 1200 * 100vw, 100px);
+
+        padding-left: clamp(40px, 100 / 1200 * 100vw, 100px);
+        padding-right: clamp(40px, 100 / 1200 * 100vw, 100px);
     }
 
     &--meet-our-team {
@@ -236,6 +255,11 @@
             padding: clamp(40px, 6.944vw, 100px) 16px;
         }
 
+        &--featured-projects {
+            padding-left: clamp(16px, 0.128 * 100vw - 38.519px, 60px);
+            padding-right: clamp(16px, 0.128 * 100vw - 38.519px, 60px);
+        }
+
         &--prior-clients {
             padding: clamp(40px, 6.944vw, 100px) clamp(16px, 0.128 * 100vw - 38.519px, 60px);
         }
@@ -279,6 +303,11 @@
         &--our-firm {
             // row-gap: clamp(16px, 4vw, 32px);
             padding: clamp(40px, 6.944vw, 100px) 16px;
+        }
+
+        &--featured-projects {
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         // &--meet-our-team {

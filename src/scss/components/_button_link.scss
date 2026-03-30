@@ -92,6 +92,9 @@
             transform: scale(1.025);
         }
     }
+
+    &--card {
+    }
 }
 
 //? --- LAPTOP ---
@@ -113,5 +116,9 @@
 
         // padding: 12px 22px;
         // border-radius: 16px;
+
+        &--card {
+            @include typography.poppins--14px;
+        }
     }
 }

@@ -10,8 +10,8 @@
     text-align: center;
 
     &__img {
-        transition: transform 0.3s ease-in-out;
         will-change: transform;
+        transition: transform 300ms ease-in-out;
 
         transform: translateZ(0);
         backface-visibility: hidden;
@@ -20,23 +20,25 @@
     &__header {
         @include typography.poppins--18px;
 
-        line-height: 26px;
+        line-height: 1.444em;
         letter-spacing: 0;
 
         color: #403e3b;
 
-        margin-top: 15px;
+        // margin-top: 15px;
+        margin-top: 1.2em;
     }
 
     &__pg {
         @include typography.poppins--16px;
 
-        line-height: 24px;
+        line-height: 1.5em;
         letter-spacing: 0;
 
         color: #645c55;
 
-        margin-top: 10px;
+        // margin-top: 10px;
+        margin-top: 0.625em;
 
         max-width: 300px;
     }
@@ -69,11 +71,13 @@
 
             justify-content: space-between;
 
-            padding: 40px;
+            // padding: 40px;
+            padding: clamp(16px, 0.038 * 100vw - 6.154px, 40px);
+
             opacity: 0;
 
-            transition: opacity 0.3s ease-in-out;
             will-change: opacity;
+            transition: opacity 300ms ease-in-out;
 
             transform: translateZ(0);
             backface-visibility: hidden;
@@ -86,7 +90,7 @@
         .card__header {
             @include typography.poppins--24px;
 
-            line-height: 30px;
+            line-height: 1.25em;
             letter-spacing: 0;
 
             color: #403e3b;
@@ -97,8 +101,8 @@
         .card__tagline {
             @include typography.poppins--14px;
 
-            line-height: 20px;
-            letter-spacing: 2px;
+            line-height: 1.429em;
+            letter-spacing: 0.143em;
 
             color: #645c55;
 
@@ -108,17 +112,17 @@
         .card__img {
             opacity: 0.78;
 
-            transition:
-                transform 0.3s ease-in-out,
-                opacity 0.3s ease-in-out;
             will-change: transform, opacity;
+            transition:
+                transform 300ms ease-in-out,
+                opacity 300ms ease-in-out;
 
             transform: translateZ(0);
             backface-visibility: hidden;
         }
 
-        transition: transform 0.3s ease-in-out;
         will-change: transform;
+        transition: transform 300ms ease-in-out;
 
         transform: translateZ(0);
         backface-visibility: hidden;
@@ -134,6 +138,16 @@
                     opacity: 1;
                 }
             }
+        }
+    }
+}
+
+//? --- BOOTSTRAP SMALL ---
+//? -----------------------
+@media (max-width: 576px) {
+    .card {
+        &--project {
+            max-width: 375px;
         }
     }
 }
