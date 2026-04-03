@@ -28,6 +28,17 @@
             }
         }
 
+        @media (hover: none) {
+            &:active {
+                display: inline-block;
+
+                transform: scale(1.025);
+
+                will-change: transform;
+                transition: transform 100ms ease-out;
+            }
+        }
+
         &--icon {
             display: block;
             line-height: 0;
@@ -53,6 +64,13 @@
         aspect-ratio: 1 / 1;
 
         transition: transform 300ms ease-in-out;
+
+        //? --- TABLET ---
+        //? --------------
+        @media (max-width: 768px) {
+            transition: transform 100ms ease-out;
+        }
+
         will-change: transform;
 
         transform: translateZ(0);

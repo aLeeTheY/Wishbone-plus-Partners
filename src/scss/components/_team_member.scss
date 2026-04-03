@@ -11,10 +11,18 @@
     cursor: pointer;
 
     will-change: transform;
+
     transform: translateZ(0);
     transform-origin: 0 0;
 
     transition: transform 300ms ease-in-out;
+
+    //? --- TABLET ---
+    //? --------------
+    @media (max-width: 768px) {
+        transition: transform 100ms ease-out;
+    }
+
     backface-visibility: hidden;
 
     @media (hover: hover) {

@@ -33,6 +33,12 @@
 
     transition: transform 300ms ease-in-out;
 
+    //? --- TABLET ---
+    //? --------------
+    @media (max-width: 768px) {
+        transition: transform 100ms ease-out;
+    }
+
     backface-visibility: hidden;
 
     text-wrap-mode: nowrap;
@@ -80,6 +86,14 @@
         transition:
             transform 300ms ease-in-out,
             border-color 300ms ease-in-out;
+
+        //? --- TABLET ---
+        //? --------------
+        @media (max-width: 768px) {
+            transition:
+                transform 100ms ease-out,
+                border-color 100ms ease-out;
+        }
 
         @media (hover: hover) {
             &:hover {
