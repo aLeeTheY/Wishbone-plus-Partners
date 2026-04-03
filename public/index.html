@@ -8,12 +8,14 @@
         <!--* Page title --->
         <title>Wishbone + Partners</title>
 
-        <!--* CSS code imports --->
+        <!--* My CSS code imports --->
         <link rel="stylesheet" href="./css/min/main.css" />
-        <!-- <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" /> -->
+
+        <!--* Other CSS code imports --->
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     </head>
     <body>
-        <header id="header" class="header" data-aos="zoom-out">
+        <header id="header" class="header" data-aos="fade-down">
             <div class="wrapper wrapper--header">
                 <a class="logo" href="#header">
                     <img class="logo__img" src="./assets/icons/header/logo.svg" alt="Logo" />
@@ -110,7 +112,7 @@
                 </div>
             </div>
         </section>
-        <section id="reeding-house" class="reeding-house" data-aos="zoom-out-up">
+        <section id="reeding-house" class="reeding-house" data-aos="fade-up">
             <div class="wrapper wrapper--reeding-house-and-marble-staircase">
                 <div class="block-header block-header--house-and-staircase">
                     <h3 class="block-header__header">Reeding house</h3>
@@ -151,7 +153,7 @@
                 </div>
             </div>
         </section>
-        <section id="the-marble-staircase" class="the-marble-staircase" data-aos="zoom-out-up">
+        <section id="the-marble-staircase" class="the-marble-staircase" data-aos="fade-up">
             <div class="wrapper wrapper--reeding-house-and-marble-staircase">
                 <div class="block-header block-header--house-and-staircase">
                     <h3 class="block-header__header">The marble staircase</h3>
@@ -159,7 +161,7 @@
                 </div>
             </div>
         </section>
-        <section id="prior-clients" class="prior-clients">
+        <section id="prior-clients" class="prior-clients" data-aos="fade-up">
             <div class="wrapper wrapper--prior-clients">
                 <div class="prior-clients__text-block" data-aos="zoom-out-right">
                     <div class="block-header block-header--prior-clients">
@@ -187,7 +189,7 @@
                 </div>
             </div>
         </section>
-        <section id="the-swirling-staircase" class="the-swirling-staircase" data-aos="zoom-out-up">
+        <section id="the-swirling-staircase" class="the-swirling-staircase" data-aos="fade-up">
             <div class="wrapper wrapper--swirling-staircase">
                 <div class="block-header block-header--house-and-staircase">
                     <h3 class="block-header__header">The swirling staircase</h3>
@@ -196,7 +198,7 @@
             </div>
         </section>
         <section id="featured-projects" class="featured-projects" data-aos="fade-up">
-            <div class="wrapper wrapper--featured-projects">
+            <div class="wrapper wrapper--featured-projects" data-aos="fade-up">
                 <div class="block-header block-header--featured-projects">
                     <h2 class="block-header__header">Featured projects</h2>
                     <p class="block-header__pg">Some of the latest and greatest projects from us here at Wishbone+Partners.</p>
@@ -334,7 +336,7 @@
                 </div>
             </div>
         </section>
-        <section id="meet-our-team" class="meet-our-team">
+        <section id="meet-our-team" class="meet-our-team" data-aos="fade-up">
             <div class="wrapper wrapper--meet-our-team">
                 <div class="meet-our-team__text-block" data-aos="fade-down-right">
                     <div class="block-header block-header--meet-our-team">
@@ -394,7 +396,7 @@
                 <a href="#!" class="button-link button-link--hero">Get in touch</a>
             </div>
         </section>
-        <footer id="footer" class="footer" data-aos="zoom-out-up">
+        <footer id="footer" class="footer" data-aos="fade-up">
             <div class="wrapper wrapper--footer">
                 <div class="footer__text-block">
                     <a class="logo logo--footer" href="#header"
@@ -422,14 +424,20 @@
         </footer>
 
         <!--* JS code imports --->
-        <!-- <script src="./js/main.js" defer></script>
+        <!-- <script src="./js/main.js" defer></script> -->
 
         <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
         <script>
             window.addEventListener("load", () => {
                 AOS.init({ once: true });
+                AOS.refresh();
             });
-        </script> -->
+
+            // let samt = 0;
+            // window.addEventListener("scroll", function () {
+            //     samt <= 10 ? samt++ : AOS.refresh();
+            // });
+        </script>
 
         <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
