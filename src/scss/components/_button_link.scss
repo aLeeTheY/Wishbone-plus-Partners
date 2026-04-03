@@ -86,15 +86,22 @@
                 transform: scale(1.025);
                 border-color: #1b1a1a;
             }
+
+            &:active {
+                transform: scale(1.025);
+            }
         }
 
-        &:active {
-            transform: scale(1.025);
+        @media (hover: none) {
+            &:active {
+                transform: scale(1.025);
+                border-color: #1b1a1a;
+            }
         }
     }
 
-    &--card {
-    }
+    // &--card {
+    // }
 }
 
 //? --- LAPTOP ---
