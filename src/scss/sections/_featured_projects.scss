@@ -16,15 +16,21 @@
         height: auto;
 
         display: grid;
-        grid-template-columns: repeat(3, minmax(144px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(max(256px, 100% / 3 - 32px), 1fr));
+
+        justify-items: stretch;
 
         gap: 16px;
+        // padding: 0 16px;
 
         // columns: 3 375px;
         // column-gap: 16px;
     }
 
     &__expanded-block {
+        width: 100%;
+        height: auto;
+
         display: flex;
         flex-direction: column;
 
@@ -40,46 +46,46 @@
     }
 }
 
-//? --- BOOTSTRAP SMALL ---
-//? -----------------------
-@media (max-width: 576px) {
-    .featured-projects {
-        // background-color: #f7f7f7;
+// //? --- BOOTSTRAP SMALL ---
+// //? -----------------------
+// @media (max-width: 576px) {
+//     .featured-projects {
+//         // background-color: #f7f7f7;
 
-        &__content {
-            // display: flex;
-            // flex-direction: column;
+//         &__content {
+//             // display: flex;
+//             // flex-direction: column;
 
-            // align-items: center;
+//             // align-items: center;
 
-            // row-gap: 50px;
-        }
+//             // row-gap: 50px;
+//         }
 
-        &__projects-block {
-            // width: 100%;
-            // height: auto;
+//         &__projects-block {
+//             // width: 100%;
+//             // height: auto;
 
-            // display: grid;
-            grid-template-columns: 1fr;
-            justify-items: center;
+//             // display: grid;
+//             grid-template-columns: 1fr;
+//             justify-items: center;
 
-            // gap: 16px;
+//             // gap: 16px;
 
-            // columns: 3 375px;
-            // column-gap: 16px;
-        }
+//             // columns: 3 375px;
+//             // column-gap: 16px;
+//         }
 
-        &__expanded-block {
-            // display: flex;
-            // flex-direction: column;
+//         &__expanded-block {
+//             // display: flex;
+//             // flex-direction: column;
 
-            // align-items: center;
-            // row-gap: 50px;
+//             // align-items: center;
+//             // row-gap: 50px;
 
-            // width: 100%;
+//             // width: 100%;
 
-            // columns: 3 375px;
-            // column-gap: 16px;
-        }
-    }
-}
+//             // columns: 3 375px;
+//             // column-gap: 16px;
+//         }
+//     }
+// }
