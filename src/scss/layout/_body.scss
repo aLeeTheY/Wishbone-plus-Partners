@@ -14,7 +14,11 @@ body {
 //     position: fixed;
 // }
 
-body:has(#menu-toggle:checked) {
-    overflow: hidden;
-    // position: fixed;
+//? --- TABLET ---
+//? --------------
+@media (max-width: 768px) {
+    body:has(#menu-toggle:checked) {
+        overflow: hidden;
+        // position: fixed;
+    }
 }
