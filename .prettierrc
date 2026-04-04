@@ -6,7 +6,7 @@
     "singleQuote": true,
     "bracketSpacing": true,
     "objectWrap": "preserve",
-    "bracketSameLine": false,
+    "bracketSameLine": true,
     "arrowParens": "always",
     "requirePragma": false,
     "insertPragma": false,
@@ -14,7 +14,7 @@
     "htmlWhitespaceSensitivity": "ignore",
     "quoteProps": "consistent",
     "trailingComma": "all",
-    "singleAttributePerLine": true,
+    "singleAttributePerLine": false,
     "embeddedLanguageFormatting": "off",
     "proseWrap": "never",
     "overrides":
