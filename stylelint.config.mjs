@@ -1,7 +1,7 @@
 /** @type {import('stylelint').Config} */
 export default {
     extends: ['stylelint-config-standard-scss'],
-    plugins: ['stylelint-selector-bem-pattern'],
+    plugins: ['stylelint-selector-bem-pattern', 'stylelint-no-unsupported-browser-features'],
     rules: {
         'plugin/selector-bem-pattern': {
             componentName: '[a-z0-9]+(?:-[a-z0-9]+)*',
@@ -12,6 +12,12 @@ export default {
         'number-max-precision': 3,
         // 'scss/double-slash-comment-whitespace-inside': '^\\/\\/[!*?todo] ([a-z0-9])*$',
         'scss/at-mixin-pattern': '^([a-z0-9]+(-[a-z0-9]+)*)(--[a-z0-9]+)?$',
+        'plugin/no-unsupported-browser-features': [
+            true,
+            {
+                severity: 'warning',
+            },
+        ],
     },
     ignoreFiles: [
         '**/*.js',
