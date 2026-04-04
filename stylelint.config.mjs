@@ -12,7 +12,14 @@ export default {
         'number-max-precision': 3,
         // 'scss/double-slash-comment-whitespace-inside': '^\\/\\/[!*?todo] ([a-z0-9])*$',
         'scss/at-mixin-pattern': '^([a-z0-9]+(-[a-z0-9]+)*)(--[a-z0-9]+)?$',
-        'plugin/no-unsupported-browser-features': [true, { severity: 'warning' }],
+        'plugin/no-unsupported-browser-features': [
+            true,
+            {
+                // * plugin reads 'production' section by default from .browserslistrc
+                // browsers: ['last 4 versions', '> 0.2%', 'not dead'],
+                severity: 'warning',
+            },
+        ],
     },
     ignoreFiles: [
         '**/*.js',
