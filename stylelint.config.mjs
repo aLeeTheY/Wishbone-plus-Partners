@@ -9,7 +9,7 @@ export default {
             utilitySelectors: '^\\.util-[a-z]+$',
         },
         'selector-class-pattern': null,
-        'number-max-precision': 3,
+        'number-max-precision': 5,
         // 'scss/double-slash-comment-whitespace-inside': '^\\/\\/[!*?todo] ([a-z0-9])*$',
         'scss/at-mixin-pattern': '^([a-z0-9]+(-[a-z0-9]+)*)(--[a-z0-9]+)?$',
         'plugin/no-unsupported-browser-features': [
@@ -17,6 +17,7 @@ export default {
             {
                 // * plugin reads 'production' section by default from .browserslistrc
                 // browsers: ['last 4 versions', '> 0.2%', 'not dead'],
+                ignore: ['css-nesting'],
                 severity: 'warning',
             },
         ],
