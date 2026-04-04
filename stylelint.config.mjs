@@ -12,12 +12,7 @@ export default {
         'number-max-precision': 3,
         // 'scss/double-slash-comment-whitespace-inside': '^\\/\\/[!*?todo] ([a-z0-9])*$',
         'scss/at-mixin-pattern': '^([a-z0-9]+(-[a-z0-9]+)*)(--[a-z0-9]+)?$',
-        'plugin/no-unsupported-browser-features': [
-            true,
-            {
-                severity: 'warning',
-            },
-        ],
+        'plugin/no-unsupported-browser-features': [true, { severity: 'warning' }],
     },
     ignoreFiles: [
         '**/*.js',
