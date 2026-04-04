@@ -20,6 +20,10 @@ export default {
         '**/*.ts',
         '**/*.mts',
         '**/*.cts',
+        '**/*.htm',
+        '**/*.html',
+        // '**/*.svg',
+        // '**/public/*',
         '**/vendors/*.scss',
     ],
 }
