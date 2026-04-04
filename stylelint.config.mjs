@@ -5,9 +5,7 @@ export default {
     rules: {
         'plugin/selector-bem-pattern': {
             componentName: '[a-z0-9]+(?:-[a-z0-9]+)*',
-            componentSelectors: {
-                initial: '^\\.{componentName}(?:__[a-z0-9]+)?(?:--[a-z0-9]+)?$',
-            },
+            componentSelectors: { initial: '^\\.{componentName}(?:__[a-z0-9]+)?(?:--[a-z0-9]+)?$' },
             utilitySelectors: '^\\.util-[a-z]+$',
         },
         'selector-class-pattern': null,

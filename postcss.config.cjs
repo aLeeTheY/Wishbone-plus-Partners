@@ -10,9 +10,7 @@ module.exports = ({ env }) => ({
             // disabled
             // autoprefixer: { grid: true },
         },
-        'postcss-sort-media-queries': {
-            sort: 'desktop-first',
-        },
+        'postcss-sort-media-queries': { sort: 'desktop-first' },
         // cssnano only in production mode
         ...(env === 'production' && {
             cssnano: {

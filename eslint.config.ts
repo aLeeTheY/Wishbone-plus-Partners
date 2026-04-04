@@ -11,10 +11,7 @@ import prettierRecomended from 'eslint-plugin-prettier/recommended'
 export default defineConfig([
     {
         files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
-        plugins: {
-            js,
-            prettier: prettierPlugin,
-        },
+        plugins: { js, prettier: prettierPlugin },
         extends: ['js/recommended', prettierConfig],
         rules: {
             ...prettierRecomended.rules,
