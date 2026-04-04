@@ -1,4 +1,4 @@
-module.exports = ({ env }) => ({
+export default ({ env }) => ({
     plugins: {
         'postcss-preset-env': {
             // default value
