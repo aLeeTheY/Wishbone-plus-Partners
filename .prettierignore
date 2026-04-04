@@ -1,34 +1,45 @@
-# Ignore .vscode/ folder
+# Ignore all .vscode/ folders
 **/.vscode
 
-# Ignore VCS/ folders
+# Ignore all VCS/ folders
 **/.git
 **/.svn
 **/.hg
 
-# Ignore node_modules/ folder
+# Ignore all node_modules/ folders
 **/node_modules
 
-# Ignore vendors/ folders
+# Ignore all vendors/ folders
 **/vendors
 
-# Ignore all build folders
-**/dist
+# Ignore all build/ and dist/ folders
 **/build
+**/dist
 
-# Ignore assets/ folder
+# Ignore all assets/ folders
 **/assets
 
-# Ignore all CSS and JS files and folders
-**/*.css
+# Ignore all CSS folders
+**/css
 
-**/*.js
-# **/*.cjs
-# **/*.mjs
+# Ignore all CSS files
+*.css
+*.css.map
 
-# **/*.ts
-# **/*.cts
-# **/*.mts
+# Ignore all JS folders
+**/js
 
-# Ignore *.tsbuildinfo files
-# *.tsbuildinfo
+# Ignore all JS source files
+*.js
+*.js.map
+
+*.cjs
+*.cjs.map
+
+*.mjs
+*.mjs.map
+
+# Allow some JS files
+!*.config.js
+!*.config.cjs
+!*.config.mjs
