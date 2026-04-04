@@ -1,6 +1,7 @@
 .our-process {
     &__content {
         display: flex;
+
         // width: fit-content;
 
         // column-gap: 104px;
@@ -11,13 +12,14 @@
     }
 }
 
-//? --- TABLET ---
-//? --------------
-@media (max-width: 768px) {
+// ? --- TABLET ---
+// ? --------------
+@media (width <= 768px) {
     .our-process {
         &__content {
             flex-direction: column;
             row-gap: 40px;
+
             // row-gap: clamp(36px, 0.012 * 100vw + 31.044px, 40px);
         }
     }

@@ -3,20 +3,17 @@
     position: relative;
 
     &::after {
-        content: "";
+        content: '';
         position: absolute;
         inset: 0;
-
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-
+        box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
         will-change: opacity;
         opacity: 0;
-
         transition: opacity 300ms ease;
 
-        //? --- TABLET ---
-        //? --------------
-        @media (max-width: 768px) {
+        // ? --- TABLET ---
+        // ? --------------
+        @media (width <= 768px) {
             transition: opacity 100ms ease;
         }
 
@@ -24,13 +21,12 @@
     }
 }
 
-//? --- TABLET ---
-//? --------------
-@media (max-width: 768px) {
+// ? --- TABLET ---
+// ? --------------
+@media (width <= 768px) {
     #header {
         position: fixed;
         z-index: 1000;
-
         width: 100%;
 
         &::after {

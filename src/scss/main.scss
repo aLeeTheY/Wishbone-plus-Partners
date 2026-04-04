@@ -1,53 +1,53 @@
-//? --- BASE
-@use "base/CSS_reset";
+// ? --- VENDORS
+@use 'vendors/reset_elad2412';
 
-@use "base/variables";
-@use "base/colors";
+// @use 'vendors/reset_andy_bell';
+// @use 'vendors/reset_joshwcomeau';
+// @use 'vendors/reset_meyerweb';
 
-@use "base/mixins";
+// ? --- BASE
+// @use 'base/reset';
+@use 'base/variables';
+@use 'base/colors';
+@use 'base/mixins';
+@use 'base/fonts';
+@use 'base/typography';
 
-@use "base/fonts";
-@use "base/typography";
+// ? --- SERVICE
+@use 'service/disabled';
 
-//? --- SERVICE
-@use "service/disabled";
+// ? --- UTILITIES
+@use 'utilities/spacing';
+@use 'utilities/visibility';
+@use 'utilities/z-index';
 
-//? --- UTILITIES
-@use "utilities/spacing";
-@use "utilities/visibility";
-@use "utilities/z-index";
+// ? --- LAYOUT
+@use 'layout/html';
+@use 'layout/body';
+@use 'layout/grid';
+@use 'layout/wrapper';
+@use 'layout/section';
 
-//? --- LAYOUT
-@use "layout/html";
-@use "layout/body";
+// ? --- BLOCKS
+@use 'components/hamburger_menu_btn';
+@use 'components/close_menu_btn';
+@use 'components/logo';
+@use 'components/navigation';
+@use 'components/button_link';
+@use 'components/block_header';
+@use 'components/team_member';
+@use 'components/card';
 
-@use "layout/grid";
-@use "layout/wrapper";
-
-@use "layout/section";
-
-//? --- BLOCKS
-@use "components/hamburger_menu_btn";
-@use "components/close_menu_btn";
-@use "components/logo";
-@use "components/navigation";
-@use "components/button_link";
-@use "components/block_header";
-@use "components/team_member";
-@use "components/card";
-
-//? --- SECTIONS
-@use "sections/header";
-
-@use "sections/hero";
-@use "sections/our_firm";
-@use "sections/reeding_house";
-@use "sections/our_process";
-@use "sections/the_marble_staircase";
-@use "sections/prior_clients";
-@use "sections/the_swirling_staircase";
-@use "sections/featured_projects";
-@use "sections/meet_our_team";
-@use "sections/get_in_touch";
-
-@use "sections/footer";
+// ? --- SECTIONS
+@use 'sections/header';
+@use 'sections/hero';
+@use 'sections/our_firm';
+@use 'sections/reeding_house';
+@use 'sections/our_process';
+@use 'sections/the_marble_staircase';
+@use 'sections/prior_clients';
+@use 'sections/the_swirling_staircase';
+@use 'sections/featured_projects';
+@use 'sections/meet_our_team';
+@use 'sections/get_in_touch';
+@use 'sections/footer';

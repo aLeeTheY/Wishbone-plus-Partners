@@ -1,6 +1,6 @@
-/**========================================================================
+/** ========================================================================
  **                            WRAPPER STYLES
- *========================================================================**/
+ *======================================================================== **/
 
 // @mixin base-wrapper {
 //     margin: 0 auto;
@@ -13,8 +13,8 @@
 
     &--header {
         max-width: 1200px;
-
         display: flex;
+
         // column-gap: 32px;
         column-gap: clamp(16px, 3.333vw, 40px);
         justify-content: space-between;
@@ -25,26 +25,25 @@
 
     &--hero {
         max-width: 1440px;
-
         display: flex;
-
         align-items: stretch;
         justify-content: space-between;
+
         // align-items: center;
 
         padding: 0 0 0 clamp(16px, 4.166vw, 60px);
+
         // padding: 0 0 0 clamp(8px, 4.166vw, 60px);
         // padding: 0 0 0 clamp(0.01px, 0.0024vw, 60px);
     }
 
     &--our-firm {
         max-width: 768px;
-
         display: flex;
         justify-content: center;
         align-items: stretch;
-
         column-gap: clamp(28px, 9.166vw, 132px);
+
         // gap: clamp(28px, 9.166vw, 132px);
 
         // padding: 0 0 0 60px;
@@ -54,11 +53,10 @@
 
     &--reeding-house-and-marble-staircase {
         max-width: 1440px;
-
         width: 100%;
         height: auto;
-
         display: flex;
+
         // flex-direction: column;
 
         justify-content: flex-end;
@@ -69,19 +67,14 @@
         // padding: clamp(0px, calc(-0.394 * 100vw + 567.488px), 400px) 60px 0 60px;
 
         // padding-top: clamp(0px, calc(-0.394 * 100vw + 567.488px), 400px);
-        padding-top: clamp(0px, -1.166 * 100vw + 895.627px, 400px);
-        padding-bottom: 0;
-
-        padding-right: clamp(16px, calc(0.128 * 100vw - 38.519px), 60px);
-        padding-left: clamp(16px, calc(0.128 * 100vw - 38.519px), 60px);
+        padding: clamp(0px, -1.166 * 100vw + 895.627px, 400px)
+            clamp(16px, calc(0.128 * 100vw - 38.519px), 60px) 0;
     }
 
     &--swirling-staircase {
         max-width: 1440px;
-
         width: 100%;
         height: auto;
-
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -90,41 +83,32 @@
         // padding: 266px 60px;
 
         // padding-top: clamp(0px, calc(-0.394 * 100vw + 567.488px), 400px);
-        padding-top: clamp(0px, -1.166 * 100vw + 895.627px, 400px);
-        padding-bottom: 0;
-
-        padding-right: clamp(16px, calc(0.128 * 100vw - 38.519px), 60px);
-        padding-left: calc(clamp(16px, calc(0.128 * 100vw - 38.519px), 60px) + 22px);
+        padding: clamp(0px, -1.166 * 100vw + 895.627px, 400px)
+            clamp(16px, calc(0.128 * 100vw - 38.519px), 60px) 0
+            calc(clamp(16px, calc(0.128 * 100vw - 38.519px), 60px) + 22px);
     }
 
     &--our-process {
         max-width: 1440px;
-
         display: flex;
         flex-direction: column;
-
         justify-content: center;
         align-items: center;
 
         // row-gap: clamp(20px, 0.037 * 100vw - 4.444px, 40px);
         row-gap: 40px;
+
         // row-gap: clamp(36px, 0.012 * 100vw + 31.044px, 40px);
 
         // padding: 0 0 0 60px;
         // padding: 100px 0;
         // padding: clamp(40px, 6.944vw, 100px) 0;
-        padding-top: clamp(40px, 100 / 1440 * 100vw, 100px);
-        padding-bottom: clamp(40px, 100 / 1440 * 100vw, 100px);
-
-        padding-left: clamp(40px, 136 / 1440 * 100vw, 136px);
-        padding-right: clamp(40px, 136 / 1440 * 100vw, 136px);
+        padding: clamp(40px, 100 / 1440 * 100vw, 100px) clamp(40px, 136 / 1440 * 100vw, 136px);
     }
 
     &--prior-clients {
         max-width: 1168px;
-
         display: flex;
-
         justify-content: space-between;
         align-items: center;
 
@@ -136,12 +120,9 @@
 
     &--get-in-touch {
         max-width: 1168px;
-
         display: flex;
-
         justify-content: space-between;
         align-items: center;
-
         gap: clamp(18px, 3.125vw, 32px);
 
         // padding: 0 0 0 60px;
@@ -161,42 +142,38 @@
         // padding: 120px 16px 100px 16px;
 
         max-width: 1440px;
-
         display: flex;
         flex-direction: column;
 
         // row-gap: clamp(16px, 3.333vw, 42px);
         row-gap: 42px;
+
         // justify-content: space-between;
 
         // padding: 20px;
         // padding: clamp(16px, 0.012 * 100vw + 11.044px, 20px);
         // padding: clamp(40px, 6.944vw, 100px) clamp(0px, -22.1vw + 317.647px, 60px);
 
-        padding-top: clamp(40px, 120 / 1440 * 100vw, 120px);
-        padding-bottom: clamp(40px, 100 / 1440 * 100vw, 100px);
-
-        padding-left: clamp(40px, 136 / 1440 * 100vw, 136px);
-        padding-right: clamp(40px, 136 / 1440 * 100vw, 136px);
+        padding: clamp(40px, 120 / 1440 * 100vw, 120px) clamp(40px, 136 / 1440 * 100vw, 136px)
+            clamp(40px, 100 / 1440 * 100vw, 100px);
     }
 
     &--meet-our-team {
         max-width: 1168px;
+
         // max-width: clamp(720px, 81.111vw, 1168px);
 
         display: flex;
+
         // gap: 32px;
         gap: clamp(18px, 3.125vw, 32px);
-
         justify-content: space-between;
         align-items: flex-start;
-
         padding: clamp(40px, 6.944vw, 100px) clamp(0px, -22.1vw + 317.647px, 60px);
     }
 
     &--footer {
         max-width: 1168px;
-
         display: flex;
         justify-content: space-between;
         align-items: end;
@@ -214,19 +191,20 @@
     // }
 }
 
-//? --- LAPTOP ---
-//? --------------
-@media (max-width: 1024px) {
+// ? --- LAPTOP ---
+// ? --------------
+@media (width <= 1024px) {
     .wrapper {
         &--our-firm {
             flex-direction: column;
 
             // justify-content: stretch;
             align-items: start;
-
             row-gap: clamp(12px, 2.734vw, 28px);
+
             // padding: clamp(40px, 4vw, 100px) clamp(36px, 6.943vw, 100px);
             padding: clamp(40px, 6.944vw, 100px) clamp(36px, 6.943vw, 100px);
+
             // max-width: 100%;
             // padding: clamp(16px, 4vw, 100px) clamp(16px, 4vw, 80px);
         }
@@ -241,18 +219,16 @@
 
             // display: flex;
             flex-direction: column;
-
             justify-content: flex-start;
             align-items: stretch;
-
             padding: clamp(40px, 6.944vw, 100px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
         }
     }
 }
 
-//? --- TABLET ---
-//? --------------
-@media (max-width: 768px) {
+// ? --- TABLET ---
+// ? --------------
+@media (width <= 768px) {
     .wrapper {
         &--our-process {
             // row-gap: 40px;
@@ -296,9 +272,9 @@
     }
 }
 
-//? --- BOOTSTRAP SMALL ---
-//? -----------------------
-@media (max-width: 576px) {
+// ? --- BOOTSTRAP SMALL ---
+// ? -----------------------
+@media (width <= 576px) {
     .wrapper {
         &--get-in-touch {
             flex-direction: column;
@@ -307,9 +283,9 @@
     }
 }
 
-//? --- MOBILE ---
-//? --------------
-@media (max-width: 425px) {
+// ? --- MOBILE ---
+// ? --------------
+@media (width <= 425px) {
     .wrapper {
         // &--header {
         //     column-gap: 16px;
@@ -317,6 +293,7 @@
 
         &--hero {
             padding: 0;
+
             // padding: clamp(0.01px, 0.0007vw, 16px);
             flex-wrap: wrap;
         }

@@ -1,6 +1,6 @@
 module.exports = ({ env }) => ({
     plugins: {
-        "postcss-preset-env": {
+        'postcss-preset-env': {
             // default value
             stage: 2,
 
@@ -10,16 +10,16 @@ module.exports = ({ env }) => ({
             // disabled
             // autoprefixer: { grid: true },
         },
-        "postcss-sort-media-queries": {
-            sort: "desktop-first",
+        'postcss-sort-media-queries': {
+            sort: 'desktop-first',
         },
         // cssnano only in production mode
-        ...(env === "production" && {
+        ...(env === 'production' && {
             cssnano: {
                 // preset: "default",
-                preset: "advanced",
+                preset: 'advanced',
             },
         }),
         // ...false,
     },
-});
+})

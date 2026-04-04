@@ -1,28 +1,23 @@
-@use "../base/typography";
+@use '../base/typography';
 
 .team-member {
     display: flex;
+
     // column-gap: 30px;
     column-gap: clamp(15px, 2.083vw, 30px);
-
     justify-content: flex-start;
     align-items: center;
-
     cursor: pointer;
-
     will-change: transform;
-
     transform: translateZ(0);
     transform-origin: 0 0;
-
     transition: transform 300ms ease-in-out;
-
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
     -webkit-tap-highlight-color: transparent;
 
-    //? --- TABLET ---
-    //? --------------
-    @media (max-width: 768px) {
+    // ? --- TABLET ---
+    // ? --------------
+    @media (width <= 768px) {
         transition: transform 100ms ease-out;
     }
 
@@ -48,9 +43,7 @@
 
         line-height: 1.444em;
         letter-spacing: 0;
-
         color: #1b1a1a;
-
         min-width: 140px;
     }
 
@@ -59,9 +52,7 @@
 
         line-height: 1em;
         letter-spacing: 0;
-
         color: #645c55;
-
         min-width: 140px;
     }
 
@@ -70,9 +61,9 @@
     }
 }
 
-//? --- LAPTOP ---
-//? --------------
-@media (max-width: 1024px) {
+// ? --- LAPTOP ---
+// ? --------------
+@media (width <= 1024px) {
     .team-member {
         column-gap: clamp(15px, 2.083vw, 30px);
 

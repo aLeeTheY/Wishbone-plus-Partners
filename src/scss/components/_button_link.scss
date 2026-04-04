@@ -1,16 +1,16 @@
-@use "../base/colors";
-@use "../base/typography";
+@use '../base/colors';
+@use '../base/typography';
 
 .button-link {
     @include typography.poppins--16px;
+
     font-size: clamp(14px, calc(14 / 1024 * 100vw), 16px);
+
     // font-size: clamp(12px, 5vw, 16px);
 
     display: block;
-
     max-width: max-content;
     max-height: max-content;
-
     letter-spacing: 0.025em;
     line-height: 1.5em;
 
@@ -19,7 +19,6 @@
 
     background-color: #1b1a1a;
     color: #fff;
-
     border-radius: 0.875em;
     padding: 0.6875em 1.25em;
 
@@ -27,24 +26,20 @@
     // padding: 11px 20px;
 
     cursor: pointer;
-
     will-change: transform;
     transform: translateZ(0);
-
     transition: transform 300ms ease-in-out;
 
-    //? --- TABLET ---
-    //? --------------
-    @media (max-width: 768px) {
+    // ? --- TABLET ---
+    // ? --------------
+    @media (width <= 768px) {
         transition: transform 100ms ease-out;
     }
 
     backface-visibility: hidden;
-
     text-wrap-mode: nowrap;
     text-align: center;
-
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
     -webkit-tap-highlight-color: transparent;
 
     // transform-origin: 50% 50%;
@@ -72,24 +67,24 @@
     &--hero {
         max-width: max-content;
         max-height: max-content;
-
         padding: 0.6875em 1.25em;
+
         // padding: 11px 20px;
 
         border-radius: 0;
         border: solid transparent 0.25em;
+
         // border: solid transparent 4px;
 
         background-color: transparent;
         color: #1b1a1a;
-
         transition:
             transform 300ms ease-in-out,
             border-color 300ms ease-in-out;
 
-        //? --- TABLET ---
-        //? --------------
-        @media (max-width: 768px) {
+        // ? --- TABLET ---
+        // ? --------------
+        @media (width <= 768px) {
             transition:
                 transform 100ms ease-out,
                 border-color 100ms ease-out;

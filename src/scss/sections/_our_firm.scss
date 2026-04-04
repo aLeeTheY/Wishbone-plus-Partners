@@ -1,4 +1,4 @@
-@use "../base/typography";
+@use '../base/typography';
 
 .our-firm {
     background-color: #fff;
@@ -6,7 +6,6 @@
     &__content {
         display: flex;
         flex-direction: column;
-
         row-gap: 10px;
 
         // max-width: 500px;
@@ -17,9 +16,7 @@
 
         // line-height: 24px;
         line-height: 1.5em;
-
         letter-spacing: 0;
-
         color: #403e3b;
     }
 

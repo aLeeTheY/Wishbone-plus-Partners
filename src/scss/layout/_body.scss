@@ -1,24 +1,23 @@
-@use "../base/colors";
+@use '../base/colors';
 
 body {
     width: 100%;
     min-height: 100vh;
-
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden auto;
 }
 
-//todo Develop JS variant for scroll block
+// todo Develop JS variant for scroll block
 // body:has(#mobile-navigation:target) {
 //     overflow: hidden;
 //     position: fixed;
 // }
 
-//? --- TABLET ---
-//? --------------
-@media (max-width: 768px) {
+// ? --- TABLET ---
+// ? --------------
+@media (width <= 768px) {
     body:has(#menu-toggle:checked) {
         overflow: hidden;
+
         // position: fixed;
     }
 }

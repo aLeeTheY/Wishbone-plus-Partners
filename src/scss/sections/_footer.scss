@@ -1,4 +1,4 @@
-@use "../base/typography";
+@use '../base/typography';
 
 .footer {
     background-color: #f7f7f7;
@@ -14,12 +14,11 @@
 
         line-height: calc(20 / 14 * 1em);
         letter-spacing: 0;
-
         color: #645c55;
     }
 
     &__link {
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
         -webkit-tap-highlight-color: transparent;
 
         @media (hover: hover) {
@@ -31,9 +30,7 @@
         @media (hover: none) {
             &:active {
                 display: inline-block;
-
                 transform: scale(1.025);
-
                 will-change: transform;
                 transition: transform 100ms ease-out;
             }
@@ -48,31 +45,28 @@
     &__social-icons-block {
         display: flex;
         align-items: center;
-
         column-gap: 20px;
     }
 
     &__copyright-block {
-        //* NOTHING
+        // * NOTHING
     }
 
     &__pg {
-        //* NOTHING
+        // * NOTHING
     }
 
     &__icon {
         aspect-ratio: 1 / 1;
-
         transition: transform 300ms ease-in-out;
 
-        //? --- TABLET ---
-        //? --------------
-        @media (max-width: 768px) {
+        // ? --- TABLET ---
+        // ? --------------
+        @media (width <= 768px) {
             transition: transform 100ms ease-out;
         }
 
         will-change: transform;
-
         transform: translateZ(0);
         backface-visibility: hidden;
 
@@ -88,9 +82,9 @@
     }
 }
 
-//? --- TABLET ---
-//? --------------
-@media (max-width: 768px) {
+// ? --- TABLET ---
+// ? --------------
+@media (width <= 768px) {
     .footer {
         &__pg {
             text-align: center;
