@@ -1,0 +1,34 @@
+# Ignore .vscode/ folder
+**/.vscode
+
+# Ignore VCS/ folders
+**/.git
+**/.svn
+**/.hg
+
+# Ignore node_modules/ folder
+**/node_modules
+
+# Ignore vendors/ folders
+**/vendors
+
+# Ignore all build folders
+**/dist
+**/build
+
+# Ignore assets/ folder
+**/assets
+
+# Ignore all CSS and JS files and folders
+**/*.css
+
+**/*.js
+# **/*.cjs
+# **/*.mjs
+
+# **/*.ts
+# **/*.cts
+# **/*.mts
+
+# Ignore *.tsbuildinfo files
+# *.tsbuildinfo

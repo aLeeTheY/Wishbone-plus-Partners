@@ -1,5 +1,28 @@
 {
-  "semi": false,
-  "singleQuote": true,
-  "printWidth": 80
+    "semi": false,
+    "tabWidth": 4,
+    "useTabs": false,
+    "printWidth": 100,
+    "singleQuote": true,
+    "bracketSpacing": true,
+    "objectWrap": "preserve",
+    "bracketSameLine": false,
+    "arrowParens": "always",
+    "requirePragma": false,
+    "insertPragma": false,
+    "checkIgnorePragma": false,
+    "htmlWhitespaceSensitivity": "ignore",
+    "quoteProps": "consistent",
+    "trailingComma": "all",
+    "singleAttributePerLine": true,
+    "embeddedLanguageFormatting": "off",
+    "proseWrap": "never",
+    "overrides":
+        [
+            { "files": ["**/*.html"], "options": { "printWidth": 160 } },
+            {
+                "files": [".prettierrc", ".prettierrc.json"],
+                "options": { "singleQuote": false, "trailingComma": "none" }
+            }
+        ]
 }
