@@ -39,3 +39,7 @@ original/
 
 # Ignore old/ folder
 old/
+
+# Ignore all files with old or no part in name
+*old*
+*no*
