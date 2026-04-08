@@ -8,10 +8,6 @@ export default {
             componentSelectors: { initial: '^\\.{componentName}(?:__[a-z0-9]+)?(?:--[a-z0-9]+)?$' },
             utilitySelectors: '^\\.util-[a-z]+$',
         },
-        'selector-class-pattern': null,
-        'number-max-precision': 5,
-        // 'scss/double-slash-comment-whitespace-inside': '^\\/\\/[!*?todo] ([a-z0-9])*$',
-        'scss/at-mixin-pattern': '^([a-z0-9]+(-[a-z0-9]+)*)(--[a-z0-9]+)?$',
         'plugin/no-unsupported-browser-features': [
             true,
             {
@@ -21,6 +17,13 @@ export default {
                 severity: 'warning',
             },
         ],
+        'media-feature-range-notation': 'prefix',
+        'declaration-empty-line-before': null,
+        'selector-class-pattern': null,
+        // 'length-zero-no-unit': null,
+        'number-max-precision': 5,
+        // 'scss/double-slash-comment-whitespace-inside': '^\\/\\/[!*?todo] ([a-z0-9])*$',
+        'scss/at-mixin-pattern': '^([a-z0-9]+(-[a-z0-9]+)*)(--[a-z0-9]+)?$',
     },
     ignoreFiles: [
         '**/*.js',
