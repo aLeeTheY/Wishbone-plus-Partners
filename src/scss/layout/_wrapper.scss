@@ -74,7 +74,7 @@
 
         // * --- SAFE
         padding: clamp(0px, -1.166 * 100vw + 895.627px, 400px)
-            clamp(16px, calc(0.128 * 100vw - 38.519px), 60px) 0;
+            clamp(16px, 0.128 * 100vw - 38.519px, 60px) 0;
 
         // @include fluid-padding-top(0, calc(-1.166 * 100vw + 895.627px), 400px);
         // @include fluid-padding-left(16px, calc(0.128 * 100vw - 38.519px), 60px);
@@ -96,8 +96,8 @@
 
         // * --- SAFE
         padding: clamp(0px, -1.166 * 100vw + 895.627px, 400px)
-            clamp(16px, calc(0.128 * 100vw - 38.519px), 60px) 0
-            calc(clamp(16px, calc(0.128 * 100vw - 38.519px), 60px) + 22px);
+            clamp(16px, 0.128 * 100vw - 38.519px, 60px) 0
+            calc(clamp(16px, 0.128 * 100vw - 38.519px, 60px) + 22px);
 
         // @include fluid-padding-top(0, calc(-1.166 * 100vw + 895.627px), 400px);
         // @include fluid-padding-left(16px, calc(0.128 * 100vw - 38.519px), 60px, 22px);

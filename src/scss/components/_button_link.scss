@@ -4,11 +4,7 @@
 
 .button-link {
     @include poppins--16px;
-
-    // * safe
-    @supports (font-size: clamp(1px, 1vw, 1px)) {
-        font-size: clamp(14px, calc(14 / 1024 * 100vw), 16px); /* stylelint-disable-line */
-    }
+    font-size: clamp(14px, 14 / 1024 * 100vw, 16px);
 
     // font-size: clamp(12px, 5vw, 16px);
 
@@ -28,7 +24,10 @@
     // line-height: 24px;
 
     background-color: #1b1a1a;
+
     color: #fff;
+    text-decoration: none;
+
     border-radius: 0.875em;
     padding: 0.6875em 1.25em;
 

@@ -1,8 +1,11 @@
 @use '../base/colors' as *;
 
 body {
-    width: 100%;
-    min-height: 100vh;
+    background-color: #fff;
+
+    // * used from css reset
+    // width: 100%;
+    // min-height: 100vh;
 
     overflow-x: hidden; // stylelint-disable-line
     overflow-y: auto; // stylelint-disable-line

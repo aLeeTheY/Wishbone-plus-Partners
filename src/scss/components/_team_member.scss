@@ -10,11 +10,14 @@
 
     justify-content: flex-start;
     align-items: center;
+
     cursor: pointer;
+
     will-change: transform;
     transform: translateZ(0);
     transform-origin: 0 0;
     transition: transform 300ms ease-in-out;
+
     -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
     -webkit-tap-highlight-color: transparent;
 

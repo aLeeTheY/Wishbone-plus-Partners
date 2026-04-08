@@ -1,6 +1,8 @@
 @use '../base/mixins' as *;
 
 .meet-our-team {
+    // background-color: #fff;
+
     &__text-block {
         display: flex;
         flex-direction: column;
