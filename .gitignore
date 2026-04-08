@@ -1,0 +1,66 @@
+# Ignore all .vscode/ folders
+**/.vscode
+
+# Ignore all public/ folders
+**/public
+
+# Ignore all node_modules/ folders
+**/node_modules
+
+# Allow all css/ folders
+# **/css
+
+# Allow all css files
+# *.css
+# *.css.map
+
+# Ignore some TypeScript files
+*.d.ts
+*.d.ts.map
+
+# Ignore all .tsbuildinfo files
+*.tsbuildinfo
+
+# Allow all JS folders
+# **/js
+
+# Allow all JS source files
+# *.js
+# *.js.map
+
+# *.cjs
+# *.cjs.map
+
+# *.mjs
+# *.mjs.map
+
+# Allow JS and TS config files
+# !*.config.js
+# !*.config.cjs
+# !*.config.mjs
+
+# !*.config.ts
+# !*.config.cts
+# !*.config.mts
+
+# Ingore fonts files
+*.otf
+*.ttf
+
+# Ignore all build/ and dist/ folders
+**/build
+**/dist
+
+# Ignore all original/ folders
+**/original
+
+# Ignore all old/ folders
+**/old
+
+# Ignore all files with "old" or "no" part in name
+*old*
+*no*
+
+# Ignore .*ignore Prettier and Docker files in GIT repo
+.prettierignore
+.dockerignore
