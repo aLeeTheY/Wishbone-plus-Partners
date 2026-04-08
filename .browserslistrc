@@ -2,8 +2,13 @@
 
 [production]
 last 4 versions
-> 0.2%
+> 0.05%
 not dead
+not kaios > 0
+not and_qq > 0
+not op_mini all
+not ios_saf < 13.4
+# not safari < 15.6
 
 [development]
 last 1 version
