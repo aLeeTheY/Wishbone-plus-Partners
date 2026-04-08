@@ -107,14 +107,14 @@
             flex-direction: column;
 
             // row-gap: 280px;
-            // row-gap: clamp(48px, 0.229 * 100vw - 49.143px, 280px);
-            @include fluid-row-gap(48px, calc(0.229 * 100vw - 49.143px), 280px);
+            row-gap: clamp(48px, 0.229 * 100vw - 49.143px, 280px);
+            // @include fluid-row-gap(48px, calc(0.229 * 100vw - 49.143px), 280px);
             justify-content: space-between;
 
             // * --- SAFE
             // padding: 40px;
-            // padding: clamp(16px, 0.038 * 100vw - 6.154px, 40px);
-            @include fluid-padding(16px, calc(0.038 * 100vw - 6.154px), 40px);
+            padding: clamp(16px, 0.038 * 100vw - 6.154px, 40px);
+            // @include fluid-padding(16px, calc(0.038 * 100vw - 6.154px), 40px);
 
             opacity: 0.6;
             will-change: opacity;

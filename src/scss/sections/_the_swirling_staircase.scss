@@ -3,13 +3,7 @@
     align-items: center;
     height: 600px;
     background: url('../../assets/images/the_swirling_staircase/background.webp');
-
-    background-position: center center;
-
-    @supports (background-position: clamp(1px, 1vw, 1px) clamp(1px, 1vw, 1px)) {
-        background-position: clamp(62%, -0.012 * 100vw + 67.025%, 50%) center; // stylelint-disable-line
-    }
-
+    background-position: clamp(62%, -0.012 * 100vw + 67.025%, 50%) center;
     background-size: cover;
     background-repeat: no-repeat;
 }

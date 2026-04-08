@@ -7,8 +7,8 @@
         // width: fit-content;
 
         // column-gap: 104px;
-        // column-gap: clamp(16px, 0.172 * 100vw - 116px, 104px);
-        @include fluid-column-gap(16px, calc(0.172 * 100vw - 116px), 104px);
+        column-gap: clamp(16px, 0.172 * 100vw - 116px, 104px);
+        // @include fluid-column-gap(16px, calc(0.172 * 100vw - 116px), 104px);
 
         // align-items: center;
         justify-content: space-between;

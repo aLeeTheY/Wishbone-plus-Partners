@@ -5,8 +5,8 @@
     display: flex;
 
     // column-gap: 30px;
-    // column-gap: clamp(15px, 2.083vw, 30px);
-    @include fluid-column-gap(15px, 2.083vw, 30px);
+    column-gap: clamp(15px, 2.083vw, 30px);
+    // @include fluid-column-gap(15px, 2.083vw, 30px);
 
     justify-content: flex-start;
     align-items: center;
@@ -68,8 +68,8 @@
 // ? --------------
 @media (max-width: 1024px) {
     .team-member {
-        // column-gap: clamp(15px, 2.083vw, 30px);
-        @include fluid-column-gap(15px, 2.083vw, 30px);
+        column-gap: clamp(15px, 2.083vw, 30px);
+        // @include fluid-column-gap(15px, 2.083vw, 30px);
 
         &--meet-our-team {
             // transform-origin: 50% 50%;

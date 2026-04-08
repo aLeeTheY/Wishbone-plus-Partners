@@ -24,8 +24,8 @@
         aspect-ratio: 220 / 19;
 
         // * --- SAFE
-        // width: clamp(160px, 18vw, 220px);
-        @include fluid-width(160px, 18vw, 220px);
+        width: clamp(160px, 18vw, 220px);
+        // @include fluid-width(160px, 18vw, 220px);
 
         height: auto;
         min-width: 160px;

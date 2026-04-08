@@ -8,8 +8,8 @@
         // max-width: 600px;
         // max-width: 37.5em;
 
-        // width: clamp(320px, 41.666vw, 600px);
-        @include fluid-width(320px, 41.666vw, 600px);
+        width: clamp(320px, 41.666vw, 600px);
+        // @include fluid-width(320px, 41.666vw, 600px);
 
         // max-width: clamp(340px, 60vw, 600px);
         // min-width: 340px;
@@ -28,13 +28,13 @@
         // padding: clamp(40px, 4vw, 60px) clamp(30px, 4vw, 50px) clamp(20px, 4vw, 40px) clamp(20px, 4vw, 40px);
 
         // clamp(20px, 2.777vw, 40px) + clamp(16px, 4.166vw, 60px) = clamp(36px, 6.943vw, 100px)
-        // padding: clamp(40px, 4.166vw, 60px) clamp(30px, 3.472vw, 50px) clamp(20px, 2.777vw, 40px)
-        //     clamp(20px, 2.777vw, 40px);
+        padding: clamp(40px, 4.166vw, 60px) clamp(30px, 3.472vw, 50px) clamp(20px, 2.777vw, 40px)
+            clamp(20px, 2.777vw, 40px);
 
-        @include fluid-padding-top(40px, 4.166vw, 60px);
-        @include fluid-padding-right(30px, 3.472vw, 50px);
-        @include fluid-padding-bottom(20px, 2.777vw, 40px);
-        @include fluid-padding-left(20px, 2.777vw, 40px);
+        // @include fluid-padding-top(40px, 4.166vw, 60px);
+        // @include fluid-padding-right(30px, 3.472vw, 50px);
+        // @include fluid-padding-bottom(20px, 2.777vw, 40px);
+        // @include fluid-padding-left(20px, 2.777vw, 40px);
     }
 
     &__pg {
@@ -48,14 +48,14 @@
         color: #403e3b;
 
         // margin-top: 18px;
-        // margin-top: clamp(16px, 1.25vw, 18px);
-        @include fluid-margin-top(16px, 1.25vw, 18px);
+        margin-top: clamp(16px, 1.25vw, 18px);
+        // @include fluid-margin-top(16px, 1.25vw, 18px);
     }
 
     &__button-link {
         // margin-top: 30px;
-        // margin-top: clamp(15px, 2.083vw, 30px);
-        @include fluid-margin-top(15px, 2.083vw, 30px);
+        margin-top: clamp(15px, 2.083vw, 30px);
+        // @include fluid-margin-top(15px, 2.083vw, 30px);
     }
 
     &__img-wrapper {
@@ -76,8 +76,8 @@
         // min-width: 300px;
         // min-height: 570px;
 
-        // min-height: clamp(160px, 50vw, 720px);
-        @include fluid-min-height(160px, 50vw, 720px);
+        min-height: clamp(160px, 50vw, 720px);
+        // @include fluid-min-height(160px, 50vw, 720px);
 
         // min-height: 720px;
     }
@@ -143,8 +143,8 @@
 // ? --------------
 @media (max-width: 768px) {
     .hero {
-        // padding-top: clamp(62.28px, 0.046 * 100vw + 42.802px, 78px);
-        @include fluid-padding-top(62.28px, calc(0.046 * 100vw + 42.802px), 78px);
+        padding-top: clamp(62.28px, 0.046 * 100vw + 42.802px, 78px);
+        // @include fluid-padding-top(62.28px, calc(0.046 * 100vw + 42.802px), 78px);
     }
 }
 
@@ -158,13 +158,13 @@
             // max-width: 100%;
             // min-width: 0;
 
-            // padding: clamp(40px, 4.166vw, 60px) clamp(16px, 3.472vw, 50px)
-            //     clamp(20px, 2.777vw, 40px) clamp(16px, 2.777vw, 40px);
+            padding: clamp(40px, 4.166vw, 60px) clamp(16px, 3.472vw, 50px)
+                clamp(20px, 2.777vw, 40px) clamp(16px, 2.777vw, 40px);
 
-            @include fluid-padding-top(40px, 4.166vw, 60px);
-            @include fluid-padding-right(16px, 3.472vw, 50px);
-            @include fluid-padding-bottom(20px, 2.777vw, 40px);
-            @include fluid-padding-left(16px, 2.777vw, 40px);
+            // @include fluid-padding-top(40px, 4.166vw, 60px);
+            // @include fluid-padding-right(16px, 3.472vw, 50px);
+            // @include fluid-padding-bottom(20px, 2.777vw, 40px);
+            // @include fluid-padding-left(16px, 2.777vw, 40px);
 
             // padding: clamp(40px, 4.166vw, 60px) clamp(16px, 3.472vw, 50px) clamp(20px, 2.777vw, 40px) clamp(8px, 2.777vw, 40px);
         }

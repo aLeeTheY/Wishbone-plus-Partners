@@ -3,13 +3,7 @@
     align-items: center;
     height: 600px;
     background: url('../../assets/images/reeding_house/background.webp');
-
-    background-position: center center;
-
-    @supports (background-position: clamp(1px, 1vw, 1px) clamp(1px, 1vw, 1px)) {
-        background-position: clamp(60%, -0.01 * 100vw + 64.187%, 50%) center; // stylelint-disable-line
-    }
-
+    background-position: clamp(60%, -0.01 * 100vw + 64.187%, 50%) center;
     background-size: cover;
     background-repeat: no-repeat;
 }

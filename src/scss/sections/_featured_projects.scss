@@ -8,8 +8,8 @@
         flex-direction: column;
         align-items: center;
 
-        // row-gap: clamp(24px, 0.06 * 100vw - 22.222px, 50px);
-        @include fluid-row-gap(24px, calc(0.06 * 100vw - 22.222px), 50px);
+        row-gap: clamp(24px, 0.06 * 100vw - 22.222px, 50px);
+        // @include fluid-row-gap(24px, calc(0.06 * 100vw - 22.222px), 50px);
     }
 
     &__projects-block {
@@ -35,8 +35,8 @@
         flex-direction: column;
         align-items: center;
 
-        // row-gap: clamp(24px, 0.06 * 100vw - 22.222px, 50px);
-        @include fluid-row-gap(24px, calc(0.06 * 100vw - 22.222px), 50px);
+        row-gap: clamp(24px, 0.06 * 100vw - 22.222px, 50px);
+        // @include fluid-row-gap(24px, calc(0.06 * 100vw - 22.222px), 50px);
 
         // width: 100%;
 

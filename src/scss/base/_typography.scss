@@ -1,5 +1,5 @@
 @use 'variables' as *;
-@use 'mixins' as *;
+// @use 'mixins' as *;
 
 @mixin poppins {
     font-family: Poppins, sans-serif;
@@ -11,7 +11,8 @@
     @include poppins;
 
     // * --- SAFE
-    @include fluid-font(12px, 5vw, 14px);
+    // @include fluid-font(12px, 5vw, 14px);
+    font-size: clamp(12px, 5vw, 14px);
 
     // font-size: clamp(12px, 5vw, 14px);
 
@@ -26,7 +27,8 @@
     @include poppins;
 
     // * --- SAFE
-    @include fluid-font(14px, 5vw, 16px);
+    // @include fluid-font(14px, 5vw, 16px);
+    font-size: clamp(14px, 5vw, 16px);
 
     // font-size: clamp(14px, 5vw, 16px);
 
@@ -41,7 +43,8 @@
     @include poppins;
 
     // * --- SAFE
-    @include fluid-font(16px, 5vw, 18px);
+    // @include fluid-font(16px, 5vw, 18px);
+    font-size: clamp(16px, 5vw, 18px);
 
     // font-size: clamp(16px, 5vw, 18px);
 
@@ -56,7 +59,8 @@
     @include poppins;
 
     // * --- SAFE
-    @include fluid-font(18px, 5vw, 20px);
+    // @include fluid-font(18px, 5vw, 20px);
+    font-size: clamp(18px, 5vw, 20px);
 
     // font-size: clamp(18px, 5vw, 20px);
 
@@ -71,7 +75,8 @@
     @include poppins;
 
     // * --- SAFE
-    @include fluid-font(20px, 5vw, 24px);
+    // @include fluid-font(20px, 5vw, 24px);
+    font-size: clamp(20px, 5vw, 24px);
 
     // font-size: clamp(20px, 5vw, 24px);
 
@@ -89,7 +94,8 @@
     // font-size: clamp(28px, 5vw, 32px);
 
     // * --- SAFE
-    @include fluid-font(22px, calc(0.022 * 100vw + 14.857px), 32px);
+    // @include fluid-font(22px, calc(0.022 * 100vw + 14.857px), 32px);
+    font-size: clamp(22px, 0.022 * 100vw + 14.857px, 32px);
 
     // font-size: clamp(22px, 0.022 * 100vw + 14.857px, 32px);
 
@@ -104,7 +110,8 @@
     @include poppins;
 
     // * --- SAFE
-    @include fluid-font(22px, calc(0.016 * 100vw + 16.857px), 40px);
+    // @include fluid-font(22px, calc(0.016 * 100vw + 16.857px), 40px);
+    font-size: clamp(22px, 0.016 * 100vw + 16.857px, 40px);
 
     // font-size: clamp(22px, 0.016 * 100vw + 16.857px, 40px);
 
@@ -119,7 +126,8 @@
     @include poppins;
 
     // * --- SAFE
-    @include fluid-font(36px, 5vw, 64px);
+    // @include fluid-font(36px, 5vw, 64px);
+    font-size: clamp(36px, 5vw, 64px);
 
     // font-size: clamp(36px, 5vw, 64px);
 

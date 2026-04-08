@@ -1,5 +1,5 @@
 @use '../base/typography' as *;
-@use '../base/mixins' as *;
+// @use '../base/mixins' as *;
 
 .block-header {
     display: flex;
@@ -24,8 +24,8 @@
 
     &--hero {
         // row-gap: 20px;
-        // row-gap: clamp(8px, 1.388vw, 20px);
-        @include fluid-row-gap(8px, 1.388vw, 20px);
+        row-gap: clamp(8px, 1.388vw, 20px);
+        // @include fluid-row-gap(8px, 1.388vw, 20px);
 
         .block-header__header {
             @include poppins--64px;
@@ -93,8 +93,8 @@
 
     &--our-process {
         // row-gap: clamp(10px, 1.388vw, 20px);
-        // row-gap: clamp(8px, 0.868vw, 12.5px);
-        @include fluid-row-gap(8px, 0.868vw, 12.5px);
+        row-gap: clamp(8px, 0.868vw, 12.5px);
+        // @include fluid-row-gap(8px, 0.868vw, 12.5px);
         text-align: center;
 
         .block-header__header {
@@ -111,8 +111,8 @@
         max-width: 570px;
         text-align: left;
 
-        // row-gap: clamp(12px, 1.367vw, 14px);
-        @include fluid-row-gap(12px, 1.367vw, 14px);
+        row-gap: clamp(12px, 1.367vw, 14px);
+        // @include fluid-row-gap(12px, 1.367vw, 14px);
 
         .block-header__header {
             @include poppins--40px;
@@ -153,8 +153,8 @@
         // ? --- LAPTOP ---
         // ? --------------
         @media (max-width: 1024px) {
-            // row-gap: clamp(8px, 0.694vw, 10px);
-            @include fluid-row-gap(8px, 0.694vw, 10px);
+            row-gap: clamp(8px, 0.694vw, 10px);
+            // @include fluid-row-gap(8px, 0.694vw, 10px);
             text-align: center;
         }
     }
@@ -185,8 +185,8 @@
         text-align: left;
 
         // row-gap: 14px;
-        // row-gap: clamp(12px, 1.367vw, 14px);
-        @include fluid-row-gap(12px, 1.367vw, 14px);
+        row-gap: clamp(12px, 1.367vw, 14px);
+        // @include fluid-row-gap(12px, 1.367vw, 14px);
 
         .block-header__header {
             @include poppins--32px;
