@@ -201,7 +201,7 @@
         max-width: 1168px;
         display: flex;
         justify-content: space-between;
-        align-items: end;
+        align-items: flex-end;
 
         padding: clamp(40px, 5vw, 60px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
         // @include fluid-padding-vertical(40px, 5vw, 60px);

@@ -124,6 +124,7 @@
 
     &__menu {
         display: flex;
+        list-style: none;
 
         column-gap: clamp(28px, 2.73438vw, 32px);
         // @include fluid-column-gap(28px, 2.73438vw, 32px);
