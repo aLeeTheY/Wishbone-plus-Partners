@@ -1,9 +1,13 @@
-@use '../base/typography';
+@use '../base/typography' as *;
+@use '../base/mixins' as *;
 
 .navigation {
     &__desktop {
         display: flex;
-        column-gap: clamp(28px, 2.734375vw, 32px);
+
+        // column-gap: clamp(28px, 2.73438vw, 32px);
+        @include fluid-column-gap(28px, 2.73438vw, 32px);
+
         align-items: center;
     }
 
@@ -18,7 +22,8 @@
     }
 
     &__mobile-menu-container {
-        overflow: hidden;
+        overflow: hidden; // stylelint-disable-line
+
         position: fixed;
         z-index: 1000;
         display: flex;
@@ -41,7 +46,16 @@
         // left: 0 !important;
         // right: 0 !important;
 
-        inset: 0;
+        // * --- FALLBACK
+        @supports not (inset: 0) {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0; // stylelint-disable-line
+        }
+        inset: 0; // stylelint-disable-line
+        // * --- FALLBACK END
+
         width: 100%;
 
         // min-height: 100vh;
@@ -65,7 +79,9 @@
 
     &__mobile-menu-header {
         width: 100%;
-        padding: clamp(16px, 3.765vw, 20px);
+
+        // padding: clamp(16px, 3.765vw, 20px);
+        @include fluid-padding(16px, 3.765vw, 20px);
 
         // border-bottom: solid gray 1px;
         box-shadow: inset 0 -1px 0 0 gray;
@@ -75,7 +91,10 @@
 
         display: flex;
         flex-direction: row;
-        column-gap: clamp(16px, 3.333vw, 40px);
+
+        // column-gap: clamp(16px, 3.333vw, 40px);
+        @include fluid-column-gap(16px, 3.333vw, 40px);
+
         align-items: center;
         justify-content: space-between;
     }
@@ -84,29 +103,37 @@
         flex-grow: 1;
         width: 100%;
 
-        // padding: clamp(24px, 3vw, 30px) clamp(16px, 3vw, 20px);
+        // padding: clamp(28px, 0.058 * 100vw + 3.219px, 48px)
+        //     clamp(16px, 0.012 * 100vw + 11.044px, 20px) clamp(16px, 0.012 * 100vw + 11.044px, 20px);
 
-        padding: clamp(28px, 0.058 * 100vw + 3.219px, 48px)
-            clamp(16px, 0.012 * 100vw + 11.044px, 20px) clamp(16px, 0.012 * 100vw + 11.044px, 20px);
+        @include fluid-padding-top(28px, calc(0.058 * 100vw + 3.219px), 48px);
+        @include fluid-padding-horizontal(16px, calc(0.012 * 100vw + 11.044px), 20px);
+        @include fluid-padding-bottom(16px, calc(0.012 * 100vw + 11.044px), 20px);
+
         display: flex;
         flex-direction: column;
 
-        // row-gap: 24px;
-        row-gap: clamp(28px, 0.058 * 100vw + 3.219px, 48px);
+        // row-gap: clamp(28px, 0.058 * 100vw + 3.219px, 48px);
+        @include fluid-row-gap(28px, calc(0.058 * 100vw + 3.219px), 48px);
+
         justify-content: space-between;
         align-items: center;
-        overflow-y: auto;
+
+        overflow-y: auto; // stylelint-disable-line
     }
 
     &__menu {
         display: flex;
-        column-gap: clamp(28px, 2.734375vw, 32px);
+
+        // column-gap: clamp(28px, 2.73438vw, 32px);
+        @include fluid-column-gap(28px, 2.73438vw, 32px);
     }
 
     &__menu-item {
-        @include typography.poppins--16px;
+        @include poppins--16px;
 
-        font-size: clamp(14px, calc(14 / 1024 * 100vw), 16px);
+        // font-size: clamp(14px, calc(14 / 1024 * 100vw), 16px);
+        @include fluid-font(14px, calc(14 / 1024 * 100vw), 16px);
 
         // font-size: clamp(12px, 10 * (1vw + 1vh) / 2, 16px);
         // font-size: clamp(12px, 2vw, 16px);
@@ -120,7 +147,7 @@
 
         // ? --- TABLET ---
         // ? --------------
-        @media (width <= 768px) {
+        @media (max-width: 768px) {
             transition: transform 100ms ease-out;
         }
 
@@ -139,9 +166,9 @@
         }
     }
 
-    &__menu-item--dot {
-        // * nothing
-    }
+    // &__menu-item--dot {
+    //     // * nothing
+    // }
 
     &__menu-link {
         -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
@@ -179,7 +206,7 @@
 
 // ? --- TABLET ---
 // ? --------------
-@media (width <= 768px) {
+@media (max-width: 768px) {
     .navigation {
         &__desktop {
             display: none;
@@ -195,17 +222,19 @@
         &__menu {
             flex-direction: column;
             align-items: center;
-            column-gap: 0;
+
+            gap: 0;
+            column-gap: 0; // stylelint-disable-line
 
             // row-gap: 32px;
         }
 
         &__menu-item {
-            @include typography.poppins--20px;
+            @include poppins--20px;
         }
 
         &__menu-item--dot {
-            @include typography.poppins--32px;
+            @include poppins--32px;
         }
 
         &__menu-link {

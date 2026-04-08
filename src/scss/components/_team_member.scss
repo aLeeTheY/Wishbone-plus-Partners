@@ -1,10 +1,13 @@
-@use '../base/typography';
+@use '../base/typography' as *;
+@use '../base/mixins' as *;
 
 .team-member {
     display: flex;
 
     // column-gap: 30px;
-    column-gap: clamp(15px, 2.083vw, 30px);
+    // column-gap: clamp(15px, 2.083vw, 30px);
+    @include fluid-column-gap(15px, 2.083vw, 30px);
+
     justify-content: flex-start;
     align-items: center;
     cursor: pointer;
@@ -17,7 +20,7 @@
 
     // ? --- TABLET ---
     // ? --------------
-    @media (width <= 768px) {
+    @media (max-width: 768px) {
         transition: transform 100ms ease-out;
     }
 
@@ -39,7 +42,7 @@
     }
 
     &__full-name {
-        @include typography.poppins--18px;
+        @include poppins--18px;
 
         line-height: 1.444em;
         letter-spacing: 0;
@@ -48,7 +51,7 @@
     }
 
     &__work-position {
-        @include typography.poppins--14px;
+        @include poppins--14px;
 
         line-height: 1em;
         letter-spacing: 0;
@@ -63,9 +66,10 @@
 
 // ? --- LAPTOP ---
 // ? --------------
-@media (width <= 1024px) {
+@media (max-width: 1024px) {
     .team-member {
-        column-gap: clamp(15px, 2.083vw, 30px);
+        // column-gap: clamp(15px, 2.083vw, 30px);
+        @include fluid-column-gap(15px, 2.083vw, 30px);
 
         &--meet-our-team {
             // transform-origin: 50% 50%;

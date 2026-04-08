@@ -1,10 +1,13 @@
+@use '../base/mixins' as *;
+
 .meet-our-team {
     &__text-block {
         display: flex;
         flex-direction: column;
 
         // row-gap: 30px;
-        row-gap: clamp(15px, 2.083vw, 30px);
+        // row-gap: clamp(15px, 2.083vw, 30px);
+        @include fluid-row-gap(15px, 2.083vw, 30px);
     }
 
     &__team-icons-block {
@@ -12,8 +15,11 @@
         grid-template-columns: repeat(2, 1fr);
 
         // row-gap: 36px;
-        gap: clamp(16px, 0.048 * 100vw - 33.398px, 36px)
-            clamp(16px, 0.251 * 100vw - 240.867px, 120px);
+        // gap: clamp(16px, 0.048 * 100vw - 33.398px, 36px)
+        //     clamp(16px, 0.251 * 100vw - 240.867px, 120px);
+
+        @include fluid-row-gap(16px, calc(0.048 * 100vw - 33.398px), 36px);
+        @include fluid-column-gap(16px, calc(0.251 * 100vw - 240.867px), 120px);
 
         // column-gap: 120px;
     }
@@ -21,21 +27,21 @@
 
 // ? --- LAPTOP ---
 // ? --------------
-@media (width <= 1024px) {
+@media (max-width: 1024px) {
     .meet-our-team {
         &__text-block {
             align-items: center;
         }
 
-        &__team-icons-block {
-            // grid-template-columns: 1fr;
-        }
+        // &__team-icons-block {
+        //     // grid-template-columns: 1fr;
+        // }
     }
 }
 
 // ? --- BOOTSTRAP SMALL ---
 // ? -----------------------
-@media (width <= 576px) {
+@media (max-width: 576px) {
     .meet-our-team {
         // &__text-block {
         //     align-items: center;

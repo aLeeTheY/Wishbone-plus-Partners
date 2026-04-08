@@ -5,7 +5,17 @@
     &::after {
         content: '';
         position: absolute;
-        inset: 0;
+
+        // * --- FALLBACK
+        @supports not (inset: 0) {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0; // stylelint-disable-line
+        }
+        inset: 0; // stylelint-disable-line
+        // * --- FALLBACK END
+
         box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
         will-change: opacity;
         opacity: 0;
@@ -13,7 +23,7 @@
 
         // ? --- TABLET ---
         // ? --------------
-        @media (width <= 768px) {
+        @media (max-width: 768px) {
             transition: opacity 100ms ease;
         }
 
@@ -23,7 +33,7 @@
 
 // ? --- TABLET ---
 // ? --------------
-@media (width <= 768px) {
+@media (max-width: 768px) {
     #header {
         position: fixed;
         z-index: 1000;

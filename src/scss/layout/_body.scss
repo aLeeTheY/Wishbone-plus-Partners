@@ -1,9 +1,11 @@
-@use '../base/colors';
+@use '../base/colors' as *;
 
 body {
     width: 100%;
     min-height: 100vh;
-    overflow: hidden auto;
+
+    overflow-x: hidden; // stylelint-disable-line
+    overflow-y: auto; // stylelint-disable-line
 }
 
 // todo Develop JS variant for scroll block
@@ -14,10 +16,16 @@ body {
 
 // ? --- TABLET ---
 // ? --------------
-@media (width <= 768px) {
-    body:has(#menu-toggle:checked) {
-        overflow: hidden;
-
-        // position: fixed;
+@media (max-width: 768px) {
+    @supports selector(body:has(#menu-toggle:checked)) {
+        // stylelint-disable-next-line
+        body:has(#menu-toggle:checked) {
+            overflow: hidden; // stylelint-disable-line
+        }
     }
+
+    // #menu-toggle:checked ~ #mobile-navigation {
+    //     transform: translateX(0);
+    //     visibility: visible;
+    // }
 }

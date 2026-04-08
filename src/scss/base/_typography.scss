@@ -1,20 +1,19 @@
-@use 'variables';
-
-/** ========================================================================
- **                            TYPOGRAPHY
- *======================================================================== **/
+@use 'variables' as *;
+@use 'mixins' as *;
 
 @mixin poppins {
     font-family: Poppins, sans-serif;
-    font-weight: variables.$regular;
+    font-weight: $regular;
     font-style: normal;
 }
 
 @mixin poppins--14px {
     @include poppins;
 
-    // font-size: 14px;
-    font-size: clamp(12px, 5vw, 14px);
+    // * --- SAFE
+    @include fluid-font(12px, 5vw, 14px);
+
+    // font-size: clamp(12px, 5vw, 14px);
 
     // ? --- MOBILE ---
     // ? --------------
@@ -26,8 +25,10 @@
 @mixin poppins--16px {
     @include poppins;
 
-    // font-size: 16px;
-    font-size: clamp(14px, 5vw, 16px);
+    // * --- SAFE
+    @include fluid-font(14px, 5vw, 16px);
+
+    // font-size: clamp(14px, 5vw, 16px);
 
     // ? --- MOBILE ---
     // ? --------------
@@ -39,8 +40,10 @@
 @mixin poppins--18px {
     @include poppins;
 
-    // font-size: 18px;
-    font-size: clamp(16px, 5vw, 18px);
+    // * --- SAFE
+    @include fluid-font(16px, 5vw, 18px);
+
+    // font-size: clamp(16px, 5vw, 18px);
 
     // ? --- MOBILE ---
     // ? --------------
@@ -52,8 +55,10 @@
 @mixin poppins--20px {
     @include poppins;
 
-    // font-size: 20px;
-    font-size: clamp(18px, 5vw, 20px);
+    // * --- SAFE
+    @include fluid-font(18px, 5vw, 20px);
+
+    // font-size: clamp(18px, 5vw, 20px);
 
     // ? --- MOBILE ---
     // ? --------------
@@ -65,8 +70,10 @@
 @mixin poppins--24px {
     @include poppins;
 
-    // font-size: 24px;
-    font-size: clamp(20px, 5vw, 24px);
+    // * --- SAFE
+    @include fluid-font(20px, 5vw, 24px);
+
+    // font-size: clamp(20px, 5vw, 24px);
 
     // ? --- MOBILE ---
     // ? --------------
@@ -80,7 +87,11 @@
 
     // font-size: 32px;
     // font-size: clamp(28px, 5vw, 32px);
-    font-size: clamp(22px, 0.022 * 100vw + 14.857px, 32px);
+
+    // * --- SAFE
+    @include fluid-font(22px, calc(0.022 * 100vw + 14.857px), 32px);
+
+    // font-size: clamp(22px, 0.022 * 100vw + 14.857px, 32px);
 
     // ? --- MOBILE ---
     // ? --------------
@@ -92,9 +103,10 @@
 @mixin poppins--40px {
     @include poppins;
 
-    // font-size: 40px;
-    // font-size: clamp(22px, 5vw, 40px);
-    font-size: clamp(22px, 0.016 * 100vw + 16.857px, 40px);
+    // * --- SAFE
+    @include fluid-font(22px, calc(0.016 * 100vw + 16.857px), 40px);
+
+    // font-size: clamp(22px, 0.016 * 100vw + 16.857px, 40px);
 
     // ? --- MOBILE ---
     // ? --------------
@@ -106,8 +118,10 @@
 @mixin poppins--64px {
     @include poppins;
 
-    // font-size: 64px;
-    font-size: clamp(36px, 5vw, 64px);
+    // * --- SAFE
+    @include fluid-font(36px, 5vw, 64px);
+
+    // font-size: clamp(36px, 5vw, 64px);
 
     // ? --- MOBILE ---
     // ? --------------

@@ -1,6 +1,4 @@
-/** ========================================================================
- **                            WRAPPER STYLES
- *======================================================================== **/
+@use '../base/mixins' as *;
 
 // @mixin base-wrapper {
 //     margin: 0 auto;
@@ -16,11 +14,14 @@
         display: flex;
 
         // column-gap: 32px;
-        column-gap: clamp(16px, 3.333vw, 40px);
+        // column-gap: clamp(16px, 3.333vw, 40px);
+        @include fluid-column-gap(16px, 3.333vw, 40px);
+
         justify-content: space-between;
 
         // padding: 20px;
-        padding: clamp(16px, 0.012 * 100vw + 11.044px, 20px);
+        // padding: clamp(16px, 0.012 * 100vw + 11.044px, 20px);
+        @include fluid-padding(16px, calc(0.012 * 100vw + 11.044px), 20px);
     }
 
     &--hero {
@@ -31,7 +32,11 @@
 
         // align-items: center;
 
-        padding: 0 0 0 clamp(16px, 4.166vw, 60px);
+        // * --- SAFE
+        // padding: 0 0 0 clamp(16px, 4.166vw, 60px);
+        padding: 0;
+
+        @include fluid-padding-left(16px, 4.166vw, 60px);
 
         // padding: 0 0 0 clamp(8px, 4.166vw, 60px);
         // padding: 0 0 0 clamp(0.01px, 0.0024vw, 60px);
@@ -42,13 +47,18 @@
         display: flex;
         justify-content: center;
         align-items: stretch;
-        column-gap: clamp(28px, 9.166vw, 132px);
+
+        // column-gap: clamp(28px, 9.166vw, 132px);
+        @include fluid-column-gap(28px, 9.166vw, 132px);
 
         // gap: clamp(28px, 9.166vw, 132px);
 
-        // padding: 0 0 0 60px;
-        // padding: 100px 0;
-        padding: clamp(40px, 6.944vw, 100px) 0;
+        // * --- SAFE
+        // padding: clamp(40px, 6.944vw, 100px) 0;
+        padding: 0;
+
+        @include fluid-padding-top(40px, 6.944vw, 100px);
+        @include fluid-padding-bottom(40px, 6.944vw, 100px);
     }
 
     &--reeding-house-and-marble-staircase {
@@ -62,13 +72,15 @@
         justify-content: flex-end;
         align-items: center;
 
-        // padding: 0 0 0 60px;
-        // padding: 266px 60px;
-        // padding: clamp(0px, calc(-0.394 * 100vw + 567.488px), 400px) 60px 0 60px;
+        // * --- SAFE
+        // padding: clamp(0px, -1.166 * 100vw + 895.627px, 400px)
+        //     clamp(16px, calc(0.128 * 100vw - 38.519px), 60px) 0;
 
-        // padding-top: clamp(0px, calc(-0.394 * 100vw + 567.488px), 400px);
-        padding: clamp(0px, -1.166 * 100vw + 895.627px, 400px)
-            clamp(16px, calc(0.128 * 100vw - 38.519px), 60px) 0;
+        @include fluid-padding-top(0, calc(-1.166 * 100vw + 895.627px), 400px);
+        @include fluid-padding-left(16px, calc(0.128 * 100vw - 38.519px), 60px);
+        @include fluid-padding-right(16px, calc(0.128 * 100vw - 38.519px), 60px);
+
+        padding-bottom: 0;
     }
 
     &--swirling-staircase {
@@ -82,10 +94,16 @@
         // padding: 0 0 0 60px;
         // padding: 266px 60px;
 
-        // padding-top: clamp(0px, calc(-0.394 * 100vw + 567.488px), 400px);
-        padding: clamp(0px, -1.166 * 100vw + 895.627px, 400px)
-            clamp(16px, calc(0.128 * 100vw - 38.519px), 60px) 0
-            calc(clamp(16px, calc(0.128 * 100vw - 38.519px), 60px) + 22px);
+        // * --- SAFE
+        // padding: clamp(0px, -1.166 * 100vw + 895.627px, 400px)
+        //     clamp(16px, calc(0.128 * 100vw - 38.519px), 60px) 0
+        //     calc(clamp(16px, calc(0.128 * 100vw - 38.519px), 60px) + 22px);
+
+        @include fluid-padding-top(0, calc(-1.166 * 100vw + 895.627px), 400px);
+        @include fluid-padding-left(16px, calc(0.128 * 100vw - 38.519px), 60px, 22px);
+        @include fluid-padding-right(16px, calc(0.128 * 100vw - 38.519px), 60px);
+
+        padding-bottom: 0;
     }
 
     &--our-process {
@@ -100,10 +118,11 @@
 
         // row-gap: clamp(36px, 0.012 * 100vw + 31.044px, 40px);
 
-        // padding: 0 0 0 60px;
-        // padding: 100px 0;
-        // padding: clamp(40px, 6.944vw, 100px) 0;
-        padding: clamp(40px, 100 / 1440 * 100vw, 100px) clamp(40px, 136 / 1440 * 100vw, 136px);
+        // * --- SAFE
+        // padding: clamp(40px, 100 / 1440 * 100vw, 100px) clamp(40px, 136 / 1440 * 100vw, 136px);
+
+        @include fluid-padding-vertical(40px, calc(100 / 1440 * 100vw), 100px);
+        @include fluid-padding-horizontal(40px, calc(136 / 1440 * 100vw), 136px);
     }
 
     &--prior-clients {
@@ -112,10 +131,11 @@
         justify-content: space-between;
         align-items: center;
 
-        // padding: 0 0 0 60px;
-        // padding: 100px 144px 100px 100px;
-        // padding: 100px 0;
-        padding: clamp(40px, 6.944vw, 100px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
+        // * --- SAFE
+        // padding: clamp(40px, 6.944vw, 100px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
+
+        @include fluid-padding-vertical(40px, 6.944vw, 100px);
+        @include fluid-padding-horizontal(0, calc(-0.221 * 100vw + 317.647px), 60px);
     }
 
     &--get-in-touch {
@@ -123,11 +143,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: clamp(18px, 3.125vw, 32px);
 
-        // padding: 0 0 0 60px;
-        // padding: 100px 0;
-        padding: clamp(40px, 6.944vw, 100px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
+        // gap: clamp(18px, 3.125vw, 32px);
+        @include fluid-gap(18px, 3.125vw, 32px);
+
+        // padding: clamp(40px, 6.944vw, 100px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
+        @include fluid-padding-vertical(40px, 6.944vw, 100px);
+        @include fluid-padding-horizontal(0, calc(-0.221 * 100vw + 317.647px), 60px);
     }
 
     &--featured-projects {
@@ -150,12 +172,11 @@
 
         // justify-content: space-between;
 
-        // padding: 20px;
-        // padding: clamp(16px, 0.012 * 100vw + 11.044px, 20px);
-        // padding: clamp(40px, 6.944vw, 100px) clamp(0px, -22.1vw + 317.647px, 60px);
-
-        padding: clamp(40px, 120 / 1440 * 100vw, 120px) clamp(40px, 136 / 1440 * 100vw, 136px)
-            clamp(40px, 100 / 1440 * 100vw, 100px);
+        // padding: clamp(40px, 120 / 1440 * 100vw, 120px) clamp(40px, 136 / 1440 * 100vw, 136px)
+        //     clamp(40px, 100 / 1440 * 100vw, 100px);
+        @include fluid-padding-top(40px, calc(120 / 1440 * 100vw), 120px);
+        @include fluid-padding-bottom(40px, calc(100 / 1440 * 100vw), 100px);
+        @include fluid-padding-horizontal(40px, calc(136 / 1440 * 100vw), 136px);
     }
 
     &--meet-our-team {
@@ -165,11 +186,15 @@
 
         display: flex;
 
-        // gap: 32px;
-        gap: clamp(18px, 3.125vw, 32px);
+        // gap: clamp(18px, 3.125vw, 32px);
+        @include fluid-gap(18px, 3.125vw, 32px);
+
         justify-content: space-between;
         align-items: flex-start;
-        padding: clamp(40px, 6.944vw, 100px) clamp(0px, -22.1vw + 317.647px, 60px);
+
+        // padding: clamp(40px, 6.944vw, 100px) clamp(0px, -22.1vw + 317.647px, 60px);
+        @include fluid-padding-vertical(40px, 6.944vw, 100px);
+        @include fluid-padding-horizontal(0, calc(-22.1vw + 317.647px), 60px);
     }
 
     &--footer {
@@ -178,8 +203,9 @@
         justify-content: space-between;
         align-items: end;
 
-        // padding: 60px 0;
-        padding: clamp(40px, 5vw, 60px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
+        // padding: clamp(40px, 5vw, 60px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
+        @include fluid-padding-vertical(40px, 5vw, 60px);
+        @include fluid-padding-horizontal(0, calc(-0.221 * 100vw + 317.647px), 60px);
     }
 
     // &--1168px {
@@ -193,17 +219,20 @@
 
 // ? --- LAPTOP ---
 // ? --------------
-@media (width <= 1024px) {
+@media (max-width: 1024px) {
     .wrapper {
         &--our-firm {
             flex-direction: column;
 
             // justify-content: stretch;
             align-items: start;
-            row-gap: clamp(12px, 2.734vw, 28px);
 
-            // padding: clamp(40px, 4vw, 100px) clamp(36px, 6.943vw, 100px);
-            padding: clamp(40px, 6.944vw, 100px) clamp(36px, 6.943vw, 100px);
+            // row-gap: clamp(12px, 2.734vw, 28px);
+            @include fluid-row-gap(12px, 2.734vw, 28px);
+
+            // padding: clamp(40px, 6.944vw, 100px) clamp(36px, 6.943vw, 100px);
+            @include fluid-padding-vertical(40px, 6.944vw, 100px);
+            @include fluid-padding-horizontal(36px, 6.943vw, 100px);
 
             // max-width: 100%;
             // padding: clamp(16px, 4vw, 100px) clamp(16px, 4vw, 80px);
@@ -221,14 +250,17 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: stretch;
-            padding: clamp(40px, 6.944vw, 100px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
+
+            // padding: clamp(40px, 6.944vw, 100px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
+            @include fluid-padding-vertical(40px, 6.944vw, 100px);
+            @include fluid-padding-horizontal(0, calc(-0.221 * 100vw + 317.647px), 60px);
         }
     }
 }
 
 // ? --- TABLET ---
 // ? --------------
-@media (width <= 768px) {
+@media (max-width: 768px) {
     .wrapper {
         &--our-process {
             // row-gap: 40px;
@@ -241,40 +273,48 @@
         }
 
         &--featured-projects {
-            padding-left: clamp(16px, 0.128 * 100vw - 38.519px, 60px);
-            padding-right: clamp(16px, 0.128 * 100vw - 38.519px, 60px);
+            // padding-left: clamp(16px, 0.128 * 100vw - 38.519px, 60px);
+            // padding-right: clamp(16px, 0.128 * 100vw - 38.519px, 60px);
+
+            @include fluid-padding-left(16px, calc(0.128 * 100vw - 38.519px), 60px);
+            @include fluid-padding-right(16px, calc(0.128 * 100vw - 38.519px), 60px);
         }
 
         &--prior-clients {
-            padding: clamp(40px, 6.944vw, 100px) clamp(16px, 0.128 * 100vw - 38.519px, 60px);
+            // padding: clamp(40px, 6.944vw, 100px) clamp(16px, 0.128 * 100vw - 38.519px, 60px);
+            @include fluid-padding-vertical(40px, 6.944vw, 100px);
+            @include fluid-padding-horizontal(16px, calc(0.128 * 100vw - 38.519px), 60px);
         }
 
         &--get-in-touch {
-            padding: clamp(40px, 6.944vw, 100px) clamp(16px, 0.128 * 100vw - 38.519px, 60px);
+            // padding: clamp(40px, 6.944vw, 100px) clamp(16px, 0.128 * 100vw - 38.519px, 60px);
+            @include fluid-padding-vertical(40px, 6.944vw, 100px);
+            @include fluid-padding-horizontal(16px, calc(0.128 * 100vw - 38.519px), 60px);
         }
 
         &--meet-our-team {
-            // padding: clamp(40px, 6.944vw, 100px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
-            padding: clamp(40px, 6.944vw, 100px) clamp(16px, 0.128 * 100vw - 38.519px, 60px);
+            // padding: clamp(40px, 6.944vw, 100px) clamp(16px, 0.128 * 100vw - 38.519px, 60px);
+            @include fluid-padding-vertical(40px, 6.944vw, 100px);
+            @include fluid-padding-horizontal(16px, calc(0.128 * 100vw - 38.519px), 60px);
         }
 
         &--footer {
             flex-direction: column;
             align-items: stretch;
 
-            // row-gap: 24px;
-            gap: clamp(24px, 32 / 768 * 100vw, 32px);
+            // gap: clamp(24px, 32 / 768 * 100vw, 32px);
+            @include fluid-gap(24px, calc(32 / 768 * 100vw), 32px);
 
-            // // padding: 60px 0;
-            // padding: clamp(40px, 5vw, 60px) clamp(0px, -0.221 * 100vw + 317.647px, 60px);
-            padding: clamp(40px, 5vw, 60px) clamp(16px, 0.128 * 100vw - 38.519px, 60px);
+            // padding: clamp(40px, 5vw, 60px) clamp(16px, 0.128 * 100vw - 38.519px, 60px);
+            @include fluid-padding-vertical(40px, 5vw, 60px);
+            @include fluid-padding-horizontal(16px, calc(0.128 * 100vw - 38.519px), 60px);
         }
     }
 }
 
 // ? --- BOOTSTRAP SMALL ---
 // ? -----------------------
-@media (width <= 576px) {
+@media (max-width: 576px) {
     .wrapper {
         &--get-in-touch {
             flex-direction: column;
@@ -285,7 +325,7 @@
 
 // ? --- MOBILE ---
 // ? --------------
-@media (width <= 425px) {
+@media (max-width: 425px) {
     .wrapper {
         // &--header {
         //     column-gap: 16px;
@@ -299,8 +339,10 @@
         }
 
         &--our-firm {
-            // row-gap: clamp(16px, 4vw, 32px);
-            padding: clamp(40px, 6.944vw, 100px) 16px;
+            // padding: clamp(40px, 6.944vw, 100px) 16px;
+            @include fluid-padding-vertical(40px, 6.944vw, 100px);
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         &--featured-projects {

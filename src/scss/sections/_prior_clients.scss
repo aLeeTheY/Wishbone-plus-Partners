@@ -1,4 +1,5 @@
-@use '../base/typography';
+@use '../base/typography' as *;
+@use '../base/mixins' as *;
 
 .prior-clients {
     background-color: #403e3b;
@@ -21,7 +22,8 @@
 
         // gap: 96px;
         // gap: clamp(48px, 0.14 * 100vw - 11.475px, 96px);
-        gap: clamp(48px, 0.188 * 100vw - 96px, 96px);
+        // gap: clamp(48px, 0.188 * 100vw - 96px, 96px);
+        @include fluid-gap(48px, calc(0.188 * 100vw - 96px), 96px);
     }
 
     &__img-link {
@@ -38,7 +40,7 @@
 
         // ? --- TABLET ---
         // ? --------------
-        @media (width <= 768px) {
+        @media (max-width: 768px) {
             transition: transform 100ms ease-out;
         }
 
@@ -57,12 +59,12 @@
         }
     }
 
-    &__img {
-        // * NOTHING
-    }
+    // &__img {
+    //     // * NOTHING
+    // }
 
     &__pg {
-        @include typography.poppins--16px;
+        @include poppins--16px;
 
         line-height: 1.5em;
         letter-spacing: 0;
@@ -72,7 +74,7 @@
 
 // ? --- LAPTOP ---
 // ? --------------
-@media (width <= 1024px) {
+@media (max-width: 1024px) {
     .prior-clients {
         &__text-block {
             max-width: 100%;
@@ -106,18 +108,20 @@
 
 // ? --- TABLET ---
 // ? --------------
-@media (width <= 768px) {
+@media (max-width: 768px) {
     .prior-clients {
         &__icons-block {
             grid-template-columns: repeat(2, minmax(128px, 1fr));
-            gap: clamp(48px, 0.14 * 100vw - 11.475px, 96px);
+
+            // gap: clamp(48px, 0.14 * 100vw - 11.475px, 96px);
+            @include fluid-gap(48px, calc(0.14 * 100vw - 11.475px), 96px);
         }
     }
 }
 
 // ? --- MOBILE ---
 // ? --------------
-@media (width <= 425px) {
+@media (max-width: 425px) {
     .prior-clients {
         &__icons-block {
             // max-width: 432px;

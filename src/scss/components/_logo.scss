@@ -1,3 +1,5 @@
+@use '../base/mixins' as *;
+
 .logo {
     display: flex;
     align-items: center;
@@ -6,28 +8,30 @@
 
     // padding: 16px;
 
+    transition: transform 300ms ease-in-out;
+
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+
+    // ? --- TABLET ---
+    // ? --------------
+    @media (max-width: 768px) {
+        transition: transform 100ms ease-out;
+    }
+
     &__img {
         aspect-ratio: 220 / 19;
-        width: clamp(160px, 18vw, 220px);
+
+        // * --- SAFE
+        // width: clamp(160px, 18vw, 220px);
+        @include fluid-width(160px, 18vw, 220px);
+
         height: auto;
         min-width: 160px;
 
         // width: auto;
         // height: auto;
-    }
-
-    & {
-        transition: transform 300ms ease-in-out;
-
-        // ? --- TABLET ---
-        // ? --------------
-        @media (width <= 768px) {
-            transition: transform 100ms ease-out;
-        }
-
-        transform: translateZ(0);
-        will-change: transform;
-        backface-visibility: hidden;
     }
 
     @media (hover: hover) {
@@ -56,7 +60,7 @@
 
 // ? --- TABLET ---
 // ? --------------
-@media (width <= 768px) {
+@media (max-width: 768px) {
     .logo {
         &--footer {
             justify-content: center;

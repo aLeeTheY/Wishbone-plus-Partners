@@ -1,4 +1,4 @@
-@use '../base/typography';
+@use '../base/typography' as *;
 
 .footer {
     background-color: #f7f7f7;
@@ -10,7 +10,7 @@
         // row-gap: 20px;
         row-gap: calc(20 / 14 * 1em);
 
-        @include typography.poppins--14px;
+        @include poppins--14px;
 
         line-height: calc(20 / 14 * 1em);
         letter-spacing: 0;
@@ -45,16 +45,17 @@
     &__social-icons-block {
         display: flex;
         align-items: center;
-        column-gap: 20px;
+
+        column-gap: 20px; // stylelint-disable-line
     }
 
-    &__copyright-block {
-        // * NOTHING
-    }
+    // &__copyright-block {
+    //     // * NOTHING
+    // }
 
-    &__pg {
-        // * NOTHING
-    }
+    // &__pg {
+    //     // * NOTHING
+    // }
 
     &__icon {
         aspect-ratio: 1 / 1;
@@ -62,7 +63,7 @@
 
         // ? --- TABLET ---
         // ? --------------
-        @media (width <= 768px) {
+        @media (max-width: 768px) {
             transition: transform 100ms ease-out;
         }
 
@@ -84,7 +85,7 @@
 
 // ? --- TABLET ---
 // ? --------------
-@media (width <= 768px) {
+@media (max-width: 768px) {
     .footer {
         &__pg {
             text-align: center;

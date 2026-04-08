@@ -1,3 +1,306 @@
-/** ========================================================================
- **                            MIXINS
- *======================================================================== **/
+// @use 'sass:meta';clear
+
+@mixin fluid-font($min, $preferred, $max, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (font-size: clamp(1px, 1vw, 1px)) {
+        font-size: $max;
+
+        // @media (max-width: #{$breakpoint}) {
+        //     font-size: $min;
+        // }
+    }
+
+    @supports (font-size: clamp(1px, 1vw, 1px)) {
+        font-size: clamp(#{$min}, #{$preferred}, #{$max}); // stylelint-disable-line
+    }
+}
+
+@mixin fluid-row-gap($min, $preferred, $max, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (row-gap: clamp(1px, 1vw, 1px)) {
+        row-gap: $max;
+
+        // @media (max-width: #{$breakpoint}) {
+        //     row-gap: $min;
+        // }
+    }
+
+    @supports (row-gap: clamp(1px, 1vw, 1px)) {
+        row-gap: clamp(#{$min}, #{$preferred}, #{$max}); // stylelint-disable-line
+    }
+}
+
+@mixin fluid-column-gap($min, $preferred, $max, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (column-gap: clamp(1px, 1vw, 1px)) {
+        column-gap: $max; // stylelint-disable-line
+
+        // @media (max-width: #{$breakpoint}) {
+        //     column-gap: $min; // stylelint-disable-line
+        // }
+    }
+
+    @supports (column-gap: clamp(1px, 1vw, 1px)) {
+        column-gap: clamp(#{$min}, #{$preferred}, #{$max}); // stylelint-disable-line
+    }
+}
+
+@mixin fluid-gap($min, $preferred, $max, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (gap: clamp(1px, 1vw, 1px)) {
+        gap: $max; // stylelint-disable-line
+
+        // @media (max-width: #{$breakpoint}) {
+        //     gap: $min; // stylelint-disable-line
+        // }
+    }
+
+    @supports (gap: clamp(1px, 1vw, 1px)) {
+        gap: clamp(#{$min}, #{$preferred}, #{$max}); // stylelint-disable-line
+    }
+}
+
+@mixin fluid-width($min, $preferred, $max, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (width: clamp(1px, 1vw, 1px)) {
+        width: $max;
+
+        // @media (max-width: #{$breakpoint}) {
+        //     wdith: $min;
+        // }
+    }
+
+    @supports (width: clamp(1px, 1vw, 1px)) {
+        width: clamp(#{$min}, #{$preferred}, #{$max}); // stylelint-disable-line
+    }
+}
+
+@mixin fluid-min-height($min, $preferred, $max, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (min-height: clamp(1px, 1vw, 1px)) {
+        min-height: $max;
+
+        // @media (max-width: #{$breakpoint}) {
+        //     wdith: $min;
+        // }
+    }
+
+    @supports (min-height: clamp(1px, 1vw, 1px)) {
+        min-height: clamp(#{$min}, #{$preferred}, #{$max}); // stylelint-disable-line
+    }
+}
+
+@mixin fluid-padding($min, $preferred, $max, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (padding: clamp(1px, 1vw, 1px)) {
+        padding: $max;
+
+        // @media (max-width: #{$breakpoint}) {
+        //     padding: $min;
+        // }
+    }
+
+    @supports (padding: clamp(1px, 1vw, 1px)) {
+        padding: clamp(#{$min}, #{$preferred}, #{$max}); // stylelint-disable-line
+    }
+}
+
+@mixin fluid-padding-vertical($min, $preferred, $max, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (padding: clamp(1px, 1vw, 1px)) {
+        padding-top: $max;
+        padding-bottom: $max;
+
+        // @media (max-width: #{$breakpoint}) {
+        //     padding-top: $min;
+        //     padding-bottom: $min;
+        // }
+    }
+
+    @supports (padding: clamp(1px, 1vw, 1px)) {
+        padding-top: clamp(#{$min}, #{$preferred}, #{$max}); // stylelint-disable-line
+        padding-bottom: clamp(#{$min}, #{$preferred}, #{$max}); // stylelint-disable-line
+    }
+}
+
+@mixin fluid-padding-horizontal($min, $preferred, $max, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (padding: clamp(1px, 1vw, 1px)) {
+        padding-left: $max;
+        padding-right: $max;
+
+        // @media (max-width: #{$breakpoint}) {
+        //     padding-left: $min;
+        //     padding-right: $min;
+        // }
+    }
+
+    @supports (padding: clamp(1px, 1vw, 1px)) {
+        padding-left: clamp(#{$min}, #{$preferred}, #{$max}); // stylelint-disable-line
+        padding-right: clamp(#{$min}, #{$preferred}, #{$max}); // stylelint-disable-line
+    }
+}
+
+@mixin fluid-padding-top($min, $preferred, $max, $addition: 0, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (padding-top: clamp(1px, 1vw, 1px)) {
+        padding-top: $max + $addition;
+
+        // @media (max-width: #{$breakpoint}) {
+        //     padding-top: $min + $addition;
+        // }
+    }
+
+    @supports (padding-top: clamp(1px, 1vw, 1px)) {
+        // stylelint-disable-next-line
+        padding-top: calc(clamp(#{$min}, #{$preferred}, #{$max}) + #{$addition});
+    }
+}
+
+@mixin fluid-padding-bottom($min, $preferred, $max, $addition: 0, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (padding-bottom: clamp(1px, 1vw, 1px)) {
+        padding-bottom: $max + $addition;
+
+        // @media (max-width: #{$breakpoint}) {
+        //     padding-bottom: $min + $addition;
+        // }
+    }
+
+    @supports (padding-bottom: clamp(1px, 1vw, 1px)) {
+        // stylelint-disable-next-line
+        padding-bottom: calc(clamp(#{$min}, #{$preferred}, #{$max}) + #{$addition});
+    }
+}
+
+@mixin fluid-padding-left($min, $preferred, $max, $addition: 0, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (padding-left: clamp(1px, 1vw, 1px)) {
+        padding-left: $max + $addition;
+
+        // @media (max-width: #{$breakpoint}) {
+        //     padding-left: $min + $addition;
+        // }
+    }
+
+    @supports (padding-left: clamp(1px, 1vw, 1px)) {
+        // stylelint-disable-next-line
+        padding-left: calc(clamp(#{$min}, #{$preferred}, #{$max}) + #{$addition});
+    }
+}
+
+@mixin fluid-padding-right($min, $preferred, $max, $addition: 0, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (padding-right: clamp(1px, 1vw, 1px)) {
+        padding-right: $max + $addition;
+
+        // @media (max-width: #{$breakpoint}) {
+        //     padding-right: $min + $addition;
+        // }
+    }
+
+    @supports (padding-right: clamp(1px, 1vw, 1px)) {
+        // stylelint-disable-next-line
+        padding-right: calc(clamp(#{$min}, #{$preferred}, #{$max}) + #{$addition});
+    }
+}
+
+@mixin fluid-margin-top($min, $preferred, $max, $addition: 0, $breakpoint: 425px) {
+    $min: if(
+        sass($min == 0): 0px; else: $min,
+    );
+    $max: if(
+        sass($max == 0): 0px; else: $max,
+    );
+
+    @supports not (margin-top: clamp(1px, 1vw, 1px)) {
+        margin-top: $max + $addition;
+
+        // @media (max-width: #{$breakpoint}) {
+        //     padding-top: $min + $addition;
+        // }
+    }
+
+    @supports (margin-top: clamp(1px, 1vw, 1px)) {
+        // stylelint-disable-next-line
+        margin-top: calc(clamp(#{$min}, #{$preferred}, #{$max}) + #{$addition});
+    }
+}

@@ -3,7 +3,13 @@
     align-items: center;
     height: 600px;
     background: url('../../assets/images/the_marble_staircase/background.webp');
-    background-position: clamp(28%, 0.022 * 100vw + 18.788%, 50%) center;
+
+    background-position: center center;
+
+    @supports (background-position: clamp(1px, 1vw, 1px) clamp(1px, 1vw, 1px)) {
+        background-position: clamp(28%, 0.022 * 100vw + 18.788%, 50%) center; // stylelint-disable-line
+    }
+
     background-size: cover;
     background-repeat: no-repeat;
 }

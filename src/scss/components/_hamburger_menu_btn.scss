@@ -1,3 +1,5 @@
+@use '../base/mixins' as *;
+
 .hamburger-menu-btn {
     display: flex;
     -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
@@ -7,7 +9,11 @@
         object-fit: contain;
         object-position: center center;
         aspect-ratio: 1 / 1;
-        width: clamp(30px, 7vw, 38px);
+
+        // * --- SAFE
+        // width: clamp(30px, 7vw, 38px);
+        @include fluid-width(30px, 7vw, 38px);
+
         min-width: 30px;
         max-width: 38px;
     }

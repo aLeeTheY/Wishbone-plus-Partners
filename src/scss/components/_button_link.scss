@@ -1,18 +1,28 @@
-@use '../base/colors';
-@use '../base/typography';
+@use '../base/colors' as *;
+@use '../base/mixins' as *;
+@use '../base/typography' as *;
 
 .button-link {
-    @include typography.poppins--16px;
+    @include poppins--16px;
 
-    font-size: clamp(14px, calc(14 / 1024 * 100vw), 16px);
+    // * safe
+    @supports (font-size: clamp(1px, 1vw, 1px)) {
+        font-size: clamp(14px, calc(14 / 1024 * 100vw), 16px); /* stylelint-disable-line */
+    }
 
     // font-size: clamp(12px, 5vw, 16px);
 
     display: block;
-    max-width: max-content;
-    max-height: max-content;
     letter-spacing: 0.025em;
     line-height: 1.5em;
+
+    // * safe
+    max-width: 100%;
+    max-width: max-content; /* stylelint-disable-line */
+
+    // * safe
+    max-height: 100%;
+    max-height: max-content; /* stylelint-disable-line */
 
     // letter-spacing: 0.4px;
     // line-height: 24px;
@@ -32,7 +42,7 @@
 
     // ? --- TABLET ---
     // ? --------------
-    @media (width <= 768px) {
+    @media (max-width: 768px) {
         transition: transform 100ms ease-out;
     }
 
@@ -52,6 +62,12 @@
     &--mobile {
         max-width: none;
         width: 100%;
+
+        // ? --- TABLET ---
+        // ? --------------
+        @media (max-width: 768px) {
+            @include fluid-font(14px, calc(0.012 * 100vw + 9.044px), 18px);
+        }
     }
 
     @media (hover: hover) {
@@ -65,8 +81,12 @@
     }
 
     &--hero {
-        max-width: max-content;
-        max-height: max-content;
+        max-width: 100%;
+        max-width: max-content; // stylelint-disable-line
+
+        max-height: 100%;
+        max-height: max-content; // stylelint-disable-line
+
         padding: 0.6875em 1.25em;
 
         // padding: 11px 20px;
@@ -84,7 +104,7 @@
 
         // ? --- TABLET ---
         // ? --------------
-        @media (width <= 768px) {
+        @media (max-width: 768px) {
             transition:
                 transform 100ms ease-out,
                 border-color 100ms ease-out;
@@ -117,7 +137,7 @@
 // //? --------------
 // @media (max-width: 1024px) {
 //     .button-link {
-//         @include typography.poppins--18px;
+//         @include poppins--18px;
 
 //         // padding: 10px 18px;
 //         // border-radius: 14px;
@@ -128,13 +148,13 @@
 // //? --------------
 // @media (max-width: 768px) {
 //     .button-link {
-//         // @include typography.poppins--18px;
+//         // @include poppins--18px;
 
 //         // padding: 12px 22px;
 //         // border-radius: 16px;
 
 //         &--card {
-//             @include typography.poppins--14px;
+//             @include poppins--14px;
 //         }
 //     }
 // }
