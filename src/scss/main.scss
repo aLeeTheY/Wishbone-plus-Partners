@@ -1,54 +1,25 @@
-// ? --- VENDORS
-// @use 'vendors/reset_elad2412';
-@use 'vendors/reset_patchwork';
+// * source: https://dev.to/technoph1le/a-modern-sass-folder-structure-330f
 
-// @use 'vendors/reset_andy_bell';
-// @use 'vendors/reset_joshwcomeau';
-// @use 'vendors/reset_meyerweb';
+// ? --- 0. ABSTRACT
+@use 'abstracts';
 
-// ? --- BASE
-// @use 'base/reset';
-@use 'base/variables';
-@use 'base/colors';
-@use 'base/mixins';
-@use 'base/fonts';
-@use 'base/typography';
+// ? --- 1. VENDORS
+@use 'vendors';
 
-// ? --- SERVICE
-@use 'service/disabled';
+// ? --- 2. BASE
+@use 'base';
 
-// ? --- UTILITIES
-@use 'utilities/spacing';
-@use 'utilities/visibility';
-@use 'utilities/z-index';
+// ? --- 3. LAYOUT (PAGE GENERIC STYLES)
+@use 'layout';
 
-// ? --- LAYOUT
-@use 'layout/html';
-@use 'layout/body';
-@use 'layout/grid';
-@use 'layout/wrapper';
-@use 'layout/section';
+// ? --- 4. PAGE SPECIFIC STYLES
+@use 'pages/index';
 
-// ? --- BLOCKS
-@use 'components/hamburger_menu_btn';
-@use 'components/close_menu_btn';
-@use 'components/logo';
-@use 'components/navigation';
-@use 'components/button_link';
-@use 'components/block_header';
-@use 'components/team_member';
-@use 'components/card';
+// ? --- 5. COMPONENTS (SPECIFIC STYLES)
+@use 'components';
 
-// ? --- SECTIONS
-@use 'sections/header';
-@use 'sections/hero';
-@use 'sections/our_firm';
-@use 'sections/reeding_house';
-@use 'sections/our_process';
-@use 'sections/the_marble_staircase';
-@use 'sections/prior_clients';
-@use 'sections/the_swirling_staircase';
-@use 'sections/featured_projects';
-@use 'sections/meet_our_team';
-@use 'sections/get_in_touch';
-@use 'sections/footer';
+// ? --- 6. UTILITIES STYLES
+@use 'utils';
+
+// ? --- 7. THEMES
+@use 'themes';

@@ -1,0 +1,10 @@
+// ? --- 1. RESET & NORMALIZE
+@forward 'reset';
+// @forward 'normalize';
+
+// ? --- 2. BASE
+@forward 'fonts';
+@forward 'typography';
+
+@forward 'root';
+@forward 'global';

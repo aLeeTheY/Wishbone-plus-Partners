@@ -1,0 +1,28 @@
+// ? --- CSS RESET --- MY ADDITIONS
+// ? ------------------------------
+
+// * disable tap highlight color
+// * {
+//     -webkit-touch-callout: nonrgba(0, 0, 0, 0); /* prevent tap highlight color / shadow */
+//     -webkit-user-select: none; /* e; /* prevent callout to copy image, etc when tap to hold */
+//     -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+//     -webkit-tap-highlight-color: prevent copy paste, to allow, change 'none' to 'text' */
+// }
+
+// // * Full reset styles for APPLE DETECTORS (tel, date, address, email)
+// [x-apple-data-detectors],
+// [x-apple-data-detectors] * {
+//     color: inherit !important;
+//     text-decoration: none !important;
+//     font-size: inherit !important;
+//     font-family: inherit !important;
+//     font-weight: inherit !important;
+//     line-height: inherit !important;
+// }
+
+// // * Full reset styles for custom link with tel= and mailto= options [APPLE DETECTORS]
+// a[href^='tel'],
+// a[href^='mailto'] {
+//     color: inherit;
+//     text-decoration: none;
+// }

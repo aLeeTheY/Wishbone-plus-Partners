@@ -1,5 +1,5 @@
-@use '../base/colors' as *;
-@use '../base/mixins' as *;
+@use '../abstracts/colors' as *;
+@use '../abstracts/mixins' as *;
 @use '../base/typography' as *;
 
 .button-link {

@@ -1,5 +1,5 @@
+@use '../abstracts/mixins' as *;
 @use '../base/typography' as *;
-@use '../base/mixins' as *;
 
 .navigation {
     &__desktop {

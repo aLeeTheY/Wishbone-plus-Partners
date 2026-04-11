@@ -1,5 +1,5 @@
-@use '../base/typography' as *;
-@use '../base/mixins' as *;
+@use '../../abstracts/mixins' as *;
+@use '../../base/typography' as *;
 
 .hero {
     background-color: #ece7e4;
