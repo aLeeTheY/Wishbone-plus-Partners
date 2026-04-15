@@ -43,3 +43,7 @@
 !*.config.js
 !*.config.cjs
 !*.config.mjs
+
+# Allow JS files and folders for Gulp
+!**/gulp/**/*.js
+!gulpfile.js

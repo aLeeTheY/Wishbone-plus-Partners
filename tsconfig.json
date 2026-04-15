@@ -20,7 +20,16 @@
 
         "sourceMap": true, // генерировать sourcemap
         "removeComments": true, // удалять комментарии из JS
-        "incremental": true // ускоренная компиляция
+        "incremental": true, // ускоренная компиляция
+
+        "paths": {
+            "@images/*": ["./src/assets/images"],
+            "@icons/*": ["./src/assets/icons"],
+            "@fonts/*": ["./src/assets/fonts"],
+            "@scss/*": ["./src/scss"],
+            "@ts/*": ["./src/ts"],
+            "@js/*": ["./src/js"]
+        }
     },
     "include": ["src/ts/**/*.ts"], // какие файлы компилировать
     "exclude": ["node_modules"] // что игнорировать

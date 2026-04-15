@@ -20,19 +20,25 @@
     "type": "module",
     "devDependencies": {
         "@eslint/js": "^10.0.1",
-        "@namics/stylelint-bem": "^11.0.0",
+        "@stylistic/eslint-plugin": "^5.10.0",
         "chokidar-cli": "^3.0.0",
         "cross-env": "^10.1.0",
         "cssnano": "^7.1.4",
         "cssnano-preset-advanced": "^7.0.12",
+        "del": "^8.0.1",
         "editorconfig-checker": "^6.1.1",
         "eslint": "^10.2.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.5",
         "globals": "^17.4.0",
+        "gulp": "^5.0.1",
+        "gulp-file-include": "^2.3.0",
+        "gulp-postcss": "^10.0.0",
+        "gulp-replace": "^1.1.4",
+        "gulp-sass": "^6.0.1",
         "jiti": "^2.6.1",
         "npm-run-all": "^4.1.5",
-        "postcss": "^8.5.8",
+        "postcss": "^8.5.9",
         "postcss-cli": "^11.0.1",
         "postcss-preset-env": "^11.2.0",
         "postcss-sort-media-queries": "^6.3.3",
@@ -43,7 +49,6 @@
         "stylelint-config-standard": "^40.0.0",
         "stylelint-config-standard-scss": "^17.0.0",
         "stylelint-no-unsupported-browser-features": "^8.1.1",
-        "stylelint-selector-bem-pattern": "^4.0.1",
         "typescript": "^6.0.2",
         "typescript-eslint": "^8.58.0"
     },
@@ -85,6 +90,8 @@
     },
     "dependencies": {
         "browser-sync": "^3.0.4",
-        "esbuild": "^0.28.0"
+        "esbuild": "^0.28.0",
+        "gulp-notify": "^5.0.0",
+        "gulp-plumber": "^1.2.1"
     }
 }

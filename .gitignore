@@ -61,3 +61,9 @@
 # Add .*ignore Prettier and Docker files to GIT repo
 !.prettierignore
 !.dockerignore
+
+# Allow gulp JS config
+!gulpfile.js
+
+# Allow all files from gulp/ folder
+!**/gulp/**/*.js

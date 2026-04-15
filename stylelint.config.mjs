@@ -1,13 +1,13 @@
 /** @type {import('stylelint').Config} */
 export default {
     extends: ['stylelint-config-standard-scss'],
-    plugins: ['stylelint-selector-bem-pattern', 'stylelint-no-unsupported-browser-features'],
+    plugins: ['stylelint-no-unsupported-browser-features'],
     rules: {
-        'plugin/selector-bem-pattern': {
-            componentName: '[a-z0-9]+(?:-[a-z0-9]+)*',
-            componentSelectors: { initial: '^\\.{componentName}(?:__[a-z0-9]+)?(?:--[a-z0-9]+)?$' },
-            utilitySelectors: '^\\.util-[a-z]+$',
-        },
+        // 'plugin/selector-bem-pattern': {
+        //     componentName: '[a-z0-9]+(?:-[a-z0-9]+)*',
+        //     componentSelectors: { initial: '^\\.{componentName}(?:__[a-z0-9]+)?(?:--[a-z0-9]+)?$' },
+        //     utilitySelectors: '^\\.util-[a-z]+$',
+        // },
         'plugin/no-unsupported-browser-features': [
             true,
             {

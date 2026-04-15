@@ -25,6 +25,6 @@
                 "options": { "singleQuote": false, "trailingComma": "none" }
             },
             { "files": ["**/*.html"], "options": { "printWidth": 160 } },
-            { "files": ["**/*.json"], "options": { "tabWidth": 4 } }
+            { "files": ["**/*.json"], "options": { "tabWidth": 4 } },
         ]
 }
