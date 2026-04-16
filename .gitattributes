@@ -1,0 +1,29 @@
+# Default | For all text files
+* text eol=lf
+
+# Images | Raster images
+*.gif   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
+*.avif  binary
+*.ico   binary
+
+# Vector images | Text images
+*.svg   text eol=lf
+
+# Videos
+*.mp4   binary
+*.webm  binary
+*.mov   binary
+*.mkv   binary
+
+# Fonts
+*.ttf   binary
+*.otf   binary
+*.woff  binary
+*.woff2 binary
+
+# Docs
+*.pdf   binary
