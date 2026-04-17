@@ -44,9 +44,10 @@
 *.otf
 *.ttf
 
-# Ignore all build/ and dist/ folders
+# Ignore all build/, dist/ and out/ folders
 **/build
 **/dist
+**/out
 
 # Ignore all original/ folders
 **/original
