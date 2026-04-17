@@ -1,4 +1,5 @@
-/** @type {import('stylelint').Config} */
+import type { Config } from 'stylelint'
+
 export default {
     extends: ['stylelint-config-standard-scss'],
     plugins: ['stylelint-no-unsupported-browser-features'],
@@ -28,17 +29,4 @@ export default {
         // 'scss/double-slash-comment-whitespace-inside': '^\\/\\/[!*?todo] ([a-z0-9])*$',
         'scss/at-mixin-pattern': '^([a-z0-9]+(-[a-z0-9]+)*)(--[a-z0-9]+)?$',
     },
-    ignoreFiles: [
-        '**/*.js',
-        '**/*.mjs',
-        '**/*.cjs',
-        '**/*.ts',
-        '**/*.mts',
-        '**/*.cts',
-        '**/*.htm',
-        '**/*.html',
-        // '**/*.svg',
-        // '**/public/*',
-        '**/vendors/*.scss',
-    ],
-}
+} satisfies Config

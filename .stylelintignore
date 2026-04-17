@@ -1,0 +1,15 @@
+# * --- Ignore all by default
+# * -------------------------
+*
+
+# * --- Allow Git inspect folders
+# * -----------------------------
+!*/
+
+# * --- Allow .css, .scss and .sass files in any folders
+# * ----------------------------------------------------
+!**/*.{css,scss,sass}
+
+# * --- Ignore all .css, .scss and .sass files in vendors/ folder
+# * ----------------------------------------------------------
+**/vendors/*.{css,scss,sass}
