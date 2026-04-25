@@ -25,10 +25,11 @@ const config: Config = {
     overrides: [
         { files: ['*.json'], options: { tabWidth: 4 } },
         {
-            files: ['*.{html,nj,njk,nunjucks}'],
+            files: ['*.html', '*.nj', '*.njk', '*.nunjucks'],
             options: {
                 printWidth: 140,
                 parser: 'jinja-template',
+                // embeddedLanguageFormatting: 'off', //! <-- problem with this option !!!
             },
         },
     ],
