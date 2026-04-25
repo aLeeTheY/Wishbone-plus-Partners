@@ -1,5 +1,6 @@
 # Ignore all .vscode/ folders
 **/.vscode
+**/.husky
 
 # Ignore all public/ folders
 **/public
