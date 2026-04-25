@@ -6,6 +6,8 @@
     -webkit-tap-highlight-color: transparent;
 
     &__img {
+        color: #000;
+
         object-fit: contain;
         object-position: center center;
         aspect-ratio: 1 / 1;
