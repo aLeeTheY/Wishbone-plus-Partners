@@ -1,70 +1,122 @@
-# Ignore all .vscode/ folders
-**/.vscode
+# # Ignore all .vscode/ folders
+# **/.vscode
 
-# Ignore all node_modules/ folders
-**/node_modules
+# # Ignore all node_modules/ folders
+# **/node_modules
 
-# Ignore all css/ folders
-**/css
+# # Ignore all css/ folders
+# **/css
 
-# Ignore all css files
-*.css
-*.css.map
+# # Ignore all css files
+# *.css
+# *.css.map
 
-# Ignore some TypeScript files
-*.d.ts
-*.d.ts.map
+# # Ignore some TypeScript files
+# *.d.ts
+# *.d.ts.map
 
-# Ignore all .tsbuildinfo files
+# # Ignore all .tsbuildinfo files
+# *.tsbuildinfo
+
+# # Ignore all JS folders
+# **/js
+
+# # Ignore all JS source files
+# *.js
+# *.js.map
+
+# *.cjs
+# *.cjs.map
+
+# *.mjs
+# *.mjs.map
+
+# # Allow JS and TS config files
+# !*.config.js
+# !*.config.cjs
+# !*.config.mjs
+
+# !*.config.ts
+# !*.config.cts
+# !*.config.mts
+
+# # Ingore fonts files
+# *.otf
+# *.ttf
+
+# # Ignore all build/, dist/ and out/ folders
+# **/build
+# **/dist
+# **/out
+
+# # Ignore all original/ folders
+# **/original
+
+# # Ignore all old/ folders
+# **/old
+
+# # Ignore all files with "old" or "no" part in name
+# *old*
+# *no*
+
+# # Add .*ignore Prettier and Docker files to GIT repo
+# !.prettierignore
+# !.dockerignore
+
+# # Allow gulp JS config
+# !gulpfile.js
+
+# # Allow all files from gulp/ folder
+# !**/gulp/**/*.js
+
+# --- IDE and dependencies ---
+.vscode/
+node_modules/
+
+# --- Build and output folders ---
+build/
+dist/
+out/
+**/original/
+**/old/
 *.tsbuildinfo
+*.map
 
-# Ignore all JS folders
-**/js
+# --- Assets and fonts ---
+# *.otf
+# *.ttf
 
-# Ignore all JS source files
+# --- Source code files (Ignored globally) ---
+*.css
 *.js
-*.js.map
-
 *.cjs
-*.cjs.map
-
 *.mjs
-*.mjs.map
+*.d.ts
 
-# Allow JS and TS config files
+# --- Folders by name ---
+**/css/
+**/js/
+
+# --- Broad name patterns (Be careful with these) ---
+*.old
+*.no
+
+# --- EXCEPTIONS (Allow specific files/folders) ---
+
+# Configuration files
 !*.config.js
 !*.config.cjs
 !*.config.mjs
-
 !*.config.ts
 !*.config.cts
 !*.config.mts
 
-# Ingore fonts files
-*.otf
-*.ttf
-
-# Ignore all build/, dist/ and out/ folders
-**/build
-**/dist
-**/out
-
-# Ignore all original/ folders
-**/original
-
-# Ignore all old/ folders
-**/old
-
-# Ignore all files with "old" or "no" part in name
-*old*
-*no*
-
-# Add .*ignore Prettier and Docker files to GIT repo
+# Build tools and ignore files
+!gulpfile.js
 !.prettierignore
 !.dockerignore
 
-# Allow gulp JS config
-!gulpfile.js
-
-# Allow all files from gulp/ folder
+# Allow gulp folder and its content
+# (Note: if gulp/ is inside a folder like dist/, it might still be ignored)
+!**/gulp/
 !**/gulp/**/*.js
