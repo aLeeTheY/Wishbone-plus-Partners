@@ -60,8 +60,8 @@
 **/old
 
 # Ignore all files with "old" or "no" part in name
-*old*
-*no*
+*.old.*
+*.no.*
 
 # Ignore .*ignore Prettier and Docker files in GIT repo
 .prettierignore
