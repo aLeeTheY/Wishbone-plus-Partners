@@ -714,7 +714,7 @@ export function audio() {
 
 // * --- LANGUAGES
 // * -------------
-export function languages() {
+export function i18n() {
     return gulp
         .src(path.src.i18n)
         .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.i18n) }))
