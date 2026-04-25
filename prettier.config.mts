@@ -32,6 +32,7 @@ const config: Config = {
             files: ['**/*.njk'],
             options: {
                 parser: 'jinja-template',
+                embeddedLanguageFormatting: 'off',
             },
         },
     ],
