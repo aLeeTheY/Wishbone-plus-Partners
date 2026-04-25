@@ -22,6 +22,8 @@
         "removeComments": true, // удалять комментарии из JS
         "incremental": true, // ускоренная компиляция
 
+        "types": ["node"],
+
         "paths": {
             "@images/*": ["./src/assets/images"],
             "@icons/*": ["./src/assets/icons"],
