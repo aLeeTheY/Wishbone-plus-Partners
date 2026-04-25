@@ -3,6 +3,10 @@
 import fs from 'fs'
 import * as nodePath from 'path'
 
+// * cli args packages
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
+
 // * main plugins
 import gulp from 'gulp'
 import gulpIf from 'gulp-if'
@@ -104,6 +108,21 @@ import revRewrite from 'gulp-rev-rewrite'
 // * ----------------
 // const webpInCssPolyfillScript = fs.readFileSync('node_modules/webp-in-css/polyfill.js', 'utf-8')
 
+// ! --- REPO NAME (REQUIRED)
+// ! ------------------------
+const REPO_NAME = 'Wishbone-plus-Partners'
+
+// * --- ARGV
+// * --------
+const argv = yargs(hideBin(process.argv))
+    .option('github-pages', {
+        alias: ['g', 'gh'],
+        type: 'boolean',
+        default: false,
+        description: 'Build project for GitHub Pages with repository prefix',
+    })
+    .parse()
+
 // * --- BUILD MODE
 // * --------------
 const NODE_ENV = process.env.NODE_ENV ?? 'development'
@@ -111,6 +130,8 @@ const NODE_ENV = process.env.NODE_ENV ?? 'development'
 const isDev = NODE_ENV === 'development'
 const isProd = NODE_ENV === 'production'
 const isStaging = NODE_ENV === 'staging'
+
+const isGithubPagesBuild = argv.githubPages
 
 // * --- CACHE VERSION
 // * -----------------
@@ -270,7 +291,7 @@ export function clean(done) {
 // * --- HTML + VERSION
 // * ------------------
 export function html() {
-    // const ctx = { locals: { a: 'Hello World!' } }
+    const root = isGithubPagesBuild ? `/${REPO_NAME}` : ''
 
     return (
         gulp
@@ -301,25 +322,25 @@ export function html() {
             //     nunjucksCompile(),
             // )
             // * заменяем пути на корректные для каждого ресурса
-            .pipe(replace(path.replace.audio, '/assets/audio/'))
+            .pipe(replace(path.replace.meta, `${root}/`))
+            .pipe(replace(path.replace.scss_css, `${root}/css/`))
+            .pipe(replace(path.replace.ts_js, `${root}/js/`))
+            .pipe(replace(path.replace.audio, `${root}/assets/audio/`))
             .pipe(
                 replace(path.replace.icons, (match, p1) => {
                     const id = p1.replace(/\//g, '--')
-                    return `/assets/icons/sprite.svg#${id}`
+                    return `${root}/assets/icons/sprite.svg#${id}`
                 }),
             )
-            .pipe(replace(path.replace.images, '/assets/images/'))
-            .pipe(replace(path.replace.videos, '/assets/videos/'))
-            .pipe(replace(path.replace.fonts, '/assets/fonts/'))
-            .pipe(replace(path.replace.misc, '/assets/misc/'))
-            .pipe(replace(path.replace.scss_css, '/css/'))
+            .pipe(replace(path.replace.images, `${root}/assets/images/`))
+            .pipe(replace(path.replace.videos, `${root}/assets/videos/`))
+            .pipe(replace(path.replace.fonts, `${root}/assets/fonts/`))
+            .pipe(replace(path.replace.misc, `${root}/assets/misc/`))
+            .pipe(replace(path.replace.libs, `${root}/libs/`))
             // * замена расширений файлов .scss
             .pipe(replace(/\.scss(?=["'])/g, '.min.css'))
-            .pipe(replace(path.replace.ts_js, '/js/'))
             // * замена расширений файлов .ts
             .pipe(replace(/\.ts(?=["'])/g, '.min.js'))
-            .pipe(replace(path.replace.libs, '/libs/'))
-            .pipe(replace(path.replace.meta, '/'))
             // .pipe(
             //     replace(
             //         '<!-- ![GULP] DO NOT REMOVE --- plugin: webp-in-css --- polyfill.js placeholder --->',
