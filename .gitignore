@@ -51,6 +51,7 @@
 # Ignore all build/ and dist/ folders
 **/build
 **/dist
+**/out
 
 # Ignore all original/ folders
 **/original
