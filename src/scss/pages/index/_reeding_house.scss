@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     height: 600px;
-    background: url('../../assets/images/reeding_house/background.webp');
+    background: url('@images/reeding_house/background.png');
     background-position: clamp(60%, -0.01 * 100vw + 64.187%, 50%) center;
     background-size: cover;
     background-repeat: no-repeat;
