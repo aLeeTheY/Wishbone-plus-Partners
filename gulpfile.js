@@ -186,6 +186,7 @@ const path = {
         // js: /@js\//g,
         ts_js: /@(ts|js)\//g, // * other variant
         libs: /@libs\//g,
+        meta: /@meta\//g,
     },
 }
 
@@ -300,24 +301,25 @@ export function html() {
             //     nunjucksCompile(),
             // )
             // * заменяем пути на корректные для каждого ресурса
-            .pipe(replace(path.replace.audio, './assets/audio/'))
+            .pipe(replace(path.replace.audio, '/assets/audio/'))
             .pipe(
                 replace(path.replace.icons, (match, p1) => {
                     const id = p1.replace(/\//g, '--')
-                    return `./assets/icons/sprite.svg#${id}`
+                    return `/assets/icons/sprite.svg#${id}`
                 }),
             )
-            .pipe(replace(path.replace.images, './assets/images/'))
-            .pipe(replace(path.replace.videos, './assets/videos/'))
-            .pipe(replace(path.replace.fonts, './assets/fonts/'))
-            .pipe(replace(path.replace.misc, './assets/misc/'))
-            .pipe(replace(path.replace.scss_css, './css/'))
+            .pipe(replace(path.replace.images, '/assets/images/'))
+            .pipe(replace(path.replace.videos, '/assets/videos/'))
+            .pipe(replace(path.replace.fonts, '/assets/fonts/'))
+            .pipe(replace(path.replace.misc, '/assets/misc/'))
+            .pipe(replace(path.replace.scss_css, '/css/'))
             // * замена расширений файлов .scss
             .pipe(replace(/\.scss(?=["'])/g, '.min.css'))
-            .pipe(replace(path.replace.ts_js, './js/'))
+            .pipe(replace(path.replace.ts_js, '/js/'))
             // * замена расширений файлов .ts
             .pipe(replace(/\.ts(?=["'])/g, '.min.js'))
-            .pipe(replace(path.replace.libs, './libs/'))
+            .pipe(replace(path.replace.libs, '/libs/'))
+            .pipe(replace(path.replace.meta, '/'))
             // .pipe(
             //     replace(
             //         '<!-- ![GULP] DO NOT REMOVE --- plugin: webp-in-css --- polyfill.js placeholder --->',
