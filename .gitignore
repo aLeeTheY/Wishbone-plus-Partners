@@ -1,5 +1,8 @@
-# # Ignore all .vscode/ folders
-# **/.vscode
+# Allow some .vscode/ files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
 
 # # Ignore all node_modules/ folders
 # **/node_modules
@@ -70,7 +73,6 @@
 # !**/gulp/**/*.js
 
 # --- IDE and dependencies ---
-.vscode/
 node_modules/
 
 # --- Build and output folders ---
