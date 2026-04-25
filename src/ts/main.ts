@@ -1,4 +1,0 @@
-/*
-    Empty file by default.
-    You can write your own code here.
-*/
