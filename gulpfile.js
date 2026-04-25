@@ -1,12 +1,13 @@
 // * --- IMPORT
 // * ----------
-// import fs from 'fs'
+import fs from 'fs'
+import * as nodePath from 'path'
 
 // * main plugins
 import gulp from 'gulp'
 import gulpIf from 'gulp-if'
-// import gulpTap from 'gulp-tap'
 import gulpNewer from 'gulp-newer'
+// import gulpTap from 'gulp-tap'
 
 // import gulpClone from 'gulp-clone'
 // import merge from 'merge-stream'
@@ -21,10 +22,22 @@ import { deleteAsync } from 'del'
 
 // * debug utils
 import plumber from 'gulp-plumber'
-import notify from 'gulp-notify'
+
+import toasted from 'toasted-notifier'
+// import notify from 'gulp-notify' // TODO: deprecated
 
 // * html plugins
-import fileInclude from 'gulp-file-include'
+// import { nunjucksCompile } from 'gulp-nunjucks'
+import nunjucksRender from 'gulp-nunjucks-render'
+
+// import fileInclude from 'gulp-file-include'
+// import nunjucksRender from 'gulp-nunjucks-render'
+
+// ! posthtml so bad...
+// import posthtml from 'gulp-posthtml'
+// import loadConfig from 'posthtml-load-config'
+// import include from 'posthtml-include'
+
 import replace from 'gulp-replace'
 
 import htmlmin from 'gulp-html-minifier-terser'
@@ -45,8 +58,17 @@ import postcss from 'gulp-postcss'
 // import penthouse from 'penthouse'
 // import inject from 'gulp-inject-string'
 
+import penthouse from 'penthouse'
+// import inject from 'gulp-inject-string'
+
 // * js plugins
 // import esbuild from 'esbuild'
+
+// ! esbuild --- build mode
+import gulpEsbuild from 'gulp-esbuild'
+// ! esbuild --- watch mode
+// import { createGulpEsbuild } from 'gulp-esbuild'
+// const gulpEsbuild = createGulpEsbuild({ incremental: true })
 
 // * images
 // import imagemin from 'gulp-imagemin' // TODO: deprecated
@@ -75,17 +97,12 @@ import svgSprite from 'gulp-svg-sprite'
 // * revision
 import rev from 'gulp-rev'
 import revRewrite from 'gulp-rev-rewrite'
+// import { config } from 'process'
+// import { url } from 'inspector'
 
-/*
-
-
-
-
-*/
-
-// import mergeStream from 'merge-stream'
-
-// import { minify } from 'terser'
+// * --- PLACEHOLDERS
+// * ----------------
+// const webpInCssPolyfillScript = fs.readFileSync('node_modules/webp-in-css/polyfill.js', 'utf-8')
 
 // * --- BUILD MODE
 // * --------------
@@ -108,8 +125,10 @@ const path = {
     clean: buildBase,
     build: {
         base: `${buildBase}/`,
+        njk: `${buildBase}/`,
         html: `${buildBase}/`,
-        js: `${buildBase}/js/`,
+        meta: `${buildBase}/`,
+        scripts: `${buildBase}/js/`,
         css: `${buildBase}/css/`,
         audio: `${buildBase}/assets/audio/`,
         icons: `${buildBase}/assets/icons/`,
@@ -118,11 +137,14 @@ const path = {
         fonts: `${buildBase}/assets/fonts/`,
         misc: `${buildBase}/assets/misc/`,
         libs: `${buildBase}/libs/`,
+        i18n: `${buildBase}/i18n/`,
     },
     src: {
         base: `${srcBase}/`,
+        njk: `${srcBase}/*.{nj,njk,nunjucks}`,
         html: `${srcBase}/*.html`,
-        ts: `${srcBase}/ts/main.ts`,
+        meta: `${srcBase}/meta/**/*.*`,
+        scripts: `${srcBase}/{js,ts}/main.{js,mjs,cjs,ts,mts,cts}`,
         scss: `${srcBase}/scss/*.scss`,
         audio: `${srcBase}/assets/audio/**/*.*`,
         icons: `${srcBase}/assets/icons/**/*.svg`,
@@ -132,11 +154,14 @@ const path = {
         fonts: `${srcBase}/assets/fonts/**/*.{ttf,otf,woff,woff2}`,
         misc: `${srcBase}/assets/misc/**/*.*`,
         libs: `${srcBase}/libs/**/*.*`,
+        i18n: `${srcBase}/i18n/**/*.*`,
     },
     watch: {
         base: `${srcBase}/`,
+        njk: `${srcBase}/**/*.{nj,njk,nunjucks}`,
         html: `${srcBase}/**/*.html`,
-        ts: `${srcBase}/ts/**/*.ts`,
+        meta: `${srcBase}/meta/**/*.*`,
+        scripts: `${srcBase}/{js,ts}/**/*.{js,mjs,cjs,ts,mts,cts}`,
         scss: `${srcBase}/scss/**/*.scss`,
         audio: `${srcBase}/assets/audio/**/*.*`,
         icons: `${srcBase}/assets/icons/**/*.*`,
@@ -145,11 +170,12 @@ const path = {
         fonts: `${srcBase}/assets/fonts/**/*.*`,
         misc: `${srcBase}/assets/misc/**/*.*`,
         libs: `${srcBase}/libs/**/*.*`,
+        i18n: `${srcBase}/i18n/**/*.*`,
     },
     replace: {
         audio: /@audio\//g,
         fonts: /@fonts\//g,
-        icons: /@icons\//g,
+        icons: /@icons\/(.+?)\.svg/g,
         images: /@images\//g,
         videos: /@videos\//g,
         misc: /@misc\//g,
@@ -163,27 +189,36 @@ const path = {
     },
 }
 
-// * --- ERROR HANDLER
-// * -----------------
-const pipelineErrorTags = {
-    unknown: 'UNKNOWN_PIPELINE_ERROR',
-    html: 'HTML_PIPELINE_ERROR',
-    styles: 'STYLES_PIPELINE_ERROR',
-    scripts: 'SCRIPTS_PIPELINE_ERROR',
-    audio: 'AUDIO_PIPELINE_ERROR',
-    icons: 'ICONS_PIPELINE_ERROR',
-    images: 'IMAGES_PIPELINE_ERROR',
-    videos: 'VIDEOS_PIPELINE_ERROR',
-    fonts: 'FONTS_PIPELINE_ERROR',
-    misc: 'MISC_PIPELINE_ERROR',
-    libs: 'LIBS_PIPELINE_ERROR',
+// * --- NOTIFICATION CENTER
+// * -----------------------
+const notificationCenterErrorTitles = {
+    unknown: '[ERROR] --- Unknown',
+    html: '[ERROR] HTML',
+    meta: '[ERROR] META',
+    styles: '[ERROR] STYLES',
+    scripts: '[ERROR] SCRIPTS',
+    audio: '[ERROR] AUDIO',
+    icons: '[ERROR] ICONS',
+    images: '[ERROR] IMAGES',
+    videos: '[ERROR] VIDEOS',
+    fonts: '[ERROR] FONTS',
+    i18n: '[ERROR] I18N',
+    misc: '[ERROR] MISC',
+    libs: '[ERROR] LIBS',
+    criticalCss: '[ERROR] CRITICAL CSS',
 }
 
-const errorHandler = (title = pipelineErrorTags.unknown) => {
-    return notify.onError({
-        title: title,
-        message: '<%= error.message %>',
-    })
+const errorHandler = (title) => {
+    return function (err) {
+        toasted.notify({
+            title: title || notificationCenterErrorTitles.unknown,
+            message: err.message || 'An unknown error occurred during the build.',
+            sound: true,
+            wait: false,
+        })
+
+        this.emit('end')
+    }
 }
 
 // ? --- FINALLY
@@ -234,22 +269,44 @@ export function clean(done) {
 // * --- HTML + VERSION
 // * ------------------
 export function html() {
+    // const ctx = { locals: { a: 'Hello World!' } }
+
     return (
         gulp
             // * берем исходники
-            .src(path.src.html)
+            .src(path.src.njk)
             // * подключаем plumber, чтобы gulp не падал при ошибке
-            .pipe(plumber({ errorHandler: errorHandler(pipelineErrorTags.html) }))
+            .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.html) }))
             // * собираем все partials в полноценные html
+            // .pipe(
+            //     fileInclude({
+            //         prefix: '@@',
+            //         basepath: '@file',
+            //         context: {
+            //             placeholder__webpInCssPolyfill: `<script>\n${webpInCssPolyfillScript}\n</script>`,
+            //         },
+            //     }),
+            // )
+            // .pipe(posthtml())
             .pipe(
-                fileInclude({
-                    prefix: '@@',
-                    basepath: '@file',
+                nunjucksRender({
+                    path: ['./src/', './'],
                 }),
             )
+            // .pipe(
+            //     // nunjucksRender({
+            //     //     path: ['src/partials'], // CRITICAL: Tell Nunjucks where to find header/footer
+            //     // }),
+            //     nunjucksCompile(),
+            // )
             // * заменяем пути на корректные для каждого ресурса
             .pipe(replace(path.replace.audio, './assets/audio/'))
-            .pipe(replace(path.replace.icons, './assets/icons/'))
+            .pipe(
+                replace(path.replace.icons, (match, p1) => {
+                    const id = p1.replace(/\//g, '--')
+                    return `./assets/icons/sprite.svg#${id}`
+                }),
+            )
             .pipe(replace(path.replace.images, './assets/images/'))
             .pipe(replace(path.replace.videos, './assets/videos/'))
             .pipe(replace(path.replace.fonts, './assets/fonts/'))
@@ -261,6 +318,12 @@ export function html() {
             // * замена расширений файлов .ts
             .pipe(replace(/\.ts(?=["'])/g, '.min.js'))
             .pipe(replace(path.replace.libs, './libs/'))
+            // .pipe(
+            //     replace(
+            //         '<!-- ![GULP] DO NOT REMOVE --- plugin: webp-in-css --- polyfill.js placeholder --->',
+            //         `<script>${webpInCssPolyfillScript}</script>`,
+            //     ),
+            // )
             // * генерируем webp на основе jpg,jpeg,png и т.д.
             .pipe(webphtml())
             // * форматируем код через prettier
@@ -272,7 +335,7 @@ export function html() {
                     htmlmin({
                         caseSensitive: true,
                         collapseWhitespace: true,
-                        preserveLineBreaks: true,
+                        preserveLineBreaks: false,
                         collapseBooleanAttributes: true,
                         collapseInlineTagWhitespace: false,
                         keepClosingSlash: true,
@@ -285,10 +348,15 @@ export function html() {
                         removeEmptyElements: false,
                         removeEmptyAttributes: true,
                         removeRedundantAttributes: false,
-                        ignoreCustomComments: [/Built with love by aLeeTheY/],
+                        ignoreCustomComments: [
+                            /Built with love by aLeeTheY/,
+                            /CRITICAL CSS PLACEHOLDER/,
+                        ],
                     }),
                 ),
             )
+            // ! posthtml so bad...
+            // .pipe(posthtml())
             // * кладем результат в папку сборки
             .pipe(gulp.dest(path.build.html))
             // * обновляем сервер разработки
@@ -305,10 +373,24 @@ export function styles() {
             // * берем исходники
             .src(path.src.scss, { sourcemaps: isDev || isStaging })
             // * подключаем plumber, чтобы gulp не падал при ошибке
-            .pipe(plumber({ errorHandler: errorHandler(pipelineErrorTags.styles) }))
+            .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.styles) }))
+            // * делаем sourcemaps в режимах dev и staging
+            // .pipe(gulpIf(isDev || isStaging, sourcemaps.init()))
+            // * билдим css через sass
+            .pipe(
+                sass({
+                    // * sass options
+                    style: isProd || isStaging ? 'compressed' : 'expanded',
+                }).on('error', sass.logError),
+            )
             // * заменяем пути на корректные для каждого ресурса
             .pipe(replace(path.replace.audio, '../assets/audio/'))
-            .pipe(replace(path.replace.icons, '../assets/icons/'))
+            .pipe(
+                replace(path.replace.icons, (match, p1) => {
+                    const id = p1.replace(/\//g, '--')
+                    return `../assets/icons/sprite.svg#${id}`
+                }),
+            )
             .pipe(replace(path.replace.images, '../assets/images/'))
             .pipe(replace(path.replace.videos, '../assets/videos/'))
             .pipe(replace(path.replace.fonts, '../assets/fonts/'))
@@ -320,17 +402,8 @@ export function styles() {
             // // * замена расширений файлов .ts
             // .pipe(replace(/\.ts(?=["'])/g, '.min.js'))
             .pipe(replace(path.replace.libs, '../libs/'))
-            // * делаем sourcemaps в режимах dev и staging
-            // .pipe(gulpIf(isDev || isStaging, sourcemaps.init()))
-            // * билдим css через sass
-            .pipe(
-                sass({
-                    // * sass options
-                    style: isProd || isStaging ? 'compressed' : 'expanded',
-                }).on('error', sass.logError),
-            )
             // * далее обрабатываем полученный css с помощью postcss (dev mode by default)
-            .pipe(postcss({ env: process.env.NODE_ENV || 'development' }))
+            .pipe(postcss())
             // * добавляем webp вариант к картинкам jpg,jpeg,png в css файле
             // ? на замену используется postcss/webp-in-css
             // .pipe(
@@ -352,22 +425,40 @@ export function styles() {
 
 // * --- SCRIPTS (TS -> JS via ESBUILD)
 // * ----------------------------------
-// export async function scripts() {
-//     try {
-//         await esbuild.build({
-//             entryPoints: [path.src.ts],
-//             bundle: true,
-//             minify: isProd || isStaging,
-//             sourcemap: isDev || isStaging,
-//             target: 'es2015',
-//             outfile: `${path.build.js}/main.min.js`,
-//         })
-//         browserSync.reload()
-//     } catch (err) {
-//         console.error(err)
-//         throw err
-//     }
-// }
+export function scripts() {
+    return (
+        gulp
+            // * берем исходники
+            .src(path.src.scripts)
+            // * подключаем plumber, чтобы gulp не падал при ошибке
+            .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.scripts) }))
+            // * билдим JS с помощью Esbuild
+            .pipe(
+                gulpEsbuild({
+                    bundle: true,
+                    format: 'iife',
+                    platform: 'browser',
+                    outfile: 'main.min.js',
+                    sourcemap: isDev || isStaging ? 'external' : false,
+                    minify: isStaging || isProd,
+                    target: ['es2018'],
+                    drop: isProd ? ['console', 'debugger'] : [],
+                    treeShaking: true,
+                    define: {
+                        'process.env.NODE_ENV': JSON.stringify(
+                            isProd ? 'production' : isStaging ? 'staging' : 'development',
+                        ),
+                    },
+                }),
+            )
+            // * добавляем к имени суффикс .min
+            // .pipe(rename({ suffix: '.min' }))
+            // * кладем результат в папку сборки
+            .pipe(gulp.dest(path.build.scripts))
+            // * обновляем сервер разработки
+            .pipe(browserSync.stream())
+    )
+}
 
 // ? FINALLY
 // * --- IMAGES (WEBP + OPTIMIZE)
@@ -376,8 +467,8 @@ export function styles() {
 export function images() {
     return gulp
         .src(path.src.images, { encoding: false })
-        .pipe(plumber({ errorHandler: errorHandler(pipelineErrorTags.images) }))
-        .pipe(gulpNewer(path.build.images))
+        .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.images) }))
+        .pipe(gulpIf(isStaging || isProd, gulpNewer(path.build.images)))
         .pipe(
             sharpOptimizeImages({
                 // * format {from}_to_{to}
@@ -408,7 +499,7 @@ export function images() {
 // function optimizeOriginalImages() {
 //     return gulp
 //         .src(path.src.images, { encoding: false })
-//         .pipe(plumber({ errorHandler: errorHandler(pipelineErrorTags.images) }))
+//         .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.images) }))
 //         .pipe(
 //             gulpIf(
 //                 isProd || isStaging,
@@ -439,7 +530,7 @@ export function images() {
 // function createWebpImages() {
 //     return gulp
 //         .src(path.src.images, { encoding: false })
-//         .pipe(plumber({ errorHandler: errorHandler(pipelineErrorTags.images) }))
+//         .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.images) }))
 //         .pipe(
 //             gulpIf(
 //                 isProd || isStaging,
@@ -462,7 +553,7 @@ export function images() {
 //     // * 1. Создаём основной поток с исходными файлами (без изменений)
 //     const sourceStream = gulp
 //         .src(path.src.images, { encoding: false })
-//         .pipe(plumber({ errorHandler: errorHandler(pipelineErrorTags.images) }))
+//         .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.images) }))
 
 //     // * 2. Ветка для оптимизированных оригиналов (JPEG/PNG)
 //     const originalStream = sourceStream
@@ -519,16 +610,27 @@ export function icons() {
     return (
         gulp
             .src(path.src.icons)
-            .pipe(plumber({ errorHandler: errorHandler(pipelineErrorTags.icons) }))
-            .pipe(gulpNewer(path.build.icons))
+            .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.icons) }))
+            .pipe(gulpIf(isStaging || isProd, gulpNewer(path.build.icons)))
             // ! use svgmin OR internal svgsprite transform, not both.
             // .pipe(svgmin())
             .pipe(
+                // ! works only via web server, not via "file:///mysite.html"
                 svgSprite({
                     mode: {
-                        stack: {
+                        symbol: {
+                            // * revision hash (disable)
+                            bust: false,
+                            // * sprite file name
                             sprite: '../sprite.svg',
+                            // * generate html example file
                             example: false,
+                            // render: {
+                            //     // * generate css file with class names for icons (disable)
+                            //     css: false,
+                            // },
+                            // * need enable if icons will using in html code
+                            inline: true,
                         },
                     },
                     shape: {
@@ -586,21 +688,37 @@ export function icons() {
 // * --- VIDEOS
 // * ----------
 export function videos() {
-    return gulp
-        .src(path.src.videos)
-        .pipe(plumber({ errorHandler: errorHandler(pipelineErrorTags.videos) }))
-        .pipe(gulp.dest(path.build.videos))
-        .pipe(browserSync.stream())
+    return (
+        gulp
+            .src(path.src.videos)
+            .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.videos) }))
+            // * video processing modules here
+            .pipe(gulp.dest(path.build.videos))
+            .pipe(browserSync.stream())
+    )
 }
 
 // TODO: доделать при необходимости
 // * --- AUDIO
 // * ---------
 export function audio() {
+    return (
+        gulp
+            .src(path.src.audio)
+            .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.audio) }))
+            // * audio processing modules here
+            .pipe(gulp.dest(path.build.audio))
+            .pipe(browserSync.stream())
+    )
+}
+
+// * --- LANGUAGES
+// * -------------
+export function languages() {
     return gulp
-        .src(path.src.audio)
-        .pipe(plumber({ errorHandler: errorHandler(pipelineErrorTags.audio) }))
-        .pipe(gulp.dest(path.build.audio))
+        .src(path.src.i18n)
+        .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.i18n) }))
+        .pipe(gulp.dest(path.build.i18n))
         .pipe(browserSync.stream())
 }
 
@@ -609,7 +727,7 @@ export function audio() {
 export function misc() {
     return gulp
         .src(path.src.misc)
-        .pipe(plumber({ errorHandler: errorHandler(pipelineErrorTags.misc) }))
+        .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.misc) }))
         .pipe(gulp.dest(path.build.misc))
         .pipe(browserSync.stream())
 }
@@ -619,8 +737,18 @@ export function misc() {
 export function libs() {
     return gulp
         .src(path.src.libs)
-        .pipe(plumber({ errorHandler: errorHandler(pipelineErrorTags.libs) }))
+        .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.libs) }))
         .pipe(gulp.dest(path.build.libs))
+        .pipe(browserSync.stream())
+}
+
+// * --- META FILES
+// * --------------
+export function meta() {
+    return gulp
+        .src(path.src.meta)
+        .pipe(plumber({ errorHandler: errorHandler(notificationCenterErrorTitles.meta) }))
+        .pipe(gulp.dest(path.build.meta))
         .pipe(browserSync.stream())
 }
 
@@ -628,7 +756,7 @@ export function libs() {
 // * ----------------------
 export function revision() {
     return gulp
-        .src([`${path.build.css}*.css`, `${path.build.js}*.js`], { base: path.build.base })
+        .src([`${path.build.css}*.css`, `${path.build.scripts}*.js`], { base: path.build.base })
         .pipe(plumber({ errorHandler }))
         .pipe(rev())
         .pipe(gulp.dest(path.build.base))
@@ -658,36 +786,61 @@ export function rewrite() {
 //     // .pipe(browserSync.stream()) | use only in dev mode
 // }
 
-// TODO: не робит
+// ? FINALLY
 // * --- CRITICAL CSS
 // * ----------------
-// export function criticalCss(done) {
-//     return gulp
-//         .src(`${path.build.html}*.html`)
-//         .pipe(plumber({ errorHandler }))
-//         .pipe(
-//             critical.stream({
-//                 base: path.build.base,
-//                 // встроить критический CSS в <style>
-//                 inline: true,
-//                 // путь к основному CSS (уже с хешами)
-//                 css: [`${path.build.css}*.css`],
-//                 // минифицировать встроенные стили
-//                 minify: true,
-//                 dimensions: [
-//                     { width: 375, height: 812 }, // mobile
-//                     { width: 1920, height: 1080 }, // desktop
-//                 ],
-//                 // удалить оригинальные инлайн-стили (если были)
-//                 extract: true,
-//             }),
-//         )
-//         .pipe(gulp.dest(path.build.html))
-//         .on('end', () => {
-//             browserSync.reload()
-//             done()
-//         })
-// }
+export async function criticalCss() {
+    const dir = nodePath.resolve(path.build.html)
+    const cssFile = nodePath.resolve(path.build.css, 'main.min.css')
+
+    const files = fs.readdirSync(dir)
+    const htmlFiles = files.filter((f) => f.endsWith('.html'))
+
+    // ! не нужно, penthouse уже захватывает media queries при генерации
+    // const viewports = [
+    //     { width: 375, height: 667 }, // Mobile
+    //     { width: 1920, height: 1080 }, // Desktop
+    // ]
+
+    const viewport = {
+        width: 1920,
+        height: 1080,
+    }
+
+    for (const file of htmlFiles) {
+        const filePath = nodePath.resolve(dir, file)
+        let html = fs.readFileSync(filePath, 'utf-8')
+
+        if (!html.includes('<!-- ! DO NOT REMOVE THIS COMMENT | CRITICAL CSS PLACEHOLDER --->')) {
+            continue
+        }
+
+        try {
+            const criticalCss = await penthouse({
+                url: `file:///${filePath}`,
+                css: cssFile,
+                width: viewport.width,
+                height: viewport.height,
+            })
+
+            html = html.replace(
+                '<!-- ! DO NOT REMOVE THIS COMMENT | CRITICAL CSS PLACEHOLDER --->',
+                `<style>${criticalCss}</style>`,
+            )
+
+            fs.writeFileSync(filePath, html)
+        } catch (err) {
+            toasted.notify({
+                title: notificationCenterErrorTitles.criticalCss,
+                message: err.message,
+                sound: true,
+                wait: false,
+            })
+        }
+
+        browserSync.reload()
+    }
+}
 
 // * --- WATCH FILES
 // * ---------------
@@ -770,7 +923,7 @@ export function watch() {
 //             // сжимаем JS
 //             .pipe(uglify())
 //             // складываем результат в папку build
-//             .pipe(gulp.dest(path.build.js))
+//             .pipe(gulp.dest(path.build.scripts))
 //             // обновляем страницу через browser-sync
 //             .pipe(browserSync.stream())
 //     )
@@ -780,7 +933,7 @@ export function watch() {
 //     return (
 //         gulp
 //             // берем файл
-//             .src(path.src.ts)
+//             .src(path.src.scripts)
 //             // объединяем всё в 1 файл
 //             .pipe(concat('main.ts'))
 //             // конвертируем TS в JS
@@ -788,7 +941,7 @@ export function watch() {
 //             // сжимаем JS
 //             .pipe(uglify())
 //             // складываем результат в папку build
-//             .pipe(gulp.dest(path.build.js))
+//             .pipe(gulp.dest(path.build.scripts))
 //             // обновляем страницу через browser-sync
 //             .pipe(browserSync.stream())
 //     )
