@@ -12,10 +12,10 @@ const config: Config = {
     objectWrap: 'preserve',
     bracketSameLine: true,
     arrowParens: 'always',
-    requirePragma: false,
     insertPragma: false,
+    requirePragma: false,
+    checkIgnorePragma: true,
     quoteProps: 'consistent',
-    checkIgnorePragma: false,
     singleAttributePerLine: false,
     htmlWhitespaceSensitivity: 'ignore',
     embeddedLanguageFormatting: 'auto',
@@ -23,16 +23,12 @@ const config: Config = {
     proseWrap: 'never',
     endOfLine: 'lf',
     overrides: [
+        { files: ['*.json'], options: { tabWidth: 4 } },
         {
-            files: ['**/*.html'],
-            options: { printWidth: 140 },
-        },
-        { files: ['**/*.json'], options: { tabWidth: 4 } },
-        {
-            files: ['**/*.njk'],
+            files: ['*.{html,nj,njk,nunjucks}'],
             options: {
+                printWidth: 140,
                 parser: 'jinja-template',
-                embeddedLanguageFormatting: 'off',
             },
         },
     ],
