@@ -18,7 +18,7 @@
     <link href="@meta/favicon.ico" rel="icon" type="image/x-icon" />
 
     <!-- * 0. Inject inline avif/webp script polyfill --->
-    <!-- ! STRONGLY BEFORE ANY CSS FILES --->
+    <!-- ! STRONGLY RECOMMENDED PLACE IT BEFORE ANY CSS FILES --->
     {% from "templates/utils/macro__inline_script.njk" import inline_script %}
     {{ inline_script('node_modules/gulp-web-images-css/plugin.js') }}
 
