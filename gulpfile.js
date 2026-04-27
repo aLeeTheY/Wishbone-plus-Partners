@@ -47,7 +47,8 @@ import replace from 'gulp-replace'
 import htmlmin from 'gulp-html-minifier-terser'
 
 // import webphtml from 'gulp-webp-html-nosvg' // TODO: deprecated
-import webphtml from 'gulp-webp-html-fixed'
+// import webphtml from 'gulp-webp-html-fixed' // ! no avig support
+import avifWebpHtml from 'gulp-avif-webp-html-universal'
 
 // * css plugins
 import * as dartSass from 'sass'
@@ -56,6 +57,8 @@ const sass = gulpSass(dartSass)
 
 import postcss from 'gulp-postcss'
 // import webpcss from 'gulp-webpcss' // TODO: deprecated
+// import avifWebpCss from 'gulp-avif-css' // ! bug when render
+import webImagesCSS from 'gulp-web-images-css'
 
 // ! critical css
 // import * as critical from 'critical' // TODO: deprecated
@@ -347,8 +350,15 @@ export function html() {
             //         `<script>${webpInCssPolyfillScript}</script>`,
             //     ),
             // )
-            // * генерируем webp на основе jpg,jpeg,png и т.д.
-            .pipe(webphtml())
+            // * генерируем webp на основе png, jpg, jpeg и т.д.
+            // .pipe(webphtml())
+            // * генерируем avif и webp на основе png, jpg и jpeg
+            .pipe(
+                avifWebpHtml({
+                    avif: true,
+                    webp: true,
+                }),
+            )
             // * форматируем код через prettier
             .pipe(prettier())
             // * минифицируем html
@@ -403,8 +413,17 @@ export function styles() {
             .pipe(
                 sass({
                     // * sass options
-                    style: isProd || isStaging ? 'compressed' : 'expanded',
+                    // style: isProd || isStaging ? 'expanded' : 'expanded',
+                    // * expanded always, bugs with webImagesCSS when compressed
+                    style: 'expanded',
                 }).on('error', sass.logError),
+            )
+            // * генерируем классы .avif и .webp для background-image: url() из .png, .jpg и .jpeg
+            // .pipe(avifWebpCss())
+            .pipe(
+                webImagesCSS({
+                    mode: 'all',
+                }),
             )
             // * заменяем пути на корректные для каждого ресурса
             .pipe(replace(path.replace.audio, '../assets/audio/'))
@@ -511,6 +530,12 @@ export function images() {
                     quality: isDev ? 100 : 60,
                     // lossless: true,
                     // nearLossless: true,
+                },
+                avif: {
+                    effort: isDev ? 0 : 9,
+                    quality: isDev ? 100 : 50,
+                    bitdepth: 8,
+                    // lossless: false,
                 },
                 // gif: {},
             }),
@@ -844,6 +869,7 @@ export async function criticalCss() {
                 css: cssFile,
                 width: viewport.width,
                 height: viewport.height,
+                forceInclude: [/^\.avif #reeding-house/, /^\.webp #reeding-house/],
             })
 
             html = html.replace(

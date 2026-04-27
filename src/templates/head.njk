@@ -17,7 +17,12 @@
     <!-- * Page favicon --->
     <link href="@meta/favicon.ico" rel="icon" type="image/x-icon" />
 
-    <!-- * 1. Inject critical-css --->
+    <!-- * 0. Inject inline avif/webp script polyfill --->
+    <!-- ! STRONGLY BEFORE ANY CSS FILES --->
+    {% from "templates/utils/macro__inline_script.njk" import inline_script %}
+    {{ inline_script('node_modules/gulp-web-images-css/plugin.js') }}
+
+    <!-- * 1. Inject inline critical-css --->
     <!-- ! DO NOT REMOVE THIS COMMENT | CRITICAL CSS PLACEHOLDER --->
 
     <!-- TODO: test link CSS with preload in head --- 90 performance --->

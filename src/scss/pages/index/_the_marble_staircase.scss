@@ -2,8 +2,8 @@
     display: flex;
     align-items: center;
     height: 600px;
-    background: url('@images/the_marble_staircase/background.png');
+    background-image: url('@images/the_marble_staircase/background.png');
     background-position: clamp(28%, 0.022 * 100vw + 18.788%, 50%) center;
-    background-size: cover;
     background-repeat: no-repeat;
+    background-size: cover;
 }

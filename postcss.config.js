@@ -17,10 +17,10 @@ export default {
         // * группировка медиазапросов в конец CSS файла
         'postcss-sort-media-queries': { sort: 'desktop-first' },
         // TODO: доделать webp-in-css и протестить
-        'webp-in-css/plugin': {
-            webpClass: 'webp',
-            noWebpClass: 'no-webp',
-        },
+        // 'webp-in-css/plugin': {
+        //     webpClass: 'webp',
+        //     noWebpClass: 'no-webp',
+        // },
         // * сжатие CSS (только в prod и staging modes)
         ...((isStaging || isProd) && {
             cssnano: {
