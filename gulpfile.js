@@ -10,6 +10,7 @@ import { hideBin } from 'yargs/helpers'
 // * main plugins
 import gulp from 'gulp'
 import gulpIf from 'gulp-if'
+import gulpExec from 'gulp-exec'
 import gulpNewer from 'gulp-newer'
 // import gulpTap from 'gulp-tap'
 
@@ -111,18 +112,15 @@ import revRewrite from 'gulp-rev-rewrite'
 // * ----------------
 // const webpInCssPolyfillScript = fs.readFileSync('node_modules/webp-in-css/polyfill.js', 'utf-8')
 
-// ! --- REPO NAME (REQUIRED)
-// ! ------------------------
-const REPO_NAME = 'Wishbone-plus-Partners'
-
 // * --- ARGV
 // * --------
 const argv = yargs(hideBin(process.argv))
-    .option('github-pages', {
-        alias: ['g', 'gh'],
-        type: 'boolean',
-        default: false,
-        description: 'Build project for GitHub Pages with repository prefix',
+    .option('site-root', {
+        alias: ['sr', 'r'],
+        type: 'string',
+        default: '',
+        description:
+            'Base path (URL prefix) for the project on the web server. If deploying to GitHub Pages, this is typically your repository name (e.g., "/my-repo/"). Default is empty string (site served from root).',
     })
     .parse()
 
@@ -134,7 +132,7 @@ const isDev = NODE_ENV === 'development'
 const isProd = NODE_ENV === 'production'
 const isStaging = NODE_ENV === 'staging'
 
-const isGithubPagesBuild = argv.githubPages
+const SITE_ROOT = argv.siteRoot
 
 // * --- CACHE VERSION
 // * -----------------
@@ -294,8 +292,6 @@ export function clean(done) {
 // * --- HTML + VERSION
 // * ------------------
 export function html() {
-    const root = isGithubPagesBuild ? `/${REPO_NAME}` : ''
-
     return (
         gulp
             // * берем исходники
@@ -325,21 +321,21 @@ export function html() {
             //     nunjucksCompile(),
             // )
             // * заменяем пути на корректные для каждого ресурса
-            .pipe(replace(path.replace.meta, `${root}/`))
-            .pipe(replace(path.replace.scss_css, `${root}/css/`))
-            .pipe(replace(path.replace.ts_js, `${root}/js/`))
-            .pipe(replace(path.replace.audio, `${root}/assets/audio/`))
+            .pipe(replace(path.replace.meta, `${SITE_ROOT}/`))
+            .pipe(replace(path.replace.scss_css, `${SITE_ROOT}/css/`))
+            .pipe(replace(path.replace.ts_js, `${SITE_ROOT}/js/`))
+            .pipe(replace(path.replace.audio, `${SITE_ROOT}/assets/audio/`))
             .pipe(
                 replace(path.replace.icons, (match, p1) => {
                     const id = p1.replace(/\//g, '--')
-                    return `${root}/assets/icons/sprite.svg#${id}`
+                    return `${SITE_ROOT}/assets/icons/sprite.svg#${id}`
                 }),
             )
-            .pipe(replace(path.replace.images, `${root}/assets/images/`))
-            .pipe(replace(path.replace.videos, `${root}/assets/videos/`))
-            .pipe(replace(path.replace.fonts, `${root}/assets/fonts/`))
-            .pipe(replace(path.replace.misc, `${root}/assets/misc/`))
-            .pipe(replace(path.replace.libs, `${root}/libs/`))
+            .pipe(replace(path.replace.images, `${SITE_ROOT}/assets/images/`))
+            .pipe(replace(path.replace.videos, `${SITE_ROOT}/assets/videos/`))
+            .pipe(replace(path.replace.fonts, `${SITE_ROOT}/assets/fonts/`))
+            .pipe(replace(path.replace.misc, `${SITE_ROOT}/assets/misc/`))
+            .pipe(replace(path.replace.libs, `${SITE_ROOT}/libs/`))
             // * замена расширений файлов .scss
             .pipe(replace(/\.scss(?=["'])/g, '.min.css'))
             // * замена расширений файлов .ts
