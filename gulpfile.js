@@ -436,6 +436,7 @@ export function styles() {
                     }),
                 ),
             )
+            // ! STRONGLY AFTER PURGE CSS
             // * генерируем классы .avif и .webp для background-image: url() из .png, .jpg и .jpeg
             // .pipe(avifWebpCss())
             .pipe(
