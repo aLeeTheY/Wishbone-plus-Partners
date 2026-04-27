@@ -56,7 +56,9 @@ import * as dartSass from 'sass'
 import gulpSass from 'gulp-sass'
 const sass = gulpSass(dartSass)
 
+import purgecss from 'gulp-purgecss'
 import postcss from 'gulp-postcss'
+
 // import webpcss from 'gulp-webpcss' // TODO: deprecated
 // import avifWebpCss from 'gulp-avif-css' // ! bug when render
 import webImagesCSS from 'gulp-web-images-css'
@@ -95,12 +97,12 @@ import svgSprite from 'gulp-svg-sprite'
 // import fonter from 'gulp-fonter-fix' // TODO: deprecated
 // import ttf2woff2 from 'gulp-ttf2woff2' // TODO: deprecated
 
-// * videos
+// * audio + videos
 // import ffmpeg from 'gulp-fluent-ffmpeg'
 // import ffmpegInstaller from '@ffmpeg-installer/ffmpeg'
 // ffmpeg.setFfmpegPath(ffmpegInstaller.path)
 
-// * audio
+// * i18n
 
 // * revision
 import rev from 'gulp-rev'
@@ -134,6 +136,7 @@ const isStaging = NODE_ENV === 'staging'
 
 const SITE_ROOT = argv.siteRoot
 
+// TODO:
 // * --- CACHE VERSION
 // * -----------------
 // const cacheVersion = `?v=${Date.now()}`
@@ -244,7 +247,6 @@ const errorHandler = (title) => {
     }
 }
 
-// ? --- FINALLY
 // * --- DEV SERVER (BROWSER-SYNC)
 // * -----------------------------
 export function server(done) {
@@ -254,7 +256,7 @@ export function server(done) {
             baseDir: path.build.html,
             directory: false,
         },
-        // TODO: протестить ghostMode потом
+        // TODO: test 'ghostMode' later
         // ghostMode: {
         //     clicks: true,
         //     scroll: true,
@@ -273,13 +275,6 @@ export function server(done) {
     done()
 }
 
-// function reload(done) {
-//     // * reload server event
-//     browserSync.reload()
-//     done()
-// }
-
-// ? --- FINALLY
 // * --- CLEAN
 // * ---------
 export function clean(done) {
@@ -288,7 +283,7 @@ export function clean(done) {
     })
 }
 
-// ? --- FINALLY
+// TODO: доделать <source> для video, audio и i18n
 // * --- HTML + VERSION
 // * ------------------
 export function html() {
@@ -393,7 +388,6 @@ export function html() {
     )
 }
 
-// TODO: FINALLY?
 // * --- STYLES (SCSS -> CSS + POSTCSS)
 // * ----------------------------------
 export function styles() {
@@ -414,13 +408,6 @@ export function styles() {
                     style: 'expanded',
                 }).on('error', sass.logError),
             )
-            // * генерируем классы .avif и .webp для background-image: url() из .png, .jpg и .jpeg
-            // .pipe(avifWebpCss())
-            .pipe(
-                webImagesCSS({
-                    mode: 'all',
-                }),
-            )
             // * заменяем пути на корректные для каждого ресурса
             .pipe(replace(path.replace.audio, '../assets/audio/'))
             .pipe(
@@ -440,6 +427,22 @@ export function styles() {
             // // * замена расширений файлов .ts
             // .pipe(replace(/\.ts(?=["'])/g, '.min.js'))
             .pipe(replace(path.replace.libs, '../libs/'))
+            // * удаляем неиспользуемые css классы
+            .pipe(
+                gulpIf(
+                    isStaging || isProd,
+                    purgecss({
+                        content: ['src/**/*.njk'],
+                    }),
+                ),
+            )
+            // * генерируем классы .avif и .webp для background-image: url() из .png, .jpg и .jpeg
+            // .pipe(avifWebpCss())
+            .pipe(
+                webImagesCSS({
+                    mode: 'all',
+                }),
+            )
             // * далее обрабатываем полученный css с помощью postcss (dev mode by default)
             .pipe(postcss())
             // * добавляем webp вариант к картинкам jpg,jpeg,png в css файле
@@ -498,10 +501,8 @@ export function scripts() {
     )
 }
 
-// ? FINALLY
 // * --- IMAGES (WEBP + OPTIMIZE)
 // * ----------------------------
-
 export function images() {
     return gulp
         .src(path.src.images, { encoding: false })
@@ -647,7 +648,6 @@ export function images() {
 //     return merge(originalStream, webpStream).on('end', () => browserSync.reload())
 // }
 
-// TODO: не работает вообще
 // * --- ICONS (SVG) + MAKE SVG SPRITE
 // * ---------------------------------
 export function icons() {
@@ -691,7 +691,7 @@ export function icons() {
     )
 }
 
-// TODO: протестить позже
+// TODO:
 // * --- FONTS + CONVERT TO WOFF/WOFF2
 // * ---------------------------------
 
@@ -728,7 +728,7 @@ export function icons() {
 //     return fontsWoff2()
 // }
 
-// TODO: доделать при необходимости
+// TODO:
 // * --- VIDEOS
 // * ----------
 export function videos() {
@@ -742,7 +742,7 @@ export function videos() {
     )
 }
 
-// TODO: доделать при необходимости
+// TODO:
 // * --- AUDIO
 // * ---------
 export function audio() {
@@ -756,6 +756,7 @@ export function audio() {
     )
 }
 
+// TODO:
 // * --- LANGUAGES
 // * -------------
 export function i18n() {
@@ -796,6 +797,7 @@ export function meta() {
         .pipe(browserSync.stream())
 }
 
+// TODO:
 // * --- REVISION (HASHING)
 // * ----------------------
 export function revision() {
@@ -809,7 +811,6 @@ export function revision() {
     // .pipe(browserSync.stream()) | use only in dev mode
 }
 
-// TODO: доделать rewrite
 export function rewrite() {
     const manifest = gulp.src(`${path.build.base}rev-manifest.json`)
     return gulp
@@ -830,7 +831,6 @@ export function rewrite() {
 //     // .pipe(browserSync.stream()) | use only in dev mode
 // }
 
-// ? FINALLY
 // * --- CRITICAL CSS
 // * ----------------
 export async function criticalCss() {
