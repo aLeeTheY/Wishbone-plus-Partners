@@ -1,6 +1,7 @@
 // * --- IMPORT
 // * ----------
 import fs from 'fs'
+import fastGlob from 'fast-glob'
 import * as nodePath from 'path'
 // import merge from 'merge-stream'
 // import mergeStreams from '@sindresorhus/merge-streams'
@@ -888,8 +889,13 @@ export async function criticalCss() {
     const dir = nodePath.resolve(path.build.html)
     const cssFile = nodePath.resolve(path.build.css, 'main.min.css')
 
-    const files = fs.readdirSync(dir)
-    const htmlFiles = files.filter((f) => f.endsWith('.html'))
+    // const files = fs.readdirSync(dir)
+    // const htmlFiles = files.filter((f) => f.endsWith('.html'))
+
+    const htmlFiles = fastGlob.sync('**/*.html', {
+        cwd: dir,
+        absolute: true,
+    })
 
     // ! не нужно, penthouse уже захватывает media queries при генерации
     // const viewports = [
