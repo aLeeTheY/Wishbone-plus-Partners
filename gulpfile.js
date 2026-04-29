@@ -2,6 +2,8 @@
 // * ----------
 import fs from 'fs'
 import * as nodePath from 'path'
+// import merge from 'merge-stream'
+// import mergeStreams from '@sindresorhus/merge-streams'
 
 // * cli args packages
 import yargs from 'yargs'
@@ -12,6 +14,7 @@ import gulp from 'gulp'
 import gulpIf from 'gulp-if'
 import gulpExec from 'gulp-exec'
 import gulpNewer from 'gulp-newer'
+// import gulpMerge from 'gulp-sequence'
 // import gulpTap from 'gulp-tap'
 
 // import gulpClone from 'gulp-clone'
@@ -124,7 +127,18 @@ const argv = yargs(hideBin(process.argv))
         description:
             'Base path (URL prefix) for the project on the web server. If deploying to GitHub Pages, this is typically your repository name (e.g., "/my-repo/"). Default is empty string (site served from root).',
     })
+    .option('internationalization', {
+        alias: ['i18n', 'i'],
+        type: 'boolean',
+        default: false,
+        description:
+            'Enable internationalization build (reads locale JSON files). Without this flag, builds with inline text and default locale only.',
+    })
     .parse()
+
+const IS_I18N_ENABLED = argv.internationalization
+
+const SITE_ROOT = argv.siteRoot
 
 // * --- BUILD MODE
 // * --------------
@@ -133,8 +147,6 @@ const NODE_ENV = process.env.NODE_ENV ?? 'development'
 const isDev = NODE_ENV === 'development'
 const isProd = NODE_ENV === 'production'
 const isStaging = NODE_ENV === 'staging'
-
-const SITE_ROOT = argv.siteRoot
 
 // TODO:
 // * --- CACHE VERSION
@@ -286,7 +298,7 @@ export function clean(done) {
 // TODO: доделать <source> для video, audio и i18n
 // * --- HTML + VERSION
 // * ------------------
-export function html() {
+function createHtmlStream({ locale, localeData, destPath }) {
     return (
         gulp
             // * берем исходники
@@ -307,6 +319,10 @@ export function html() {
             .pipe(
                 nunjucksRender({
                     path: ['./src/', './'],
+                    data: {
+                        locale,
+                        ...localeData,
+                    },
                 }),
             )
             // .pipe(
@@ -382,10 +398,44 @@ export function html() {
             // ! posthtml so bad...
             // .pipe(posthtml())
             // * кладем результат в папку сборки
-            .pipe(gulp.dest(path.build.html))
-            // * обновляем сервер разработки
-            .pipe(browserSync.stream())
+            .pipe(gulp.dest(destPath))
+        // * обновляем сервер разработки
+        // .pipe(browserSync.stream())
     )
+}
+
+export async function html() {
+    if (IS_I18N_ENABLED) {
+        // * build for locales
+        const i18config = JSON.parse(fs.readFileSync('./src/i18n/languages.json', 'utf-8'))
+        const { default_locale: defaultLocale, available_locales: locales } = i18config
+
+        for (const locale of locales) {
+            const dataPath = `./src/i18n/${locale}.json`
+            const localeData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'))
+
+            const destPath =
+                locale === defaultLocale
+                    ? path.build.html
+                    : nodePath.join(path.build.html, String(locale).toLowerCase())
+
+            const stream = createHtmlStream({ locale, localeData, destPath })
+            await new Promise((resolve, reject) => {
+                stream.on('end', resolve).on('error', reject)
+            })
+
+            // reload browserSync after every locale build
+            // browserSync.reload();
+        }
+    } else {
+        const stream = createHtmlStream({ destPath: path.build.html })
+
+        await new Promise((resolve, reject) => {
+            stream.on('end', resolve).on('error', reject)
+        })
+    }
+
+    browserSync.reload()
 }
 
 // * --- STYLES (SCSS -> CSS + POSTCSS)

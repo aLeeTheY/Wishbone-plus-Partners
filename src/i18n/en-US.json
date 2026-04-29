@@ -1,0 +1,186 @@
+{
+    "common": {
+        "head": {
+            "title": "Wishbone + Partners",
+            "description": "A desktop-focused single-page website built with HTML and Sass, using Alpine.js for collapsible sections and AOS for scroll animations. Features custom CSS transitions and is not optimized for mobile."
+        },
+        "header": {
+            "aria": {
+                "logo": "Logo of 'Wishbone + Partners' company",
+                "menu": {
+                    "hamburger": "Menu, hamburger button icon",
+                    "close": "Menu, close button icon"
+                }
+            },
+            "navigation": {
+                "link": {
+                    "projects": "Projects",
+                    "about": "About",
+                    "news": "News",
+                    "team": "Team",
+                    "contact": "Contact"
+                },
+                "button": {
+                    "get_template": "Get template"
+                }
+            }
+        },
+        "footer": {
+            "aria": {
+                "logo": "Logo of 'Wishbone + Partners' company",
+                "social": {
+                    "twitter": "Twitter icon",
+                    "instagram": "Instagram icon",
+                    "facebook": "Facebook icon"
+                }
+            },
+            "copyright": {
+                "powered_by": "Powered by Webflow.",
+                "all_rights_reserved": "All rights reserved Wishbone+Partners, Inc.",
+                "licensing": "Licensing."
+            }
+        }
+    },
+    "index": {
+        "common": {
+            "team": {
+                "collier": {
+                    "alt": "Photo of Stephen Collier",
+                    "name": "Stephen Collier",
+                    "role": "Senior Partner"
+                },
+                "peters": {
+                    "alt": "Photo of Nolan Peters",
+                    "name": "Nolan Peters",
+                    "role": "Associate"
+                },
+                "wonder": {
+                    "alt": "Photo of Ferris Wonder",
+                    "name": "Ferris Wonder",
+                    "role": "Associate Partner"
+                },
+                "stone": {
+                    "alt": "Photo of Aria Stone",
+                    "name": "Aria Stone",
+                    "role": "Senior Partner"
+                },
+                "ferry": {
+                    "alt": "Photo of Niko Ferry",
+                    "name": "Niko Ferry",
+                    "role": "Partner"
+                }
+            },
+            "button": {
+                "read_more": "Read more"
+            }
+        },
+        "hero": {
+            "alt": {
+                "hero_main_img": "Main image"
+            },
+            "tagline": "Wishbone+Partners",
+            "title": "The home of beautiful architecture.",
+            "paragraph": "We are an architecture firm with a focus on beautiful but functional design. At its heart, we believe design is about usability and accessibility — these are the guiding principles for our work. Read more about our previous projects, our process and our team below."
+        },
+        "our_firm": {
+            "title": "Our firm",
+            "paragraph": {
+                "one": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.",
+                "two": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.",
+                "three": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere."
+            }
+        },
+        "reeding_house": {
+            "title": "Reeding House",
+            "paragraph": "Lorem ipsum dolor sit amet, dolor sit amet dolor sit amet."
+        },
+        "our_process": {
+            "tagline": "Our process",
+            "title": "How we do what we do.",
+            "card": {
+                "sketching": {
+                    "aria": "Icon of 'Sketching' icon",
+                    "title": "Sketching",
+                    "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut tristique libero. Nulla luctus sapien ac arcu tempor, vitae tempor leo iaculis."
+                },
+                "finalizing": {
+                    "aria": "Icon of 'Finalizing' icon",
+                    "title": "Finalizing",
+                    "paragraph": "Adipiscing elit. Nulla ut tristique libero. Nulla vitae tempor leo iaculis luctus sapien ac arcu tempor, vitae."
+                },
+                "building": {
+                    "aria": "Icon of 'Building' icon",
+                    "title": "Building",
+                    "paragraph": "Nulla ut tristique libero. Lorem ipsum ut tristique libero. Nulla luctus sapien ac arcu tempor, vitae lorem ipsum dolor leo iaculis."
+                }
+            }
+        },
+        "the_marble_staircase": {
+            "title": "The Marble Staircase",
+            "paragraph": "Lorem ipsum dolor sit amet, dolor sit amet dolor sit amet."
+        },
+        "prior_clients": {
+            "tagline": "Prior clients",
+            "title": "Happy customers.",
+            "paragraph": "Morbi neque ex, condimentum dapibus congue et, vulputate ut ligula. Vestibulum sit amet urna turpis. Mauris euismod elit et nisi ultrices, ut faucibus orci tincidunt.",
+            "company": {
+                "hill_and_hayes": {
+                    "aria": "Logo of 'Hill & Hayes' company",
+                    "name": "Hill & Hayes"
+                },
+                "riksgransen": {
+                    "aria": "Logo of 'RIKSGRANSEN' company",
+                    "name": "RIKSGRANSEN"
+                },
+                "studio_cai": {
+                    "aria": "Logo of 'Studio Cai' company",
+                    "name": "Studio Cai"
+                },
+                "chill_industries": {
+                    "aria": "Logo of 'Chill Industries' company",
+                    "name": "Chill Industries"
+                }
+            }
+        },
+        "the_swirling_staircase": {
+            "title": "The Swirling Staircase",
+            "paragraph": "Lorem ipsum dolor sit amet, dolor sit amet dolor sit amet."
+        },
+        "featured_projects": {
+            "title": "Featured projects",
+            "paragraph": "Some of the latest and greatest projects from us here at Wishbone+Partners.",
+            "project": {
+                "one": {
+                    "city": "Los Angeles",
+                    "title": "Vanguard Plaza"
+                },
+                "two": {
+                    "city": "New York",
+                    "title": "Big Road Brewery"
+                },
+                "three": {
+                    "city": "Seattle",
+                    "title": "Reeding House"
+                }
+            },
+            "button": {
+                "view_all": "View all projects",
+                "close": "Close"
+            }
+        },
+        "meet_our_team": {
+            "title": "Meet our team",
+            "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis.",
+            "button": {
+                "see_team": "See team"
+            }
+        },
+        "get_in_touch": {
+            "tagline": "Get in touch",
+            "title": "Think we would be a good fit for your next project?",
+            "button": {
+                "get_in_touch": "Get in touch"
+            }
+        }
+    }
+}

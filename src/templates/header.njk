@@ -1,7 +1,7 @@
 <header id="header" class="header" data-aos="fade-down">
     <div class="wrapper wrapper--header">
         <a class="logo" href="#header">
-            <svg class="logo__img" width="220" height="19" aria-label="Company 'Wishbone + Partners' logo">
+            <svg class="logo__img" width="220" height="19" aria-label="{{ common.header.aria.logo }}">
                 <use href="@icons/common/logo.svg"></use>
             </svg>
         </a>
@@ -9,39 +9,39 @@
             <div class="navigation__desktop">
                 <ul class="navigation__menu">
                     <li class="navigation__menu-item">
-                        <a href="#!" class="navigation__menu-link">Projects</a>
+                        <a href="#!" class="navigation__menu-link">{{ common.header.navigation.link.projects }}</a>
                     </li>
                     <li class="navigation__menu-item">
-                        <a href="#!" class="navigation__menu-link">About</a>
+                        <a href="#!" class="navigation__menu-link">{{ common.header.navigation.link.about }}</a>
                     </li>
                     <li class="navigation__menu-item">
-                        <a href="#!" class="navigation__menu-link">News</a>
+                        <a href="#!" class="navigation__menu-link">{{ common.header.navigation.link.news }}</a>
                     </li>
                     <li class="navigation__menu-item">
-                        <a href="#!" class="navigation__menu-link">Team</a>
+                        <a href="#!" class="navigation__menu-link">{{ common.header.navigation.link.team }}</a>
                     </li>
                     <li class="navigation__menu-item">
-                        <a href="#!" class="navigation__menu-link">Contact</a>
+                        <a href="#!" class="navigation__menu-link">{{ common.header.navigation.link.contact }}</a>
                     </li>
                 </ul>
-                <a href="#!" class="navigation__button-link button-link">Get template</a>
+                <a href="#!" class="navigation__button-link button-link">{{ common.header.navigation.button.get_template }}</a>
             </div>
             <div class="navigation__mobile">
                 <input type="checkbox" id="menu-toggle" hidden />
                 <label for="menu-toggle" class="hamburger-menu-btn">
-                    <svg class="hamburger-menu-btn__img" width="30" height="30" aria-label="Hamburger menu icon">
+                    <svg class="hamburger-menu-btn__img" width="30" height="30" aria-label="{{ common.header.aria.menu.hamburger }}">
                         <use href="@icons/header/hamburger.svg"></use>
                     </svg>
                 </label>
                 <div class="navigation__mobile-menu-container" id="mobile-navigation">
                     <div class="navigation__mobile-menu-header">
                         <a class="logo" href="#header">
-                            <svg class="logo__img" width="160" height="14" aria-label="Company 'Wishbone + Partners' logo">
+                            <svg class="logo__img" width="160" height="14" aria-label="{{ common.header.aria.logo }}">
                                 <use href="@icons/common/logo.svg"></use>
                             </svg>
                         </a>
                         <label for="menu-toggle" class="close-menu-btn">
-                            <svg class="close-menu-btn__img" width="30" height="30" aria-label="Close menu icon">
+                            <svg class="close-menu-btn__img" width="30" height="30" aria-label="{{ common.header.aria.menu.close }}">
                                 <use href="@icons/header/close.svg"></use>
                             </svg>
                         </label>
@@ -49,26 +49,28 @@
                     <div class="navigation__mobile-menu-content">
                         <ul class="navigation__menu">
                             <li class="navigation__menu-item">
-                                <a href="#!" class="navigation__menu-link">Projects</a>
+                                <a href="#!" class="navigation__menu-link">{{ common.header.navigation.link.projects }}</a>
                             </li>
                             <li class="navigation__menu-item navigation__menu-item--dot">&middot;</li>
                             <li class="navigation__menu-item">
-                                <a href="#!" class="navigation__menu-link">About</a>
+                                <a href="#!" class="navigation__menu-link">{{ common.header.navigation.link.about }}</a>
                             </li>
                             <li class="navigation__menu-item navigation__menu-item--dot">&middot;</li>
                             <li class="navigation__menu-item">
-                                <a href="#!" class="navigation__menu-link">News</a>
+                                <a href="#!" class="navigation__menu-link">{{ common.header.navigation.link.news }}</a>
                             </li>
                             <li class="navigation__menu-item navigation__menu-item--dot">&middot;</li>
                             <li class="navigation__menu-item">
-                                <a href="#!" class="navigation__menu-link">Team</a>
+                                <a href="#!" class="navigation__menu-link">{{ common.header.navigation.link.team }}</a>
                             </li>
                             <li class="navigation__menu-item navigation__menu-item--dot">&middot;</li>
                             <li class="navigation__menu-item">
-                                <a href="#!" class="navigation__menu-link">Contact</a>
+                                <a href="#!" class="navigation__menu-link">{{ common.header.navigation.link.contact }}</a>
                             </li>
                         </ul>
-                        <a href="#!" class="navigation__button-link button-link button-link--mobile">Get template</a>
+                        <a href="#!" class="navigation__button-link button-link button-link--mobile">
+                            {{ common.header.navigation.button.get_template }}
+                        </a>
                     </div>
                 </div>
             </div>
