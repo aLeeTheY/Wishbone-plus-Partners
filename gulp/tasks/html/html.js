@@ -60,7 +60,16 @@ import avifWebpHtml from 'gulp-avif-webp-html-universal'
 // const cacheVersion = `?v=${Date.now()}`
 
 // TODO: доделать <source> для video, audio и i18n
-function createHtmlStream({ locale, localeData, destPath }) {
+function createHtmlStream({
+    locale,
+    localeData,
+    destPath,
+    allLocales,
+    defaultLocale,
+    baseUrl,
+    baseUrlPrefix,
+    pageRelativePath,
+}) {
     return (
         gulp
             // * берем исходники
@@ -85,6 +94,11 @@ function createHtmlStream({ locale, localeData, destPath }) {
                     data: {
                         locale,
                         ...localeData,
+                        allLocales,
+                        defaultLocale,
+                        baseUrl,
+                        baseUrlPrefix,
+                        pageRelativePath,
                     },
                 }),
             )
@@ -95,21 +109,21 @@ function createHtmlStream({ locale, localeData, destPath }) {
             //     nunjucksCompile(),
             // )
             // * заменяем пути на корректные для каждого ресурса
-            .pipe(gulpReplace(path.replace.meta, `${env.siteRoot}/`))
-            .pipe(gulpReplace(path.replace.scss_css, `${env.siteRoot}/css/`))
-            .pipe(gulpReplace(path.replace.ts_js, `${env.siteRoot}/js/`))
-            .pipe(gulpReplace(path.replace.audio, `${env.siteRoot}/assets/audio/`))
+            .pipe(gulpReplace(path.replace.meta, `${env.baseUrlPrefix}/`))
+            .pipe(gulpReplace(path.replace.scss_css, `${env.baseUrlPrefix}/css/`))
+            .pipe(gulpReplace(path.replace.ts_js, `${env.baseUrlPrefix}/js/`))
+            .pipe(gulpReplace(path.replace.audio, `${env.baseUrlPrefix}/assets/audio/`))
             .pipe(
                 gulpReplace(path.replace.icons, (match, p1) => {
                     const id = p1.replace(/\//g, '--')
-                    return `${env.siteRoot}/assets/icons/sprite.svg#${id}`
+                    return `${env.baseUrlPrefix}/assets/icons/sprite.svg#${id}`
                 }),
             )
-            .pipe(gulpReplace(path.replace.images, `${env.siteRoot}/assets/images/`))
-            .pipe(gulpReplace(path.replace.videos, `${env.siteRoot}/assets/videos/`))
-            .pipe(gulpReplace(path.replace.fonts, `${env.siteRoot}/assets/fonts/`))
-            .pipe(gulpReplace(path.replace.misc, `${env.siteRoot}/assets/misc/`))
-            .pipe(gulpReplace(path.replace.libs, `${env.siteRoot}/libs/`))
+            .pipe(gulpReplace(path.replace.images, `${env.baseUrlPrefix}/assets/images/`))
+            .pipe(gulpReplace(path.replace.videos, `${env.baseUrlPrefix}/assets/videos/`))
+            .pipe(gulpReplace(path.replace.fonts, `${env.baseUrlPrefix}/assets/fonts/`))
+            .pipe(gulpReplace(path.replace.misc, `${env.baseUrlPrefix}/assets/misc/`))
+            .pipe(gulpReplace(path.replace.libs, `${env.baseUrlPrefix}/libs/`))
             // * замена расширений файлов .scss
             .pipe(gulpReplace(/\.scss(?=["'])/g, '.min.css'))
             // * замена расширений файлов .ts
@@ -186,7 +200,16 @@ export async function html() {
                     ? path.build.html
                     : nodePath.join(path.build.html, String(locale).toLowerCase())
 
-            const stream = createHtmlStream({ locale, localeData, destPath })
+            const stream = createHtmlStream({
+                locale,
+                localeData,
+                destPath,
+                allLocales: locales,
+                defaultLocale,
+                baseUrl: env.baseUrl,
+                baseUrlPrefix: env.baseUrlPrefix,
+                pageRelativePath: '',
+            })
             await new Promise((resolve, reject) => {
                 stream.on('end', resolve).on('error', reject)
             })

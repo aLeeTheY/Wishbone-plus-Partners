@@ -1,6 +1,20 @@
+{% from "templates/utils/macro__inline_script.njk" import inline_script %}
+{% from "templates/utils/macro__hreflang_tags.njk" import hreflang_tags %}
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ! PAGE LOCALE TAGS --->
+    {{
+        hreflang_tags(
+            all_locales = allLocales,
+            default_locale = defaultLocale,
+            base_url = baseUrl,
+            base_url_prefix = baseUrlPrefix,
+            page_path = pageRelativePath
+        )
+    }}
 
     <!-- * For old Internet Explorer --->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,17 +23,16 @@
     <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
 
     <!-- * Page title --->
-    <title>{{ title }}</title>
+    <title>{{ common.head.title }}</title>
 
     <!-- * Page description --->
-    <meta name="description" content="{{ description }}" />
+    <meta name="description" content="{{ common.head.description }}" />
 
     <!-- * Page favicon --->
     <link href="@meta/favicon.ico" rel="icon" type="image/x-icon" />
 
     <!-- * 0. Inject inline avif/webp script polyfill --->
     <!-- ! STRONGLY RECOMMENDED PLACE IT BEFORE ANY CSS FILES --->
-    {% from "templates/utils/macro__inline_script.njk" import inline_script %}
     {{ inline_script('node_modules/gulp-web-images-css/plugin.js') }}
 
     <!-- * 1. Inject inline critical-css --->
