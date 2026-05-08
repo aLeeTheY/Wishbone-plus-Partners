@@ -25,3 +25,7 @@ export function watch() {
     gulp.watch(path.watch.libs, libs)
     gulp.watch(path.watch.misc, misc)
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('watch', watch)

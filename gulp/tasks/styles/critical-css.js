@@ -1,4 +1,5 @@
 import fs from 'fs'
+import gulp from 'gulp'
 import nodePath from 'path'
 import fastGlob from 'fast-glob'
 import penthouse from 'penthouse'
@@ -63,3 +64,7 @@ export async function criticalCss() {
         browserSync.reload()
     }
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('critical-css', criticalCss)

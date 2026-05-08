@@ -52,3 +52,7 @@ export function icons() {
             .pipe(browserSync.stream())
     )
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('icons', icons)

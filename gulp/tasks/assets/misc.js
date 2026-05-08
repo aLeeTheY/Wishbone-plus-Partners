@@ -13,3 +13,7 @@ export function misc() {
         .pipe(gulp.dest(path.build.misc))
         .pipe(browserSync.stream())
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('misc', misc)

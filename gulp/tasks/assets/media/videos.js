@@ -16,3 +16,7 @@ export function videos() {
             .pipe(browserSync.stream())
     )
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('videos', videos)

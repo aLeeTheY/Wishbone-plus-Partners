@@ -52,3 +52,7 @@ export function scripts() {
             .pipe(browserSync.stream())
     )
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('scripts', scripts)

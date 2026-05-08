@@ -227,3 +227,7 @@ export async function html() {
 
     browserSync.reload()
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('html', html)

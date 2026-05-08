@@ -13,3 +13,7 @@ export function meta() {
         .pipe(gulp.dest(path.build.meta))
         .pipe(browserSync.stream())
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('meta', meta)

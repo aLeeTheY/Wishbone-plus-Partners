@@ -48,3 +48,7 @@ export function images() {
         .pipe(gulp.dest(path.build.images))
         .pipe(browserSync.stream())
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('images', images)

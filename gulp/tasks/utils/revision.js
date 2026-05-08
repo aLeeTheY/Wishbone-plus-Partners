@@ -39,3 +39,7 @@ export function rewrite() {
 //         .pipe(gulp.dest(path.build.html))
 //     // .pipe(browserSync.stream()) | use only in dev mode
 // }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('revision', revision)

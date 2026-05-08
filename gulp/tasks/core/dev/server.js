@@ -1,4 +1,6 @@
+import gulp from 'gulp'
 import browserSync from 'browser-sync'
+
 import { path } from '../../../config/path.js'
 
 // * --- EXPORT GULP TASK FOR START DEV SERVER
@@ -28,3 +30,7 @@ export function server(done) {
     })
     done()
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('server', server)

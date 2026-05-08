@@ -16,3 +16,7 @@ export function audio() {
             .pipe(browserSync.stream())
     )
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('audio', audio)

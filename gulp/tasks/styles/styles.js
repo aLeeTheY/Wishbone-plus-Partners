@@ -99,3 +99,7 @@ export function styles() {
             .pipe(browserSync.stream())
     )
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('styles', styles)

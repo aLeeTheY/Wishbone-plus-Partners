@@ -13,3 +13,7 @@ export function libs() {
         .pipe(gulp.dest(path.build.libs))
         .pipe(browserSync.stream())
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('libs', libs)
