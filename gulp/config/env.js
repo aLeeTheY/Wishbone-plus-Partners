@@ -16,12 +16,12 @@ const argv = yargs(hideBin(process.argv))
             'For GitHub Pages this is usually "https://username.github.io". ' +
             'If not provided, the value from site.config.json is used.',
     })
-    .option('base-url-prefix', {
+    .option('base-url-postfix', {
         alias: ['bup', 'p'],
         type: 'string',
         default: undefined,
         description:
-            'URL path prefix where the site is served, e.g. "/my-repo/". ' +
+            'URL path postfix where the site is served, e.g. "/my-repo/". ' +
             'For GitHub Pages this is the repository name. ' +
             'Leave empty or omit if served from root. ' +
             'If not provided, the value from site.config.json is used.',
@@ -54,11 +54,11 @@ export const env = {
     },
     isI18N: argv.internationalization,
     baseUrl: argv.baseUrl !== undefined ? argv.baseUrl : siteConfig.baseUrl,
-    baseUrlPrefix:
-        argv.baseUrlPrefix !== undefined
-            ? '/' + argv.baseUrlPrefix
-            : siteConfig.baseUrlPrefix !== ''
-              ? '/' + siteConfig.baseUrlPrefix
+    baseUrlPostfix:
+        argv.baseUrlPostfix !== undefined
+            ? '/' + argv.baseUrlPostfix
+            : siteConfig.baseUrlPostfix !== ''
+              ? '/' + siteConfig.baseUrlPostfix
               : '',
     // placeholders: {
     //     webpInCssPolyfillScript: fs.readFileSync('node_modules/webp-in-css/polyfill.js', 'utf-8'),

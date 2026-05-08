@@ -67,7 +67,7 @@ function createHtmlStream({
     allLocales,
     defaultLocale,
     baseUrl,
-    baseUrlPrefix,
+    baseUrlPostfix,
     pageRelativePath,
 }) {
     return (
@@ -97,7 +97,7 @@ function createHtmlStream({
                         allLocales,
                         defaultLocale,
                         baseUrl,
-                        baseUrlPrefix,
+                        baseUrlPostfix,
                         pageRelativePath,
                     },
                 }),
@@ -109,21 +109,21 @@ function createHtmlStream({
             //     nunjucksCompile(),
             // )
             // * заменяем пути на корректные для каждого ресурса
-            .pipe(gulpReplace(path.replace.meta, `${env.baseUrlPrefix}/`))
-            .pipe(gulpReplace(path.replace.scss_css, `${env.baseUrlPrefix}/css/`))
-            .pipe(gulpReplace(path.replace.ts_js, `${env.baseUrlPrefix}/js/`))
-            .pipe(gulpReplace(path.replace.audio, `${env.baseUrlPrefix}/assets/audio/`))
+            .pipe(gulpReplace(path.replace.meta, `${env.baseUrlPostfix}/`))
+            .pipe(gulpReplace(path.replace.scss_css, `${env.baseUrlPostfix}/css/`))
+            .pipe(gulpReplace(path.replace.ts_js, `${env.baseUrlPostfix}/js/`))
+            .pipe(gulpReplace(path.replace.audio, `${env.baseUrlPostfix}/assets/audio/`))
             .pipe(
                 gulpReplace(path.replace.icons, (match, p1) => {
                     const id = p1.replace(/\//g, '--')
-                    return `${env.baseUrlPrefix}/assets/icons/sprite.svg#${id}`
+                    return `${env.baseUrlPostfix}/assets/icons/sprite.svg#${id}`
                 }),
             )
-            .pipe(gulpReplace(path.replace.images, `${env.baseUrlPrefix}/assets/images/`))
-            .pipe(gulpReplace(path.replace.videos, `${env.baseUrlPrefix}/assets/videos/`))
-            .pipe(gulpReplace(path.replace.fonts, `${env.baseUrlPrefix}/assets/fonts/`))
-            .pipe(gulpReplace(path.replace.misc, `${env.baseUrlPrefix}/assets/misc/`))
-            .pipe(gulpReplace(path.replace.libs, `${env.baseUrlPrefix}/libs/`))
+            .pipe(gulpReplace(path.replace.images, `${env.baseUrlPostfix}/assets/images/`))
+            .pipe(gulpReplace(path.replace.videos, `${env.baseUrlPostfix}/assets/videos/`))
+            .pipe(gulpReplace(path.replace.fonts, `${env.baseUrlPostfix}/assets/fonts/`))
+            .pipe(gulpReplace(path.replace.misc, `${env.baseUrlPostfix}/assets/misc/`))
+            .pipe(gulpReplace(path.replace.libs, `${env.baseUrlPostfix}/libs/`))
             // * замена расширений файлов .scss
             .pipe(gulpReplace(/\.scss(?=["'])/g, '.min.css'))
             // * замена расширений файлов .ts
@@ -207,7 +207,7 @@ export async function html() {
                 allLocales: locales,
                 defaultLocale,
                 baseUrl: env.baseUrl,
-                baseUrlPrefix: env.baseUrlPrefix,
+                baseUrlPostfix: env.baseUrlPostfix,
                 pageRelativePath: '',
             })
             await new Promise((resolve, reject) => {

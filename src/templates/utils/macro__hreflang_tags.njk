@@ -1,11 +1,11 @@
-{% macro hreflang_tags(all_locales, default_locale, base_url, base_url_prefix, page_path) %}
+{% macro hreflang_tags(all_locales, default_locale, base_url, base_url_postfix, page_path) %}
     {% for locale in all_locales %}
         {%- if locale == default_locale -%}
-            {% set full_url = base_url + (base_url_prefix | trim('/')) + '/' + page_path %}
+            {% set full_url = base_url + (base_url_postfix | trim('/')) + '/' + page_path %}
         {%- else -%}
-            {% set full_url = base_url + (base_url_prefix | trim('/')) + '/' + locale | lower + '/' + page_path %}
+            {% set full_url = base_url + (base_url_postfix | trim('/')) + '/' + locale | lower + '/' + page_path %}
         {%- endif -%}
         <link rel="alternate" type="text/html" hreflang="{{ locale }}" href="{{ full_url }}" />
     {% endfor %}
-    <link rel="alternate" type="text/html" hreflang="x-default" href="{{ base_url + (base_url_prefix | trim('/')) + '/' + page_path }}" />
+    <link rel="alternate" type="text/html" hreflang="x-default" href="{{ base_url + (base_url_postfix | trim('/')) + '/' + page_path }}" />
 {% endmacro %}
