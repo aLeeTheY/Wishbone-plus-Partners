@@ -15,9 +15,11 @@
 # Ignore all build/ and dist/ folders
 **/build
 **/dist
+# **/out
+**/archive
 
 # Ignore all assets/ folders
-**/assets
+# **/assets
 
 # Ignore all CSS folders
 **/css

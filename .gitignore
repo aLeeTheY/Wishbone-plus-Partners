@@ -81,6 +81,7 @@ dist/
 out/
 **/original/
 **/old/
+**/archive/
 *.tsbuildinfo
 *.map
 
