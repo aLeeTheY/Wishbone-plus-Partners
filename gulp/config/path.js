@@ -77,5 +77,5 @@ export const path = {
         libs: /@libs\//g,
         meta: /@meta\//g,
     },
-    ftp: ``,
+    ftp: `test`,
 }
