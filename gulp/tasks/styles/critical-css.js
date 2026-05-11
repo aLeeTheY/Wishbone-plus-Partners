@@ -6,7 +6,7 @@ import penthouse from 'penthouse'
 import browserSync from 'browser-sync'
 
 import { path } from '../../config/path.js'
-import { errorHandler, ERROR_HANDLER_TITLES } from '../../helpers/error-handler.js'
+import { errorHandler, NOTIFICATION_HANDLER_TITLES } from '../../helpers/error-handler.js'
 
 // * --- EXPORT GULP TASK FOR INLINE CRITICAL CSS TO HTML FILES
 // * ----------------------------------------------------------
@@ -58,7 +58,7 @@ export async function criticalCss() {
 
             fs.writeFileSync(filePath, html)
         } catch (err) {
-            errorHandler(ERROR_HANDLER_TITLES.CRITICAL_CSS)(err)
+            errorHandler(NOTIFICATION_HANDLER_TITLES.CRITICAL_CSS)(err)
         }
 
         browserSync.reload()

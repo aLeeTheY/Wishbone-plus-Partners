@@ -4,7 +4,10 @@ import vinylFTP from 'vinyl-ftp'
 
 import { path } from '../../config/path.js'
 import { configFTP } from '../../config/ftp.js'
-import { plumberWithErrorHandler, ERROR_HANDLER_TITLES } from '../../helpers/error-handler.js'
+import {
+    plumberWithErrorHandler,
+    NOTIFICATION_HANDLER_TITLES,
+} from '../../helpers/error-handler.js'
 
 // * --- EXPORT GULP TASK FOR UPLOAD PROJECT BUILD TO REMOTE SERVER VIA FTP PROTOCOL
 // * -------------------------------------------------------------------------------
@@ -14,6 +17,6 @@ export function ftp() {
 
     return gulp
         .src(`${path.build.base}/**/*.*`, {})
-        .pipe(plumberWithErrorHandler(ERROR_HANDLER_TITLES.FTP))
+        .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.FTP))
         .pipe(ftpConnect.dest(`/${path.ftp}/${path.root}`))
 }

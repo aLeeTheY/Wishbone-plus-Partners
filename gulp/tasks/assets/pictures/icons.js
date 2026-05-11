@@ -5,7 +5,10 @@ import browserSync from 'browser-sync'
 
 import { env } from '../../../config/env.js'
 import { path } from '../../../config/path.js'
-import { plumberWithErrorHandler, ERROR_HANDLER_TITLES } from '../../../helpers/error-handler.js'
+import {
+    plumberWithErrorHandler,
+    NOTIFICATION_HANDLER_TITLES,
+} from '../../../helpers/error-handler.js'
 
 import svgSprite from 'gulp-svg-sprite'
 import svgoConfig from '../../../../svgo.config.mjs'
@@ -16,8 +19,13 @@ export function icons() {
     return (
         gulp
             .src(path.src.icons)
-            .pipe(plumberWithErrorHandler(ERROR_HANDLER_TITLES.ICONS))
-            .pipe(gulpIf(env.buildMode.isStaging || env.buildMode.isProd, gulpNewer(path.build.icons)))
+            .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.ICONS))
+            .pipe(
+                gulpIf(
+                    env.buildMode.isStaging || env.buildMode.isProd,
+                    gulpNewer(path.build.icons),
+                ),
+            )
             // ! use svgmin OR internal svgsprite transform, not both.
             // .pipe(svgmin())
             .pipe(

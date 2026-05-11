@@ -32,7 +32,10 @@ import browserSync from 'browser-sync'
 
 import { env } from '../../config/env.js'
 import { path } from '../../config/path.js'
-import { plumberWithErrorHandler, ERROR_HANDLER_TITLES } from '../../helpers/error-handler.js'
+import {
+    plumberWithErrorHandler,
+    NOTIFICATION_HANDLER_TITLES,
+} from '../../helpers/error-handler.js'
 
 // * html plugins
 // import { nunjucksCompile } from 'gulp-nunjucks'
@@ -75,7 +78,7 @@ function createHtmlStream({
             // * берем исходники
             .src(path.src.njk)
             // * подключаем plumber, чтобы gulp не падал при ошибке
-            .pipe(plumberWithErrorHandler(ERROR_HANDLER_TITLES.HTML))
+            .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.HTML))
             // * собираем все partials в полноценные html
             // .pipe(
             //     fileInclude({

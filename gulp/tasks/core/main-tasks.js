@@ -12,12 +12,13 @@ import { audio } from '../assets/media/audio.js'
 import { icons } from '../assets/pictures/icons.js'
 import { images } from '../assets/pictures/images.js'
 import { videos } from '../assets/media/videos.js'
+import { fonts } from '../assets/fonts/fonts.js'
 import { libs } from '../scripts/libs.js'
 import { misc } from '../assets/misc.js'
 
 // * --- LOCAL TASKS
 // * ---------------
-const assets = gulp.parallel(icons, images, audio, videos)
+const assets = gulp.parallel(icons, images, audio, videos, fonts)
 const mainTasks = gulp.series(gulp.parallel(styles, scripts, assets, libs, misc), html)
 const devTools = gulp.parallel(watch, server)
 

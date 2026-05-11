@@ -1,35 +1,73 @@
+/* eslint-disable no-console */
 import toasted from 'toasted-notifier'
 import plumber from 'gulp-plumber'
 
-// * --- EXPORT ERROR HANDLER TITLES
-// * -------------------------------
-export const ERROR_HANDLER_TITLES = {
-    UNKNOWN: '[ERROR] --- Unknown',
-    HTML: '[ERROR] HTML',
-    META: '[ERROR] META',
-    STYLES: '[ERROR] STYLES',
-    SCRIPTS: '[ERROR] SCRIPTS',
-    AUDIO: '[ERROR] AUDIO',
-    ICONS: '[ERROR] ICONS',
-    IMAGES: '[ERROR] IMAGES',
-    VIDEOS: '[ERROR] VIDEOS',
-    FONTS: '[ERROR] FONTS',
-    I18N: '[ERROR] I18N',
-    MISC: '[ERROR] MISC',
-    LIBS: '[ERROR] LIBS',
-    CRITICAL_CSS: '[ERROR] CRITICAL CSS',
-    ZIP: '[ERROR] ZIP',
-    FTP: '[ERROR] FTP',
-    REVISION: '[ERROR] REVISION',
-    REVISION_REWRITE: '[ERROR] REVISION --> REWRITE',
+// * --- EXPORT HANDLER TITLES
+// * -------------------------
+export const NOTIFICATION_HANDLER_TITLES = {
+    UNKNOWN: 'UNKNOWN',
+    HTML: 'HTML',
+    META: 'META',
+    STYLES: 'STYLES',
+    SCRIPTS: 'SCRIPTS',
+    AUDIO: 'AUDIO',
+    ICONS: 'ICONS',
+    IMAGES: 'IMAGES',
+    VIDEOS: 'VIDEOS',
+    FONTS: 'FONTS',
+    I18N: 'I18N',
+    MISC: 'MISC',
+    LIBS: 'LIBS',
+    CRITICAL_CSS: 'CRITICAL CSS',
+    ZIP: 'ZIP',
+    FTP: 'FTP',
+    REVISION: 'REVISION',
+    REVISION_REWRITE: 'REVISION --> REWRITE',
+}
+
+// * --- EXPORT NOTIFY HELPERS
+// * -------------------------
+export const notify = {
+    warn(title, message) {
+        // Вывод в консоль (обычный или цветной)
+        console.warn(
+            `[ WARNING  ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}: ${message ?? ''}`,
+        )
+
+        toasted.notify({
+            title: `[ WARNING  ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}`,
+            message: message ?? '',
+            sound: false,
+            wait: false,
+            // можно добавить тип: 'warning' если toasted поддерживает
+        })
+    },
+    success(title, message) {
+        // Вывод в консоль (обычный или цветной)
+        console.info(
+            `[ SUCCESS  ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}: ${message ?? ''}`,
+        )
+
+        toasted.notify({
+            title: `[ SUCCESS  ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}`,
+            message: message ?? '',
+            sound: false,
+            wait: false,
+        })
+    },
 }
 
 // * --- EXPORT ERROR HANDLER
 // * ------------------------
 export const errorHandler = (title) =>
     function (err) {
+        // Вывод в консоль (обычный или цветной)
+        console.error(
+            `[ ERROR    ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}: ${err.message}`,
+        )
+
         toasted.notify({
-            title: title ?? ERROR_HANDLER_TITLES.UNKNOWN,
+            title: `[ ERROR    ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}`,
             message: err.message ?? 'An unknown error occurred during the build.',
             sound: false,
             wait: false,

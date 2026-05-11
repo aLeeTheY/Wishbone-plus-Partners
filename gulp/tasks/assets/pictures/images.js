@@ -5,7 +5,10 @@ import browserSync from 'browser-sync'
 
 import { env } from '../../../config/env.js'
 import { path } from '../../../config/path.js'
-import { plumberWithErrorHandler, ERROR_HANDLER_TITLES } from '../../../helpers/error-handler.js'
+import {
+    plumberWithErrorHandler,
+    NOTIFICATION_HANDLER_TITLES,
+} from '../../../helpers/error-handler.js'
 
 import sharpOptimizeImages from 'gulp-sharp-optimize-images'
 
@@ -14,7 +17,7 @@ import sharpOptimizeImages from 'gulp-sharp-optimize-images'
 export function images() {
     return gulp
         .src(path.src.images, { encoding: false })
-        .pipe(plumberWithErrorHandler(ERROR_HANDLER_TITLES.IMAGES) )
+        .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.IMAGES))
         .pipe(gulpIf(env.buildMode.isStaging || env.buildMode.isProd, gulpNewer(path.build.images)))
         .pipe(
             sharpOptimizeImages({

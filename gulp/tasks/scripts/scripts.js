@@ -3,7 +3,10 @@ import browserSync from 'browser-sync'
 
 import { env } from '../../config/env.js'
 import { path } from '../../config/path.js'
-import { plumberWithErrorHandler, ERROR_HANDLER_TITLES } from '../../helpers/error-handler.js'
+import {
+    plumberWithErrorHandler,
+    NOTIFICATION_HANDLER_TITLES,
+} from '../../helpers/error-handler.js'
 
 // ! build mode
 import gulpEsbuild from 'gulp-esbuild'
@@ -20,7 +23,7 @@ export function scripts() {
             // * берем исходники
             .src(path.src.scripts)
             // * подключаем plumber, чтобы gulp не падал при ошибке
-            .pipe(plumberWithErrorHandler(ERROR_HANDLER_TITLES.SCRIPTS))
+            .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.SCRIPTS))
             // * билдим JS с помощью Esbuild
             .pipe(
                 gulpEsbuild({

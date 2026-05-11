@@ -17,7 +17,10 @@ import webImagesCSS from 'gulp-web-images-css'
 
 import { env } from '../../config/env.js'
 import { path } from '../../config/path.js'
-import { plumberWithErrorHandler, ERROR_HANDLER_TITLES } from '../../helpers/error-handler.js'
+import {
+    plumberWithErrorHandler,
+    NOTIFICATION_HANDLER_TITLES,
+} from '../../helpers/error-handler.js'
 
 // * --- EXPORT GULP TASK FOR SCSS/CSS FILES
 // * ---------------------------------------
@@ -27,7 +30,7 @@ export function styles() {
             // * берем исходники
             .src(path.src.scss, { sourcemaps: env.buildMode.isDev || env.buildMode.isStaging })
             // * подключаем plumber, чтобы gulp не падал при ошибке
-            .pipe(plumberWithErrorHandler(ERROR_HANDLER_TITLES.STYLES))
+            .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.STYLES))
             // * делаем sourcemaps в режимах dev и staging
             // .pipe(gulpIf(isDev || isStaging, sourcemaps.init()))
             // * билдим css через sass
