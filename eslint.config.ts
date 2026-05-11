@@ -38,7 +38,7 @@ export default defineConfig([
         // extends: ['js/recommended', prettierConfig],
         rules: {
             // eslint stylistic rules
-            '@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 2 }],
+            '@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 3 }],
 
             // prettier rules
             // ...prettierRecomended.rules,
