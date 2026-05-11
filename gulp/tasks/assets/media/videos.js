@@ -1,25 +1,226 @@
+import fs from 'fs/promises'
+// import { existsSync } from 'fs'
 import gulp from 'gulp'
+import path from 'path'
 import browserSync from 'browser-sync'
+import { spawn, spawnSync } from 'child_process'
+import pLimit from 'p-limit'
 
-import { path } from '../../../config/path.js'
+import { path as configPath } from '../../../config/path.js'
 import {
+    notify,
     plumberWithErrorHandler,
     NOTIFICATION_HANDLER_TITLES,
 } from '../../../helpers/error-handler.js'
 
-// * --- EXPORT GULP TASK FOR VIDEO FILES
-// * ------------------------------------
-export function videos() {
-    return (
-        gulp
-            .src(path.src.videos)
-            .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.VIDEOS))
-            // * video processing modules here
-            .pipe(gulp.dest(path.build.videos))
-            .pipe(browserSync.stream())
-    )
+const limit = pLimit(3) // 2–4 — оптимально
+
+const RAW_DIR = path.resolve(configPath.src.videos.replace(/\/\*\*\/\*\.\{.*$/, ''))
+
+// ====================== Helpers ======================
+
+const isVideo = (file) => /\.(mp4|mov|avi|mkv|webm|flv|m4v)$/i.test(file)
+
+async function isOutdated(src, dest) {
+    try {
+        const [srcStat, destStat] = await Promise.all([
+            fs.stat(src),
+            fs.stat(dest).catch(() => null),
+        ])
+        return !destStat || srcStat.mtimeMs > destStat.mtimeMs
+    } catch {
+        return true
+    }
 }
 
-// * --- REGISTER GULP TASK
-// * ----------------------
+function runFFmpeg(args, label = '') {
+    return new Promise((resolve, reject) => {
+        const proc = spawn('ffmpeg', ['-hide_banner', ...args], {
+            stdio: 'inherit',
+            shell: false,
+        })
+
+        proc.on('close', (code) => {
+            if (code === 0) {
+                resolve()
+            } else {
+                reject(new Error(`ffmpeg ${label} exited with code ${code}`))
+            }
+        })
+
+        proc.on('error', (err) => reject(new Error(`Failed to start ffmpeg: ${err.message}`)))
+    })
+}
+
+// ====================== NVENC Detection ======================
+
+const hasNvenc = (() => {
+    try {
+        const res = spawnSync('ffmpeg', ['-hide_banner', '-encoders'], {
+            encoding: 'utf8',
+            timeout: 3000,
+        })
+        return res.stdout.includes('h264_nvenc') || res.stdout.includes('hevc_nvenc')
+    } catch {
+        return false
+    }
+})()
+
+// ====================== Main Processor ======================
+
+async function processVideo(file) {
+    const input = file.path
+    if (!isVideo(input)) {
+        return
+    }
+
+    const relPath = path.relative(RAW_DIR, input)
+    const parsed = path.parse(relPath)
+    const outDir = path.join(configPath.build.videos, parsed.dir)
+    const baseName = parsed.name
+
+    const mp4Out = path.join(outDir, `${baseName}.mp4`)
+    const webmOut = path.join(outDir, `${baseName}.webm`)
+
+    const mp4Tmp = `${mp4Out}.tmp`
+    const webmTmp = `${webmOut}.tmp`
+
+    let mp4Processed = false
+    let webmProcessed = false
+
+    try {
+        await fs.mkdir(outDir, { recursive: true })
+
+        // ---------- MP4 ----------
+        if (await isOutdated(input, mp4Out)) {
+            const mp4Args = hasNvenc
+                ? [
+                      '-y',
+                      '-i',
+                      input,
+                      '-c:v',
+                      'h264_nvenc',
+                      '-preset',
+                      'p4',
+                      '-tune',
+                      'hq',
+                      '-cq',
+                      '24', // чуть лучше качество
+                      '-rc',
+                      'vbr',
+                      '-maxrate',
+                      '8M', // ↑ для современных видео
+                      '-bufsize',
+                      '16M',
+                      '-movflags',
+                      '+faststart',
+                      '-c:a',
+                      'aac',
+                      '-b:a',
+                      '128k',
+                      '-f',
+                      'mp4',
+                      mp4Tmp,
+                  ]
+                : [
+                      '-y',
+                      '-i',
+                      input,
+                      '-c:v',
+                      'libx264',
+                      '-crf',
+                      '24',
+                      '-preset',
+                      'medium',
+                      '-maxrate',
+                      '8M',
+                      '-bufsize',
+                      '16M',
+                      '-movflags',
+                      '+faststart',
+                      '-c:a',
+                      'aac',
+                      '-b:a',
+                      '128k',
+                      '-f',
+                      'mp4',
+                      mp4Tmp,
+                  ]
+
+            await runFFmpeg(mp4Args, '→ MP4')
+            await fs.rename(mp4Tmp, mp4Out)
+            mp4Processed = true
+        }
+
+        // ---------- WebM (VP9) ----------
+        if (await isOutdated(input, webmOut)) {
+            await runFFmpeg(
+                [
+                    '-y',
+                    '-i',
+                    input,
+                    '-c:v',
+                    'libvpx-vp9',
+                    '-crf',
+                    '31',
+                    '-b:v',
+                    '0',
+                    '-deadline',
+                    'good',
+                    '-cpu-used',
+                    '2', // баланс скорость/качество
+                    '-row-mt',
+                    '1',
+                    '-c:a',
+                    'libopus',
+                    '-b:a',
+                    '128k',
+                    '-f',
+                    'webm',
+                    webmTmp,
+                ],
+                '→ WebM',
+            )
+
+            await fs.rename(webmTmp, webmOut)
+            webmProcessed = true
+        }
+
+        const status = hasNvenc ? 'NVENC' : 'CPU'
+        const processed = mp4Processed || webmProcessed ? '✓' : '↻'
+
+        notify.success(NOTIFICATION_HANDLER_TITLES.VIDEOS, `${processed} ${relPath} (${status})`)
+    } catch (err) {
+        notify.warn(NOTIFICATION_HANDLER_TITLES.VIDEOS, `${relPath}: ${err.message}`)
+
+        // Cleanup
+        await Promise.allSettled([
+            fs.unlink(mp4Tmp).catch(() => {}),
+            fs.unlink(webmTmp).catch(() => {}),
+        ])
+    }
+}
+
+// ====================== Gulp Task ======================
+
+export function videos(done) {
+    const tasks = []
+
+    return gulp
+        .src(configPath.src.videos, { allowEmpty: true, read: false })
+        .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.VIDEOS))
+        .on('data', (file) => {
+            tasks.push(limit(() => processVideo(file)))
+        })
+        .on('end', async () => {
+            try {
+                await Promise.all(tasks)
+                browserSync.reload()
+                done()
+            } catch (err) {
+                done(err)
+            }
+        })
+}
+
 gulp.task('videos', videos)
