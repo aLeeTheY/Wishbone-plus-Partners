@@ -1,40 +1,274 @@
-// * fonts
-// import fonter from 'gulp-fonter-fix' // TODO: deprecated
-// import ttf2woff2 from 'gulp-ttf2woff2' // TODO: deprecated
+import fs from 'fs'
+import gulp from 'gulp'
+import nodePath from 'path'
+import browserSync from 'browser-sync'
+import { execSync } from 'node:child_process'
 
-// TODO:
-// * --- FONTS + CONVERT TO WOFF/WOFF2
-// * ---------------------------------
+import { path } from '../../../config/path.js'
+import {
+    notify,
+    plumberWithErrorHandler,
+    NOTIFICATION_HANDLER_TITLES,
+    errorHandler,
+} from '../../../helpers/error-handler.js'
 
-// * just copy ttf/otf | no convert to woff/woff2
-// function fontsCopy() {
-//     return gulp
-//         .src(path.src.fonts)
-//         .pipe(plumber({ errorHandler }))
-//         .pipe(gulp.dest(path.build.fonts))
-// }
+function run(cmd) {
+    execSync(cmd, { stdio: 'inherit' })
+}
 
-// * convert ttf/otf to woff
-// function fontsWoff() {
-//     return gulp
-//         .src(path.src.fonts)
-//         .pipe(plumber({ errorHandler }))
-//         .pipe(gulpIf(/\/.otf$/, fonter({ formats: ['ttf'] })))
-//         .pipe(gulpIf(/\.ttf$/, fonter({ formats: ['woff'] })))
-//         .pipe(gulp.dest(path.build.fonts))
-// }
+const RAW = 'src/assets/fonts'
+const OUT = path.build.fonts // 'out/assets/fonts/'
 
-// * convert ttf/otf to woff2 | recomended to use
-// function fontsWoff2() {
-//     return gulp
-//         .src(path.src.fonts)
-//         .pipe(plumber({ errorHandler }))
-//         .pipe(gulpIf(/\.otf$/, fonter({ formats: ['ttf'] })))
-//         .pipe(gulpIf(/\.ttf$/, ttf2woff2()))
-//         .pipe(gulp.dest(path.build.fonts))
-// }
+/**
+ * Рекурсивно получить все файлы шрифтов (ttf/otf) из RAW с относительными путями.
+ * @returns {string[]} массив относительных путей (например ['bold/MyFont-Bold.ttf', 'MyFont-Regular.ttf'])
+ */
+/**
+ * Рекурсивно получить все .ttf/.otf файлы с относительными путями
+ */
+/**
+ * Рекурсивно получить все файлы шрифтов (ttf/otf) из RAW с относительными путями.
+ */
+function getRawFontFiles() {
+    if (!fs.existsSync(RAW)) {
+        return []
+    }
 
-// * default entrypoint for fonts
-// export function fonts() {
-//     return fontsWoff2()
-// }
+    const files = fs.readdirSync(RAW, {
+        recursive: true,
+        withFileTypes: true,
+    })
+
+    return files
+        .filter((dirent) => dirent.isFile() && /\.(ttf|otf)$/i.test(dirent.name))
+        .map((dirent) => {
+            // Поддержка разных версий Node.js
+            const dirPath = dirent.parentPath || dirent.path || RAW
+            return nodePath.relative(RAW, nodePath.join(dirPath, dirent.name))
+        })
+        .sort()
+}
+/**
+ * Конвертация шрифтов (с поддержкой любой вложенности папок)
+ */
+function convert__rawFonts() {
+    fs.mkdirSync(OUT, { recursive: true })
+
+    const rawFiles = getRawFontFiles()
+
+    if (rawFiles.length === 0) {
+        notify.warn(
+            NOTIFICATION_HANDLER_TITLES.FONTS,
+            `В папке ${RAW} нет .ttf/.otf файлов, пропускаем конвертацию.`,
+        )
+        return
+    }
+
+    for (const relPath of rawFiles) {
+        const rawInput = nodePath.join(RAW, relPath)
+        const parsed = nodePath.parse(relPath)
+        const outDir = nodePath.join(OUT, parsed.dir)
+        const outBase = nodePath.join(outDir, parsed.name)
+
+        fs.mkdirSync(outDir, { recursive: true })
+
+        const ttfTarget = outBase + '.ttf'
+
+        // OTF → TTF
+        if (parsed.ext.toLowerCase() === '.otf') {
+            run(`ftcli converter otf2ttf "${rawInput}" --output-dir "${outDir}"`)
+
+            const dirtyName = parsed.base + '.ttf' // например: MyFont.otf.ttf
+            const dirtyPath = nodePath.join(outDir, dirtyName)
+
+            if (fs.existsSync(dirtyPath)) {
+                fs.renameSync(dirtyPath, ttfTarget)
+            }
+        }
+        // Уже TTF
+        else if (parsed.ext.toLowerCase() === '.ttf') {
+            fs.copyFileSync(rawInput, ttfTarget)
+        }
+
+        // TTF → WOFF / WOFF2
+        if (fs.existsSync(ttfTarget)) {
+            run(`ftcli converter ft2wf "${ttfTarget}" --output-dir "${outDir}" --overwrite`)
+
+            // Чистим имена
+            for (const wfExt of ['woff', 'woff2']) {
+                const dirty = nodePath.join(outDir, parsed.name + '.ttf.' + wfExt)
+                const clean = nodePath.join(outDir, parsed.name + '.' + wfExt)
+                if (fs.existsSync(dirty)) {
+                    fs.renameSync(dirty, clean)
+                }
+            }
+        }
+    }
+
+    notify.success(
+        NOTIFICATION_HANDLER_TITLES.FONTS,
+        `Шрифты сконвертированы (${rawFiles.length} шт.)`,
+    )
+}
+
+/**
+ * Сгенерировать/обновить _fonts.scss.
+ * Онлайн-шрифты не трогаем, перезаписываем только блок // ! --- OFFLINE FONTS
+ */
+/**
+ * Сгенерировать/обновить _fonts.scss
+ */
+function generateFontFaceSCSS() {
+    fs.mkdirSync('src/scss/base', { recursive: true })
+
+    const outFiles = fs
+        .readdirSync(OUT, { recursive: true, withFileTypes: true })
+        .filter((dirent) => dirent.isFile() && /\.(woff2?|ttf)$/i.test(dirent.name))
+        .map((dirent) => {
+            // Исправление для новых версий Node.js
+            const dirPath = dirent.parentPath || dirent.path || OUT
+            return nodePath.relative(OUT, nodePath.join(dirPath, dirent.name))
+        })
+        .sort()
+
+    if (outFiles.length === 0) {
+        notify.warn(
+            NOTIFICATION_HANDLER_TITLES.FONTS,
+            'Нет шрифтов в out/assets/fonts/, _fonts.scss не обновлён.',
+        )
+        return
+    }
+
+    const families = {}
+    const weightMap = {
+        thin: 100,
+        extralight: 200,
+        light: 300,
+        regular: 400,
+        normal: 400,
+        medium: 500,
+        semibold: 600,
+        bold: 700,
+        extrabold: 800,
+        black: 900,
+    }
+
+    for (const relPath of outFiles) {
+        const fileName = nodePath.basename(relPath)
+        const fileExt = nodePath.extname(fileName).slice(1).toLowerCase()
+        const nameWithoutExt = nodePath.basename(fileName, nodePath.extname(fileName))
+
+        const parts = nameWithoutExt.split('-')
+
+        let family = nameWithoutExt
+        let weight = 400
+        let style = 'normal'
+
+        if (parts.length > 1) {
+            const last = parts[parts.length - 1].toLowerCase()
+
+            if (last.includes('italic')) {
+                style = 'italic'
+                parts.pop()
+                const prev = parts[parts.length - 1]?.toLowerCase()
+                if (weightMap[prev]) {
+                    weight = weightMap[parts.pop().toLowerCase()]
+                }
+                family = parts.join('-')
+            } else if (weightMap[last]) {
+                weight = weightMap[last]
+                parts.pop()
+                family = parts.join('-')
+            }
+        }
+
+        const key = `${family}__${weight}__${style}`
+
+        if (!families[key]) {
+            families[key] = {
+                family: family.replace(/-+$/, ''),
+                weight,
+                style,
+                formats: [],
+            }
+        }
+
+        families[key].formats.push({ ext: fileExt, relPath })
+    }
+
+    // Сортировка форматов по приоритету
+    const priority = { woff2: 1, woff: 2, ttf: 3 }
+    for (const key of Object.keys(families)) {
+        families[key].formats.sort((a, b) => (priority[a.ext] || 99) - (priority[b.ext] || 99))
+    }
+
+    // Генерация SCSS
+    const newOfflineBlock = ['// ! --- OFFLINE FONTS', '// ! -----------------', '']
+
+    for (const key of Object.keys(families).sort()) {
+        const { family, weight, style, formats } = families[key]
+
+        const srcParts = formats.map((f) => {
+            const formatStr = f.ext === 'ttf' ? 'truetype' : f.ext
+            // Нормализуем слеши для CSS
+            const cssPath = f.relPath.split(nodePath.sep).join('/')
+            return `    url('../assets/fonts/${cssPath}') format('${formatStr}')`
+        })
+
+        newOfflineBlock.push(`@font-face {`)
+        newOfflineBlock.push(`    font-family: '${family}';`)
+        newOfflineBlock.push(`    font-weight: ${weight};`)
+        newOfflineBlock.push(`    font-style: ${style};`)
+        newOfflineBlock.push(`    font-display: swap;`)
+        newOfflineBlock.push(`    src:`)
+        newOfflineBlock.push(srcParts.join(',\n'))
+        newOfflineBlock.push(`    ;`)
+        newOfflineBlock.push(`}`)
+        newOfflineBlock.push('')
+    }
+
+    const scssPath = 'src/scss/base/_fonts.scss'
+    const marker = '// ! --- OFFLINE FONTS'
+    const existingContent = fs.existsSync(scssPath) ? fs.readFileSync(scssPath, 'utf8') : ''
+
+    let finalContent
+    if (existingContent.includes(marker)) {
+        const beforeMarker = existingContent.substring(0, existingContent.indexOf(marker))
+        finalContent = beforeMarker + newOfflineBlock.join('\n')
+    } else {
+        finalContent = [
+            '// ! --- ONLINE FONTS',
+            '// ! ----------------',
+            '',
+            ...newOfflineBlock,
+        ].join('\n')
+    }
+
+    fs.writeFileSync(scssPath, finalContent)
+    notify.success(
+        NOTIFICATION_HANDLER_TITLES.FONTS,
+        `_fonts.scss обновлён (${outFiles.length} файлов)`,
+    )
+
+    try {
+        run(`prettier --write ${scssPath}`)
+    } catch (err) {
+        errorHandler(NOTIFICATION_HANDLER_TITLES.FONTS)(err)
+    }
+}
+
+/**
+ * Основная задача: конвертация → генерация SCSS → стрим для BrowserSync
+ */
+export function fonts() {
+    convert__rawFonts()
+    generateFontFaceSCSS()
+
+    return gulp
+        .src(`${OUT}/**/*.{woff,woff2,ttf}`)
+        .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.FONTS))
+        .pipe(gulp.dest(OUT)) // уже там, но для консистентности стрима
+        .pipe(browserSync.stream())
+}
+
+gulp.task('fonts', fonts)
