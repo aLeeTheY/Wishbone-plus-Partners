@@ -1,25 +1,167 @@
+import fs from 'fs/promises'
+// import { existsSync } from 'fs'
 import gulp from 'gulp'
+import path from 'path'
 import browserSync from 'browser-sync'
+import { spawn } from 'child_process'
+import pLimit from 'p-limit'
 
-import { path } from '../../../config/path.js'
+import { path as configPath } from '../../../config/path.js'
 import {
+    notify,
     plumberWithErrorHandler,
     NOTIFICATION_HANDLER_TITLES,
 } from '../../../helpers/error-handler.js'
 
-// * --- EXPORT GULP TASK FOR AUDIO FILES
-// * ------------------------------------
-export function audio() {
-    return (
-        gulp
-            .src(path.src.audio)
-            .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.AUDIO))
-            // * audio processing modules here
-            .pipe(gulp.dest(path.build.audio))
-            .pipe(browserSync.stream())
-    )
+const limit = pLimit(3) // можно поднять до 4–6 для аудио
+
+const RAW_DIR = path.resolve(configPath.src.audio.replace(/\/\*\*\/\*\.\*.*$/, ''))
+
+// ====================== Helpers ======================
+
+const isAudio = (file) => /\.(mp3|wav|ogg|m4a|flac|aac|opus)$/i.test(file)
+
+async function isOutdated(src, dest) {
+    try {
+        const [srcStat, destStat] = await Promise.all([
+            fs.stat(src),
+            fs.stat(dest).catch(() => null),
+        ])
+        return !destStat || srcStat.mtimeMs > destStat.mtimeMs
+    } catch {
+        return true
+    }
 }
 
-// * --- REGISTER GULP TASK
-// * ----------------------
+function runFFmpeg(args, label = '') {
+    return new Promise((resolve, reject) => {
+        const proc = spawn('ffmpeg', ['-hide_banner', ...args], {
+            stdio: 'inherit',
+        })
+
+        proc.on('close', (code) => {
+            if (code === 0) {
+                resolve()
+            } else {
+                reject(new Error(`ffmpeg ${label} exited with code ${code}`))
+            }
+        })
+
+        proc.on('error', (err) => {
+            reject(new Error(`Failed to start ffmpeg ${label}: ${err.message}`))
+        })
+    })
+}
+
+// ====================== Main Processor ======================
+
+async function processAudio(file) {
+    const input = file.path
+    if (!isAudio(input)) {
+        return
+    }
+
+    const relPath = path.relative(RAW_DIR, input)
+    const parsed = path.parse(relPath)
+
+    const outDir = path.join(configPath.build.audio, parsed.dir)
+    const baseName = parsed.name
+
+    const webmOut = path.join(outDir, `${baseName}.webm`)
+    const mp3Out = path.join(outDir, `${baseName}.mp3`)
+
+    const webmTmp = `${webmOut}.tmp`
+    const mp3Tmp = `${mp3Out}.tmp`
+
+    let processed = false
+
+    try {
+        await fs.mkdir(outDir, { recursive: true })
+
+        // ---------- WebM + Opus (лучший выбор для веба) ----------
+        if (await isOutdated(input, webmOut)) {
+            await runFFmpeg(
+                [
+                    '-y',
+                    '-i',
+                    input,
+                    '-c:a',
+                    'libopus',
+                    '-b:a',
+                    '96k',
+                    '-vbr',
+                    'on',
+                    '-compression_level',
+                    '10',
+                    '-f',
+                    'webm',
+                    webmTmp,
+                ],
+                'Opus',
+            )
+
+            await fs.rename(webmTmp, webmOut)
+            processed = true
+        }
+
+        // ---------- MP3 (совместимость) ----------
+        if (await isOutdated(input, mp3Out)) {
+            await runFFmpeg(
+                [
+                    '-y',
+                    '-i',
+                    input,
+                    '-c:a',
+                    'libmp3lame',
+                    '-q:a',
+                    '2', // VBR ~190 kbps — отличное качество
+                    '-f',
+                    'mp3',
+                    mp3Tmp,
+                ],
+                'MP3',
+            )
+
+            await fs.rename(mp3Tmp, mp3Out)
+            processed = true
+        }
+
+        const status = processed ? '✓' : '↻'
+        notify.success(NOTIFICATION_HANDLER_TITLES.AUDIO, `${status} ${relPath}`)
+    } catch (err) {
+        notify.warn(NOTIFICATION_HANDLER_TITLES.AUDIO, `${relPath}: ${err.message}`)
+
+        // Cleanup
+        await Promise.allSettled([
+            fs.unlink(webmTmp).catch(() => {}),
+            fs.unlink(mp3Tmp).catch(() => {}),
+        ])
+    }
+}
+
+// ====================== Gulp Task ======================
+
+export function audio(done) {
+    const tasks = []
+
+    return gulp
+        .src(configPath.src.audio, {
+            allowEmpty: true,
+            read: false,
+        })
+        .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.AUDIO))
+        .on('data', (file) => {
+            tasks.push(limit(() => processAudio(file)))
+        })
+        .on('end', async () => {
+            try {
+                await Promise.all(tasks)
+                browserSync.reload()
+                done()
+            } catch (err) {
+                done(err)
+            }
+        })
+}
+
 gulp.task('audio', audio)
