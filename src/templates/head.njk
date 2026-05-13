@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- ! PAGE LOCALE TAGS --->
-    {{
-        hreflang_tags(
-            all_locales = allLocales,
-            default_locale = defaultLocale,
-            base_url = baseUrl,
-            base_url_postfix = baseUrlPostfix,
-            page_path = pageRelativePath
-        )
-    }}
+    {% if allLocales and defaultLocale and baseUrl and baseUrlPostfix and pageRelativePath %}
+        {{
+            hreflang_tags(
+                all_locales = allLocales,
+                default_locale = defaultLocale,
+                base_url = baseUrl,
+                base_url_postfix = baseUrlPostfix,
+                page_path = pageRelativePath
+            )
+        }}
+    {% endif %}
 
     <!-- * For old Internet Explorer --->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
