@@ -23,7 +23,7 @@ export function scripts() {
     return (
         gulp
             // * берем исходники
-            .src(path.src.scripts)
+            .src(path.src.scripts, { sourcemaps: env.buildMode.isDev || env.buildMode.isStaging })
             // * подключаем plumber, чтобы gulp не падал при ошибке
             .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.SCRIPTS))
             // * билдим JS с помощью Esbuild
@@ -33,7 +33,7 @@ export function scripts() {
                     format: 'iife',
                     platform: 'browser',
                     outfile: 'main.min.js',
-                    sourcemap: env.buildMode.isDev || env.buildMode.isStaging ? 'external' : false,
+                    sourcemap: env.buildMode.isDev || env.buildMode.isStaging ? 'linked' : false,
                     minify: env.buildMode.isStaging || env.buildMode.isProd,
                     target: ['es2018'],
                     drop: env.buildMode.isProd ? ['console', 'debugger'] : [],
@@ -54,7 +54,11 @@ export function scripts() {
             // * добавляем к имени суффикс .min
             // .pipe(rename({ suffix: '.min' }))
             // * кладем результат в папку сборки
-            .pipe(gulp.dest(path.build.scripts))
+            .pipe(
+                gulp.dest(path.build.scripts, {
+                    sourcemaps: env.buildMode.isDev || env.buildMode.isStaging ? '.' : false,
+                }),
+            )
             // // * делаем запись в rev-manifest.json
             // .pipe(
             //     gulpIf(
