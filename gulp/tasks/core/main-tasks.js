@@ -15,6 +15,7 @@ import { videos } from '../assets/media/videos.js'
 import { fonts } from '../assets/fonts/fonts.js'
 import { libs } from '../scripts/libs.js'
 import { misc } from '../assets/misc.js'
+import { revise } from '../utils/revision.js'
 
 // * --- LOCAL TASKS
 // * ---------------
@@ -27,5 +28,5 @@ const devTools = gulp.parallel(watch, server)
 export const dev = gulp.series(clean, mainTasks, devTools)
 
 // TODO: add revision
-// export const staging = gulp.series(clean, mainTasks, watch, server)
-export const prod = gulp.series(clean, mainTasks)
+export const staging = gulp.series(clean, mainTasks, revise, server)
+export const prod = gulp.series(clean, mainTasks, revise)

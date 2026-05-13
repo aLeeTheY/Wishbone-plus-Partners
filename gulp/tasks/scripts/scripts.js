@@ -1,4 +1,6 @@
 import gulp from 'gulp'
+// import gulpIf from 'gulp-if'
+// import gulpRev from 'gulp-rev'
 import browserSync from 'browser-sync'
 
 import { env } from '../../config/env.js'
@@ -47,10 +49,23 @@ export function scripts() {
                     },
                 }),
             )
+            // // * добавляем к файлу ревизию для инвалидации кэша
+            // .pipe(gulpIf(env.buildMode.isStaging || env.buildMode.isProd, gulpRev()))
             // * добавляем к имени суффикс .min
             // .pipe(rename({ suffix: '.min' }))
             // * кладем результат в папку сборки
             .pipe(gulp.dest(path.build.scripts))
+            // // * делаем запись в rev-manifest.json
+            // .pipe(
+            //     gulpIf(
+            //         env.buildMode.isStaging || env.buildMode.isProd,
+            //         gulpRev.manifest('rev-manifest.json', { base: 'out/', merge: true }),
+            //     ),
+            // )
+            // // * созраняем rev-manifest.json
+            // .pipe(
+            //     gulpIf(env.buildMode.isStaging || env.buildMode.isProd, gulp.dest(path.build.base)),
+            // )
             // * обновляем сервер разработки
             .pipe(browserSync.stream())
     )

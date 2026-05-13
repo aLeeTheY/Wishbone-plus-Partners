@@ -1,8 +1,9 @@
 import gulp from 'gulp'
-// import browserSync from 'browser-sync'
+import { readFileSync } from 'node:fs'
 
 import rev from 'gulp-rev'
 import revRewrite from 'gulp-rev-rewrite'
+import revDel from 'gulp-rev-delete-original'
 
 import { path } from '../../config/path.js'
 import {
@@ -10,39 +11,60 @@ import {
     NOTIFICATION_HANDLER_TITLES,
 } from '../../helpers/error-handler.js'
 
-// * --- EXPORT GULP TASK FOR MAKE REVISION HASH FOR WEBSITE STATIC FILES (IGNORE CACHE)
-// * -----------------------------------------------------------------------------------
-export function revision() {
-    return gulp
-        .src([`${path.build.css}*.css`, `${path.build.scripts}*.js`], { base: path.build.base })
-        .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.REVISION))
-        .pipe(rev())
-        .pipe(gulp.dest(path.build.base))
-        .pipe(rev.manifest('rev-manifest.json'))
-        .pipe(gulp.dest(path.build.base))
-    // .pipe(browserSync.stream()) | use only in dev mode
+// * --- ASSET REVISIONING
+// * ---------------------
+function revision() {
+    return (
+        gulp
+            // * берем готовые собранные ассеты
+            .src(
+                `${path.build.base}/**/*.{css,js,woff,woff2,ttf,svg,avif,webp,png,jpeg,jpg,webm,mp4,mp3}`,
+                {
+                    base: path.build.base,
+                    encoding: false,
+                },
+            )
+            // * подключаем plumber
+            .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.REVISION))
+            // * добавляем ревизию к имени файлов
+            .pipe(rev())
+            // * удаляем оригинальные файлы до ревизии
+            .pipe(revDel())
+            // * перезаписываем файлы с новым именем
+            .pipe(gulp.dest(path.build.base))
+            // * генерируем rev-manifest.json
+            .pipe(
+                rev.manifest('rev-manifest.json', {
+                    merge: true,
+                }),
+            )
+            // * перезаписываем rev-manifest.json
+            .pipe(gulp.dest(path.build.base))
+    )
 }
 
-export function rewrite() {
-    const manifest = gulp.src(`${path.build.base}rev-manifest.json`)
-    return gulp
-        .src(`${path.build.html}*.html`)
-        .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.REVISION_REWRITE))
-        .pipe(revRewrite({ manifest }))
-        .pipe(gulp.dest(path.build.html))
-    // .pipe(browserSync.stream()) | use only in dev mode
+// * --- REWRITING REFERENCES
+// * ------------------------
+function rewrite() {
+    const manifest = readFileSync(`${path.build.base}/rev-manifest.json`)
+
+    return (
+        gulp
+            // * берем готовые собранные html
+            .src(`${path.build.base}/**/*.{html,css}`)
+            // * подключаем plumber
+            .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.REVISION_REWRITE))
+            // * перезаписываем пути к новым ассетам с ревизиями
+            .pipe(revRewrite({ manifest }))
+            // * сохраняем обновленный html
+            .pipe(gulp.dest(path.build.base))
+    )
 }
 
-// export function rewrite() {
-//     const manifest = JSON.parse(fs.readFileSync(`${path.build.base}rev-manifest.json`))
-//     return gulp
-//         .src(`${path.build.html}*.html`)
-//         .pipe(plumber({ errorHandler }))
-//         .pipe(revRewrite({ manifest }))
-//         .pipe(gulp.dest(path.build.html))
-//     // .pipe(browserSync.stream()) | use only in dev mode
-// }
+// * --- EXPORT GULP TASK
+// * --------------------
+export const revise = gulp.series(revision, rewrite)
 
 // * --- REGISTER GULP TASK
 // * ----------------------
-gulp.task('revision', revision)
+gulp.task('revise', revise)

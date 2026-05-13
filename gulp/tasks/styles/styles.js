@@ -1,5 +1,6 @@
 import gulp from 'gulp'
 import gulpIf from 'gulp-if'
+// import gulpRev from 'gulp-rev'
 import gulpRename from 'gulp-rename'
 import gulpReplace from 'gulp-replace'
 import browserSync from 'browser-sync'
@@ -88,6 +89,8 @@ export function styles() {
             //         noWebpClass: '.no-webp',
             //     }),
             // )
+            // // * добавляем к файлу ревизию для инвалидации кэша
+            // .pipe(gulpIf(env.buildMode.isStaging || env.buildMode.isProd, gulpRev()))
             // * добавляем к имени суффикс .min
             .pipe(gulpRename({ suffix: '.min' }))
             // * пишем sourcemaps
@@ -98,6 +101,17 @@ export function styles() {
                     sourcemaps: env.buildMode.isDev || env.buildMode.isStaging ? '.' : false,
                 }),
             )
+            // // * делаем запись в rev-manifest.json
+            // .pipe(
+            //     gulpIf(
+            //         env.buildMode.isStaging || env.buildMode.isProd,
+            //         gulpRev.manifest('rev-manifest.json', { base: 'out/', merge: true }),
+            //     ),
+            // )
+            // // * созраняем rev-manifest.json
+            // .pipe(
+            //     gulpIf(env.buildMode.isStaging || env.buildMode.isProd, gulp.dest(path.build.base)),
+            // )
             // * обновляем сервер разработки
             .pipe(browserSync.stream())
     )
