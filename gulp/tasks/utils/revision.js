@@ -1,10 +1,12 @@
 import gulp from 'gulp'
+import { deleteAsync } from 'del'
 import { readFileSync } from 'node:fs'
 
 import rev from 'gulp-rev'
 import revRewrite from 'gulp-rev-rewrite'
 import revDel from 'gulp-rev-delete-original'
 
+import { env } from '../../config/env.js'
 import { path } from '../../config/path.js'
 import {
     plumberWithErrorHandler,
@@ -61,9 +63,21 @@ function rewrite() {
     )
 }
 
+// * --- DELETE REVISION MANIFEST FILE
+// * ---------------------------------
+function deleteManifest(done) {
+    if (env.buildMode.isProd) {
+        deleteAsync(`${path.build.base}/rev-manifest.json`).then(() => {
+            done()
+        })
+    } else {
+        done()
+    }
+}
+
 // * --- EXPORT GULP TASK
 // * --------------------
-export const revise = gulp.series(revision, rewrite)
+export const revise = gulp.series(revision, rewrite, deleteManifest)
 
 // * --- REGISTER GULP TASK
 // * ----------------------
