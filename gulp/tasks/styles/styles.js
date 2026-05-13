@@ -10,7 +10,7 @@ import gulpSass from 'gulp-sass'
 const sass = gulpSass(dartSass)
 
 import postcss from 'gulp-postcss'
-import purgecss from 'gulp-purgecss'
+// import purgecss from 'gulp-purgecss'
 
 // import webpcss from 'gulp-webpcss' // TODO: deprecated
 // import avifWebpCss from 'gulp-avif-css' // ! bug when render
@@ -63,14 +63,14 @@ export function styles() {
             // .pipe(gulpReplace(/\.ts(?=["'])/g, '.min.js'))
             .pipe(gulpReplace(path.replace.libs, '../libs/'))
             // * удаляем неиспользуемые css классы
-            .pipe(
-                gulpIf(
-                    env.buildMode.isStaging || env.buildMode.isProd,
-                    purgecss({
-                        content: ['src/**/*.njk'],
-                    }),
-                ),
-            )
+            // .pipe(
+            //     gulpIf(
+            //         env.buildMode.isStaging || env.buildMode.isProd,
+            //         purgecss({
+            //             content: ['src/**/*.njk'],
+            //         }),
+            //     ),
+            // )
             // ! STRONGLY AFTER PURGE CSS
             // * генерируем классы .avif и .webp для background-image: url() из .png, .jpg и .jpeg
             // .pipe(avifWebpCss())

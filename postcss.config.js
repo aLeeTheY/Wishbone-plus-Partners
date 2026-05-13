@@ -21,6 +21,12 @@ export default {
         //     webpClass: 'webp',
         //     noWebpClass: 'no-webp',
         // },
+        // * удаление неиспользуемых CSS (только в staging/prod)
+        ...((isStaging || isProd) && {
+            '@fullhuman/postcss-purgecss': {
+                content: ['src/**/*.njk'],
+            },
+        }),
         // * сжатие CSS (только в prod и staging modes)
         ...((isStaging || isProd) && {
             cssnano: {
