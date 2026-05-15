@@ -36,6 +36,7 @@ import {
     plumberWithErrorHandler,
     NOTIFICATION_HANDLER_TITLES,
 } from '../../helpers/error-handler.js'
+import { htmlImg2PictureTransformer } from '../../helpers/html-img2picture-transformer.js'
 
 // * html plugins
 // import { nunjucksCompile } from 'gulp-nunjucks'
@@ -55,7 +56,9 @@ import htmlmin from 'gulp-html-minifier-terser'
 
 // import webphtml from 'gulp-webp-html-nosvg' // TODO: deprecated
 // import webphtml from 'gulp-webp-html-fixed' // ! no avig support
-import avifWebpHtml from 'gulp-avif-webp-html-universal'
+
+// import { pictureTransformer } from '../../helpers/picture-transformer.js'
+// import avifWebpHtml from 'gulp-avif-webp-html-universal'
 
 // TODO:
 // * --- CACHE VERSION
@@ -105,6 +108,8 @@ function createHtmlStream({
                     },
                 }),
             )
+            // * генерируем <img> в <picture>/<source> + responsive + avif/webp
+            .pipe(htmlImg2PictureTransformer('src/assets/images', { desktopFirst: true }))
             // .pipe(
             //     // nunjucksRender({
             //     //     path: ['src/partials'], // CRITICAL: Tell Nunjucks where to find header/footer
@@ -140,12 +145,21 @@ function createHtmlStream({
             // * генерируем webp на основе png, jpg, jpeg и т.д.
             // .pipe(webphtml())
             // * генерируем avif и webp на основе png, jpg и jpeg
-            .pipe(
-                avifWebpHtml({
-                    avif: true,
-                    webp: true,
-                }),
-            )
+            // .pipe(
+            //     avifWebpHtml({
+            //         avif: true,
+            //         webp: true,
+            //     }),
+            // )
+
+            // .pipe(
+            //     pictureTransformer({
+            //         imgDir: path.join(process.cwd(), 'out', 'assets', 'images'), // ваш путь build.images
+            //         avif: true,
+            //         webp: true,
+            //         sizes: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw', // пример адаптивного sizes
+            //     }),
+            // )
             // * форматируем код через prettier
             .pipe(prettier())
             // * минифицируем html
