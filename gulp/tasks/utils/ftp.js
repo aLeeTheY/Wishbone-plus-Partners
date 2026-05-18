@@ -1,6 +1,5 @@
 import gulp from 'gulp'
 import through2 from 'through2'
-import gulpUtil from 'gulp-util'
 import vinylFTP from 'vinyl-ftp'
 
 import { env } from '../../config/env.js'
@@ -20,7 +19,10 @@ export function ftp() {
         return gulp.src('.').pipe(gulp.dest('.'))
     }
 
-    configFTP.log = gulpUtil.log
+    configFTP.log = (message) => {
+        // vinyl-ftp передаёт строку вида "PUT /path"
+        notify.info(NOTIFICATION_HANDLER_TITLES.FTP, message)
+    }
 
     const ftpConnect = vinylFTP.create(configFTP)
 
