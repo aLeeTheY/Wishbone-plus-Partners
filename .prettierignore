@@ -14,18 +14,18 @@
 
 # Ignore all build/ and dist/ folders
 **/build
-**/dist
-# **/out
+# **/dist
+**/out
 **/archive
 
 # Ignore all assets/ folders
 # **/assets
 
 # Ignore all CSS folders
-**/css
+# **/css
 
 # Ignore all CSS files
-*.css
+# *.css
 *.css.map
 
 # Ignore all JS folders
