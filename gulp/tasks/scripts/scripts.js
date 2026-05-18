@@ -1,4 +1,5 @@
 import gulp from 'gulp'
+import through2 from 'through2'
 // import gulpIf from 'gulp-if'
 // import gulpRev from 'gulp-rev'
 import browserSync from 'browser-sync'
@@ -23,9 +24,15 @@ export function scripts() {
     return (
         gulp
             // * берем исходники
-            .src(path.src.scripts, { sourcemaps: env.buildMode.isDev || env.buildMode.isStaging })
+            // .src(path.src.scripts, { sourcemaps: env.buildMode.isDev || env.buildMode.isStaging })
+            .src(path.src.scripts)
             // * подключаем plumber, чтобы gulp не падал при ошибке
-            .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.SCRIPTS))
+            // ! .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.SCRIPTS))
+            .pipe(
+                env.buildMode.isDev
+                    ? plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.SCRIPTS)
+                    : through2.obj(), // passthrough
+            )
             // * билдим JS с помощью Esbuild
             .pipe(
                 gulpEsbuild({
@@ -54,11 +61,12 @@ export function scripts() {
             // * добавляем к имени суффикс .min
             // .pipe(rename({ suffix: '.min' }))
             // * кладем результат в папку сборки
-            .pipe(
-                gulp.dest(path.build.scripts, {
-                    sourcemaps: env.buildMode.isDev || env.buildMode.isStaging ? '.' : false,
-                }),
-            )
+            // ! .pipe(
+            // !     gulp.dest(path.build.scripts, {
+            // !         sourcemaps: env.buildMode.isDev || env.buildMode.isStaging ? '.' : false,
+            // !     }),
+            // ! )
+            .pipe(gulp.dest(path.build.scripts))
             // // * делаем запись в rev-manifest.json
             // .pipe(
             //     gulpIf(
@@ -71,7 +79,10 @@ export function scripts() {
             //     gulpIf(env.buildMode.isStaging || env.buildMode.isProd, gulp.dest(path.build.base)),
             // )
             // * обновляем сервер разработки
-            .pipe(browserSync.stream())
+            .on('end', () => {
+                // * update dev server
+                browserSync.reload()
+            })
     )
 }
 

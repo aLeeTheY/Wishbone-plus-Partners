@@ -3,9 +3,10 @@ import browserSync from 'browser-sync'
 
 import { path } from '../../../config/path.js'
 
+// TODO: починить watchers
 // * --- EXPORT GULP TASK FOR START DEV SERVER
 // * -----------------------------------------
-export function server(done) {
+export function server(cb) {
     browserSync.init({
         // * serve files from the app directory with directory listing
         server: {
@@ -28,7 +29,7 @@ export function server(done) {
         // * server port
         port: 3000,
     })
-    done()
+    cb()
 }
 
 // * --- REGISTER GULP TASK

@@ -2,12 +2,20 @@
 import toasted from 'toasted-notifier'
 import plumber from 'gulp-plumber'
 
+import { env } from '../config/env.js'
+
 // * --- EXPORT HANDLER TITLES
 // * -------------------------
 export const NOTIFICATION_HANDLER_TITLES = {
     UNKNOWN: 'UNKNOWN',
     HTML: 'HTML',
-    META: 'META',
+    META: {
+        FAVICON: {
+            IMAGES: 'META -> FAVICON -> IMAGES',
+            WEB_MANIFEST: 'META -> FAVICON -> WEB_MANIFEST',
+        },
+        TEXT: 'META -> TEXT',
+    },
     STYLES: 'STYLES',
     SCRIPTS: 'SCRIPTS',
     AUDIO: 'AUDIO',
@@ -21,8 +29,11 @@ export const NOTIFICATION_HANDLER_TITLES = {
     CRITICAL_CSS: 'CRITICAL CSS',
     ZIP: 'ZIP',
     FTP: 'FTP',
-    REVISION: 'REVISION',
-    REVISION_REWRITE: 'REVISION --> REWRITE',
+    REVISION: {
+        DEFAULT: 'REVISION',
+        REWRITE: 'REVISION -> REWRITE',
+    },
+    OBFUSCATE_SELECTORS: 'OBFUSCATE SELECTORS',
 }
 
 // * --- EXPORT NOTIFY HELPERS
@@ -34,13 +45,31 @@ export const notify = {
             `[ WARNING  ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}: ${message ?? ''}`,
         )
 
-        toasted.notify({
-            title: `[ WARNING  ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}`,
-            message: message ?? '',
-            sound: false,
-            wait: false,
-            // можно добавить тип: 'warning' если toasted поддерживает
-        })
+        if (env.isVerbose) {
+            toasted.notify({
+                title: `[ WARNING  ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}`,
+                message: message ?? '',
+                sound: false,
+                wait: false,
+                // можно добавить тип: 'warning' если toasted поддерживает
+            })
+        }
+    },
+    info(title, message) {
+        // Вывод в консоль (обычный или цветной)
+        console.info(
+            `[ INFO     ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}: ${message ?? ''}`,
+        )
+
+        if (env.isVerbose) {
+            toasted.notify({
+                title: `[ INFO     ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}`,
+                message: message ?? '',
+                sound: false,
+                wait: false,
+                // можно добавить тип: 'warning' если toasted поддерживает
+            })
+        }
     },
     success(title, message) {
         // Вывод в консоль (обычный или цветной)
@@ -48,12 +77,14 @@ export const notify = {
             `[ SUCCESS  ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}: ${message ?? ''}`,
         )
 
-        toasted.notify({
-            title: `[ SUCCESS  ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}`,
-            message: message ?? '',
-            sound: false,
-            wait: false,
-        })
+        if (env.isVerbose) {
+            toasted.notify({
+                title: `[ SUCCESS  ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}`,
+                message: message ?? '',
+                sound: false,
+                wait: false,
+            })
+        }
     },
 }
 
@@ -61,11 +92,12 @@ export const notify = {
 // * ------------------------
 export const errorHandler = (title) =>
     function (err) {
-        // Вывод в консоль (обычный или цветной)
+        // вывод в консоль (обычный или цветной)
         console.error(
             `[ ERROR    ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}: ${err.message}`,
         )
 
+        // ! вызов toasted всегда, даже без verbose !!!
         toasted.notify({
             title: `[ ERROR    ] ${title ?? NOTIFICATION_HANDLER_TITLES.UNKNOWN}`,
             message: err.message ?? 'An unknown error occurred during the build.',

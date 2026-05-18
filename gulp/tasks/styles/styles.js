@@ -1,4 +1,5 @@
 import gulp from 'gulp'
+import through2 from 'through2'
 // import gulpIf from 'gulp-if'
 // import gulpRev from 'gulp-rev'
 import gulpRename from 'gulp-rename'
@@ -10,6 +11,7 @@ import gulpSass from 'gulp-sass'
 const sass = gulpSass(dartSass)
 
 import postcss from 'gulp-postcss'
+// import sourcemaps from 'gulp-sourcemaps'
 // import purgecss from 'gulp-purgecss'
 
 // import webpcss from 'gulp-webpcss' // TODO: deprecated
@@ -23,17 +25,28 @@ import {
     NOTIFICATION_HANDLER_TITLES,
 } from '../../helpers/error-handler.js'
 
+// TODO: избавится от пакета gulp-sourcemaps (не принёс разницы со встроенным функционалом gulp 5)
 // * --- EXPORT GULP TASK FOR SCSS/CSS FILES
 // * ---------------------------------------
 export function styles() {
     return (
         gulp
             // * берем исходники
-            .src(path.src.scss, { sourcemaps: env.buildMode.isDev || env.buildMode.isStaging })
+            .src(path.src.styles.files, {
+                sourcemaps: env.buildMode.isDev || env.buildMode.isStaging,
+            })
             // * подключаем plumber, чтобы gulp не падал при ошибке
-            .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.STYLES))
+            // ! .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.STYLES))
+            .pipe(
+                env.buildMode.isDev
+                    ? plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.STYLES)
+                    : through2.obj(),
+            )
             // * делаем sourcemaps в режимах dev и staging
             // .pipe(gulpIf(isDev || isStaging, sourcemaps.init()))
+            // .pipe(
+            //     env.buildMode.isDev || env.buildMode.isStaging ? sourcemaps.init() : through2.obj(),
+            // )
             // * билдим css через sass
             .pipe(
                 sass({
@@ -41,27 +54,42 @@ export function styles() {
                     // style: isProd || isStaging ? 'expanded' : 'expanded',
                     // * expanded always, bugs with webImagesCSS when compressed
                     style: 'expanded',
-                }).on('error', sass.logError),
-            )
-            // * заменяем пути на корректные для каждого ресурса
-            .pipe(gulpReplace(path.replace.audio, '../assets/audio/'))
-            .pipe(
-                gulpReplace(path.replace.icons, (match, p1) => {
-                    const id = p1.replace(/\//g, '--')
-                    return `../assets/icons/sprite.svg#${id}`
                 }),
             )
-            .pipe(gulpReplace(path.replace.images, '../assets/images/'))
-            .pipe(gulpReplace(path.replace.videos, '../assets/videos/'))
-            .pipe(gulpReplace(path.replace.fonts, '../assets/fonts/'))
-            .pipe(gulpReplace(path.replace.misc, '../assets/misc/'))
-            .pipe(gulpReplace(path.replace.scss_css, './'))
-            // // * замена расширений файлов .scss
-            // .pipe(gulpReplace(/\.scss(?=["'])/g, '.min.css'))
-            .pipe(gulpReplace(path.replace.ts_js, '../js/'))
-            // // * замена расширений файлов .ts
-            // .pipe(gulpReplace(/\.ts(?=["'])/g, '.min.js'))
-            .pipe(gulpReplace(path.replace.libs, '../libs/'))
+
+            // * заменяем пути на корректные для каждого ресурса
+            // .pipe(gulpReplace(/@meta\//g, '../'))
+            .pipe(gulpReplace(/@(scss|css)\//g, env.isInlineCSS ? './css' : './'))
+            // .pipe(gulpReplace(/@(ts|js)\//g, '../js/'))
+            .pipe(
+                gulpReplace(/@audio\//g, env.isInlineCSS ? './assets/audio/' : '../assets/audio/'),
+            )
+            .pipe(
+                gulpReplace(/@fonts\//g, env.isInlineCSS ? './assets/fonts/' : '../assets/fonts/'),
+            )
+            .pipe(
+                gulpReplace(/@icons\/(.+?)\.svg/g, (match, p1) => {
+                    const id = p1.replace(/\//g, '--')
+                    return env.isInlineCSS
+                        ? `./assets/icons/sprite.svg#${id}`
+                        : `../assets/icons/sprite.svg#${id}`
+                }),
+            )
+            .pipe(
+                gulpReplace(
+                    /@images\//g,
+                    env.isInlineCSS ? './assets/images/' : '../assets/images/',
+                ),
+            )
+            .pipe(
+                gulpReplace(
+                    /@videos\//g,
+                    env.isInlineCSS ? './assets/videos/' : '../assets/videos/',
+                ),
+            )
+            .pipe(gulpReplace(/@misc\//g, env.isInlineCSS ? './assets/misc/' : '../assets/misc/'))
+            // .pipe(gulpReplace(/@libs\//g, '../libs/'))
+
             // * удаляем неиспользуемые css классы
             // .pipe(
             //     gulpIf(
@@ -95,12 +123,19 @@ export function styles() {
             .pipe(gulpRename({ suffix: '.min' }))
             // * пишем sourcemaps
             // .pipe(gulpIf(isDev || isStaging, sourcemaps.write('.')))
+            // .pipe(
+            //     env.buildMode.isDev || env.buildMode.isStaging
+            //         ? sourcemaps.write('.')
+            //         : through2.obj(),
+            // )
+
             // * кладем результат в папку сборки
             .pipe(
-                gulp.dest(path.build.css, {
+                gulp.dest(path.build.styles, {
                     sourcemaps: env.buildMode.isDev || env.buildMode.isStaging ? '.' : false,
                 }),
             )
+
             // // * делаем запись в rev-manifest.json
             // .pipe(
             //     gulpIf(
@@ -112,8 +147,10 @@ export function styles() {
             // .pipe(
             //     gulpIf(env.buildMode.isStaging || env.buildMode.isProd, gulp.dest(path.build.base)),
             // )
-            // * обновляем сервер разработки
-            .pipe(browserSync.stream())
+            .on('end', () => {
+                // * update dev server
+                browserSync.reload()
+            })
     )
 }
 

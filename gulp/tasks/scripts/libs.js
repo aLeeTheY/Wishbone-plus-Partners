@@ -1,6 +1,8 @@
 import gulp from 'gulp'
+import through2 from 'through2'
 import browserSync from 'browser-sync'
 
+import { env } from '../../config/env.js'
 import { path } from '../../config/path.js'
 import {
     plumberWithErrorHandler,
@@ -12,9 +14,16 @@ import {
 export function libs() {
     return gulp
         .src(path.src.libs)
-        .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.LIBS))
+        .pipe(
+            env.buildMode.isDev
+                ? plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.LIBS)
+                : through2.obj(), // passthrough
+        )
         .pipe(gulp.dest(path.build.libs))
-        .pipe(browserSync.stream())
+        .on('end', () => {
+            // * update dev server
+            browserSync.reload()
+        })
 }
 
 // * --- REGISTER GULP TASK

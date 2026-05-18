@@ -1,7 +1,9 @@
 import gulp from 'gulp'
 import gulpZip from 'gulp-zip'
+import through2 from 'through2'
 import { deleteAsync } from 'del'
 
+import { env } from '../../config/env.js'
 import { path } from '../../config/path.js'
 import {
     plumberWithErrorHandler,
@@ -11,11 +13,19 @@ import {
 // * --- EXPORT GULP TASK FOR PUSH PROJECT BUILD TO ZIP ARCHIVE
 // * ----------------------------------------------------------
 export async function zip() {
-    await deleteAsync(`./archive/${path.root}.zip`)
+    await deleteAsync(`${path.zip}/${path.projectRootFolderName}.zip`)
 
     return gulp
-        .src(`${path.build.base}/**/*.*`, {})
-        .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.ZIP))
-        .pipe(gulpZip(`${path.root}.zip`))
-        .pipe(gulp.dest('./archive/'))
+        .src(`${path.build.base}/**/*.*`)
+        .pipe(
+            env.buildMode.isDev
+                ? plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.ZIP)
+                : through2.obj(), // passthrough
+        )
+        .pipe(gulpZip(`${path.projectRootFolderName}.zip`))
+        .pipe(gulp.dest(`${path.zip}/`))
 }
+
+// * --- REGISTER GULP TASK
+// * ----------------------
+gulp.task('zip', zip)

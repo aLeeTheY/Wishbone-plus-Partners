@@ -3,17 +3,26 @@ import gulp from 'gulp'
 import nodePath from 'path'
 import fastGlob from 'fast-glob'
 import penthouse from 'penthouse'
+import { pathToFileURL } from 'url'
 import browserSync from 'browser-sync'
 
+import { env } from '../../config/env.js'
 import { path } from '../../config/path.js'
-import { errorHandler, NOTIFICATION_HANDLER_TITLES } from '../../helpers/error-handler.js'
+import { notify, NOTIFICATION_HANDLER_TITLES } from '../../helpers/error-handler.js'
 
 // * --- EXPORT GULP TASK FOR INLINE CRITICAL CSS TO HTML FILES
 // * ----------------------------------------------------------
 export async function criticalCss() {
-    // TODO: read docs for nodePath.resolve()
+    if (env.isInlineCSS) {
+        notify.info(
+            NOTIFICATION_HANDLER_TITLES.CRITICAL_CSS,
+            'Skipped – full inline CSS is enabled.',
+        )
+        return
+    }
+
     const dir = nodePath.resolve(path.build.html)
-    const cssFile = nodePath.resolve(path.build.css, 'main.min.css')
+    const cssFilePath = nodePath.resolve(path.build.styles, 'main.min.css')
 
     // const files = fs.readdirSync(dir)
     // const htmlFiles = files.filter((f) => f.endsWith('.html'))
@@ -23,7 +32,7 @@ export async function criticalCss() {
         absolute: true,
     })
 
-    // ! не нужно, penthouse уже захватывает media queries при генерации
+    // ! не нужно, penthouse захватывает media queries при генерации благодаря postcss-sort-media-queries
     // const viewports = [
     //     { width: 375, height: 667 }, // Mobile
     //     { width: 1920, height: 1080 }, // Desktop
@@ -34,33 +43,41 @@ export async function criticalCss() {
         height: 1080,
     }
 
-    for (const file of htmlFiles) {
-        const filePath = nodePath.resolve(dir, file)
+    for (const filePath of htmlFiles) {
         let html = fs.readFileSync(filePath, 'utf-8')
 
-        if (!html.includes('<!-- ! DO NOT REMOVE THIS COMMENT | CRITICAL CSS PLACEHOLDER --->')) {
+        if (
+            !html.includes('<!-- ! DO NOT REMOVE THIS COMMENT !!! | CRITICAL CSS PLACEHOLDER --->')
+        ) {
             continue
         }
 
         try {
+            const fileUrl = pathToFileURL(filePath).href
             const criticalCss = await penthouse({
-                url: `file:///${filePath}`,
-                css: cssFile,
+                url: fileUrl,
+                css: cssFilePath,
                 width: viewport.width,
                 height: viewport.height,
+
+                // ! INCLUDE SOME CSS CLASSES TO PENTHOUSE MANUALLY !!!
                 forceInclude: [/^\.avif #reeding-house/, /^\.webp #reeding-house/],
             })
 
             html = html.replace(
-                '<!-- ! DO NOT REMOVE THIS COMMENT | CRITICAL CSS PLACEHOLDER --->',
-                `<style>${criticalCss}</style>`,
+                '<!-- ! DO NOT REMOVE THIS COMMENT !!! | CRITICAL CSS PLACEHOLDER --->',
+                `<style type="text/css" id="critical-css">${criticalCss}</style>`,
             )
 
             fs.writeFileSync(filePath, html)
         } catch (err) {
-            errorHandler(NOTIFICATION_HANDLER_TITLES.CRITICAL_CSS)(err)
+            notify.warn(
+                NOTIFICATION_HANDLER_TITLES.CRITICAL_CSS,
+                `${nodePath.basename(filePath)}: ${err.message}`,
+            )
         }
 
+        // * update dev server
         browserSync.reload()
     }
 }

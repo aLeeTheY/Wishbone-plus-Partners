@@ -293,6 +293,15 @@ export function htmlImg2PictureTransformer(assetsSrcDir, options = {}) {
                             })
                             DomUtils.appendChild(picture, source)
                         })
+
+                        // 👇 ВОТ ЭТО ДОБАВЛЯЕМ – исходный формат как fallback для больших экранов
+                        const originalMime = `image/${originalExt.toLowerCase()}`
+                        const origSource = new Element('source', {
+                            type: originalMime,
+                            media: `(${mediaQueryType}: ${origBp.queryVal}px)`,
+                            srcset: `${basePath}.${originalExt}`,
+                        })
+                        DomUtils.appendChild(picture, origSource)
                     }
                 }
 

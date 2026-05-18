@@ -13,8 +13,5 @@ gulp.task('dev', dev)
 gulp.task('prod', prod)
 gulp.task('staging', staging)
 
-// gulp.task('zip', prod)
-// gulp.task('ftp', prod)
-
 gulp.task('zip', zip)
 gulp.task('ftp', ftp)

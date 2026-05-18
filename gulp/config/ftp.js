@@ -1,10 +1,7 @@
-export let configFTP = {
-    // * ftp server address
-    host: '',
-    // * ftp server user
-    user: '',
-    // * ftp server password
-    password: '',
-    // * amout of simultaneous threads
+export const configFTP = {
+    host: process.env.FTP_HOST || '',
+    user: process.env.FTP_USER || '',
+    password: process.env.FTP_PASSWORD || '',
     parallel: 5,
+    enabled: !!(process.env.FTP_HOST && process.env.FTP_USER),
 }

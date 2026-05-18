@@ -1,41 +1,20 @@
-// import fileInclude from 'gulp-file-include'
-
-// const version = Date.now()
-
-// export const html = () => {
-//     const app = global.app
-//     return (
-//         app.gulp //
-//             .src(app.path.src.html)
-//             .pipe(fileInclude())
-//             .pipe(app.plugins.gulpReplace(/@images\//g, './assets/images'))
-//             .pipe(app.plugins.gulpReplace(/@icons\//g, './assets/icons'))
-//             .pipe(app.plugins.gulpReplace(/@fonts\//g, './assets/fonts'))
-//             .pipe(app.plugins.gulpReplace(/@scss\//g, './src/scss'))
-//             .pipe(app.plugins.gulpReplace(/@css\//g, './css'))
-//             .pipe(app.plugins.gulpReplace(/@ts\//g, './src/ts'))
-//             .pipe(app.plugins.gulpReplace(/@js\//g, './js'))
-
-//             // files version (cache)
-//             .pipe(app.plugins.gulpReplace(/(\.(css|js|png|jpg|jpeg|webp|svg))/g, `$1?v=${version}`))
-
-//             .pipe(app.gulp.dest(app.path.build.html))
-//     )
-// }
-
 import fs from 'fs'
 import gulp from 'gulp'
 import nodePath from 'path'
 import gulpIf from 'gulp-if'
+import through2 from 'through2'
+import { deleteAsync } from 'del'
 import prettier from 'gulp-prettier'
 import browserSync from 'browser-sync'
 
 import { env } from '../../config/env.js'
 import { path } from '../../config/path.js'
 import {
+    notify,
     plumberWithErrorHandler,
     NOTIFICATION_HANDLER_TITLES,
 } from '../../helpers/error-handler.js'
+import { inlineAssetsInHtml } from '../../helpers/inline-assets.js'
 import { htmlImg2PictureTransformer } from '../../helpers/html-img2picture-transformer.js'
 
 // * html plugins
@@ -75,13 +54,26 @@ function createHtmlStream({
     baseUrl,
     baseUrlPostfix,
     pageRelativePath,
+    // * инлайн аргументы
+    cssContent = '',
+    jsContent = '',
+    spriteContent = '',
 }) {
+    const ignoreCustomComments = [/Built with love by aLeeTheY/]
+    if (!env.isInlineCSS) {
+        ignoreCustomComments.push(/CRITICAL CSS PLACEHOLDER/)
+    }
+
     return (
         gulp
             // * берем исходники
             .src(path.src.njk)
             // * подключаем plumber, чтобы gulp не падал при ошибке
-            .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.HTML))
+            .pipe(
+                env.buildMode.isDev
+                    ? plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.HTML)
+                    : through2.obj(), // passthrough
+            )
             // * собираем все partials в полноценные html
             // .pipe(
             //     fileInclude({
@@ -95,7 +87,7 @@ function createHtmlStream({
             // .pipe(posthtml())
             .pipe(
                 nunjucksRender({
-                    // path: [`${path.root}/src/`, `${path.root}/src/templates/`, `${path.root}/`],
+                    // path: [`${path.projectRootFolderName}/src/`, `${path.projectRootFolderName}/src/templates/`, `${path.projectRootFolderName}/`],
                     path: ['./src/', './'],
                     data: {
                         locale,
@@ -109,33 +101,152 @@ function createHtmlStream({
                 }),
             )
             // * генерируем <img> в <picture>/<source> + responsive + avif/webp
-            .pipe(htmlImg2PictureTransformer('src/assets/images', { desktopFirst: true }))
+            .pipe(htmlImg2PictureTransformer(path.src.images.base, { desktopFirst: true }))
             // .pipe(
             //     // nunjucksRender({
             //     //     path: ['src/partials'], // CRITICAL: Tell Nunjucks where to find header/footer
             //     // }),
             //     nunjucksCompile(),
             // )
+
             // * заменяем пути на корректные для каждого ресурса
-            .pipe(gulpReplace(path.replace.meta, `${env.baseUrlPostfix}/`))
-            .pipe(gulpReplace(path.replace.scss_css, `${env.baseUrlPostfix}/css/`))
-            .pipe(gulpReplace(path.replace.ts_js, `${env.baseUrlPostfix}/js/`))
-            .pipe(gulpReplace(path.replace.audio, `${env.baseUrlPostfix}/assets/audio/`))
             .pipe(
-                gulpReplace(path.replace.icons, (match, p1) => {
+                gulpReplace(
+                    /@meta\//g,
+                    locale !== defaultLocale && env.isLocal
+                        ? `../`
+                        : env.isLocal
+                          ? `./`
+                          : `${env.baseUrlPostfix}/`,
+                ),
+            )
+            .pipe(
+                gulpReplace(
+                    /@(scss|css)\//g,
+                    locale !== defaultLocale && env.isLocal
+                        ? `../css/`
+                        : env.isLocal
+                          ? `./css/`
+                          : `${env.baseUrlPostfix}/css/`,
+                ),
+            )
+            .pipe(
+                gulpReplace(
+                    /@(ts|js)\//g,
+                    locale !== defaultLocale && env.isLocal
+                        ? `../js/`
+                        : env.isLocal
+                          ? `./js/`
+                          : `${env.baseUrlPostfix}/js/`,
+                ),
+            )
+            .pipe(
+                gulpReplace(
+                    /@audio\//g,
+                    locale !== defaultLocale && env.isLocal
+                        ? `../assets/audio/`
+                        : env.isLocal
+                          ? `./assets/audio/`
+                          : `${env.baseUrlPostfix}/assets/audio/`,
+                ),
+            )
+            // .pipe(gulpReplace(/@fonts\//g, `${env.baseUrlPostfix}/assets/fonts/`))
+            .pipe(
+                gulpReplace(/@icons\/(.+?)\.svg/g, (match, p1) => {
                     const id = p1.replace(/\//g, '--')
+                    if (env.isLocal || env.isInlineSprite) {
+                        return `#${id}`
+                    }
                     return `${env.baseUrlPostfix}/assets/icons/sprite.svg#${id}`
                 }),
             )
-            .pipe(gulpReplace(path.replace.images, `${env.baseUrlPostfix}/assets/images/`))
-            .pipe(gulpReplace(path.replace.videos, `${env.baseUrlPostfix}/assets/videos/`))
-            .pipe(gulpReplace(path.replace.fonts, `${env.baseUrlPostfix}/assets/fonts/`))
-            .pipe(gulpReplace(path.replace.misc, `${env.baseUrlPostfix}/assets/misc/`))
-            .pipe(gulpReplace(path.replace.libs, `${env.baseUrlPostfix}/libs/`))
+            // .pipe(
+            //     gulpReplace('</body>', (match) => {
+            //         if (env.isLocal) {
+            //             try {
+            //                 const iconsDir = nodePath.resolve(path.build.icons)
+            //                 const files = fs.readdirSync(iconsDir)
+            //                 const spriteFile = files.find((f) => /^sprite.*\.svg$/.test(f))
+            //                 if (spriteFile) {
+            //                     const spriteContent = fs.readFileSync(
+            //                         nodePath.join(iconsDir, spriteFile),
+            //                         'utf-8',
+            //                     )
+            //                     return `<div style="display:none;">${spriteContent}</div>\n${match}`
+            //                 }
+            //             } catch (error) {
+            //                 notify.warn(
+            //                     NOTIFICATION_HANDLER_TITLES.HTML,
+            //                     `Ошибка инлайнинга спрайта: ${error.message}`,
+            //                 )
+            //             }
+            //         }
+            //         return match
+            //     }),
+            // )
+            .pipe(
+                gulpReplace(
+                    /@images\//g,
+                    locale !== defaultLocale && env.isLocal
+                        ? `../assets/images/`
+                        : env.isLocal
+                          ? `./assets/images/`
+                          : `${env.baseUrlPostfix}/assets/images/`,
+                ),
+            )
+            .pipe(
+                gulpReplace(
+                    /@videos\//g,
+                    locale !== defaultLocale && env.isLocal
+                        ? `../assets/videos/`
+                        : env.isLocal
+                          ? `./assets/videos/`
+                          : `${env.baseUrlPostfix}/assets/videos/`,
+                ),
+            )
+            .pipe(
+                gulpReplace(
+                    /@misc\//g,
+                    locale !== defaultLocale && env.isLocal
+                        ? `../assets/misc/`
+                        : env.isLocal
+                          ? `./assets/misc/`
+                          : `${env.baseUrlPostfix}/assets/misc/`,
+                ),
+            )
+            .pipe(
+                gulpReplace(
+                    /@libs\//g,
+                    locale !== defaultLocale && env.isLocal
+                        ? `../libs/`
+                        : env.isLocal
+                          ? `./libs/`
+                          : `${env.baseUrlPostfix}/libs/`,
+                ),
+            )
+
             // * замена расширений файлов .scss
             .pipe(gulpReplace(/\.scss(?=["'])/g, '.min.css'))
             // * замена расширений файлов .ts
             .pipe(gulpReplace(/\.ts(?=["'])/g, '.min.js'))
+
+            // * вставка инлайн файлов, если включена
+            .pipe(
+                through2.obj(function (file, enc, callback) {
+                    let html = file.contents.toString()
+                    html = inlineAssetsInHtml(html, {
+                        inlineCss: env.isInlineCSS,
+                        cssContent,
+                        inlineJs: env.isInlineJS,
+                        jsContent,
+                        inlineSprite: env.isInlineSprite,
+                        spriteContent,
+                    })
+                    file.contents = Buffer.from(html)
+                    callback(null, file)
+                }),
+            )
+
             // .pipe(
             //     gulpReplace(
             //         '<!-- ![GULP] DO NOT REMOVE --- plugin: webp-in-css --- polyfill.js placeholder --->',
@@ -182,10 +293,7 @@ function createHtmlStream({
                         removeEmptyElements: false,
                         removeEmptyAttributes: true,
                         removeRedundantAttributes: false,
-                        ignoreCustomComments: [
-                            /Built with love by aLeeTheY/,
-                            /CRITICAL CSS PLACEHOLDER/,
-                        ],
+                        ignoreCustomComments: ignoreCustomComments,
                     }),
                 ),
             )
@@ -198,18 +306,53 @@ function createHtmlStream({
     )
 }
 
-// * --- EXPORT GULP TASK FOR HTML FILES
-// * -----------------------------------
-export async function html() {
+async function buildHtml() {
+    // * инлайн-ресурсы (загружаем один раз)
+    let cssContent = ''
+    let jsContent = ''
+    let spriteContent = ''
+
+    if (env.isInlineCSS) {
+        const cssPath = nodePath.join(path.build.styles, 'main.min.css')
+        if (fs.existsSync(cssPath)) {
+            cssContent = fs.readFileSync(cssPath, 'utf-8')
+        } else {
+            notify.warn(NOTIFICATION_HANDLER_TITLES.HTML, 'CSS file not found for inline')
+        }
+    }
+    if (env.isInlineJS) {
+        const jsPath = nodePath.join(path.build.scripts, 'main.min.js')
+        if (fs.existsSync(jsPath)) {
+            jsContent = fs.readFileSync(jsPath, 'utf-8')
+        } else {
+            notify.warn(NOTIFICATION_HANDLER_TITLES.HTML, 'JS file not found for inline')
+        }
+    }
+    if (env.isInlineSprite) {
+        const iconsDir = nodePath.resolve(path.build.icons)
+        try {
+            const files = fs.readdirSync(iconsDir)
+            const spriteFile = files.find((f) => /^sprite.*\.svg$/.test(f))
+            if (spriteFile) {
+                spriteContent = fs.readFileSync(nodePath.join(iconsDir, spriteFile), 'utf-8')
+            }
+        } catch (err) {
+            notify.warn(
+                NOTIFICATION_HANDLER_TITLES.HTML,
+                `SVG sprite file not found for inline: ${err}`,
+            )
+        }
+    }
+
     if (env.isI18N) {
         // * build for locales
         const i18nConfig = JSON.parse(
-            fs.readFileSync(`${path.src.base}/i18n/languages.json`, 'utf-8'),
+            fs.readFileSync(`${path.src.i18n.base}/languages.json`, 'utf-8'),
         )
         const { default_locale: defaultLocale, available_locales: locales } = i18nConfig
 
         for (const locale of locales) {
-            const dataPath = `${path.src.base}/i18n/${locale}.json`
+            const dataPath = `${path.src.i18n.base}/${locale}.json`
             const localeData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'))
 
             const destPath =
@@ -226,6 +369,9 @@ export async function html() {
                 baseUrl: env.baseUrl,
                 baseUrlPostfix: env.baseUrlPostfix,
                 pageRelativePath: '',
+                cssContent,
+                jsContent,
+                spriteContent,
             })
             await new Promise((resolve, reject) => {
                 stream.on('end', resolve).on('error', reject)
@@ -235,15 +381,49 @@ export async function html() {
             // browserSync.reload();
         }
     } else {
-        const stream = createHtmlStream({ destPath: path.build.html })
+        const stream = createHtmlStream({
+            destPath: path.build.html,
+            cssContent,
+            jsContent,
+            spriteContent,
+        })
 
         await new Promise((resolve, reject) => {
             stream.on('end', resolve).on('error', reject)
         })
     }
 
+    // * update dev server
     browserSync.reload()
 }
+
+async function cleanInlineAssets() {
+    // * собираем пути для удаления в массив на основе условий
+    const pathsToDelete = []
+
+    if (env.buildMode.isProd && env.isInlineCSS) {
+        pathsToDelete.push(path.build.styles)
+    }
+    if (env.buildMode.isProd && env.isInlineJS) {
+        pathsToDelete.push(path.build.scripts)
+    }
+    if (env.buildMode.isProd && env.isInlineSprite) {
+        // pathsToDelete.push(`${path.build.icons}sprite*.svg`)
+        pathsToDelete.push(path.build.icons)
+    }
+
+    // * если есть что удалять, вызываем deleteAsync и возвращаем Promise
+    if (pathsToDelete.length > 0) {
+        return await deleteAsync(pathsToDelete)
+    }
+
+    // * It's okay
+    return Promise.resolve()
+}
+
+// * --- EXPORT GULP TASK FOR HTML FILES
+// * -----------------------------------
+export const html = gulp.series(buildHtml, cleanInlineAssets)
 
 // * --- REGISTER GULP TASK
 // * ----------------------

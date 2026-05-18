@@ -2,92 +2,85 @@
 // ! ------------------------------
 
 import fs from 'fs/promises'
-// import { existsSync } from 'fs'
 import gulp from 'gulp'
 import path from 'path'
 import browserSync from 'browser-sync'
 import { spawn } from 'child_process'
 import pLimit from 'p-limit'
 
+import { env } from '../../../config/env.js'
 import { path as configPath } from '../../../config/path.js'
-import {
-    notify,
-    plumberWithErrorHandler,
-    NOTIFICATION_HANDLER_TITLES,
-} from '../../../helpers/error-handler.js'
+import { assetExists } from '../../../helpers/asset-exists.js'
+import { notify, NOTIFICATION_HANDLER_TITLES } from '../../../helpers/error-handler.js'
 
-const limit = pLimit(3) // можно поднять до 4–6 для аудио
+const limit = pLimit(4)
+const AUDIO_GLOB = configPath.src.audio
+const OUT_DIR = path.resolve(configPath.build.audio)
 
-const RAW_DIR = path.resolve(configPath.src.audio.replace(/\/\*\*\/\*\.\*.*$/, ''))
-
-// ====================== Helpers ======================
-
-const isAudio = (file) => /\.(mp3|wav|ogg|m4a|flac|aac|opus)$/i.test(file)
-
-async function isOutdated(src, dest) {
+// Проверка инструментов
+async function checkToolAvailable(tool) {
     try {
-        const [srcStat, destStat] = await Promise.all([
-            fs.stat(src),
-            fs.stat(dest).catch(() => null),
-        ])
-        return !destStat || srcStat.mtimeMs > destStat.mtimeMs
+        await spawnPromise(tool, ['-version'], { verbose: false })
     } catch {
-        return true
+        throw new Error(`${tool} is not available.`)
     }
 }
 
-function runFFmpeg(args, label = '') {
+// Универсальный spawnPromise с verbose
+function spawnPromise(cmd, args, { verbose = false } = {}) {
     return new Promise((resolve, reject) => {
-        const proc = spawn('ffmpeg', ['-hide_banner', ...args], {
-            stdio: 'inherit',
+        const proc = spawn(cmd, args, {
+            stdio: verbose ? 'inherit' : 'pipe',
         })
-
+        let stderr = ''
+        if (!verbose) {
+            proc.stderr.on('data', (data) => {
+                stderr += data
+            })
+        }
         proc.on('close', (code) => {
             if (code === 0) {
                 resolve()
             } else {
-                reject(new Error(`ffmpeg ${label} exited with code ${code}`))
+                reject(new Error(stderr || `Command failed with code ${code}`))
             }
         })
-
-        proc.on('error', (err) => {
-            reject(new Error(`Failed to start ffmpeg ${label}: ${err.message}`))
-        })
+        proc.on('error', reject)
     })
 }
 
-// ====================== Main Processor ======================
+const isAudio = (file) => /\.(mp3|wav|ogg|m4a|flac|aac|opus)$/i.test(file)
 
-async function processAudio(file) {
-    const input = file.path
-    if (!isAudio(input)) {
-        return
+async function processFile(filePath) {
+    if (!isAudio(filePath)) {
+        return { success: false, path: filePath, reason: 'not audio' }
     }
 
-    const relPath = path.relative(RAW_DIR, input)
+    const RAW_DIR = path.resolve('src/assets/audio')
+    const relPath = path.relative(RAW_DIR, filePath)
     const parsed = path.parse(relPath)
-
-    const outDir = path.join(configPath.build.audio, parsed.dir)
+    const outDir = path.join(OUT_DIR, parsed.dir)
     const baseName = parsed.name
+
+    const needWebm = !(await assetExists(outDir, baseName, '.webm'))
+    const needMp3 = !(await assetExists(outDir, baseName, '.mp3'))
 
     const webmOut = path.join(outDir, `${baseName}.webm`)
     const mp3Out = path.join(outDir, `${baseName}.mp3`)
-
-    const webmTmp = `${webmOut}.tmp`
-    const mp3Tmp = `${mp3Out}.tmp`
+    const webmTmp = webmOut + '.tmp'
+    const mp3Tmp = mp3Out + '.tmp'
 
     let processed = false
-
     try {
         await fs.mkdir(outDir, { recursive: true })
 
-        // ---------- WebM + Opus (лучший выбор для веба) ----------
-        if (await isOutdated(input, webmOut)) {
-            await runFFmpeg(
+        if (needWebm) {
+            await spawnPromise(
+                'ffmpeg',
                 [
                     '-y',
                     '-i',
-                    input,
+                    filePath,
                     '-c:a',
                     'libopus',
                     '-b:a',
@@ -100,71 +93,67 @@ async function processAudio(file) {
                     'webm',
                     webmTmp,
                 ],
-                'Opus',
+                { verbose: env.isVerbose },
             )
-
             await fs.rename(webmTmp, webmOut)
             processed = true
         }
 
-        // ---------- MP3 (совместимость) ----------
-        if (await isOutdated(input, mp3Out)) {
-            await runFFmpeg(
-                [
-                    '-y',
-                    '-i',
-                    input,
-                    '-c:a',
-                    'libmp3lame',
-                    '-q:a',
-                    '2', // VBR ~190 kbps — отличное качество
-                    '-f',
-                    'mp3',
-                    mp3Tmp,
-                ],
-                'MP3',
+        if (needMp3) {
+            await spawnPromise(
+                'ffmpeg',
+                ['-y', '-i', filePath, '-c:a', 'libmp3lame', '-q:a', '2', '-f', 'mp3', mp3Tmp],
+                { verbose: env.isVerbose },
             )
-
             await fs.rename(mp3Tmp, mp3Out)
             processed = true
         }
 
-        const status = processed ? '✓' : '↻'
-        notify.success(NOTIFICATION_HANDLER_TITLES.AUDIO, `${status} ${relPath}`)
+        return { success: true, relPath, processed }
     } catch (err) {
-        notify.warn(NOTIFICATION_HANDLER_TITLES.AUDIO, `${relPath}: ${err.message}`)
-
-        // Cleanup
         await Promise.allSettled([
             fs.unlink(webmTmp).catch(() => {}),
             fs.unlink(mp3Tmp).catch(() => {}),
         ])
+        return { success: false, relPath, error: err.message }
     }
 }
 
-// ====================== Gulp Task ======================
+export async function audio() {
+    await checkToolAvailable('ffmpeg')
 
-export function audio(done) {
-    const tasks = []
+    // Сбор файлов через асинхронную итерацию (Gulp 5)
+    const files = []
+    const stream = gulp.src(AUDIO_GLOB, { allowEmpty: true, read: false })
+    for await (const file of stream) {
+        files.push(file.path)
+    }
 
-    return gulp
-        .src(configPath.src.audio, {
-            allowEmpty: true,
-            read: false,
-        })
-        .pipe(plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.AUDIO))
-        .on('data', (file) => {
-            tasks.push(limit(() => processAudio(file)))
-        })
-        .on('end', async () => {
-            try {
-                await Promise.all(tasks)
-                browserSync.reload()
-                done()
-            } catch (err) {
-                done(err)
-            }
-        })
+    if (files.length === 0) {
+        notify.warn(NOTIFICATION_HANDLER_TITLES.AUDIO, 'No audio files found.')
+        return
+    }
+
+    const results = await Promise.all(files.map((file) => limit(() => processFile(file))))
+
+    const failed = results.filter((r) => !r.success)
+    const succeeded = results.filter((r) => r.success)
+    const processedCount = succeeded.filter((r) => r.processed).length
+    const skippedCount = succeeded.length - processedCount
+
+    if (failed.length > 0) {
+        notify.warn(
+            NOTIFICATION_HANDLER_TITLES.AUDIO,
+            `Audio: ${processedCount} updated, ${skippedCount} skipped, ${failed.length} failed.`,
+        )
+    } else {
+        notify.success(
+            NOTIFICATION_HANDLER_TITLES.AUDIO,
+            `Audio: ${processedCount} updated, ${skippedCount} skipped.`,
+        )
+    }
+
+    // * update dev server
+    browserSync.reload()
 }
-
 gulp.task('audio', audio)
