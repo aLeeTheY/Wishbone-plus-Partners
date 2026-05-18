@@ -1,4 +1,6 @@
 {
     "baseUrl": "https://localhost:3000",
-    "baseUrlPostfix": ""
+    "baseUrlPostfix": "",
+    "baseUrlForGithub": "https://aleethey.github.io",
+    "baseUrlPostfixForGithub": "Wishbone-plus-Partners"
 }
