@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.example.com/</loc>
-    <lastmod>2026-04-25</lastmod>
-  </url>
-  <url>
-    <loc>https://www.example.com/about</loc>
+    <!-- page url address -->
+    <loc>https://aleethey.github.io/Wishbone-plus-Partners/</loc>
+    <!-- page last change -->
+    <lastmod>2026-05-19</lastmod>
+    <!-- page change frequency -->
+    <changefreq>weekly</changefreq>
+    <!-- page priority -->
+    <priority>1.0</priority>
   </url>
 </urlset>

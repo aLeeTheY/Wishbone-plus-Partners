@@ -1,4 +1,6 @@
+# all robots can index all website
 User-agent: *
-Disallow: /private/
-Disallow: /wp-admin/
-Sitemap: https://www.example.com/sitemap.xml
+Disallow:
+
+# website sitemap
+Sitemap: https://aleethey.github.io/Wishbone-plus-Partners/sitemap.xml
