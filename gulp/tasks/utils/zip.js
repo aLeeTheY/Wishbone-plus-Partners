@@ -16,7 +16,7 @@ export async function zip() {
     await deleteAsync(`${path.zip}/${path.projectRootFolderName}.zip`)
 
     return gulp
-        .src(`${path.build.base}/**/*.*`)
+        .src(`${path.build.base}/**/*.*`, { encoding: false })
         .pipe(
             env.buildMode.isDev
                 ? plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.ZIP)
