@@ -32,7 +32,7 @@ export async function icons() {
         }
         notify.success(NOTIFICATION_HANDLER_TITLES.ICONS, 'Icons: up-to-date, skipped.')
         // Возвращаем пустой поток, чтобы Gulp не ругался
-        return gulp.src('.').pipe(gulp.dest('.'))
+        return
     }
 
     if (env.isVerbose) {
@@ -57,7 +57,7 @@ export async function icons() {
                             // * revision hash (disable)
                             bust: false,
                             // * sprite file name
-                            sprite: '../sprite.svg',
+                            sprite: 'sprite.svg',
                             // * generate html example file
                             example: false,
                             // render: {
