@@ -1,6 +1,6 @@
 {
   "apple-touch-icon.png": "apple-touch-icon-b3f2bfa620.png",
-  "assets/icons/sprite.svg": "assets/icons/sprite-a9611fab18.svg",
+  "assets/icons/symbol/sprite.svg": "assets/icons/symbol/sprite-a9611fab18.svg",
   "assets/images/featured_projects/first-mobile.avif": "assets/images/featured_projects/first-mobile-b060c5879b.avif",
   "assets/images/featured_projects/first-mobile.png": "assets/images/featured_projects/first-mobile-7b0c630668.png",
   "assets/images/featured_projects/first-mobile.webp": "assets/images/featured_projects/first-mobile-8b0c588fe9.webp",
@@ -80,7 +80,7 @@
   "favicon-96x96.png": "favicon-96x96-9191ea5ea6.png",
   "favicon.svg": "favicon-b8d07d6695.svg",
   "js/main.min.js": "js/main-204cc4f523.min.js",
-  "site.webmanifest": "site-db3e8a2aee.webmanifest",
+  "site.webmanifest": "site-dbcfd343b2.webmanifest",
   "web-app-manifest-192x192.png": "web-app-manifest-192x192-fce1e1c432.png",
   "web-app-manifest-512x512.png": "web-app-manifest-512x512-95f9fc6881.png"
 }
