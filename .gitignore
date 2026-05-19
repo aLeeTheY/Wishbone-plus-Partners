@@ -49,6 +49,7 @@
 *.ttf
 
 # Ignore all build/ and dist/ folders
+**/archive
 **/build
 **/dist
 **/out
