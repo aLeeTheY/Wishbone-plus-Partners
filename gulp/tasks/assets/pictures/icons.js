@@ -57,7 +57,7 @@ export async function icons() {
                             // * revision hash (disable)
                             bust: false,
                             // * sprite file name
-                            sprite: 'sprite.svg',
+                            sprite: '../sprite.svg',
                             // * generate html example file
                             example: false,
                             // render: {
