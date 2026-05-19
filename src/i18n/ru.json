@@ -1,0 +1,186 @@
+{
+    "common": {
+        "head": {
+            "title": "Wishbone + Partners",
+            "description": "Одностраничный сайт для десктопа, созданный с помощью HTML и Sass, с использованием Alpine.js для сворачиваемых секций и AOS для анимации при скролле. Использует кастомные CSS-переходы и не оптимизирован для мобильных устройств."
+        },
+        "header": {
+            "aria": {
+                "logo": "Логотип компании 'Wishbone + Partners'",
+                "menu": {
+                    "hamburger": "Меню, иконка кнопки-гамбургера",
+                    "close": "Меню, иконка кнопки закрытия"
+                }
+            },
+            "navigation": {
+                "link": {
+                    "projects": "Проекты",
+                    "about": "О нас",
+                    "news": "Новости",
+                    "team": "Наша команда",
+                    "contact": "Контакты"
+                },
+                "button": {
+                    "get_template": "Получить шаблон"
+                }
+            }
+        },
+        "footer": {
+            "aria": {
+                "logo": "Логотип компании 'Wishbone + Partners'",
+                "social": {
+                    "twitter": "Иконка Twitter",
+                    "instagram": "Иконка Instagram",
+                    "facebook": "Иконка Facebook"
+                }
+            },
+            "copyright": {
+                "powered_by": "Сделано с помощью Webflow.",
+                "all_rights_reserved": "Все права защищены Wishbone+Partners, Inc.",
+                "licensing": "Лицензирование."
+            }
+        }
+    },
+    "index": {
+        "common": {
+            "team": {
+                "collier": {
+                    "alt": "Фотография Стивена Кольера",
+                    "name": "Стивен Кольер",
+                    "role": "Старший партнёр"
+                },
+                "peters": {
+                    "alt": "Фотография Нолана Питерса",
+                    "name": "Нолан Питерс",
+                    "role": "Сотрудник"
+                },
+                "wonder": {
+                    "alt": "Фотография Ферриса Уандера",
+                    "name": "Феррис Уандер",
+                    "role": "Младший партнёр"
+                },
+                "stone": {
+                    "alt": "Фотография Арии Стоун",
+                    "name": "Ария Стоун",
+                    "role": "Старший партнёр"
+                },
+                "ferry": {
+                    "alt": "Фотография Нико Ферри",
+                    "name": "Нико Ферри",
+                    "role": "Партнёр"
+                }
+            },
+            "button": {
+                "read_more": "Читать далее"
+            }
+        },
+        "hero": {
+            "alt": {
+                "hero_main_img": "Главное изображение"
+            },
+            "tagline": "Wishbone+Partners",
+            "title": "Пространство красивой архитектуры.",
+            "paragraph": "Мы — архитектурное бюро, которое фокусируется на красивом, но функциональном дизайне. В основе всего лежит убеждение, что дизайн — это прежде всего удобство и доступность. Именно этими принципами мы руководствуемся в своей работе. Узнайте больше о наших предыдущих проектах, нашем процессе и нашей команде ниже."
+        },
+        "our_firm": {
+            "title": "О нашей фирме",
+            "paragraph": {
+                "one": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.",
+                "two": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.",
+                "three": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere."
+            }
+        },
+        "reeding_house": {
+            "title": "Reeding House",
+            "paragraph": "Lorem ipsum dolor sit amet, dolor sit amet dolor sit amet."
+        },
+        "our_process": {
+            "tagline": "Наш подход",
+            "title": "Как мы работаем.",
+            "card": {
+                "sketching": {
+                    "aria": "Иконка 'Создание эскиза'",
+                    "title": "Созданиём эскизы",
+                    "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut tristique libero. Nulla luctus sapien ac arcu tempor, vitae tempor leo iaculis."
+                },
+                "finalizing": {
+                    "aria": "Иконка 'Утверждение проекта'",
+                    "title": "Утверждаем проект",
+                    "paragraph": "Adipiscing elit. Nulla ut tristique libero. Nulla vitae tempor leo iaculis luctus sapien ac arcu tempor, vitae."
+                },
+                "building": {
+                    "aria": "Иконка 'Процесс строительства'",
+                    "title": "Строим Ваш объект",
+                    "paragraph": "Nulla ut tristique libero. Lorem ipsum ut tristique libero. Nulla luctus sapien ac arcu tempor, vitae lorem ipsum dolor leo iaculis."
+                }
+            }
+        },
+        "the_marble_staircase": {
+            "title": "The Marble Staircase",
+            "paragraph": "Lorem ipsum dolor sit amet, dolor sit amet dolor sit amet."
+        },
+        "prior_clients": {
+            "tagline": "Наши заказчики",
+            "title": "Нам доверяют.",
+            "paragraph": "Morbi neque ex, condimentum dapibus congue et, vulputate ut ligula. Vestibulum sit amet urna turpis. Mauris euismod elit et nisi ultrices, ut faucibus orci tincidunt.",
+            "company": {
+                "hill_and_hayes": {
+                    "aria": "Логотип компании 'Hill & Hayes'",
+                    "name": "Hill & Hayes"
+                },
+                "riksgransen": {
+                    "aria": "Логотип компании 'RIKSGRANSEN'",
+                    "name": "RIKSGRANSEN"
+                },
+                "studio_cai": {
+                    "aria": "Логотип компании 'Studio Cai'",
+                    "name": "Studio Cai"
+                },
+                "chill_industries": {
+                    "aria": "Логотип компании 'Chill Industries'",
+                    "name": "Chill Industries"
+                }
+            }
+        },
+        "the_swirling_staircase": {
+            "title": "The Swirling Staircase",
+            "paragraph": "Lorem ipsum dolor sit amet, dolor sit amet dolor sit amet."
+        },
+        "featured_projects": {
+            "title": "Избранные проекты",
+            "paragraph": "Несколько последних и лучших проектов от нас, Wishbone+Partners.",
+            "project": {
+                "one": {
+                    "city": "Лос-Анджелес",
+                    "title": "Vanguard Plaza"
+                },
+                "two": {
+                    "city": "Нью-Йорк",
+                    "title": "Пивоварня Big Road"
+                },
+                "three": {
+                    "city": "Сиэтл",
+                    "title": "Reeding House"
+                }
+            },
+            "button": {
+                "view_all": "Все проекты",
+                "close": "Свернуть"
+            }
+        },
+        "meet_our_team": {
+            "title": "Знакомьтесь с нашей командой",
+            "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis.",
+            "button": {
+                "see_team": "Наша команда"
+            }
+        },
+        "get_in_touch": {
+            "tagline": "Связаться с нами",
+            "title": "Думаете, мы подходим для вашего следующего проекта?",
+            "button": {
+                "get_in_touch": "Связаться с нами"
+            }
+        }
+    }
+}

@@ -307,3 +307,55 @@
 //         margin-top: calc(clamp(#{$min}, #{$preferred}, #{$max}) + #{$addition});
 //     }
 // }
+
+// _responsive-images.scss
+// @use 'sass:list';
+
+// $responsive-widths: 320, 640, 1024, 1920;
+
+// @mixin responsive-bg($image-path, $file-extension: 'jpg') {
+//     $base-filename: unquote($image-path);
+//     // Удаляем расширение из пути
+//     $dot-index: str-index($base-filename, '.');
+//     $name: if($dot-index, str-slice($base-filename, 1, $dot-index - 1), $base-filename);
+//     $dir: '';
+//     $slash-index: str-index($name, '/');
+//     @if $slash-index {
+//         $dir: str-slice($name, 1, $slash-index);
+//         $name: str-slice($name, $slash-index + 1);
+//     }
+
+//     $webp-set: ();
+//     $avif-set: ();
+//     $fallback-set: ();
+
+//     @each $w in $responsive-widths {
+//         $suffix: if($w == 0, '', '-#{$w}w');
+//         $path-prefix: if($dir != '', '#{$dir}#{$name}#{$suffix}', '#{$name}#{$suffix}');
+//         $avif-set: append(
+//             $avif-set,
+//             url('#{$path-prefix}.avif') type('image/avif') #{$w}w,
+//             $separator: comma
+//         );
+//         $webp-set: append(
+//             $webp-set,
+//             url('#{$path-prefix}.webp') type('image/webp') #{$w}w,
+//             $separator: comma
+//         );
+//         $fallback-set: append(
+//             $fallback-set,
+//             url('#{$path-prefix}.#{$file-extension}') #{$w}w,
+//             $separator: comma
+//         );
+//     }
+
+//     // Современные браузеры с image-set() для avif/webp
+//     .avif & {
+//         background-image: image-set(#{$avif-set});
+//     }
+//     .webp & {
+//         background-image: image-set(#{$webp-set});
+//     }
+//     // Фоллбэк
+//     background-image: image-set(#{$fallback-set});
+// }

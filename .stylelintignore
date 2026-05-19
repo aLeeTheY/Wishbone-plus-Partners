@@ -1,0 +1,28 @@
+# * --- Ignore all files and folders by default
+# * -------------------------------------------
+*
+
+# * --- Allow Git inspect folders
+# * -----------------------------
+!*/
+
+# * --- Allow .css, .scss and .sass files in any folders
+# * ----------------------------------------------------
+!**/*.css
+!**/*.scss
+!**/*.sass
+
+# * --- Ignore all .css, .scss and .sass files in these folders and their subfolders
+# * --------------------------------------------------------------------------------
+**/node_modules/**
+**/vendors/**
+
+**/out/**
+**/dist/**
+**/build/**
+**/archive/**
+
+**/public/**
+
+**/backup/**
+**/old/**

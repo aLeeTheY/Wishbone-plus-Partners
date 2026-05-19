@@ -1,5 +1,5 @@
 # Ignore all .vscode/ folders
-**/.vscode
+# **/.vscode
 
 # Ignore all VCS/ folders
 **/.git
@@ -14,16 +14,18 @@
 
 # Ignore all build/ and dist/ folders
 **/build
-**/dist
+# **/dist
+**/out
+**/archive
 
 # Ignore all assets/ folders
-**/assets
+# **/assets
 
 # Ignore all CSS folders
-**/css
+# **/css
 
 # Ignore all CSS files
-*.css
+# *.css
 *.css.map
 
 # Ignore all JS folders
@@ -43,3 +45,7 @@
 !*.config.js
 !*.config.cjs
 !*.config.mjs
+
+# Allow JS files and folders for Gulp
+!**/gulp/**/*.js
+!gulpfile.js

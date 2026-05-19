@@ -1,0 +1,534 @@
+<!-- Built with love by aLeeTheY | https://github.com/aLeeTheY -->
+<!doctype html>
+<html lang="{{ locale }}">
+    {% include "templates/head.njk" %}
+
+    <body>
+        {% include "templates/header.njk" %}
+
+        <main>
+            <section id="hero" class="hero">
+                <div class="wrapper wrapper--hero">
+                    <div class="hero__text" data-aos="fade-right">
+                        <div class="block-header block-header--hero">
+                            <h3 class="block-header__tagline">{{ index.hero.tagline }}</h3>
+                            <h1 class="block-header__header">{{ index.hero.title }}</h1>
+                        </div>
+                        <p class="hero__pg">{{ index.hero.paragraph }}</p>
+                        <a class="hero__button-link button-link button-link--hero" href="#!">{{ index.common.button.read_more }}</a>
+                    </div>
+                    <div class="hero__img-wrapper" data-aos="fade-left">
+                        <img
+                            width="720"
+                            height="720"
+                            fetchpriority="high"
+                            decoding="async"
+                            class="hero__img"
+                            src="@images/hero/main_image.png"
+                            alt="{{ index.hero.alt.hero_main_img }}" />
+                    </div>
+                </div>
+            </section>
+            <section id="our-firm" class="our-firm" data-aos="fade-up">
+                <div class="wrapper wrapper--our-firm">
+                    <h2 class="block-header block-header--our-firm">{{ index.our_firm.title }}</h2>
+                    <div class="our-firm__content">
+                        <p class="our-firm__pg">{{ index.our_firm.paragraph.one }}</p>
+                        <p class="our-firm__pg">{{ index.our_firm.paragraph.two }}</p>
+                        <p class="our-firm__pg">{{ index.our_firm.paragraph.three }}</p>
+                        <a href="#!" class="our-firm__team-member-link team-member">
+                            <img
+                                width="84"
+                                height="84"
+                                loading="lazy"
+                                decoding="async"
+                                class="team-member__img"
+                                src="@images/our_team/stephen_collier.png"
+                                alt="{{ index.common.team.collier.alt }}" />
+                            <div class="team-member__content">
+                                <p class="team-member__full-name">{{ index.common.team.collier.name }}</p>
+                                <p class="team-member__work-position">{{ index.common.team.collier.role }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section id="reeding-house" class="reeding-house" data-aos="fade-up">
+                <div class="wrapper wrapper--reeding-house-and-marble-staircase">
+                    <div class="block-header block-header--house-and-staircase">
+                        <h3 class="block-header__header">{{ index.reeding_house.title }}</h3>
+                        <p class="block-header__pg">{{ index.reeding_house.paragraph }}</p>
+                    </div>
+                </div>
+            </section>
+            <section id="our-process" class="our-process" data-aos="fade-up">
+                <div class="wrapper wrapper--our-process">
+                    <div class="block-header block-header--our-process">
+                        <h3 class="block-header__tagline">{{ index.our_process.tagline }}</h3>
+                        <h2 class="block-header__header">{{ index.our_process.title }}</h2>
+                    </div>
+                    <div class="our-process__content">
+                        <div class="card">
+                            <svg class="card__img" width="117" height="102" aria-label="{{ index.our_process.card.sketching.aria }}">
+                                <use href="@icons/our_process/sketching.svg"></use>
+                            </svg>
+                            <h4 class="card__header">{{ index.our_process.card.sketching.title }}</h4>
+                            <p class="card__pg">{{ index.our_process.card.sketching.paragraph }}</p>
+                        </div>
+                        <div class="card">
+                            <svg class="card__img" width="117" height="102" aria-label="{{ index.our_process.card.finalizing.aria }}">
+                                <use href="@icons/our_process/finalizing.svg"></use>
+                            </svg>
+                            <h4 class="card__header">{{ index.our_process.card.finalizing.title }}</h4>
+                            <p class="card__pg">{{ index.our_process.card.finalizing.paragraph }}</p>
+                        </div>
+                        <div class="card">
+                            <svg class="card__img" width="117" height="102" aria-label="{{ index.our_process.card.building.aria }}">
+                                <use href="@icons/our_process/building.svg"></use>
+                            </svg>
+                            <h4 class="card__header">{{ index.our_process.card.building.title }}</h4>
+                            <p class="card__pg">{{ index.our_process.card.building.paragraph }}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="the-marble-staircase" class="the-marble-staircase" data-aos="fade-up">
+                <div class="wrapper wrapper--reeding-house-and-marble-staircase">
+                    <div class="block-header block-header--house-and-staircase">
+                        <h3 class="block-header__header">{{ index.the_marble_staircase.title }}</h3>
+                        <p class="block-header__pg">{{ index.the_marble_staircase.paragraph }}</p>
+                    </div>
+                </div>
+            </section>
+            <section id="prior-clients" class="prior-clients" data-aos="fade-up">
+                <div class="wrapper wrapper--prior-clients">
+                    <div class="prior-clients__text-block" data-aos="zoom-out-right">
+                        <div class="block-header block-header--prior-clients">
+                            <h3 class="block-header__tagline">{{ index.prior_clients.tagline }}</h3>
+                            <h2 class="block-header__header">{{ index.prior_clients.title }}</h2>
+                        </div>
+                        <p class="prior-clients__pg">{{ index.prior_clients.paragraph }}</p>
+                    </div>
+                    <div class="prior-clients__icons-block" data-aos="zoom-out-left">
+                        <a href="#!" class="prior-clients__img-link">
+                            <svg
+                                class="prior-clients__img"
+                                width="128"
+                                height="30"
+                                aria-label="{{ index.prior_clients.company.hill_and_hayes.aria }}">
+                                <use href="@icons/prior_clients/hill_and_hayes.svg"></use>
+                            </svg>
+                        </a>
+                        <a href="#!" class="prior-clients__img-link">
+                            <svg
+                                class="prior-clients__img"
+                                width="128"
+                                height="78"
+                                aria-label="{{ index.prior_clients.company.riksgransen.aria }}">
+                                <use href="@icons/prior_clients/riksgransen.svg"></use>
+                            </svg>
+                        </a>
+                        <a href="#!" class="prior-clients__img-link">
+                            <svg
+                                class="prior-clients__img"
+                                width="128"
+                                height="20"
+                                aria-label="{{ index.prior_clients.company.studio_cai.aria }}">
+                                <use href="@icons/prior_clients/studio_cai.svg"></use>
+                            </svg>
+                        </a>
+                        <a href="#!" class="prior-clients__img-link">
+                            <svg
+                                class="prior-clients__img"
+                                width="128"
+                                height="36"
+                                aria-label="{{ index.prior_clients.company.chill_industries.aria }}">
+                                <use href="@icons/prior_clients/chill_industries.svg"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section id="the-swirling-staircase" class="the-swirling-staircase" data-aos="fade-up">
+                <div class="wrapper wrapper--swirling-staircase">
+                    <div class="block-header block-header--house-and-staircase">
+                        <h3 class="block-header__header">{{ index.the_swirling_staircase.title }}</h3>
+                        <p class="block-header__pg">{{ index.the_swirling_staircase.paragraph }}</p>
+                    </div>
+                </div>
+            </section>
+            <section id="featured-projects" class="featured-projects" data-aos="fade-up">
+                <div class="wrapper wrapper--featured-projects" data-aos="fade-up">
+                    <div class="block-header block-header--featured-projects">
+                        <h2 class="block-header__header">{{ index.featured_projects.title }}</h2>
+                        <p class="block-header__pg">{{ index.featured_projects.paragraph }}</p>
+                    </div>
+                    <div class="featured-projects__content" x-data="{ expanded: false }">
+                        <div class="featured-projects__projects-block">
+                            <div class="card card--project" data-aos="flip-up">
+                                <img
+                                    width="375"
+                                    height="456"
+                                    loading="lazy"
+                                    decoding="async"
+                                    src="@images/featured_projects/first.png"
+                                    alt="{{ index.featured_projects.project.one.alt }}"
+                                    class="card__img" />
+                                <div class="card__content">
+                                    <div class="card__header-block">
+                                        <h4 class="card__tagline">{{ index.featured_projects.project.one.city }}</h4>
+                                        <h3 class="card__header">{{ index.featured_projects.project.one.title }}</h3>
+                                    </div>
+                                    <a href="#!" class="button-link button-link--card">{{ index.common.button.read_more }}</a>
+                                </div>
+                            </div>
+                            <div class="card card--project" data-aos="flip-up">
+                                <img
+                                    width="375"
+                                    height="456"
+                                    loading="lazy"
+                                    decoding="async"
+                                    src="@images/featured_projects/second.png"
+                                    alt="{{ index.featured_projects.project.two.alt }}"
+                                    class="card__img" />
+                                <div class="card__content">
+                                    <div class="card__header-block">
+                                        <h4 class="card__tagline">{{ index.featured_projects.project.two.city }}</h4>
+                                        <h3 class="card__header">{{ index.featured_projects.project.two.title }}</h3>
+                                    </div>
+                                    <a href="#!" class="button-link button-link--card">{{ index.common.button.read_more }}</a>
+                                </div>
+                            </div>
+                            <div class="card card--project" data-aos="flip-up">
+                                <img
+                                    width="375"
+                                    height="456"
+                                    loading="lazy"
+                                    decoding="async"
+                                    src="@images/featured_projects/third.png"
+                                    alt="{{ index.featured_projects.project.three.alt }}"
+                                    class="card__img" />
+                                <div class="card__content">
+                                    <div class="card__header-block">
+                                        <h4 class="card__tagline">{{ index.featured_projects.project.three.city }}</h4>
+                                        <h3 class="card__header">{{ index.featured_projects.project.three.title }}</h3>
+                                    </div>
+                                    <a href="#!" class="button-link button-link--card">{{ index.common.button.read_more }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="button-link button-link--hero" @click="expanded = !expanded">
+                            {{ index.featured_projects.button.view_all }}
+                        </button>
+                        <div class="featured-projects__expanded-block" x-show="expanded" x-collapse.duration.500ms>
+                            <div class="featured-projects__projects-block">
+                                <div class="card card--project">
+                                    <img
+                                        width="375"
+                                        height="456"
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="@images/featured_projects/first.png"
+                                        alt="{{ index.featured_projects.project.one.alt }}"
+                                        class="card__img" />
+                                    <div class="card__content">
+                                        <div class="card__header-block">
+                                            <h4 class="card__tagline">{{ index.featured_projects.project.one.city }}</h4>
+                                            <h3 class="card__header">{{ index.featured_projects.project.one.title }}</h3>
+                                        </div>
+                                        <a href="#!" class="button-link button-link--card">{{ index.common.button.read_more }}</a>
+                                    </div>
+                                </div>
+                                <div class="card card--project">
+                                    <img
+                                        width="375"
+                                        height="456"
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="@images/featured_projects/second.png"
+                                        alt="{{ index.featured_projects.project.two.alt }}"
+                                        class="card__img" />
+                                    <div class="card__content">
+                                        <div class="card__header-block">
+                                            <h4 class="card__tagline">{{ index.featured_projects.project.two.city }}</h4>
+                                            <h3 class="card__header">{{ index.featured_projects.project.two.title }}</h3>
+                                        </div>
+                                        <a href="#!" class="button-link button-link--card">{{ index.common.button.read_more }}</a>
+                                    </div>
+                                </div>
+                                <div class="card card--project">
+                                    <img
+                                        width="375"
+                                        height="456"
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="@images/featured_projects/third.png"
+                                        alt="{{ index.featured_projects.project.three.alt }}"
+                                        class="card__img" />
+                                    <div class="card__content">
+                                        <div class="card__header-block">
+                                            <h4 class="card__tagline">{{ index.featured_projects.project.three.city }}</h4>
+                                            <h3 class="card__header">{{ index.featured_projects.project.three.title }}</h3>
+                                        </div>
+                                        <a href="#!" class="button-link button-link--card">{{ index.common.button.read_more }}</a>
+                                    </div>
+                                </div>
+                                <div class="card card--project">
+                                    <img
+                                        width="375"
+                                        height="456"
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="@images/featured_projects/first.png"
+                                        alt="{{ index.featured_projects.project.one.alt }}"
+                                        class="card__img" />
+                                    <div class="card__content">
+                                        <div class="card__header-block">
+                                            <h4 class="card__tagline">{{ index.featured_projects.project.one.city }}</h4>
+                                            <h3 class="card__header">{{ index.featured_projects.project.one.title }}</h3>
+                                        </div>
+                                        <a href="#!" class="button-link button-link--card">{{ index.common.button.read_more }}</a>
+                                    </div>
+                                </div>
+                                <div class="card card--project">
+                                    <img
+                                        width="375"
+                                        height="456"
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="@images/featured_projects/second.png"
+                                        alt="{{ index.featured_projects.project.two.alt }}"
+                                        class="card__img" />
+                                    <div class="card__content">
+                                        <div class="card__header-block">
+                                            <h4 class="card__tagline">{{ index.featured_projects.project.two.city }}</h4>
+                                            <h3 class="card__header">{{ index.featured_projects.project.two.title }}</h3>
+                                        </div>
+                                        <a href="#!" class="button-link button-link--card">{{ index.common.button.read_more }}</a>
+                                    </div>
+                                </div>
+                                <div class="card card--project">
+                                    <img
+                                        width="375"
+                                        height="456"
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="@images/featured_projects/third.png"
+                                        alt="{{ index.featured_projects.project.three.alt }}"
+                                        class="card__img" />
+                                    <div class="card__content">
+                                        <div class="card__header-block">
+                                            <h4 class="card__tagline">{{ index.featured_projects.project.three.city }}</h4>
+                                            <h3 class="card__header">{{ index.featured_projects.project.three.title }}</h3>
+                                        </div>
+                                        <a href="#!" class="button-link button-link--card">{{ index.common.button.read_more }}</a>
+                                    </div>
+                                </div>
+                                <div class="card card--project">
+                                    <img
+                                        width="375"
+                                        height="456"
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="@images/featured_projects/first.png"
+                                        alt="{{ index.featured_projects.project.one.alt }}"
+                                        class="card__img" />
+                                    <div class="card__content">
+                                        <div class="card__header-block">
+                                            <h4 class="card__tagline">{{ index.featured_projects.project.one.city }}</h4>
+                                            <h3 class="card__header">{{ index.featured_projects.project.one.title }}</h3>
+                                        </div>
+                                        <a href="#!" class="button-link button-link--card">{{ index.common.button.read_more }}</a>
+                                    </div>
+                                </div>
+                                <div class="card card--project">
+                                    <img
+                                        width="375"
+                                        height="456"
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="@images/featured_projects/second.png"
+                                        alt="{{ index.featured_projects.project.two.alt }}"
+                                        class="card__img" />
+                                    <div class="card__content">
+                                        <div class="card__header-block">
+                                            <h4 class="card__tagline">{{ index.featured_projects.project.two.city }}</h4>
+                                            <h3 class="card__header">{{ index.featured_projects.project.two.title }}</h3>
+                                        </div>
+                                        <a href="#!" class="button-link button-link--card">{{ index.common.button.read_more }}</a>
+                                    </div>
+                                </div>
+                                <div class="card card--project">
+                                    <img
+                                        width="375"
+                                        height="456"
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="@images/featured_projects/third.png"
+                                        alt="{{ index.featured_projects.project.three.alt }}"
+                                        class="card__img" />
+                                    <div class="card__content">
+                                        <div class="card__header-block">
+                                            <h4 class="card__tagline">{{ index.featured_projects.project.three.city }}</h4>
+                                            <h3 class="card__header">{{ index.featured_projects.project.three.title }}</h3>
+                                        </div>
+                                        <a href="#!" class="button-link button-link--card">{{ index.common.button.read_more }}</a>
+                                    </div>
+                                </div>
+                                <div class="card card--project">
+                                    <img
+                                        width="375"
+                                        height="456"
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="@images/featured_projects/first.png"
+                                        alt="{{ index.featured_projects.project.one.alt }}"
+                                        class="card__img" />
+                                    <div class="card__content">
+                                        <div class="card__header-block">
+                                            <h4 class="card__tagline">{{ index.featured_projects.project.one.city }}</h4>
+                                            <h3 class="card__header">{{ index.featured_projects.project.one.title }}</h3>
+                                        </div>
+                                        <a href="#!" class="button-link button-link--card">{{ index.common.button.read_more }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="button-link button-link--hero" @click="expanded = !expanded">
+                                {{ index.featured_projects.button.close }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="meet-our-team" class="meet-our-team" data-aos="fade-up">
+                <div class="wrapper wrapper--meet-our-team">
+                    <div class="meet-our-team__text-block" data-aos="fade-down-right">
+                        <div class="block-header block-header--meet-our-team">
+                            <h2 class="block-header__header">{{ index.meet_our_team.title }}</h2>
+                            <p class="block-header__pg">{{ index.meet_our_team.paragraph }}</p>
+                        </div>
+                        <a class="button-link button-link--hero" href="#!">{{ index.meet_our_team.button.see_team }}</a>
+                    </div>
+                    <div class="meet-our-team__team-icons-block" data-aos="fade-up-left">
+                        <div class="team-member team-member--meet-our-team">
+                            <img
+                                width="84"
+                                height="84"
+                                loading="lazy"
+                                decoding="async"
+                                src="@images/our_team/stephen_collier.png"
+                                alt="{{ index.common.team.collier.alt }}" />
+                            <div>
+                                <p class="team-member__full-name">{{ index.common.team.collier.name }}</p>
+                                <p class="team-member__work-position">{{ index.common.team.collier.role }}</p>
+                            </div>
+                        </div>
+                        <div class="team-member team-member--meet-our-team">
+                            <img
+                                width="84"
+                                height="84"
+                                loading="lazy"
+                                decoding="async"
+                                src="@images/our_team/nolan_peters.png"
+                                alt="{{ index.common.team.peters.alt }}" />
+                            <div>
+                                <p class="team-member__full-name">{{ index.common.team.peters.name }}</p>
+                                <p class="team-member__work-position">{{ index.common.team.peters.role }}</p>
+                            </div>
+                        </div>
+                        <div class="team-member team-member--meet-our-team">
+                            <img
+                                width="84"
+                                height="84"
+                                loading="lazy"
+                                decoding="async"
+                                src="@images/our_team/ferris_wonder.png"
+                                alt="{{ index.common.team.wonder.alt }}" />
+                            <div>
+                                <p class="team-member__full-name">{{ index.common.team.wonder.name }}</p>
+                                <p class="team-member__work-position">{{ index.common.team.wonder.role }}</p>
+                            </div>
+                        </div>
+                        <div class="team-member team-member--meet-our-team">
+                            <img
+                                width="84"
+                                height="84"
+                                loading="lazy"
+                                decoding="async"
+                                src="@images/our_team/aria_stone.png"
+                                alt="{{ index.common.team.stone.alt }}" />
+                            <div>
+                                <p class="team-member__full-name">{{ index.common.team.stone.name }}</p>
+                                <p class="team-member__work-position">{{ index.common.team.stone.role }}</p>
+                            </div>
+                        </div>
+                        <div class="team-member team-member--meet-our-team">
+                            <img
+                                width="84"
+                                height="84"
+                                loading="lazy"
+                                decoding="async"
+                                src="@images/our_team/niko_ferry.png"
+                                alt="{{ index.common.team.ferry.alt }}" />
+                            <div>
+                                <p class="team-member__full-name">{{ index.common.team.ferry.name }}</p>
+                                <p class="team-member__work-position">{{ index.common.team.ferry.role }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="get-in-touch" class="get-in-touch" data-aos="fade-up">
+                <div class="wrapper wrapper--get-in-touch">
+                    <div class="block-header block-header--get-in-touch">
+                        <h3 class="block-header__tagline">{{ index.get_in_touch.tagline }}</h3>
+                        <h2 class="block-header__header">{{ index.get_in_touch.title }}</h2>
+                    </div>
+                    <a href="#!" class="button-link button-link--hero">{{ index.get_in_touch.button.get_in_touch }}</a>
+                </div>
+            </section>
+        </main>
+
+        {% include "templates/footer.njk" %}
+
+        <!-- TODO: test link CSS without preload in footer --- 96 performance --->
+        <!-- * 2. Import vendors CSS --->
+        <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
+
+        <!-- * 3. Import my CSS --->
+        <!-- <link rel="stylesheet" href="@scss/main.scss" /> -->
+
+        <!-- TODO: test link CSS with preload in footer --- 90 performance --->
+        <!-- * 2. Import vendors CSS --->
+        <!-- <link rel="preload" href="https://unpkg.com/aos@next/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'" /> -->
+
+        <!-- * 3. Import my CSS --->
+        <!-- <link rel="preload" href="@scss/main.scss" as="style" onload="this.onload=null;this.rel='stylesheet'" /> -->
+        <!-- * 3.one. Fallback (if JS disable) --->
+        <!-- <noscript>
+            <link rel="stylesheet" href="@scss/main.scss" />
+        </noscript> -->
+
+        <!--* 1. Import vendor JS --->
+        <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+        <script>
+            window.addEventListener('load', () => {
+                AOS.init({ once: true })
+                AOS.refresh()
+            })
+
+            // let samt = 0;
+            // window.addEventListener("scroll", function () {
+            //     samt <= 10 ? samt++ : AOS.refresh();
+            // });
+        </script>
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script> -->
+
+        <!-- ! DO NOT REMOVE THIS COMMENT !!! | INLINE JS START | DISABLED BY DEFAULT --->
+        <!-- * 2. Import my JS --->
+        <script src="@ts/main.ts" defer></script>
+        <!-- ! DO NOT REMOVE THIS COMMENT !!! | INLINE JS END --->
+    </body>
+</html>

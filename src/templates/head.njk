@@ -1,0 +1,58 @@
+{% from "templates/utils/macro__inline_script.njk" import inline_script %}
+{% from "templates/utils/macro__hreflang_tags.njk" import hreflang_tags %}
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ! PAGE LOCALE TAGS --->
+    {% if allLocales and defaultLocale and baseUrl and baseUrlPostfix and pageRelativePath %}
+        {{
+            hreflang_tags(
+                all_locales = allLocales,
+                default_locale = defaultLocale,
+                base_url = baseUrl,
+                base_url_postfix = baseUrlPostfix,
+                page_path = pageRelativePath
+            )
+        }}
+    {% endif %}
+
+    <!-- * For old Internet Explorer --->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- * BLOCK APPLE DETECTORS --->
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+
+    <!-- * Page title --->
+    <title>{{ common.head.title }}</title>
+
+    <!-- * Page description --->
+    <meta name="description" content="{{ common.head.description }}" />
+
+    <!-- * Page favicon --->
+    <link href="@meta/favicon.ico" rel="icon" type="image/x-icon" />
+
+    <!-- * 0. Inject inline avif/webp script polyfill --->
+    <!-- ! STRONGLY RECOMMENDED PLACE IT BEFORE ANY CSS FILES --->
+    {{ inline_script('node_modules/gulp-web-images-css/plugin.js') }}
+
+    <!-- * 1. Inject inline critical-css --->
+    <!-- ! DO NOT REMOVE THIS COMMENT !!! | CRITICAL CSS PLACEHOLDER --->
+
+    <!-- TODO: test link CSS with preload in head --- 90 performance --->
+    <!-- * 2. Import vendors CSS --->
+    <link rel="preload" href="https://unpkg.com/aos@next/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+
+    <!-- ! DO NOT REMOVE THIS COMMENT !!! | INLINE CSS START | DISABLED BY DEFAULT --->
+    <!-- * 3. Import my CSS --->
+    <link rel="preload" href="@scss/main.scss" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <!-- * 3.1. Fallback (if JS disable) --->
+    <noscript>
+        <link rel="stylesheet" href="@scss/main.scss" />
+    </noscript>
+    <!-- ! DO NOT REMOVE THIS COMMENT !!! | INLINE CSS END --->
+
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>

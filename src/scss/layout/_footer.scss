@@ -64,6 +64,9 @@
         aspect-ratio: 1 / 1;
         transition: transform 300ms ease-in-out;
 
+        min-width: 24px;
+        height: auto;
+
         // ? --- TABLET ---
         // ? --------------
         @media (max-width: 768px) {
