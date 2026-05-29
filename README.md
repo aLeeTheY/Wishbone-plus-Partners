@@ -218,16 +218,16 @@ _Для удобства, вся информация разбита по кат
 <summary>⚙️ Окружение и автоматизация сборки (Gulp Ecosystem)</summary>
 
 - [![Node.js][NodeJS-logo]][NodeJS-url] <sup>— runtime-окружение</sup>
-    - [![Npm][Npm-logo]][Npm-url] <sup>— менеджер пакетов и управление зависимостями</sup>
+  - [![Npm][Npm-logo]][Npm-url] <sup>— менеджер пакетов и управление зависимостями</sup>
 - [![Gulp 5][Gulp-logo]][Gulp-url] <sup>— таск-раннер для автоматизации и оркестрации процессов</sup>
-    - **Интегрированные Gulp-таски (Node.js API):**
-        - [![Esbuild][Esbuild-logo]][Esbuild-url] <sup>— сверхбыстрый бандлинг и компиляция TS/JS кода внутри сборки</sup>
-        - [![PostCSS][PostCSS-logo]][PostCSS-url] <sup>— многоступенчатая постобработка, автопрефиксирование и оптимизация стилей</sup>
-        - [![Sharp][sharp-logo]][sharp-url] <sup>— автоматическая обработка растровых изображений и генерация AVIF/WebP в процессе сборки</sup>
-        - [![SVGO][SVGO-logo]][SVGO-url] <sup>— автоматическая очистка и минификация SVG-иконок</sup>
-    - **Внешние CLI-инструменты (автоматический вызов через Gulp Spawn):**
-        - [![FFmpeg][ffmpeg-logo]][ffmpeg-url] <sup>— конвертация аудио и видео-ассетов в формат `.webm` с поддержкой GPU-ускорения NVENC</sup>
-        - [![Foundry Tools CLI][FoundryToolsCLI-logo]][FoundryToolsCLI-url] <sup>— Python-утилита для конвертации клиентских шрифтов OTF/TTF в форматы WOFF и WOFF2</sup>
+  - **Интегрированные Gulp-таски (Node.js API):**
+    - [![Esbuild][Esbuild-logo]][Esbuild-url] <sup>— сверхбыстрый бандлинг и компиляция TS/JS кода внутри сборки</sup>
+    - [![PostCSS][PostCSS-logo]][PostCSS-url] <sup>— многоступенчатая постобработка, автопрефиксирование и оптимизация стилей</sup>
+    - [![Sharp][sharp-logo]][sharp-url] <sup>— автоматическая обработка растровых изображений и генерация AVIF/WebP в процессе сборки</sup>
+    - [![SVGO][SVGO-logo]][SVGO-url] <sup>— автоматическая очистка и минификация SVG-иконок</sup>
+  - **Внешние CLI-инструменты (автоматический вызов через Gulp Spawn):**
+    - [![FFmpeg][ffmpeg-logo]][ffmpeg-url] <sup>— конвертация аудио и видео-ассетов в формат `.webm` с поддержкой GPU-ускорения NVENC</sup>
+    - [![Foundry Tools CLI][FoundryToolsCLI-logo]][FoundryToolsCLI-url] <sup>— Python-утилита для конвертации клиентских шрифтов OTF/TTF в форматы WOFF и WOFF2</sup>
 - [![Browserslist][Browserslist-logo]][Browserslist-url] <sup>— управление конфигурацией целевых браузеров</sup>
 
 </details>
@@ -240,8 +240,8 @@ _Для удобства, вся информация разбита по кат
 - [![ESLint][ESLint-logo]][ESLint-url] <sup>— глубокий статический анализ и линтинг TypeScript/JavaScript кода</sup>
 - [![Prettier][Prettier-logo]][Prettier-url] <sup>— автоматическое форматирование кода во всех типах файлов (включая Nunjucks)</sup>
 - [![Husky][Husky-logo]][Husky-url] <sup>— управление автоматическими Git-хуками на стороне клиента</sup>
-    - [![Lint-staged][LintStaged-logo]][LintStaged-url] <sup>— линтинг и форматирование файлов перед коммитом (`pre-commit`)</sup>
-    - [![Commitlint][CommitLint-logo]][CommitLint-url] <sup>— строгая валидация сообщений по спецификации Conventional Commits (с кастомным типом `wip`)</sup>
+  - [![Lint-staged][LintStaged-logo]][LintStaged-url] <sup>— линтинг и форматирование файлов перед коммитом (`pre-commit`)</sup>
+  - [![Commitlint][CommitLint-logo]][CommitLint-url] <sup>— строгая валидация сообщений по спецификации Conventional Commits (с кастомным типом `wip`)</sup>
 
 </details>
 
@@ -396,7 +396,8 @@ Wishbone-plus-Partners/
 - [![Firefox][Firefox-logo]][Firefox-url]
 - [![Opera][Opera-logo]][Opera-url]
 
-> [!IMPORTANT] Информация актуальна для версии **[2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0)**. На момент проверки проект корректно отображался в последних стабильных версиях всех [указанных браузеров](#-поддерживаемые-браузеры).
+> [!IMPORTANT]
+> Информация актуальна для версии **[2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0)**. На момент проверки проект корректно отображался в последних стабильных версиях всех [указанных браузеров](#-поддерживаемые-браузеры).
 >
 > **Дата последней проверки: 30 мая 2026**
 
@@ -512,22 +513,22 @@ gulp --info
 ### 🏁 Фаза 1 – Статическая вёрстка (v1.0.0)
 
 - [x] Верстка десктопного макета из Figma
-    - [x] Разработка семантической HTML-структуры
-    - [x] Базовая стилизация на SCSS (BEM)
+  - [x] Разработка семантической HTML-структуры
+  - [x] Базовая стилизация на SCSS (BEM)
 - [x] Внедрение интерактивных элементов на базе AOS.js и Alpine.js
 
 ### 🚀 Фаза 2 – Gulp-интеграция и Fluid-адаптив (v2.0.0)
 
 - [x] Создание современной сборки **Gulp 5**
-    - [x] Полная автоматизация линтинга и форматирования (Husky, ESLint, Stylelint, Prettier)
-    - [x] Оптимизация всех ресурсов: шрифты (WOFF2), изображения (AVIF/WebP), медиа (FFmpeg)
-    - [x] Настройка критического CSS, кэширования (`gulp-rev`), обфускации и CLI-управления через `yargs`
-    - [x] Внедрение модульного Nunjucks-шаблонизатора и мультиязычности (i18n)
-    - [x] Разработка самописных хелперов (инкрементальные проверки, `<picture>`-трансформер, инлайн-сборка)
+  - [x] Полная автоматизация линтинга и форматирования (Husky, ESLint, Stylelint, Prettier)
+  - [x] Оптимизация всех ресурсов: шрифты (WOFF2), изображения (AVIF/WebP), медиа (FFmpeg)
+  - [x] Настройка критического CSS, кэширования (`gulp-rev`), обфускации и CLI-управления через `yargs`
+  - [x] Внедрение модульного Nunjucks-шаблонизатора и мультиязычности (i18n)
+  - [x] Разработка самописных хелперов (инкрементальные проверки, `<picture>`-трансформер, инлайн-сборка)
 - [x] Переход на Fluid Design с использованием `clamp()`, `min()`, `max()`
-    - [x] Адаптив под Laptop
-    - [x] Адаптив под Tablet
-    - [x] Адаптив под Mobile
+  - [x] Адаптив под Laptop
+  - [x] Адаптив под Tablet
+  - [x] Адаптив под Mobile
 - [x] Формирование демо на GitHub Pages
 - [x] Подготовка технической документации и `README.md`
 
@@ -601,7 +602,8 @@ GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com
 
 <br />
 
-> [!NOTE] Без этих инструментов разработка данного проекта была бы **невозможна**.
+> [!NOTE]
+> Без этих инструментов разработка данного проекта была бы **невозможна**.
 
 <p align="right">(<a href="#readme-top">наверх</a>)</p>
 

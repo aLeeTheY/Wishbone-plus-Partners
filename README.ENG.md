@@ -218,16 +218,16 @@ _For clarity, project dependencies are grouped by environmental roles._
 <summary>⚙️ Build Automation & Orchestration (Gulp Ecosystem)</summary>
 
 - [![Node.js][NodeJS-logo]][NodeJS-url] <sup>— Javascript runtime environment</sup>
-    - [![Npm][Npm-logo]][Npm-url] <sup>— Package management and workspace dependencies</sup>
+  - [![Npm][Npm-logo]][Npm-url] <sup>— Package management and workspace dependencies</sup>
 - [![Gulp 5][Gulp-logo]][Gulp-url] <sup>— Task runner for workflow orchestration and pipeline streaming</sup>
-    - **Integrated Gulp Tasks (Node.js API):**
-        - [![Esbuild][Esbuild-logo]][Esbuild-url] <sup>— Ultra-fast script bundling and compilation within the pipeline</sup>
-        - [![PostCSS][PostCSS-logo]][PostCSS-url] <sup>— Multi-stage style post-processing, prefixing, and asset minification</sup>
-        - [![Sharp][sharp-logo]][sharp-url] <sup>— High-performance image processing and AVIF/WebP generation routines</sup>
-        - [![SVGO][SVGO-logo]][SVGO-url] <sup>— Automated optimization and minification for vector assets</sup>
-    - **External Native Binaries (Executed via Gulp Spawn):**
-        - [![FFmpeg][ffmpeg-logo]][ffmpeg-url] <sup>— Multimedia encoding engine to transcode audio/video into `.webm` using NVENC hardware acceleration</sup>
-        - [![Foundry Tools CLI][FoundryToolsCLI-logo]][FoundryToolsCLI-url] <sup>— Python utility utilized for rebuilding OTF/TTF typographic assets into optimized WOFF/WOFF2 packages</sup>
+  - **Integrated Gulp Tasks (Node.js API):**
+    - [![Esbuild][Esbuild-logo]][Esbuild-url] <sup>— Ultra-fast script bundling and compilation within the pipeline</sup>
+    - [![PostCSS][PostCSS-logo]][PostCSS-url] <sup>— Multi-stage style post-processing, prefixing, and asset minification</sup>
+    - [![Sharp][sharp-logo]][sharp-url] <sup>— High-performance image processing and AVIF/WebP generation routines</sup>
+    - [![SVGO][SVGO-logo]][SVGO-url] <sup>— Automated optimization and minification for vector assets</sup>
+  - **External Native Binaries (Executed via Gulp Spawn):**
+    - [![FFmpeg][ffmpeg-logo]][ffmpeg-url] <sup>— Multimedia encoding engine to transcode audio/video into `.webm` using NVENC hardware acceleration</sup>
+    - [![Foundry Tools CLI][FoundryToolsCLI-logo]][FoundryToolsCLI-url] <sup>— Python utility utilized for rebuilding OTF/TTF typographic assets into optimized WOFF/WOFF2 packages</sup>
 - [![Browserslist][Browserslist-logo]][Browserslist-url] <sup>— Target matrix provider for environmental compatibility tooling</sup>
 
 </details>
@@ -240,8 +240,8 @@ _For clarity, project dependencies are grouped by environmental roles._
 - [![ESLint][ESLint-logo]][ESLint-url] <sup>— Static analysis framework inspecting TypeScript/JavaScript code quality</sup>
 - [![Prettier][Prettier-logo]][Prettier-url] <sup>— Opinionated multi-format formatter supporting Nunjucks structures</sup>
 - [![Husky][Husky-logo]][Husky-url] <sup>— Native client-side Git hooks lifecycle management</sup>
-    - [![Lint-staged][LintStaged-logo]][LintStaged-url] <sup>— Isolates and filters staged files for pre-commit evaluation</sup>
-    - [![Commitlint][CommitLint-logo]][CommitLint-url] <sup>— Enforces standard semantic formatting across commit history with custom `wip` extensions</sup>
+  - [![Lint-staged][LintStaged-logo]][LintStaged-url] <sup>— Isolates and filters staged files for pre-commit evaluation</sup>
+  - [![Commitlint][CommitLint-logo]][CommitLint-url] <sup>— Enforces standard semantic formatting across commit history with custom `wip` extensions</sup>
 
 </details>
 
@@ -396,7 +396,8 @@ The codebase is validated to ensure visual consistency and script execution stab
 - [![Firefox][Firefox-logo]][Firefox-url]
 - [![Opera][Opera-logo]][Opera-url]
 
-> [!IMPORTANT] This information applies to version **[2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0)**. At the time of verification, the project was rendered correctly in the latest stable versions of all [supported browsers](#supported-browsers).
+> [!IMPORTANT]
+> This information applies to version **[2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0)**. At the time of verification, the project was rendered correctly in the latest stable versions of all [supported browsers](#supported-browsers).
 >
 > **Last Verification Date: May 29, 2026**
 
@@ -512,22 +513,22 @@ Experimental Features parameters:
 ### 🏁 Phase 1 – Static Layout (v1.0.0)
 
 - [x] Figma desktop wireframe implementation
-    - [x] Semantic HTML5 layout development
-    - [x] Base SCSS style structures mapping (BEM)
+  - [x] Semantic HTML5 layout development
+  - [x] Base SCSS style structures mapping (BEM)
 - [x] Client UI interaction provisioning via AOS.js and Alpine.js
 
 ### 🚀 Phase 2 – Gulp Integration & Fluid Responsiveness (v2.0.0)
 
 - [x] Establishing a modern automated build engine powered by **Gulp 5**
-    - [x] Workspace code quality checks orchestration (Husky, ESLint, Stylelint, Prettier)
-    - [x] Resource compression engine setup: Web fonts (WOFF2), Graphics (AVIF/WebP), Media layers (FFmpeg)
-    - [x] Asset management setup: Critical CSS pathing, cache hashing (`gulp-rev`), code obfuscation, and command line control bindings (`yargs`)
-    - [x] Implementation of the Nunjucks modular document generator and language localization routines (i18n)
-    - [x] Authoring custom stream wrappers (state checks trackers, `<picture>` DOM injection processors, asset inline builders)
+  - [x] Workspace code quality checks orchestration (Husky, ESLint, Stylelint, Prettier)
+  - [x] Resource compression engine setup: Web fonts (WOFF2), Graphics (AVIF/WebP), Media layers (FFmpeg)
+  - [x] Asset management setup: Critical CSS pathing, cache hashing (`gulp-rev`), code obfuscation, and command line control bindings (`yargs`)
+  - [x] Implementation of the Nunjucks modular document generator and language localization routines (i18n)
+  - [x] Authoring custom stream wrappers (state checks trackers, `<picture>` DOM injection processors, asset inline builders)
 - [x] Achieving a Fluid Design using `clamp()`, `min()`, and `max()` functions
-    - [x] Laptop viewport optimization
-    - [x] Tablet viewport optimization
-    - [x] Mobile viewport optimization
+  - [x] Laptop viewport optimization
+  - [x] Tablet viewport optimization
+  - [x] Mobile viewport optimization
 - [x] Shipping live demo structures to GitHub Pages
 - [x] Constructing workspace documentation architecture and engineering `README.md`
 
@@ -601,7 +602,8 @@ GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com
 
 <br />
 
-> [!NOTE] Without these tools, the development of this project would have been **impossible**.
+> [!NOTE]
+> Without these tools, the development of this project would have been **impossible**.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
