@@ -600,8 +600,6 @@ GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com
 
 </details>
 
-<br />
-
 > [!NOTE]
 > Без этих инструментов разработка данного проекта была бы **невозможна**.
 
