@@ -396,7 +396,7 @@ The codebase is validated to ensure visual consistency and script execution stab
 - [![Firefox][Firefox-logo]][Firefox-url]
 - [![Opera][Opera-logo]][Opera-url]
 
-> [!IMPORTANT] Compatibility data corresponds with release version **[2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0)**. During evaluation phases, the layout demonstrated native stability across all current stable paths of [specified browser targets](#-supported-browsers).
+> [!IMPORTANT] This information applies to version **[2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0)**. At the time of verification, the project was rendered correctly in the latest stable versions of all [supported browsers](#supported-browsers).
 >
 > **Last Verification Date: May 29, 2026**
 
@@ -410,7 +410,7 @@ _Follow the configuration scripts provided below to prepare and spin up the proj
 
 ### 📋 Prerequisites
 
-1. Set up [Node.js][NodeJS-url], [FFmpeg][FFmpeg-url], [Python][Python-url], and [FoundryTools-CLI][FoundryTools-CLI-url] inside your operating environment.
+1. Set up [Node.js][NodeJS-url], [FFmpeg][FFmpeg-url], [Python][Python-url], and [FoundryTools-CLI][FoundryToolsCLI-url] inside your operating environment.
 
 2. Fetch the codebase by extracting the repository ZIP bundle or cloning via [Git][Git-url]:
 
@@ -655,6 +655,7 @@ GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com
 [Browserslist-url]: https://github.com/browserslist/browserslist
 [Sharp-logo]: https://custom-icon-badges.demolab.com/badge/Sharp-1f2a1c?logo=sharp&style=for-the-badge
 [Sharp-url]: https://sharp.pixelplumbing.com/
+[Python-url]: https://www.python.org/
 
 <!-- linters & code format --->
 

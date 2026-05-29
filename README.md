@@ -410,7 +410,7 @@ _Следуйте приведённым ниже инструкциям для 
 
 ### 📋 Предварительные требования
 
-1. Установите [Node.js][NodeJS-url], [FFmpeg][FFmpeg-url], [Python][Python-url] и [FoundryTools-CLI][FoundryTools-CLI-url].
+1. Установите [Node.js][NodeJS-url], [FFmpeg][FFmpeg-url], [Python][Python-url] и [FoundryTools-CLI][FoundryToolsCLI-url].
 
 2. Скачайте данный репозиторий в виде ZIP-архива или клонируйте его с помощью [Git][Git-url]:
 
@@ -655,6 +655,7 @@ GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com
 [Browserslist-url]: https://github.com/browserslist/browserslist
 [Sharp-logo]: https://custom-icon-badges.demolab.com/badge/Sharp-1f2a1c?logo=sharp&style=for-the-badge
 [Sharp-url]: https://sharp.pixelplumbing.com/
+[Python-url]: https://www.python.org/
 
 <!-- linters & code format --->
 
