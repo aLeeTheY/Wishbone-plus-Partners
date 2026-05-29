@@ -94,9 +94,9 @@
 
 ## ℹ️ About The Project <a id="about-the-project"></a>
 
-The primary goal of this project is to develop a highly optimized corporate landing page featuring automated build workflows, full internationalization, and peak performance.
+The primary goal of the project is to develop a responsive corporate landing page with a focus on full build automation, multilingual support, and achieving maximum performance scores.
 
-The project is architected as a modular engineering scaffold powered by Gulp 5. The Nunjucks templating engine compiles HTML with robust localization (i18n) support, while SCSS is organized using the BEM methodology and processed through a multi-stage PostCSS pipeline. TypeScript is bundled into an optimized production asset, heavy media assets are compressed using dedicated low-level CLI utilities, and build parameters are driven directly by a custom CLI interface. The system fully segregates dev, staging, and production build targets.
+The project is built as a modular engineering framework on top of Gulp 5: the Nunjucks templating engine assembles HTML with localization (i18n) support, SCSS is processed using the BEM methodology through a multi-stage PostCSS pipeline, and client-side logic (when needed) is written in TypeScript and compiled into an optimized bundle. All media assets are processed by specialized utilities to compress and optimize page loading, while build parameter management is exposed through a CLI interface with support for `dev`, `staging`, and `production` modes.
 
 ### 🎨 Design <a id="design"></a>
 
