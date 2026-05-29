@@ -33,7 +33,7 @@
   <h1 align="center">Wishbone + Partners</h1>
 
   <p align="center">
-    💼 Corporate landing page for the Wishbone + Partners architecture bureau featuring localization and fluid layout.
+    💼 Corporate landing page for the Wishbone + Partners architectural bureau with localization and fluid layout.
     <br />
     <br />
     <a href="https://verstaem.online/projects/wishbone/">Design (Figma)</a>
