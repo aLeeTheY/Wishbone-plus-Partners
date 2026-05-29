@@ -431,11 +431,15 @@ npm install
 
 4. To compile assets and wake the workspace server, execute one of the specified command protocols matching your target environment:
 
+<div align="center">
+
 | Build Target  | Invocation Script                                              |
 | ------------- | -------------------------------------------------------------- |
 | `development` | `cross-env NODE_ENV=development gulp dev --i18n`               |
 | `staging`     | `cross-env NODE_ENV=staging gulp staging --i18n`               |
 | `production`  | `cross-env NODE_ENV=production gulp prod --i18n --prod-server` |
+
+</div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

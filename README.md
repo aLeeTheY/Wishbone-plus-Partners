@@ -431,11 +431,15 @@ npm install
 
 4. Для сборки и запуска проекта, выполните одну из следующих команд (_с учётом предпочтительного режима сборки_):
 
+<div align="center">
+
 | Режим сборки  | Команда                                                        |
 | ------------- | -------------------------------------------------------------- |
 | `development` | `cross-env NODE_ENV=development gulp dev --i18n`               |
 | `staging`     | `cross-env NODE_ENV=staging gulp staging --i18n`               |
 | `production`  | `cross-env NODE_ENV=production gulp prod --i18n --prod-server` |
+
+</div>
 
 <p align="right">(<a href="#readme-top">наверх</a>)</p>
 
