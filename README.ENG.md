@@ -399,7 +399,7 @@ The codebase is validated to ensure visual consistency and script execution stab
 > [!IMPORTANT]
 > This information applies to version **[2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0)**. At the time of verification, the project was rendered correctly in the latest stable versions of all [supported browsers](#supported-browsers).
 >
-> **Last Verification Date: May 29, 2026**
+> **Last Verification Date: May 30, 2026**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
