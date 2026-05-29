@@ -514,14 +514,14 @@ Experimental Features parameters:
 
 ## 🗺️ Roadmap <a id="roadmap"></a>
 
-### 🏁 Phase 1 – Static Layout (v1.0.0)
+### 🏁 Phase 1 – Static Layout ([v1.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/1.0.0))
 
 - [x] Figma desktop wireframe implementation
   - [x] Semantic HTML5 layout development
   - [x] Base SCSS style structures mapping (BEM)
 - [x] Client UI interaction provisioning via AOS.js and Alpine.js
 
-### 🚀 Phase 2 – Gulp Integration & Fluid Responsiveness (v2.0.0)
+### 🚀 Phase 2 – Gulp Integration & Fluid Responsiveness ([v2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0))
 
 - [x] Establishing a modern automated build engine powered by **Gulp 5**
   - [x] Workspace code quality checks orchestration (Husky, ESLint, Stylelint, Prettier)

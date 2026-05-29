@@ -514,14 +514,14 @@ gulp --info
 
 ## 🗺️ Дорожная карта <a id="roadmap"></a>
 
-### 🏁 Фаза 1 – Статическая вёрстка (v1.0.0)
+### 🏁 Фаза 1 – Статическая вёрстка ([v1.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/1.0.0))
 
 - [x] Верстка десктопного макета из Figma
   - [x] Разработка семантической HTML-структуры
   - [x] Базовая стилизация на SCSS (BEM)
 - [x] Внедрение интерактивных элементов на базе AOS.js и Alpine.js
 
-### 🚀 Фаза 2 – Gulp-интеграция и Fluid-адаптив (v2.0.0)
+### 🚀 Фаза 2 – Gulp-интеграция и Fluid-адаптив ([v2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0))
 
 - [x] Создание современной сборки **Gulp 5**
   - [x] Полная автоматизация линтинга и форматирования (Husky, ESLint, Stylelint, Prettier)
