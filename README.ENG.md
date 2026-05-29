@@ -53,56 +53,56 @@
   <summary>📦 Table of Contents</summary>
   <ol>
     <li>
-      <a href="#-about-the-project">ℹ️ About The Project</a>
+      <a href="#about-the-project">ℹ️ About The Project</a>
       <ul>
-        <li><a href="#-design">🎨 Design</a></li>
-        <li><a href="#-preview">👁️ Preview</a></li>
+        <li><a href="#design">🎨 Design</a></li>
+        <li><a href="#preview">👁️ Preview</a></li>
         <li>
-          <a href="#-key-features">✨ Key Features</a>
+          <a href="#key-features">✨ Key Features</a>
           <ul>
-            <li><a href="#-google-lighthouse-benchmark">⚡ Google Lighthouse Benchmark</a></li>
+            <li><a href="#google-lighthouse-benchmark">⚡ Google Lighthouse Benchmark</a></li>
           </ul>
         </li>
-        <li><a href="#-built-with">🛠️ Built With</a></li>
-        <li><a href="#-project-structure">📂 Project Structure</a></li>
-        <li><a href="#-supported-browsers">🌐 Supported Browsers</a></li>
+        <li><a href="#built-with">🛠️ Built With</a></li>
+        <li><a href="#project-structure">📂 Project Structure</a></li>
+        <li><a href="#supported-browsers">🌐 Supported Browsers</a></li>
       </ul>
     </li>
     <li>
-      <a href="#-quick-start">🚀 Quick Start</a>
+      <a href="#quick-start">🚀 Quick Start</a>
       <ul>
-        <li><a href="#-prerequisites">📋 Prerequisites</a></li>
-        <li><a href="#-installation">📥 Installation</a></li>
-        <li><a href="#-build--launch">⚙️ Build & Launch</a></li>
+        <li><a href="#prerequisites">📋 Prerequisites</a></li>
+        <li><a href="#installation">📥 Installation</a></li>
+        <li><a href="#build-launch">⚙️ Build & Launch</a></li>
       </ul>
     </li>
     <li>
-      <a href="#-usage">💡 Usage</a>
+      <a href="#usage">💡 Usage</a>
       <ul>
-        <li><a href="#-configuration">🔧 Configuration</a></li>
+        <li><a href="#configuration">🔧 Configuration</a></li>
       </ul>
     </li>
-    <li><a href="#-development-challenges">🧠 Development Challenges</a></li>
-    <li><a href="#-key-skills">📈 Key Skills</a></li>
-    <li><a href="#-roadmap">🗺️ Roadmap</a></li>
-    <li><a href="#-license">📄 License</a></li>
-    <li><a href="#-contact">🤝 Contact</a></li>
-    <li><a href="#-acknowledgments">💖 Acknowledgments</a></li>
+    <li><a href="#development-challenges">🧠 Development Challenges</a></li>
+    <li><a href="#key-skills">📈 Key Skills</a></li>
+    <li><a href="#roadmap">🗺️ Roadmap</a></li>
+    <li><a href="#license">📄 License</a></li>
+    <li><a href="#contact">🤝 Contact</a></li>
+    <li><a href="#acknowledgments">💖 Acknowledgments</a></li>
   </ol>
 </details>
 <!-- ABOUT THE PROJECT -->
 
-## ℹ️ About The Project
+## ℹ️ About The Project <a id="about-the-project"></a>
 
 The primary goal of this project is to develop a highly optimized corporate landing page featuring automated build workflows, full internationalization, and peak performance.
 
 The project is architected as a modular engineering scaffold powered by Gulp 5. The Nunjucks templating engine compiles HTML with robust localization (i18n) support, while SCSS is organized using the BEM methodology and processed through a multi-stage PostCSS pipeline. TypeScript is bundled into an optimized production asset, heavy media assets are compressed using dedicated low-level CLI utilities, and build parameters are driven directly by a custom CLI interface. The system fully segregates dev, staging, and production build targets.
 
-### 🎨 Design
+### 🎨 Design <a id="design"></a>
 
 The visual layout is based on the [**Wishbone + Partners**](https://verstaem.online/projects/wishbone/) wireframe provided by the [**verstaem.online**](https://verstaem.online/) platform. <br /> The core objective was to implement the interface using Pixel Perfect fidelity and Fluid Design principles, ensuring seamless adaptation across all viewports while maintaining the integrity of the original design system.
 
-### 👁️ Preview
+### 👁️ Preview <a id="preview"></a>
 
 Below is a **preview** of the live environment (_**Desktop + Mobile**, click the image to view the live demo_):
 
@@ -112,7 +112,7 @@ Below is a **preview** of the live environment (_**Desktop + Mobile**, click the
 
 </div>
 
-### ✨ Key Features
+### ✨ Key Features <a id="key-features"></a>
 
 _For convenience, features are categorized by core architectural domains._
 
@@ -187,7 +187,7 @@ _For convenience, features are categorized by core architectural domains._
 
 </details>
 
-#### ⚡ Google Lighthouse Benchmark
+#### ⚡ Google Lighthouse Benchmark <a id="google-lighthouse-benchmark"></a>
 
 As confirmation of the project's optimization, below are the benchmark metrics obtained from **Google Lighthouse** evaluations for both desktop and mobile layouts:
 
@@ -199,7 +199,7 @@ As confirmation of the project's optimization, below are the benchmark metrics o
 
 </div>
 
-### 🛠️ Built With
+### 🛠️ Built With <a id="built-with"></a>
 
 _For clarity, project dependencies are grouped by environmental roles._
 
@@ -261,7 +261,7 @@ _For clarity, project dependencies are grouped by environmental roles._
 
 </details>
 
-### 📂 Project Structure
+### 📂 Project Structure <a id="project-structure"></a>
 
 ```text
 Wishbone-plus-Partners/
@@ -386,7 +386,7 @@ Wishbone-plus-Partners/
 └── tsconfig.json
 ```
 
-### 🌐 Supported Browsers
+### 🌐 Supported Browsers <a id="supported-browsers"></a>
 
 The codebase is validated to ensure visual consistency and script execution stability across modern releases of the following web browsers:
 
@@ -405,11 +405,11 @@ The codebase is validated to ensure visual consistency and script execution stab
 
 <!-- GETTING STARTED -->
 
-## 🚀 Quick Start
+## 🚀 Quick Start <a id="quick-start"></a>
 
 _Follow the configuration scripts provided below to prepare and spin up the project in a local development environment._
 
-### 📋 Prerequisites
+### 📋 Prerequisites <a id="prerequisites"></a>
 
 1. Set up [Node.js][NodeJS-url], [FFmpeg][FFmpeg-url], [Python][Python-url], and [FoundryTools-CLI][FoundryToolsCLI-url] inside your operating environment.
 
@@ -419,7 +419,7 @@ _Follow the configuration scripts provided below to prepare and spin up the proj
 git clone https://github.com/aLeeTheY/Wishbone-plus-Partners
 ```
 
-### 📥 Installation
+### 📥 Installation <a id="installation"></a>
 
 3. Route into the workspace directory and trigger package initialization dependencies:
 
@@ -427,7 +427,7 @@ git clone https://github.com/aLeeTheY/Wishbone-plus-Partners
 npm install
 ```
 
-### ⚙️ Build & Launch
+### ⚙️ Build & Launch <a id="build-launch"></a>
 
 4. To compile assets and wake the workspace server, execute one of the specified command protocols matching your target environment:
 
@@ -439,7 +439,7 @@ npm install
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 💡 Usage
+## 💡 Usage <a id="usage"></a>
 
 _You can drive Gulp compilation configurations at runtime using explicit **Command Line Interface arguments** (argv)._
 
@@ -449,7 +449,7 @@ To evaluate the complete manual of available configuration parameters, run:
 gulp --info
 ```
 
-### 🔧 Configuration
+### 🔧 Configuration <a id="configuration"></a>
 
 The parameter configuration options are documented below:
 
@@ -484,7 +484,7 @@ Experimental Features parameters:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🧠 Development Challenges
+## 🧠 Development Challenges <a id="development-challenges"></a>
 
 - **Migrating Legacy Static Infrastructure to an Automated Gulp Workflow:** The original codebase (v1.0.0) was a loose collection of uncompiled static files built strictly for desktop viewports without any build-tool orchestration. Transitioning this structure into a robust Gulp 5 ecosystem required a complete architectural overhaul: manual HTML strings were modularized into Nunjucks templates, styles re-engineered into a strict BEM + `7-1 Pattern` system, and the layout rewritten from scratch into a fluid, responsive environment without the aid of mobile Figma wireframes.
 - **Evaluating and Selecting npm/gulp Packages:** Many libraries inside the Gulp module graph are currently flagged as `deprecated`. Significant effort was allocated to isolating modern equivalents or engineering bespoke custom script blocks to avoid legacy packages.
@@ -495,7 +495,7 @@ Experimental Features parameters:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 📈 Key Skills
+## 📈 Key Skills <a id="key-skills"></a>
 
 - **Fluid Design Implementation:** Practical mastery over fluid rendering mechanics using `clamp`, `min`, and `max` operations combined with minimal media-query overrides to produce clean layout fluidity.
 - **Internationalization (i18n):** Orchestrating robust site localization pipelines powered by Nunjucks templates rendering key/value JSON structures dynamically across multi-language domains.
@@ -508,7 +508,7 @@ Experimental Features parameters:
 
 <!-- ROADMAP -->
 
-## 🗺️ Roadmap
+## 🗺️ Roadmap <a id="roadmap"></a>
 
 ### 🏁 Phase 1 – Static Layout (v1.0.0)
 
@@ -544,7 +544,7 @@ Experimental Features parameters:
 
 <!-- LICENSE -->
 
-## 📄 License
+## 📄 License <a id="license"></a>
 
 Copyright © 2025 [aLeeTheY](https://github.com/aLeeTheY) <br/> Distributed under the [MIT][license-url] License. See `LICENSE` file for more information.
 
@@ -552,7 +552,7 @@ Copyright © 2025 [aLeeTheY](https://github.com/aLeeTheY) <br/> Distributed unde
 
 <!-- CONTACT -->
 
-## 🤝 Contact
+## 🤝 Contact <a id="contact"></a>
 
 GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com](mailto:aleethey@gmail.com)
 
@@ -560,7 +560,7 @@ GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com
 
 <!-- ACKNOWLEDGMENTS -->
 
-## 💖 Acknowledgments
+## 💖 Acknowledgments <a id="acknowledgments"></a>
 
 [aLeeTheY](https://github.com/aLeeTheY) expresses gratitude to the developers and communities of the following projects:
 
