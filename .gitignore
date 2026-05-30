@@ -9,6 +9,11 @@
 
 # ! --- 3. Разрешаем проверять только конкретные расширения
 # ! -------------------------------------------------------
+# * GIT FILES
+!**/*.gitkeep
+!**/*.gitignore
+!**/*.gitattributes
+
 # * SERVICE FILES
 !**/*.browserslistrc
 !**/*.editorconfig
