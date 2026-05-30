@@ -198,9 +198,9 @@ As confirmation of the project's optimization, below are the benchmark metrics o
 
 <div align="center">
 
-|                        🖥️ Desktop Version                        |                       📱 Mobile Version                        |
-| :--------------------------------------------------------------: | :------------------------------------------------------------: |
-| ![Lighthouse Desktop](project/lighthouse_benchmark__desktop.png) | ![Lighthouse Mobile](project/lighthouse_benchmark__mobile.png) |
+|                        🖥️ Desktop Version                         |                        📱 Mobile Version                        |
+| :---------------------------------------------------------------: | :-------------------------------------------------------------: |
+| ![Lighthouse Desktop](project/lighthouse_benchmark__desktop.avif) | ![Lighthouse Mobile](project/lighthouse_benchmark__mobile.avif) |
 
 </div>
 

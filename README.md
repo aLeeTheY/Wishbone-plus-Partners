@@ -198,9 +198,9 @@ _Для удобства, вся информация разбита по кат
 
 <div align="center">
 
-|                        🖥️ Desktop Version                        |                       📱 Mobile Version                        |
-| :--------------------------------------------------------------: | :------------------------------------------------------------: |
-| ![Lighthouse Desktop](project/lighthouse_benchmark__desktop.png) | ![Lighthouse Mobile](project/lighthouse_benchmark__mobile.png) |
+|                        🖥️ Desktop Version                         |                        📱 Mobile Version                        |
+| :---------------------------------------------------------------: | :-------------------------------------------------------------: |
+| ![Lighthouse Desktop](project/lighthouse_benchmark__desktop.avif) | ![Lighthouse Mobile](project/lighthouse_benchmark__mobile.avif) |
 
 </div>
 
