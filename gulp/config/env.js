@@ -15,99 +15,93 @@ const appVersion = packageJson.version
 // * --- ARGV CONFIG
 // * ---------------
 const argv = yargs(hideBin(process.argv))
-    // * выравнивание текста по ширине терминала
+    // * Выравнивание текста по ширине терминала
     .wrap(Math.min(100, yargs(hideBin(process.argv)).terminalWidth()))
-    // * настраиваем вывод версии приложения
-    .version('version', 'Show the current build version of the project', appVersion)
+    // * Настраиваем вывод версии приложения
+    .version('version', 'Displays current workspace semantic version', appVersion)
     .alias('version', 'v')
-    // * настраиваем вывод help
-    .help('info', 'Show help information and available build options')
+    // * Настраиваем вывод help
+    .help('info', 'Displays CLI options manual')
     .alias('info', 'i')
-    // * флаг verbose
+    // * Флаг verbose
     .option('verbose', {
         alias: ['V'],
         type: 'boolean',
         default: false,
-        description: 'Print detailed logging and asset processing steps to the terminal',
+        description: 'Unlocks extended console logging during task streaming execution',
     })
     .option('force-clean', {
         alias: ['c'],
         type: 'boolean',
         default: false,
-        description: 'Force clean the entire dist/ folder, including assets and libraries',
+        description: 'Triggers a hard sweep of the compiled `dist/` workspace directory',
     })
-    // * флаг obfuscation
+    // * Флаг obfuscation
     .option('obfuscation', {
         alias: ['obf'],
         type: 'boolean',
         default: false,
         description:
-            'Enable class name obfuscation across all CSS, JS, and HTML source files. CAUTION: Incompatible with --inline-* options.',
+            'Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with `--inline-*` options',
     })
-    // * флаг base-url
+    // * Флаг base-url
     .option('base-url', {
         alias: ['bu'],
         type: 'string',
         default: undefined,
-        description:
-            'Base URL (domain) of the site, e.g. "https://example.com". ' +
-            'For GitHub Pages this is usually "https://username.github.io". ' +
-            'If not provided, the value from site.config.json is used',
+        description: 'Maps target deployment domain root, e.g., `https://example.com`',
     })
-    // * флаг base-url-postfix
+    // * Флаг base-url-postfix
     .option('base-url-postfix', {
         alias: ['bup'],
         type: 'string',
         default: undefined,
         description:
-            'URL path postfix where the site is served, e.g. "/my-repo/". ' +
-            'For GitHub Pages this is the repository name. ' +
-            'Leave empty or omit if served from root. ' +
-            'If not provided, the value from site.config.json is used',
+            'Maps trailing repository paths for subdirectory deployments, e.g., `.../my-repo/...`',
     })
-    // * флаг internationalization
+    // * Флаг internationalization
     .option('internationalization', {
         alias: ['i18n'],
         type: 'boolean',
         default: false,
-        description:
-            'Enable internationalization build (reads locale JSON files). ' +
-            'Without this flag, builds with inline text and default locale only',
+        description: 'Activates localized multi-lingual document compilation',
     })
-    // * флаг local
+    // * Флаг local
     .option('local', {
         alias: ['l'],
         type: 'boolean',
         default: false,
-        description: 'Build with relative paths for offline viewing via the file:/// protocol',
+        description:
+            'Switches paths to strict relative links, satisfying standalone execution via `file:///`',
     })
-    // * флаг inline-sprite
+    // * Флаг inline-sprite
     .option('inline-sprite', {
         alias: ['full-inline-sprite', 'is'],
         type: 'boolean',
         default: false,
-        description: 'Inline SVG sprite into HTML (forced when --local)',
+        description:
+            'Directly embeds the SVG vector asset grid inside the document (forced automatically via `--local`)',
     })
-    // * флаг inline-css
+    // * Флаг inline-css
     .option('inline-css', {
         alias: ['full-inline-css', 'ic'],
         type: 'boolean',
         default: false,
-        description: 'Inline final CSS bundle into HTML (critical-css will be disabled)',
+        description: 'Directly embeds production stylesheets inside the HTML layout payload',
     })
-    // * флаг inline-js
+    // * Флаг inline-js
     .option('inline-js', {
         alias: ['full-inline-js', 'ij'],
         type: 'boolean',
         default: false,
-        description: 'Inline final JavaScript bundle into HTML',
+        description: 'Directly embeds processed client scripts inside the HTML layout payload',
     })
-    // * флаг production-server
+    // * Флаг production-server
     .option('production-server', {
         alias: ['prod-server', 'server', 'ps'],
         type: 'boolean',
         default: false,
-        description: 'Enables local server execution for the production task',
+        description: 'Launches a local server tracking the compiled production build footprint',
     })
 
     // ! group options
@@ -121,13 +115,12 @@ const argv = yargs(hideBin(process.argv))
         ) {
             throw new Error('Flags --obfuscation and --inline-* cannot be used together.')
         }
-        return true // * если всё хорошо, пропускаем дальше
+        return true
     })
     .fail((msg, err) => {
-        // * выводим только текст ошибки красным цветом в консоль
         // eslint-disable-next-line no-console
         console.error('\n\x1b[31m%s\x1b[0m\n', `❌ Error: ${msg || err.message}`)
-        process.exit(1) // Завершаем процесс
+        process.exit(1)
     })
     .parse()
 
