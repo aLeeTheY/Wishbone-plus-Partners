@@ -77,9 +77,14 @@
       </ul>
     </li>
     <li>
-      <a href="#usage">💡 Использование</a>
+    <a href="#usage">💡 Использование</a>
       <ul>
-        <li><a href="#configuration">🔧 Конфигурация</a></li>
+        <li>
+        <a href="#configuration">🔧 Конфигурация</a>
+          <ul>
+            <li><a href="#npm-scripts">🏃 NPM скрипты</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#development-challenges">🧠 Сложности при разработке</a></li>
@@ -399,7 +404,7 @@ Wishbone-plus-Partners/
 > [!IMPORTANT]
 > Информация актуальна для версии **[2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0)**. На момент проверки проект корректно отображался в последних стабильных версиях всех [указанных браузеров](#supported-browsers).
 >
-> **Дата последней проверки: 30 мая 2026**
+> **Дата последней проверки: 31 мая 2026**
 
 <p align="right">(<a href="#readme-top">наверх</a>)</p>
 
@@ -433,11 +438,11 @@ npm install
 
 <div align="center">
 
-| Режим сборки  | Команда                                                        |
-| ------------- | -------------------------------------------------------------- |
-| `development` | `cross-env NODE_ENV=development gulp dev --i18n`               |
-| `staging`     | `cross-env NODE_ENV=staging gulp staging --i18n`               |
-| `production`  | `cross-env NODE_ENV=production gulp prod --i18n --prod-server` |
+| Режим сборки  |                            Команда                             |   `npm`-скрипт    |
+| :-----------: | :------------------------------------------------------------: | :---------------: |
+| `development` |        `cross-env NODE_ENV=development gulp dev --i18n`        |   `npm run dev`   |
+|   `staging`   |   `cross-env NODE_ENV=production gulp prod --staging --i18n`   | `npm run staging` |
+| `production`  | `cross-env NODE_ENV=production gulp prod --i18n --prod-server` |  `npm run prod`   |
 
 </div>
 
@@ -459,20 +464,21 @@ gulp --info
 
 <div align="center">
 
-|                        Опция                         |    Тип    | Значение по-умолчанию |                             Описание                             |
-| :--------------------------------------------------: | :-------: | :-------------------: | :--------------------------------------------------------------: |
-|                   `-v, --version`                    | `boolean` |        `false`        |                 Показать текущую версию проекта                  |
-|                     `-i, --info`                     | `boolean` |        `false`        |                Показать справку и доступные опции                |
-|                   `-V, --verbose`                    | `boolean` |        `false`        |   Расширенный вывод логов при выполнении некоторых Gulp-тасков   |
-|                 `-c, --force-clean`                  | `boolean` |        `false`        |                   Полная очистка папки `dist/`                   |
-|                  `--base-url, --bu`                  | `string`  |          `-`          |        Базовый URL сайта, например `https://example.com`         |
-|             `--base-url-postfix, --bup`              | `string`  |          `-`          |  Постфикс пути, где развёрнут сайт, например `.../my-repo/...`   |
-|           `--internationalization, --i18n`           | `boolean` |        `false`        |                  Включить мультиязычную сборку                   |
-|                    `-l, --local`                     | `boolean` |        `false`        |          Сборка с относительными путями для `file:///`           |
-|    `--inline-sprite, --full-inline-sprite, --is`     | `boolean` |        `false`        | Встроить SVG-спрайт в HTML (включен автоматически при `--local`) |
-|       `--inline-css, --full-inline-css, --ic`        | `boolean` |        `false`        |                    Встроить CSS-стили в HTML                     |
-|        `--inline-js, --full-inline-js, --ij`         | `boolean` |        `false`        |                    Встроить JS-скрипты в HTML                    |
-| `--production-server, --prod-server, --server, --ps` | `boolean` |        `false`        |         Запустить локальный сервер для продакшен-сборки          |
+|                        Опция                         |    Тип    | Значение по-умолчанию |                                   Описание                                   |
+| :--------------------------------------------------: | :-------: | :-------------------: | :--------------------------------------------------------------------------: |
+|                   `-v, --version`                    | `boolean` |        `false`        |                       Показать текущую версию проекта                        |
+|                     `-i, --info`                     | `boolean` |        `false`        |                      Показать справку и доступные опции                      |
+|                   `-V, --verbose`                    | `boolean` |        `false`        |         Расширенный вывод логов при выполнении некоторых Gulp-тасков         |
+|                   `-s, --staging`                    | `boolean` |        `false`        | Включить конфигурацию `staging`-окружения на базе правил `production`-сборки |
+|                 `-c, --force-clean`                  | `boolean` |        `false`        |                         Полная очистка папки `dist/`                         |
+|                    `-l, --local`                     | `boolean` |        `false`        |                Сборка с относительными путями для `file:///`                 |
+|           `--internationalization, --i18n`           | `boolean` |        `false`        |                        Включить мультиязычную сборку                         |
+|    `--inline-sprite, --full-inline-sprite, --is`     | `boolean` |        `false`        |       Встроить SVG-спрайт в HTML (включен автоматически при `--local`)       |
+|       `--inline-css, --full-inline-css, --ic`        | `boolean` |        `false`        |                          Встроить CSS-стили в HTML                           |
+|        `--inline-js, --full-inline-js, --ij`         | `boolean` |        `false`        |                          Встроить JS-скрипты в HTML                          |
+|                  `--base-url, --bu`                  | `string`  |          `-`          |              Базовый URL сайта, например `https://example.com`               |
+|             `--base-url-postfix, --bup`              | `string`  |          `-`          |        Постфикс пути, где развёрнут сайт, например `.../my-repo/...`         |
+| `--production-server, --prod-server, --server, --ps` | `boolean` |        `false`        |               Запустить локальный сервер для продакшен-сборки                |
 
 </div>
 
@@ -483,6 +489,32 @@ gulp --info
 |         Опция          |    Тип    | Значение по-умолчанию |                                   Описание                                    |
 | :--------------------: | :-------: | :-------------------: | :---------------------------------------------------------------------------: |
 | `--obfuscation, --obf` | `boolean` |        `false`        | Обфускация имён классов в CSS, JS и HTML. Несовместима с `--inline-*` опциями |
+
+</div>
+
+#### 🏃 NPM скрипты <a id="npm-scripts"></a>
+
+_Для удобства, ниже продублированы основные npm-скрипты, доступные в проекте._
+
+<div align="center">
+
+|       Скрипт        |                         Список команд                          |                         Описание                         |
+| :-----------------: | :------------------------------------------------------------: | :------------------------------------------------------: |
+|      `prepare`      |                            `husky`                             |  Автоматическая настройка Git-хуков после `npm install`  |
+|        `dev`        |          `cross-env NODE_ENV=development gulp --i18n`          |  Dev-сервер с горячей перезагрузкой и мультиязычностью   |
+|      `staging`      |   `cross-env NODE_ENV=production gulp prod --staging --i18n`   | Production-сборка с активированными отладочными флагами  |
+|       `prod`        | `cross-env NODE_ENV=production gulp prod --i18n --prod-server` | Production-сборка с локальным сервером для предпросмотра |
+|       `start`       |                         `npm run dev`                          |                 Алиас для `npm run dev`                  |
+|       `build`       | `cross-env NODE_ENV=production gulp prod --i18n --force-clean` |       Полная production-сборка с очисткой `dist/`        |
+|      `archive`      |                  `npm run build && gulp zip`                   |             Сборка и упаковка `dist/` в ZIP              |
+|      `lint:ts`      |                           `eslint .`                           |              Линтинг TypeScript/JavaScript               |
+|    `lint:ts:fix`    |                        `eslint . --fix`                        |      Автоисправление ошибок линтера в TS/JS-файлах       |
+|     `lint:scss`     |                    `stylelint "**/*.scss"`                     |                   Линтинг SCSS-файлов                    |
+|   `lint:scss:fix`   |                `stylelint \"**/*.scss\" --fix`                 |       Автоисправление ошибок линтера в SCSS-файлах       |
+|       `lint`        |           `npm-run-all --parallel lint:ts lint:scss`           |            Параллельный линтинг TS/JS и SCSS             |
+|     `lint:fix`      |       `npm-run-all --parallel lint:ts:fix lint:scss:fix`       |       Параллельное автоисправление в TS/JS и SCSS        |
+|      `format`       |                      `prettier . --write`                      |        Форматирование всех файлов через Prettier         |
+| `test:editorconfig` |                     `editorconfig-checker`                     |      Проверка соответствия правилам `.editorconfig`      |
 
 </div>
 

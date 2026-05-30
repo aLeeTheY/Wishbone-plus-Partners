@@ -77,9 +77,14 @@
       </ul>
     </li>
     <li>
-      <a href="#usage">💡 Usage</a>
+    <a href="#usage">💡 Usage</a>
       <ul>
-        <li><a href="#configuration">🔧 Configuration</a></li>
+        <li>
+        <a href="#configuration">🔧 Configuration</a>
+          <ul>
+            <li><a href="#npm-scripts">🏃 NPM Scripts</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#development-challenges">🧠 Development Challenges</a></li>
@@ -399,7 +404,7 @@ The codebase is validated to ensure visual consistency and script execution stab
 > [!IMPORTANT]
 > This information applies to version **[2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0)**. At the time of verification, the project was rendered correctly in the latest stable versions of all [supported browsers](#supported-browsers).
 >
-> **Last Verification Date: May 30, 2026**
+> **Last Verification Date: May 31, 2026**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -433,11 +438,11 @@ npm install
 
 <div align="center">
 
-| Build Target  | Invocation Script                                              |
-| ------------- | -------------------------------------------------------------- |
-| `development` | `cross-env NODE_ENV=development gulp dev --i18n`               |
-| `staging`     | `cross-env NODE_ENV=staging gulp staging --i18n`               |
-| `production`  | `cross-env NODE_ENV=production gulp prod --i18n --prod-server` |
+| Build Target  |                       Invocation Script                        |   `npm`-script    |
+| :-----------: | :------------------------------------------------------------: | :---------------: |
+| `development` |        `cross-env NODE_ENV=development gulp dev --i18n`        |   `npm run dev`   |
+|   `staging`   |   `cross-env NODE_ENV=production gulp prod --staging --i18n`   | `npm run staging` |
+| `production`  | `cross-env NODE_ENV=production gulp prod --i18n --prod-server` |  `npm run prod`   |
 
 </div>
 
@@ -464,14 +469,15 @@ The parameter configuration options are documented below:
 |                   `-v, --version`                    | `boolean` |      `false`       |                            Displays current workspace semantic version                             |
 |                     `-i, --info`                     | `boolean` |      `false`       |                                    Displays CLI options manual                                     |
 |                   `-V, --verbose`                    | `boolean` |      `false`       |                  Unlocks extended console logging during task streaming execution                  |
+|                   `-s, --staging`                    | `boolean` |      `false`       |             Enable `staging` environment configurations under `production` build rules             |
 |                 `-c, --force-clean`                  | `boolean` |      `false`       |                 Triggers a hard sweep of the compiled `dist/` workspace directory                  |
-|                  `--base-url, --bu`                  | `string`  |        `-`         |                  Maps target deployment domain root, e.g., `https://example.com`                   |
-|             `--base-url-postfix, --bup`              | `string`  |        `-`         |        Maps trailing repository paths for subdirectory deployments, e.g., `.../my-repo/...`        |
-|           `--internationalization, --i18n`           | `boolean` |      `false`       |                       Activates localized multi-lingual document compilation                       |
 |                    `-l, --local`                     | `boolean` |      `false`       |      Switches paths to strict relative links, satisfying standalone execution via `file:///`       |
+|           `--internationalization, --i18n`           | `boolean` |      `false`       |                       Activates localized multi-lingual document compilation                       |
 |    `--inline-sprite, --full-inline-sprite, --is`     | `boolean` |      `false`       | Directly embeds the SVG vector asset grid inside the document (forced automatically via `--local`) |
 |       `--inline-css, --full-inline-css, --ic`        | `boolean` |      `false`       |               Directly embeds production stylesheets inside the HTML layout payload                |
 |        `--inline-js, --full-inline-js, --ij`         | `boolean` |      `false`       |              Directly embeds processed client scripts inside the HTML layout payload               |
+|                  `--base-url, --bu`                  | `string`  |        `-`         |                  Maps target deployment domain root, e.g., `https://example.com`                   |
+|             `--base-url-postfix, --bup`              | `string`  |        `-`         |        Maps trailing repository paths for subdirectory deployments, e.g., `.../my-repo/...`        |
 | `--production-server, --prod-server, --server, --ps` | `boolean` |      `false`       |              Launches a local server tracking the compiled production build footprint              |
 
 </div>
@@ -483,6 +489,32 @@ Experimental Features parameters:
 |     Parameter Flag     | Data Type | Default Allocation |                                             Functional Target                                              |
 | :--------------------: | :-------: | :----------------: | :--------------------------------------------------------------------------------------------------------: |
 | `--obfuscation, --obf` | `boolean` |      `false`       | Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with `--inline-*` options |
+
+</div>
+
+#### 🏃 NPM Scripts <a id="npm-scripts"></a>
+
+_For convenience, the main npm scripts available in the project are listed below._
+
+<div align="center">
+
+|       Script        |                          Command List                          |                     Description                     |
+| :-----------------: | :------------------------------------------------------------: | :-------------------------------------------------: |
+|      `prepare`      |                            `husky`                             | Automatically sets up Git hooks after `npm install` |
+|        `dev`        |          `cross-env NODE_ENV=development gulp --i18n`          | Dev server with hot reload and multilingual support |
+|      `staging`      |   `cross-env NODE_ENV=production gulp prod --staging --i18n`   |    Production build with debugging flags enabled    |
+|       `prod`        | `cross-env NODE_ENV=production gulp prod --i18n --prod-server` |    Production build with a local preview server     |
+|       `start`       |                         `npm run dev`                          |               Alias for `npm run dev`               |
+|       `build`       | `cross-env NODE_ENV=production gulp prod --i18n --force-clean` |     Full production build with `dist/` cleanup      |
+|      `archive`      |                  `npm run build && gulp zip`                   |        Build and package `dist/` into a ZIP         |
+|      `lint:ts`      |                           `eslint .`                           |         Lint TypeScript/JavaScript codebase         |
+|    `lint:ts:fix`    |                        `eslint . --fix`                        |        Auto-fix linter errors in TS/JS files        |
+|     `lint:scss`     |                    `stylelint "**/*.scss"`                     |                Lint SCSS stylesheets                |
+|   `lint:scss:fix`   |                `stylelint \"**/*.scss\" --fix`                 |        Auto-fix linter errors in SCSS files         |
+|       `lint`        |           `npm-run-all --parallel lint:ts lint:scss`           |         Parallel linting for TS/JS and SCSS         |
+|     `lint:fix`      |       `npm-run-all --parallel lint:ts:fix lint:scss:fix`       |        Parallel auto-fix for TS/JS and SCSS         |
+|      `format`       |                      `prettier . --write`                      |    Format all files according to Prettier rules     |
+| `test:editorconfig` |                     `editorconfig-checker`                     |   Verify compliance with `.editorconfig` settings   |
 
 </div>
 
