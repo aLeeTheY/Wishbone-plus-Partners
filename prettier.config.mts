@@ -2,7 +2,7 @@ import { type Config } from 'prettier'
 
 // TODO: забблочить переносы > [!NOTE] > в Markdown
 const config: Config = {
-    plugins: ['prettier-plugin-jinja-template'],
+    plugins: ['prettier-plugin-jinja-template', '@prettier/plugin-xml'],
     semi: false,
     tabWidth: 4,
     useTabs: false,
@@ -24,7 +24,7 @@ const config: Config = {
     proseWrap: 'never',
     endOfLine: 'lf',
     overrides: [
-        { files: ['*.json'], options: { tabWidth: 4 } },
+        { files: ['*.json', '*.webmanifest'], options: { tabWidth: 4 } },
         {
             files: ['*.md'], // Переопределяем только для Markdown
             options: {
@@ -34,12 +34,20 @@ const config: Config = {
             },
         },
         {
+            files: ['*.svg', '*.xml'], // Переопределяем только для XML
+            options: {
+                parser: 'xml',
+                tabWidth: 2,
+                xmlSortAttributesByKey: true,
+                xmlWhitespaceSensitivity: 'ignore',
+            },
+        },
+        {
             files: ['*.html', '*.nj', '*.njk', '*.nunjucks'],
             options: {
                 printWidth: 140,
                 parser: 'jinja-template',
                 // embeddedLanguageFormatting: 'off', //! <-- problem was with this option !!! | resolved in prettier-plugin-jinja-template v2.2.0
-                embeddedLanguageFormatting: 'off',
             },
         },
     ],
