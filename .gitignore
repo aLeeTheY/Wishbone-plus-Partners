@@ -90,20 +90,20 @@
 
 # ! --- 4. Папки и подпапки под запретом
 # ! ------------------------------------
-**/husky/_
+**/husky/_/
 
-**/node_modules/**
-# **/vendors/**
+**/node_modules/
+# **/vendors/
 
-**/out/**
-**/dist/**
-**/build/**
+**/out/
+**/dist/
+**/build/
 
-**/archive/**
-**/public/**
+**/archive/
+**/public/
 
-**/backup/**
-**/old/**
+**/backup/
+**/old/
 
 # ! --- 5. Файлы под запретом
 # ! -------------------------
