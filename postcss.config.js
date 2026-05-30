@@ -8,7 +8,8 @@ export default {
         //     precalculate: true,
         // },
         // * округлить пиксельные значения до целых чисел
-        'postcss-round-subpixels': {},
+        // ! отключать для Fluid Design !!!
+        // 'postcss-round-subpixels': {},
         // * fallback для font-variant (совместимость)
         'postcss-font-variant': {},
         // * автоматическое добавление font-display: swap для внешних локальных шрифтов (only works in @font-face)
