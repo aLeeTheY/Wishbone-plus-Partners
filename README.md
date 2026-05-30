@@ -193,8 +193,8 @@ _Для удобства, вся информация разбита по кат
 
 <div align="center">
 
-| 🖥️ Desktop Version | 📱 Mobile Version |
-| :-: | :-: |
+|                        🖥️ Desktop Version                        |                       📱 Mobile Version                        |
+| :--------------------------------------------------------------: | :------------------------------------------------------------: |
 | ![Lighthouse Desktop](project/lighthouse_benchmark__desktop.png) | ![Lighthouse Mobile](project/lighthouse_benchmark__mobile.png) |
 
 </div>
@@ -421,7 +421,7 @@ git clone https://github.com/aLeeTheY/Wishbone-plus-Partners
 
 ### 📥 Установка зависимостей <a id="installation"></a>
 
-3. Перейдите в каталог проекта и установите все необходимые зависимости:
+1. Перейдите в каталог проекта и установите все необходимые зависимости:
 
 ```sh
 npm install
@@ -429,7 +429,7 @@ npm install
 
 ### ⚙️ Сборка и запуск <a id="build-launch"></a>
 
-4. Для сборки и запуска проекта, выполните одну из следующих команд (_с учётом предпочтительного режима сборки_):
+1. Для сборки и запуска проекта, выполните одну из следующих команд (_с учётом предпочтительного режима сборки_):
 
 <div align="center">
 
@@ -459,20 +459,20 @@ gulp --info
 
 <div align="center">
 
-| Опция | Тип | Значение по-умолчанию | Описание |
-| :-: | :-: | :-: | :-: |
-| `-v, --version` | `boolean` | `false` | Показать текущую версию проекта |
-| `-i, --info` | `boolean` | `false` | Показать справку и доступные опции |
-| `-V, --verbose` | `boolean` | `false` | Расширенный вывод логов при выполнении некоторых Gulp-тасков |
-| `-c, --force-clean` | `boolean` | `false` | Полная очистка папки `dist/` |
-| `--base-url, --bu` | `string` | `-` | Базовый URL сайта, например `https://example.com` |
-| `--base-url-postfix, --bup` | `string` | `-` | Постфикс пути, где развёрнут сайт, например `.../my-repo/...` |
-| `--internationalization, --i18n` | `boolean` | `false` | Включить мультиязычную сборку |
-| `-l, --local` | `boolean` | `false` | Сборка с относительными путями для `file:///` |
-| `--inline-sprite, --full-inline-sprite, --is` | `boolean` | `false` | Встроить SVG-спрайт в HTML (включен автоматически при `--local`) |
-| `--inline-css, --full-inline-css, --ic` | `boolean` | `false` | Встроить CSS-стили в HTML |
-| `--inline-js, --full-inline-js, --ij` | `boolean` | `false` | Встроить JS-скрипты в HTML |
-| `--production-server, --prod-server, --server, --ps` | `boolean` | `false` | Запустить локальный сервер для продакшен-сборки |
+|                        Опция                         |    Тип    | Значение по-умолчанию |                             Описание                             |
+| :--------------------------------------------------: | :-------: | :-------------------: | :--------------------------------------------------------------: |
+|                   `-v, --version`                    | `boolean` |        `false`        |                 Показать текущую версию проекта                  |
+|                     `-i, --info`                     | `boolean` |        `false`        |                Показать справку и доступные опции                |
+|                   `-V, --verbose`                    | `boolean` |        `false`        |   Расширенный вывод логов при выполнении некоторых Gulp-тасков   |
+|                 `-c, --force-clean`                  | `boolean` |        `false`        |                   Полная очистка папки `dist/`                   |
+|                  `--base-url, --bu`                  | `string`  |          `-`          |        Базовый URL сайта, например `https://example.com`         |
+|             `--base-url-postfix, --bup`              | `string`  |          `-`          |  Постфикс пути, где развёрнут сайт, например `.../my-repo/...`   |
+|           `--internationalization, --i18n`           | `boolean` |        `false`        |                  Включить мультиязычную сборку                   |
+|                    `-l, --local`                     | `boolean` |        `false`        |          Сборка с относительными путями для `file:///`           |
+|    `--inline-sprite, --full-inline-sprite, --is`     | `boolean` |        `false`        | Встроить SVG-спрайт в HTML (включен автоматически при `--local`) |
+|       `--inline-css, --full-inline-css, --ic`        | `boolean` |        `false`        |                    Встроить CSS-стили в HTML                     |
+|        `--inline-js, --full-inline-js, --ij`         | `boolean` |        `false`        |                    Встроить JS-скрипты в HTML                    |
+| `--production-server, --prod-server, --server, --ps` | `boolean` |        `false`        |         Запустить локальный сервер для продакшен-сборки          |
 
 </div>
 
@@ -480,9 +480,9 @@ gulp --info
 
 <div align="center">
 
-| Опция | Тип | Значение по-умолчанию | Описание |
-| :-: | :-: | :-: | :-: |
-| `--obfuscation, --obf` | `boolean` | `false` | Обфускация имён классов в CSS, JS и HTML. Несовместима с `--inline-*` опциями |
+|         Опция          |    Тип    | Значение по-умолчанию |                                   Описание                                    |
+| :--------------------: | :-------: | :-------------------: | :---------------------------------------------------------------------------: |
+| `--obfuscation, --obf` | `boolean` |        `false`        | Обфускация имён классов в CSS, JS и HTML. Несовместима с `--inline-*` опциями |
 
 </div>
 

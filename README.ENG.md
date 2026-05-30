@@ -193,8 +193,8 @@ As confirmation of the project's optimization, below are the benchmark metrics o
 
 <div align="center">
 
-| 🖥️ Desktop Version | 📱 Mobile Version |
-| :-: | :-: |
+|                        🖥️ Desktop Version                        |                       📱 Mobile Version                        |
+| :--------------------------------------------------------------: | :------------------------------------------------------------: |
 | ![Lighthouse Desktop](project/lighthouse_benchmark__desktop.png) | ![Lighthouse Mobile](project/lighthouse_benchmark__mobile.png) |
 
 </div>
@@ -421,7 +421,7 @@ git clone https://github.com/aLeeTheY/Wishbone-plus-Partners
 
 ### 📥 Installation <a id="installation"></a>
 
-3. Route into the workspace directory and trigger package initialization dependencies:
+1. Route into the workspace directory and trigger package initialization dependencies:
 
 ```sh
 npm install
@@ -429,7 +429,7 @@ npm install
 
 ### ⚙️ Build & Launch <a id="build-launch"></a>
 
-4. To compile assets and wake the workspace server, execute one of the specified command protocols matching your target environment:
+1. To compile assets and wake the workspace server, execute one of the specified command protocols matching your target environment:
 
 <div align="center">
 
@@ -459,20 +459,20 @@ The parameter configuration options are documented below:
 
 <div align="center">
 
-| Parameter Flag | Data Type | Default Allocation | Functional Target |
-| :-: | :-: | :-: | :-: |
-| `-v, --version` | `boolean` | `false` | Displays current workspace semantic version |
-| `-i, --info` | `boolean` | `false` | Displays CLI options manual |
-| `-V, --verbose` | `boolean` | `false` | Unlocks extended console logging during task streaming execution |
-| `-c, --force-clean` | `boolean` | `false` | Triggers a hard sweep of the compiled `dist/` workspace directory |
-| `--base-url, --bu` | `string` | `-` | Maps target deployment domain root, e.g., `https://example.com` |
-| `--base-url-postfix, --bup` | `string` | `-` | Maps trailing repository paths for subdirectory deployments, e.g., `.../my-repo/...` |
-| `--internationalization, --i18n` | `boolean` | `false` | Activates localized multi-lingual document compilation |
-| `-l, --local` | `boolean` | `false` | Switches paths to strict relative links, satisfying standalone execution via `file:///` |
-| `--inline-sprite, --full-inline-sprite, --is` | `boolean` | `false` | Directly embeds the SVG vector asset grid inside the document (forced automatically via `--local`) |
-| `--inline-css, --full-inline-css, --ic` | `boolean` | `false` | Directly embeds production stylesheets inside the HTML layout payload |
-| `--inline-js, --full-inline-js, --ij` | `boolean` | `false` | Directly embeds processed client scripts inside the HTML layout payload |
-| `--production-server, --prod-server, --server, --ps` | `boolean` | `false` | Launches a local server tracking the compiled production build footprint |
+|                    Parameter Flag                    | Data Type | Default Allocation |                                         Functional Target                                          |
+| :--------------------------------------------------: | :-------: | :----------------: | :------------------------------------------------------------------------------------------------: |
+|                   `-v, --version`                    | `boolean` |      `false`       |                            Displays current workspace semantic version                             |
+|                     `-i, --info`                     | `boolean` |      `false`       |                                    Displays CLI options manual                                     |
+|                   `-V, --verbose`                    | `boolean` |      `false`       |                  Unlocks extended console logging during task streaming execution                  |
+|                 `-c, --force-clean`                  | `boolean` |      `false`       |                 Triggers a hard sweep of the compiled `dist/` workspace directory                  |
+|                  `--base-url, --bu`                  | `string`  |        `-`         |                  Maps target deployment domain root, e.g., `https://example.com`                   |
+|             `--base-url-postfix, --bup`              | `string`  |        `-`         |        Maps trailing repository paths for subdirectory deployments, e.g., `.../my-repo/...`        |
+|           `--internationalization, --i18n`           | `boolean` |      `false`       |                       Activates localized multi-lingual document compilation                       |
+|                    `-l, --local`                     | `boolean` |      `false`       |      Switches paths to strict relative links, satisfying standalone execution via `file:///`       |
+|    `--inline-sprite, --full-inline-sprite, --is`     | `boolean` |      `false`       | Directly embeds the SVG vector asset grid inside the document (forced automatically via `--local`) |
+|       `--inline-css, --full-inline-css, --ic`        | `boolean` |      `false`       |               Directly embeds production stylesheets inside the HTML layout payload                |
+|        `--inline-js, --full-inline-js, --ij`         | `boolean` |      `false`       |              Directly embeds processed client scripts inside the HTML layout payload               |
+| `--production-server, --prod-server, --server, --ps` | `boolean` |      `false`       |              Launches a local server tracking the compiled production build footprint              |
 
 </div>
 
@@ -480,9 +480,9 @@ Experimental Features parameters:
 
 <div align="center">
 
-| Parameter Flag | Data Type | Default Allocation | Functional Target |
-| :-: | :-: | :-: | :-: |
-| `--obfuscation, --obf` | `boolean` | `false` | Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with `--inline-*` options |
+|     Parameter Flag     | Data Type | Default Allocation |                                             Functional Target                                              |
+| :--------------------: | :-------: | :----------------: | :--------------------------------------------------------------------------------------------------------: |
+| `--obfuscation, --obf` | `boolean` |      `false`       | Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with `--inline-*` options |
 
 </div>
 
