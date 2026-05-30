@@ -6,6 +6,10 @@ import { hideBin } from 'yargs/helpers'
 
 import { path } from './path.js'
 
+// * --- NODE_ENV
+// * ------------
+const NODE_ENV = process.env.NODE_ENV ?? 'development'
+
 // * --- RESOLVE PATH TO PACKAGE.JSON FILE
 // * -------------------------------------
 const packageJsonPath = nodePath.resolve(process.cwd(), 'package.json')
@@ -29,6 +33,13 @@ const argv = yargs(hideBin(process.argv))
         type: 'boolean',
         default: false,
         description: 'Unlocks extended console logging during task streaming execution',
+    })
+    // * Флаг staging
+    .option('staging', {
+        alias: ['s'],
+        type: 'boolean',
+        default: false,
+        description: 'Enable `staging` environment configurations under `production` build rules',
     })
     .option('force-clean', {
         alias: ['c'],
@@ -109,6 +120,13 @@ const argv = yargs(hideBin(process.argv))
 
     // ! check options mix
     .check((argv) => {
+        // Защита от смеси с девелопментом
+        if (argv.staging && NODE_ENV !== 'production') {
+            throw new Error(
+                'The --staging flag can only be used under production rules (cross-env NODE_ENV=production).',
+            )
+        }
+        // Проверка обфускации и инлайнинга
         if (
             argv.obfuscation &&
             (argv['inline-sprite'] || argv['inline-css'] || argv['inline-js'])
@@ -124,9 +142,9 @@ const argv = yargs(hideBin(process.argv))
     })
     .parse()
 
-// * --- CONSTANTS
-// * -------------
-const NODE_ENV = process.env.NODE_ENV ?? 'development'
+// * --- CHECK STAGING MODE
+// * ----------------------
+const isStagingMode = NODE_ENV === 'production' && argv.staging
 
 // * --- LOAD CONFIG
 // * ---------------
@@ -137,8 +155,8 @@ const siteConfig = JSON.parse(fs.readFileSync(`${path.src.base}/site.config.json
 export const env = {
     buildMode: {
         isDev: NODE_ENV === 'development',
-        isProd: NODE_ENV === 'production',
-        isStaging: NODE_ENV === 'staging',
+        isStaging: isStagingMode,
+        isProd: NODE_ENV === 'production' && !isStagingMode,
     },
     isVerbose: argv.verbose,
     isForceClean: argv.forceClean,

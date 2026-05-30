@@ -284,9 +284,14 @@ function createHtmlStream({
                         collapseBooleanAttributes: true,
                         collapseInlineTagWhitespace: false,
                         keepClosingSlash: true,
+                        // * uses relateurl - see docs
                         minifyURLs: true,
+                        // * uses clean-css - see docs
                         minifyCSS: true,
-                        minifyJS: true,
+                        // * uses UglifyJS - see docs
+                        minifyJS: env.buildMode.isProd
+                            ? { compress: { drop_console: true } }
+                            : true,
                         html5: true,
                         removeComments: true,
                         quoteCharacter: '"',

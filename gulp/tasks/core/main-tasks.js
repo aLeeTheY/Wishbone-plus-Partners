@@ -36,17 +36,6 @@ const devTools = gulp.parallel(watch, server)
 // * --- EXPORT GULP MAIN TASKS PIPELINES
 // * ------------------------------------
 export const dev = gulp.series(clean, mainTasks, devTools)
-
-// TODO: add revision
-export const staging = gulp.series(
-    clean,
-    mainTasks,
-    criticalCss,
-    revise,
-    // * obfuscation
-    env.isObfuscation ? obfuscateSelectors : (cb) => cb(),
-    server,
-)
 export const prod = gulp.series(
     clean,
     mainTasks,
@@ -54,6 +43,6 @@ export const prod = gulp.series(
     revise,
     // * obfuscation
     env.isObfuscation ? obfuscateSelectors : (cb) => cb(),
-    // * run server in prod mode
-    env.isProdServer ? server : (cb) => cb(),
+    // * run server in staging mode or in full production mode
+    env.buildMode.isStaging || env.isProdServer ? server : (cb) => cb(),
 )

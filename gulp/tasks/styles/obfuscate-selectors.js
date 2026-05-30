@@ -62,7 +62,7 @@ export function obfuscateSelectors() {
                         extensions: ['.js', '.html'],
                         // * стабильная замена для кеширования
                         fresh: env.buildMode.isDev || env.buildMode.isStaging ? false : true,
-                        keepData: env.buildMode.isDev || env.buildMode.isStaging ? true : true,
+                        keepData: env.buildMode.isDev || env.buildMode.isStaging ? true : false,
                         showConfig: false,
                     }),
                 ]),
