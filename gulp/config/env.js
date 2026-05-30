@@ -47,36 +47,6 @@ const argv = yargs(hideBin(process.argv))
         default: false,
         description: 'Triggers a hard sweep of the compiled `dist/` workspace directory',
     })
-    // * Флаг obfuscation
-    .option('obfuscation', {
-        alias: ['obf'],
-        type: 'boolean',
-        default: false,
-        description:
-            'Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with `--inline-*` options',
-    })
-    // * Флаг base-url
-    .option('base-url', {
-        alias: ['bu'],
-        type: 'string',
-        default: undefined,
-        description: 'Maps target deployment domain root, e.g., `https://example.com`',
-    })
-    // * Флаг base-url-postfix
-    .option('base-url-postfix', {
-        alias: ['bup'],
-        type: 'string',
-        default: undefined,
-        description:
-            'Maps trailing repository paths for subdirectory deployments, e.g., `.../my-repo/...`',
-    })
-    // * Флаг internationalization
-    .option('internationalization', {
-        alias: ['i18n'],
-        type: 'boolean',
-        default: false,
-        description: 'Activates localized multi-lingual document compilation',
-    })
     // * Флаг local
     .option('local', {
         alias: ['l'],
@@ -84,6 +54,13 @@ const argv = yargs(hideBin(process.argv))
         default: false,
         description:
             'Switches paths to strict relative links, satisfying standalone execution via `file:///`',
+    })
+    // * Флаг internationalization
+    .option('internationalization', {
+        alias: ['i18n'],
+        type: 'boolean',
+        default: false,
+        description: 'Activates localized multi-lingual document compilation',
     })
     // * Флаг inline-sprite
     .option('inline-sprite', {
@@ -107,12 +84,35 @@ const argv = yargs(hideBin(process.argv))
         default: false,
         description: 'Directly embeds processed client scripts inside the HTML layout payload',
     })
+    // * Флаг base-url
+    .option('base-url', {
+        alias: ['bu'],
+        type: 'string',
+        default: undefined,
+        description: 'Maps target deployment domain root, e.g., `https://example.com`',
+    })
+    // * Флаг base-url-postfix
+    .option('base-url-postfix', {
+        alias: ['bup'],
+        type: 'string',
+        default: undefined,
+        description:
+            'Maps trailing repository paths for subdirectory deployments, e.g., `.../my-repo/...`',
+    })
     // * Флаг production-server
     .option('production-server', {
         alias: ['prod-server', 'server', 'ps'],
         type: 'boolean',
         default: false,
         description: 'Launches a local server tracking the compiled production build footprint',
+    })
+    // * Флаг obfuscation
+    .option('obfuscation', {
+        alias: ['obf'],
+        type: 'boolean',
+        default: false,
+        description:
+            'Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with `--inline-*` options',
     })
 
     // ! group options
