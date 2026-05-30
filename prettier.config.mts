@@ -1,5 +1,6 @@
 import { type Config } from 'prettier'
 
+// TODO: забблочить переносы > [!NOTE] > в Markdown
 const config: Config = {
     plugins: ['prettier-plugin-jinja-template'],
     semi: false,
@@ -25,11 +26,20 @@ const config: Config = {
     overrides: [
         { files: ['*.json'], options: { tabWidth: 4 } },
         {
+            files: ['*.md'], // Переопределяем только для Markdown
+            options: {
+                tabWidth: 2,
+                parser: 'markdown',
+                proseWrap: 'preserve',
+            },
+        },
+        {
             files: ['*.html', '*.nj', '*.njk', '*.nunjucks'],
             options: {
                 printWidth: 140,
                 parser: 'jinja-template',
-                // embeddedLanguageFormatting: 'off', //! <-- problem with this option !!!
+                // embeddedLanguageFormatting: 'off', //! <-- problem was with this option !!! | resolved in prettier-plugin-jinja-template v2.2.0
+                embeddedLanguageFormatting: 'off',
             },
         },
     ],
