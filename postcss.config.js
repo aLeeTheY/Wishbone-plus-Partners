@@ -1,4 +1,3 @@
-const isStaging = process.env.NODE_ENV === 'staging'
 const isProd = process.env.NODE_ENV === 'production'
 
 export default {
@@ -8,7 +7,8 @@ export default {
         //     precalculate: true,
         // },
         // * округлить пиксельные значения до целых чисел
-        'postcss-round-subpixels': {},
+        // ! отключать для Fluid Design !!!
+        // 'postcss-round-subpixels': {},
         // * fallback для font-variant (совместимость)
         'postcss-font-variant': {},
         // * автоматическое добавление font-display: swap для внешних локальных шрифтов (only works in @font-face)
@@ -60,7 +60,7 @@ export default {
         // },
         // ! не подходит
         // * обфускация CSS, замена имён классов упрощёными именами (только в staging/prod)
-        // ...((isStaging || isProd) && {
+        // ...(isProd && {
         //     'postcss-obfuscator': {
         //         enable: true,
         //         length: 2,
@@ -74,13 +74,13 @@ export default {
         //     },
         // }),
         // * удаление неиспользуемых CSS (только в staging/prod)
-        ...((isStaging || isProd) && {
+        ...(isProd && {
             '@fullhuman/postcss-purgecss': {
                 content: ['src/**/*.njk'],
             },
         }),
         // * сжатие CSS (только в prod и staging modes)
-        ...((isStaging || isProd) && {
+        ...(isProd && {
             cssnano: {
                 // preset: "default",
                 preset: [

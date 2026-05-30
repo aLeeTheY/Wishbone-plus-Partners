@@ -6,6 +6,10 @@ import { hideBin } from 'yargs/helpers'
 
 import { path } from './path.js'
 
+// * --- NODE_ENV
+// * ------------
+const NODE_ENV = process.env.NODE_ENV ?? 'development'
+
 // * --- RESOLVE PATH TO PACKAGE.JSON FILE
 // * -------------------------------------
 const packageJsonPath = nodePath.resolve(process.cwd(), 'package.json')
@@ -15,99 +19,100 @@ const appVersion = packageJson.version
 // * --- ARGV CONFIG
 // * ---------------
 const argv = yargs(hideBin(process.argv))
-    // * выравнивание текста по ширине терминала
+    // * Выравнивание текста по ширине терминала
     .wrap(Math.min(100, yargs(hideBin(process.argv)).terminalWidth()))
-    // * настраиваем вывод версии приложения
-    .version('version', 'Show the current build version of the project', appVersion)
+    // * Настраиваем вывод версии приложения
+    .version('version', 'Displays current workspace semantic version', appVersion)
     .alias('version', 'v')
-    // * настраиваем вывод help
-    .help('info', 'Show help information and available build options')
+    // * Настраиваем вывод help
+    .help('info', 'Displays CLI options manual')
     .alias('info', 'i')
-    // * флаг verbose
+    // * Флаг verbose
     .option('verbose', {
         alias: ['V'],
         type: 'boolean',
         default: false,
-        description: 'Print detailed logging and asset processing steps to the terminal',
+        description: 'Unlocks extended console logging during task streaming execution',
+    })
+    // * Флаг staging
+    .option('staging', {
+        alias: ['s'],
+        type: 'boolean',
+        default: false,
+        description: 'Enable `staging` environment configurations under `production` build rules',
     })
     .option('force-clean', {
         alias: ['c'],
         type: 'boolean',
         default: false,
-        description: 'Force clean the entire dist/ folder, including assets and libraries',
+        description: 'Triggers a hard sweep of the compiled `dist/` workspace directory',
     })
-    // * флаг obfuscation
-    .option('obfuscation', {
-        alias: ['obf'],
+    // * Флаг local
+    .option('local', {
+        alias: ['l'],
         type: 'boolean',
         default: false,
         description:
-            'Enable class name obfuscation across all CSS, JS, and HTML source files. CAUTION: Incompatible with --inline-* options.',
+            'Switches paths to strict relative links, satisfying standalone execution via `file:///`',
     })
-    // * флаг base-url
+    // * Флаг internationalization
+    .option('internationalization', {
+        alias: ['i18n'],
+        type: 'boolean',
+        default: false,
+        description: 'Activates localized multi-lingual document compilation',
+    })
+    // * Флаг inline-sprite
+    .option('inline-sprite', {
+        alias: ['full-inline-sprite', 'is'],
+        type: 'boolean',
+        default: false,
+        description:
+            'Directly embeds the SVG vector asset grid inside the document (forced automatically via `--local`)',
+    })
+    // * Флаг inline-css
+    .option('inline-css', {
+        alias: ['full-inline-css', 'ic'],
+        type: 'boolean',
+        default: false,
+        description: 'Directly embeds production stylesheets inside the HTML layout payload',
+    })
+    // * Флаг inline-js
+    .option('inline-js', {
+        alias: ['full-inline-js', 'ij'],
+        type: 'boolean',
+        default: false,
+        description: 'Directly embeds processed client scripts inside the HTML layout payload',
+    })
+    // * Флаг base-url
     .option('base-url', {
         alias: ['bu'],
         type: 'string',
         default: undefined,
-        description:
-            'Base URL (domain) of the site, e.g. "https://example.com". ' +
-            'For GitHub Pages this is usually "https://username.github.io". ' +
-            'If not provided, the value from site.config.json is used',
+        description: 'Maps target deployment domain root, e.g., `https://example.com`',
     })
-    // * флаг base-url-postfix
+    // * Флаг base-url-postfix
     .option('base-url-postfix', {
         alias: ['bup'],
         type: 'string',
         default: undefined,
         description:
-            'URL path postfix where the site is served, e.g. "/my-repo/". ' +
-            'For GitHub Pages this is the repository name. ' +
-            'Leave empty or omit if served from root. ' +
-            'If not provided, the value from site.config.json is used',
+            'Maps trailing repository paths for subdirectory deployments, e.g., `.../my-repo/...`',
     })
-    // * флаг internationalization
-    .option('internationalization', {
-        alias: ['i18n'],
-        type: 'boolean',
-        default: false,
-        description:
-            'Enable internationalization build (reads locale JSON files). ' +
-            'Without this flag, builds with inline text and default locale only',
-    })
-    // * флаг local
-    .option('local', {
-        alias: ['l'],
-        type: 'boolean',
-        default: false,
-        description: 'Build with relative paths for offline viewing via the file:/// protocol',
-    })
-    // * флаг inline-sprite
-    .option('inline-sprite', {
-        alias: ['full-inline-sprite', 'is'],
-        type: 'boolean',
-        default: false,
-        description: 'Inline SVG sprite into HTML (forced when --local)',
-    })
-    // * флаг inline-css
-    .option('inline-css', {
-        alias: ['full-inline-css', 'ic'],
-        type: 'boolean',
-        default: false,
-        description: 'Inline final CSS bundle into HTML (critical-css will be disabled)',
-    })
-    // * флаг inline-js
-    .option('inline-js', {
-        alias: ['full-inline-js', 'ij'],
-        type: 'boolean',
-        default: false,
-        description: 'Inline final JavaScript bundle into HTML',
-    })
-    // * флаг production-server
+    // * Флаг production-server
     .option('production-server', {
         alias: ['prod-server', 'server', 'ps'],
         type: 'boolean',
         default: false,
-        description: 'Enables local server execution for the production task',
+        description: 'Launches a local server tracking the compiled production build footprint',
+    })
+    // * Флаг obfuscation
+    .option('obfuscation', {
+        alias: ['obf'],
+        type: 'boolean',
+        default: false,
+        description:
+            'Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with `--inline-*` options',
     })
 
     // ! group options
@@ -115,25 +120,31 @@ const argv = yargs(hideBin(process.argv))
 
     // ! check options mix
     .check((argv) => {
+        // Защита от смеси с девелопментом
+        if (argv.staging && NODE_ENV !== 'production') {
+            throw new Error(
+                'The --staging flag can only be used under production rules (cross-env NODE_ENV=production).',
+            )
+        }
+        // Проверка обфускации и инлайнинга
         if (
             argv.obfuscation &&
             (argv['inline-sprite'] || argv['inline-css'] || argv['inline-js'])
         ) {
             throw new Error('Flags --obfuscation and --inline-* cannot be used together.')
         }
-        return true // * если всё хорошо, пропускаем дальше
+        return true
     })
     .fail((msg, err) => {
-        // * выводим только текст ошибки красным цветом в консоль
         // eslint-disable-next-line no-console
         console.error('\n\x1b[31m%s\x1b[0m\n', `❌ Error: ${msg || err.message}`)
-        process.exit(1) // Завершаем процесс
+        process.exit(1)
     })
     .parse()
 
-// * --- CONSTANTS
-// * -------------
-const NODE_ENV = process.env.NODE_ENV ?? 'development'
+// * --- CHECK STAGING MODE
+// * ----------------------
+const isStagingMode = NODE_ENV === 'production' && argv.staging
 
 // * --- LOAD CONFIG
 // * ---------------
@@ -144,8 +155,8 @@ const siteConfig = JSON.parse(fs.readFileSync(`${path.src.base}/site.config.json
 export const env = {
     buildMode: {
         isDev: NODE_ENV === 'development',
-        isProd: NODE_ENV === 'production',
-        isStaging: NODE_ENV === 'staging',
+        isStaging: isStagingMode,
+        isProd: NODE_ENV === 'production' && !isStagingMode,
     },
     isVerbose: argv.verbose,
     isForceClean: argv.forceClean,

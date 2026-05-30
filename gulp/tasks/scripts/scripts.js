@@ -47,11 +47,7 @@ export function scripts() {
                     treeShaking: true,
                     define: {
                         'process.env.buildMode.NODE_ENV': JSON.stringify(
-                            env.buildMode.isProd
-                                ? 'production'
-                                : env.buildMode.isStaging
-                                  ? 'staging'
-                                  : 'development',
+                            env.buildMode.isDev ? 'development' : 'production',
                         ),
                     },
                 }),

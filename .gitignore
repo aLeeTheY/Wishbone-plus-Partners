@@ -1,125 +1,110 @@
-# Allow some .vscode/ files
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
-!.vscode/launch.json
+# ! --- 1. Игнорируем абсолютно всё по умолчанию
+# ! --------------------------------------------
+*
 
-# # Ignore all node_modules/ folders
-# **/node_modules
+# ! --- 2. Разрешаем Git наблюдать за любыми папками
+# ! ------------------------------------------------
+!*/
+!**/
 
-# # Ignore all css/ folders
-# **/css
+# ! --- 3. Разрешаем проверять только конкретные расширения
+# ! -------------------------------------------------------
+# * GIT FILES
+!**/*.gitkeep
+!**/*.gitignore
+!**/*.gitattributes
 
-# # Ignore all css files
-# *.css
-# *.css.map
+# * SERVICE FILES
+!**/*.browserslistrc
+!**/*.editorconfig
 
-# # Ignore some TypeScript files
-# *.d.ts
-# *.d.ts.map
+# * IGNORE FILES
+!**/*.dockerignore
+!**/*.prettierignore
+!**/*.stylelintignore
 
-# # Ignore all .tsbuildinfo files
-# *.tsbuildinfo
+# * CSS | SCSS | SASS
+!**/*.css
+!**/*.scss
+!**/*.sass
 
-# # Ignore all JS folders
-# **/js
+# * JS | TS
+!**/*.js
+!**/*.cjs
+!**/*.mjs
+!**/*.ts
+!**/*.cts
+!**/*.mts
 
-# # Ignore all JS source files
-# *.js
-# *.js.map
-
-# *.cjs
-# *.cjs.map
-
-# *.mjs
-# *.mjs.map
-
-# # Allow JS and TS config files
-# !*.config.js
-# !*.config.cjs
-# !*.config.mjs
-
-# !*.config.ts
-# !*.config.cts
-# !*.config.mts
-
-# # Ingore fonts files
-# *.otf
-# *.ttf
-
-# # Ignore all build/, dist/ and out/ folders
-# **/build
-# **/dist
-# **/out
-
-# # Ignore all original/ folders
-# **/original
-
-# # Ignore all old/ folders
-# **/old
-
-# # Ignore all files with "old" or "no" part in name
-# *old*
-# *no*
-
-# # Add .*ignore Prettier and Docker files to GIT repo
-# !.prettierignore
-# !.dockerignore
-
-# # Allow gulp JS config
-# !gulpfile.js
-
-# # Allow all files from gulp/ folder
-# !**/gulp/**/*.js
-
-# --- IDE and dependencies ---
-node_modules/
-
-# --- Build and output folders ---
-build/
-dist/
-out/
-**/original/
-**/old/
-**/archive/
-*.tsbuildinfo
-*.map
-
-# --- Assets and fonts ---
-# *.otf
-# *.ttf
-
-# --- Source code files (Ignored globally) ---
-*.css
-*.js
-*.cjs
-*.mjs
-*.d.ts
-
-# --- Folders by name ---
-**/css/
-**/js/
-
-# --- Broad name patterns (Be careful with these) ---
-*.old
-*.no
-
-# --- EXCEPTIONS (Allow specific files/folders) ---
-
-# Configuration files
-!*.config.js
-!*.config.cjs
-!*.config.mjs
-!*.config.ts
-!*.config.cts
-!*.config.mts
-
-# Build tools and ignore files
+# * GULP
 !gulpfile.js
-!.prettierignore
-!.dockerignore
-
-# Allow gulp folder and its content
-# (Note: if gulp/ is inside a folder like dist/, it might still be ignored)
-!**/gulp/
 !**/gulp/**/*.js
+
+# * HTML | NUNJUCKS
+!**/*.html
+!**/*.nj
+!**/*.njk
+!**/*.nunjucks
+
+# * JSON | YAML
+!**/*.json
+!**/*.webmanifest
+
+!**/*.yml
+!**/*.yaml
+
+# * XML | SVG
+!**/*.xml
+!**/*.svg
+
+# * MEDIA
+!**/*.ico
+!**/*.gif
+
+!**/*.png
+!**/*.jpg
+!**/*.jpeg
+!**/*.avif
+!**/*.webp
+
+!**/*.mp3
+!**/*.mp4
+!**/*.webm
+
+# * FONTS
+!**/*.eot
+!**/*.otf
+!**/*.ttf
+!**/*.woff
+!**/*.woff2
+
+# * MARKDOWN | LICENSE
+!**/*.md
+!**/LICENSE
+
+# * OTHER
+!**/*.txt
+
+# * MAPS
+# !**/*.map
+
+# ! --- 4. Папки и подпапки под запретом
+# ! ------------------------------------
+**/husky/_/
+
+**/node_modules/
+# **/vendors/
+
+**/out/
+**/dist/
+**/build/
+
+**/archive/
+**/public/
+
+**/backup/
+**/old/
+
+# ! --- 5. Файлы под запретом
+# ! -------------------------
+out.txt

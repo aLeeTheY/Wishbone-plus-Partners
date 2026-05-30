@@ -1,51 +1,86 @@
-# Ignore all .vscode/ folders
-# **/.vscode
+# ! --- 1. Игнорируем абсолютно всё по умолчанию
+# ! --------------------------------------------
+*
 
-# Ignore all VCS/ folders
-**/.git
-**/.svn
-**/.hg
+# ! --- 2. Разрешаем Prettier заходить в любые папки
+# ! ------------------------------------------------
+!/*/
+!**/
 
-# Ignore all node_modules/ folders
-**/node_modules
+# ! --- 3. Разрешаем форматировать только конкретные расширения
+# ! -----------------------------------------------------------
 
-# Ignore all vendors/ folders
-**/vendors
+# * CSS | SCSS | SASS
+!**/*.css
+!**/*.scss
+!**/*.sass
 
-# Ignore all build/ and dist/ folders
-**/build
-# **/dist
-**/out
-**/archive
+# * JS | TS
+# !**/*.js
+# !**/*.cjs
+# !**/*.mjs
 
-# Ignore all assets/ folders
-# **/assets
+!**/*.config.js
+!**/*.config.cjs
+!**/*.config.mjs
 
-# Ignore all CSS folders
-# **/css
+!**/*.ts
+!**/*.cts
+!**/*.mts
 
-# Ignore all CSS files
-# *.css
-*.css.map
-
-# Ignore all JS folders
-**/js
-
-# Ignore all JS source files
-*.js
-*.js.map
-
-*.cjs
-*.cjs.map
-
-*.mjs
-*.mjs.map
-
-# Allow some JS files
-!*.config.js
-!*.config.cjs
-!*.config.mjs
-
-# Allow JS files and folders for Gulp
-!**/gulp/**/*.js
+# * GULP
 !gulpfile.js
+!**/gulp/**/*.js
+
+# * HTML | NUNJUCKS
+!**/*.html
+!**/*.nj
+!**/*.njk
+!**/*.nunjucks
+
+# * JSON | YAML
+!**/*.json
+!**/*.webmanifest
+
+!**/*.yml
+!**/*.yaml
+
+# * XML | SVG
+!**/*.xml
+# !**/*.svg
+
+# * MARKDOWN | LICENSE
+!**/*.md
+# !**/LICENSE
+
+# * OTHER
+!**/*.txt
+
+# * MAPS
+# !**/*.map
+
+# ! --- 4. Папки и подпапки под запретом
+# ! ------------------------------------
+# **/.vscode/
+# **/.husky/
+
+**/.git/
+**/.svn/
+**/.hg/
+
+**/node_modules/
+# **/vendors/
+
+**/out/
+**/dist/
+**/build/
+
+**/archive/
+**/public/
+
+**/backup/
+**/old/
+
+# ! --- 5. Файлы под запретом
+# ! -------------------------
+out.txt
