@@ -61,25 +61,25 @@
 
 # ! --- 4. Папки и подпапки под запретом
 # ! ------------------------------------
-# **/.vscode
-# **/.husky
+# **/.vscode/
+# **/.husky/
 
-**/.git
-**/.svn
-**/.hg
+**/.git/
+**/.svn/
+**/.hg/
 
-**/node_modules/**
-# **/vendors/**
+**/node_modules/
+# **/vendors/
 
-**/out/**
-**/dist/**
-**/build/**
-**/archive/**
+**/out/
+**/dist/
+**/build/
 
-**/public/**
+**/archive/
+**/public/
 
-**/backup/**
-**/old/**
+**/backup/
+**/old/
 
 # ! --- 5. Файлы под запретом
 # ! -------------------------
