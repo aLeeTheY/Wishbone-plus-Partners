@@ -27,6 +27,7 @@
         "@eslint/compat": "^2.1.0",
         "@eslint/js": "^10.0.1",
         "@fullhuman/postcss-purgecss": "^8.0.0",
+        "@prettier/plugin-xml": "^3.4.2",
         "@stylistic/eslint-plugin": "^5.10.0",
         "@types/node": "^25.9.0",
         "browser-sync": "^3.0.4",
