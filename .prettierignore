@@ -1,51 +1,86 @@
-# Ignore all .vscode/ folders
-# **/.vscode
+# ! --- 1. Игнорируем абсолютно всё по умолчанию
+# ! --------------------------------------------
+*
 
-# Ignore all VCS/ folders
+# ! --- 2. Разрешаем Prettier заходить в любые папки
+# ! ------------------------------------------------
+!/*/
+!**/
+
+# ! --- 3. Разрешаем форматировать только конкретные расширения
+# ! -----------------------------------------------------------
+
+# * CSS | SCSS | SASS
+!**/*.css
+!**/*.scss
+!**/*.sass
+
+# * JS | TS
+# !**/*.js
+# !**/*.cjs
+# !**/*.mjs
+
+!**/*.config.js
+!**/*.config.cjs
+!**/*.config.mjs
+
+!**/*.ts
+!**/*.cts
+!**/*.mts
+
+# * GULP
+!gulpfile.js
+!**/gulp/**/*.js
+
+# * HTML | NUNJUCKS
+!**/*.html
+!**/*.nj
+!**/*.njk
+!**/*.nunjucks
+
+# * JSON | YAML
+!**/*.json
+!**/*.webmanifest
+
+!**/*.yml
+!**/*.yaml
+
+# * XML | SVG
+!**/*.xml
+# !**/*.svg
+
+# * MARKDOWN | LICENSE
+!**/*.md
+# !**/LICENSE
+
+# * OTHER
+!**/*.txt
+
+# * MAPS
+# !**/*.map
+
+# ! --- 4. Папки и подпапки под запретом
+# ! ------------------------------------
+# **/.vscode
+# **/.husky
+
 **/.git
 **/.svn
 **/.hg
 
-# Ignore all node_modules/ folders
-**/node_modules
+**/node_modules/**
+# **/vendors/**
 
-# Ignore all vendors/ folders
-**/vendors
+**/out/**
+**/dist/**
+**/build/**
+**/archive/**
 
-# Ignore all build/ and dist/ folders
-**/build
-# **/dist
-**/out
-**/archive
+**/public/**
 
-# Ignore all assets/ folders
-# **/assets
+**/backup/**
+**/old/**
 
-# Ignore all CSS folders
-# **/css
-
-# Ignore all CSS files
-# *.css
-*.css.map
-
-# Ignore all JS folders
-**/js
-
-# Ignore all JS source files
-*.js
-*.js.map
-
-*.cjs
-*.cjs.map
-
-*.mjs
-*.mjs.map
-
-# Allow some JS files
-!*.config.js
-!*.config.cjs
-!*.config.mjs
-
-# Allow JS files and folders for Gulp
-!**/gulp/**/*.js
-!gulpfile.js
+# ! --- 5. Файлы под запретом
+# ! -------------------------
+out.txt
