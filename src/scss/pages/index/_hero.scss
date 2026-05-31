@@ -183,14 +183,7 @@
         }
 
         &__img {
-            @supports not (inset: 0) {
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0; // stylelint-disable-line
-            }
-
-            inset: 0; // stylelint-disable-line
+            inset: 0;
 
             height: auto;
             width: 100%;

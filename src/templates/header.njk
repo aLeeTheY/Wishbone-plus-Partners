@@ -1,3 +1,5 @@
+{% from "utils/macro__i18n_button__2_langs.njk" import i18n_button__2_langs %}
+
 <header id="header" class="header" data-aos="fade-down">
     <div class="wrapper wrapper--header">
         <a class="logo" href="#header">
@@ -5,7 +7,7 @@
                 <use href="@icons/common/logo.svg"></use>
             </svg>
         </a>
-        <nav class="navigation">
+        <nav class="navigation {{ 'navigation--' + (locale | lower) }}">
             <div class="navigation__desktop">
                 <ul class="navigation__menu">
                     <li class="navigation__menu-item">
@@ -24,7 +26,25 @@
                         <a href="#!" class="navigation__menu-link">{{ common.header.navigation.link.contact }}</a>
                     </li>
                 </ul>
-                <a href="#!" class="navigation__button-link button-link">{{ common.header.navigation.button.get_template }}</a>
+                <div class="navigation__buttons-group">
+                    <a href="#!" class="navigation__button-link button-link">{{ common.header.navigation.button.get_template }}</a>
+
+                    <div class="navigation__separator"></div>
+
+                    <!-- ! GENERATE I18N BUTTON --- ONLY FOR 2 LANGS !!! --->
+                    {% if locale and defaultLocale and siteUrl %}
+                        {{
+                            i18n_button__2_langs(
+                                current_locale = locale,
+                                default_locale = defaultLocale,
+                                alternate_locale = 'ru',
+                                site_url = siteUrl,
+                                class = 'navigation__button-link button-link button-link--i18n',
+                                button_text = common.header.navigation.button.i18n.short
+                            )
+                        }}
+                    {% endif %}
+                </div>
             </div>
             <div class="navigation__mobile">
                 <input type="checkbox" id="menu-toggle" hidden />
@@ -68,9 +88,25 @@
                                 <a href="#!" class="navigation__menu-link">{{ common.header.navigation.link.contact }}</a>
                             </li>
                         </ul>
-                        <a href="#!" class="navigation__button-link button-link button-link--mobile">
-                            {{ common.header.navigation.button.get_template }}
-                        </a>
+                        <div class="navigation__buttons-group navigation__buttons-group--mobile">
+                            <a href="#!" class="navigation__button-link button-link button-link--mobile">
+                                {{ common.header.navigation.button.get_template }}
+                            </a>
+
+                            <!-- ! GENERATE I18N BUTTON --- ONLY FOR 2 LANGS !!! --->
+                            {% if locale and defaultLocale and siteUrl %}
+                                {{
+                                    i18n_button__2_langs(
+                                        current_locale = locale,
+                                        default_locale = defaultLocale,
+                                        alternate_locale = 'ru',
+                                        site_url = siteUrl,
+                                        class = 'navigation__button-link button-link button-link--i18n button-link--mobile',
+                                        button_text = common.header.navigation.button.i18n.long
+                                    )
+                                }}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>

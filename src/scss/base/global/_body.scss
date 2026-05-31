@@ -17,12 +17,23 @@ body {
 //     position: fixed;
 // }
 
+// ? --- TABLET (860px) --- RUS
+// ? --------------------------
+@media (max-width: 860px) {
+    @supports selector(.page:has(#menu-toggle:checked)) {
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+        .page--ru:has(#menu-toggle:checked) {
+            overflow: hidden; // stylelint-disable-line
+        }
+    }
+}
+
 // ? --- TABLET ---
 // ? --------------
 @media (max-width: 768px) {
-    @supports selector(body:has(#menu-toggle:checked)) {
+    @supports selector(.page:has(#menu-toggle:checked)) {
         // stylelint-disable-next-line
-        body:has(#menu-toggle:checked) {
+        .page:not(.page--ru):has(#menu-toggle:checked) {
             overflow: hidden; // stylelint-disable-line
         }
     }

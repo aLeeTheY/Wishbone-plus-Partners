@@ -17,11 +17,15 @@
                     "projects": "Проекты",
                     "about": "О нас",
                     "news": "Новости",
-                    "team": "Наша команда",
+                    "team": "Команда",
                     "contact": "Контакты"
                 },
                 "button": {
-                    "get_template": "Получить шаблон"
+                    "get_template": "Получить шаблон",
+                    "i18n": {
+                        "short": "ENG",
+                        "long": "ENGLISH"
+                    }
                 }
             }
         },

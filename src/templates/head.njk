@@ -1,19 +1,17 @@
-{% from "templates/utils/macro__inline_script.njk" import inline_script %}
-{% from "templates/utils/macro__hreflang_tags.njk" import hreflang_tags %}
+{% from "utils/macro__inline_script.njk" import inline_script %}
+{% from "utils/macro__hreflang_tags.njk" import hreflang_tags %}
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- ! PAGE LOCALE TAGS --->
-    {% if allLocales and defaultLocale and baseUrl and baseUrlPostfix and pageRelativePath %}
+    {% if allLocales and defaultLocale and siteUrl %}
         {{
             hreflang_tags(
                 all_locales = allLocales,
                 default_locale = defaultLocale,
-                base_url = baseUrl,
-                base_url_postfix = baseUrlPostfix,
-                page_path = pageRelativePath
+                site_url = siteUrl
             )
         }}
     {% endif %}

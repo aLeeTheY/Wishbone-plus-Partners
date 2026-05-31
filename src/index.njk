@@ -3,7 +3,7 @@
 <html lang="{{ locale }}">
     {% include "templates/head.njk" %}
 
-    <body>
+    <body class="page {{ 'page--' + (locale | lower) }}">
         {% include "templates/header.njk" %}
 
         <main>

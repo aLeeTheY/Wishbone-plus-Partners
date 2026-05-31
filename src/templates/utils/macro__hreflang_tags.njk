@@ -1,11 +1,18 @@
-{% macro hreflang_tags(all_locales, default_locale, base_url, base_url_postfix, page_path) %}
+{% macro hreflang_tags(all_locales, default_locale, site_url) %}
+    {# Убираем слэш в конце, чтобы избежать дубликатов типа // #}
+    {% set clean_site_url = site_url | trim('/') %}
+
     {% for locale in all_locales %}
         {%- if locale == default_locale -%}
-            {% set full_url = base_url + (base_url_postfix | trim('/')) + '/' + page_path %}
+            {# Дэфолтный вариант, корень домена #}
+            {% set final_url = clean_site_url + '/' %}
         {%- else -%}
-            {% set full_url = base_url + (base_url_postfix | trim('/')) + '/' + locale | lower + '/' + page_path %}
+            {# Если встретили какой-либо язык, прибавить его в site_url #}
+            {% set final_url = clean_site_url + '/' + (locale | lower) + '/' %}
         {%- endif -%}
-        <link rel="alternate" type="text/html" hreflang="{{ locale }}" href="{{ full_url }}" />
+
+        <link rel="alternate" type="text/html" hreflang="{{ locale | lower }}" href="{{ final_url }}" />
     {% endfor %}
-    <link rel="alternate" type="text/html" hreflang="x-default" href="{{ base_url + (base_url_postfix | trim('/')) + '/' + page_path }}" />
+
+    <link rel="alternate" type="text/html" hreflang="x-default" href="{{ clean_site_url + '/' }}" />
 {% endmacro %}

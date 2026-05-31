@@ -58,15 +58,42 @@
     // transform: translateZ(0);
     // transform: perspective(1px);
 
+    &--i18n {
+        background-color: transparent;
+        color: #1b1a1a;
+
+        outline: 2px solid #1b1a1a;
+        outline-offset: -2px;
+
+        border-radius: 0;
+    }
+
+    // &--ru {
+    //     letter-spacing: -0.005em;
+    // }
+
     &--mobile {
         max-width: none;
         width: 100%;
 
+        @mixin ru-mobile-font {
+            // @include fluid-font(14px, calc(0.012 * 100vw + 9.044px), 18px);
+            font-size: clamp(16px, 0.0058 * 100vw + 13.5219px, 18px);
+        }
+
         // ? --- TABLET ---
         // ? --------------
         @media (max-width: 768px) {
-            // @include fluid-font(14px, calc(0.012 * 100vw + 9.044px), 18px);
-            font-size: clamp(16px, 0.0058 * 100vw + 13.5219px, 18px);
+            @include ru-mobile-font;
+        }
+
+        // ? --- TABLET (860px) --- RUS
+        // ? --------------------------
+        @media (max-width: 860px) {
+            .page--ru & {
+                // Sass скомпилирует это в: .page--ru .button-link--mobile
+                @include ru-mobile-font;
+            }
         }
     }
 

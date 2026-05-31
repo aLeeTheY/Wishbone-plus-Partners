@@ -9,6 +9,10 @@
         // @include fluid-column-gap(28px, 2.73438vw, 32px);
 
         align-items: center;
+
+        // &--ru {
+        //     column-gap: clamp(20px, 2.73438vw, 32px);
+        // }
     }
 
     &__mobile {
@@ -46,15 +50,7 @@
         // left: 0 !important;
         // right: 0 !important;
 
-        // * --- FALLBACK
-        @supports not (inset: 0) {
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0; // stylelint-disable-line
-        }
-        inset: 0; // stylelint-disable-line
-        // * --- FALLBACK END
+        inset: 0;
 
         width: 100%;
 
@@ -126,8 +122,7 @@
         display: flex;
         list-style: none;
 
-        column-gap: clamp(28px, 2.73438vw, 32px);
-        // @include fluid-column-gap(28px, 2.73438vw, 32px);
+        column-gap: clamp(16px, 0.037 * 100vw - 12.4444px, 32px);
     }
 
     &__menu-item {
@@ -178,6 +173,8 @@
         -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
         -webkit-tap-highlight-color: transparent;
 
+        text-wrap-mode: nowrap;
+
         @media (hover: hover) {
             &:hover {
                 text-decoration: underline;
@@ -188,6 +185,33 @@
     // &__button-link {
     //     //* nothing
     // }
+
+    &__buttons-group {
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        &--mobile {
+            width: 100%;
+            height: auto;
+
+            flex-direction: column;
+        }
+    }
+
+    &__separator {
+        background-color: #1b1a1a;
+
+        height: 30px;
+        width: 1px;
+
+        border-radius: 50%;
+
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+        overflow: hidden;
+    }
 }
 
 // ? --- LAPTOP ---
@@ -208,22 +232,22 @@
 //     }
 // }
 
-// ? --- TABLET ---
-// ? --------------
-@media (max-width: 768px) {
-    .navigation {
-        &__desktop {
+// ? --- TABLET (860px) --- RUS
+// ? --------------------------
+@media (max-width: 860px) {
+    .navigation--ru {
+        .navigation__desktop {
             display: none;
         }
 
-        &__mobile {
+        .navigation__mobile {
             // position: fixed;
             // z-index: 1000;
 
             display: flex;
         }
 
-        &__menu {
+        .navigation__menu {
             flex-direction: column;
             align-items: center;
 
@@ -233,15 +257,58 @@
             // row-gap: 32px;
         }
 
-        &__menu-item {
+        .navigation__menu-item {
             @include poppins--20px;
         }
 
-        &__menu-item--dot {
+        .navigation__menu-item--dot {
             @include poppins--32px;
         }
 
-        &__menu-link {
+        .navigation__menu-link {
+            @media (hover: hover) {
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+// ? --- TABLET ---
+// ? --------------
+@media (max-width: 768px) {
+    .navigation:not(.navigation--ru) {
+        .navigation__desktop {
+            display: none;
+        }
+
+        .navigation__mobile {
+            // position: fixed;
+            // z-index: 1000;
+
+            display: flex;
+        }
+
+        .navigation__menu {
+            flex-direction: column;
+            align-items: center;
+
+            gap: 0;
+            column-gap: 0; // stylelint-disable-line
+
+            // row-gap: 32px;
+        }
+
+        .navigation__menu-item {
+            @include poppins--20px;
+        }
+
+        .navigation__menu-item--dot {
+            @include poppins--32px;
+        }
+
+        .navigation__menu-link {
             @media (hover: hover) {
                 &:hover {
                     text-decoration: underline;

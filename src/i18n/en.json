@@ -21,7 +21,11 @@
                     "contact": "Contact"
                 },
                 "button": {
-                    "get_template": "Get template"
+                    "get_template": "Get template",
+                    "i18n": {
+                        "short": "РУС",
+                        "long": "РУССКИЙ"
+                    }
                 }
             }
         },
