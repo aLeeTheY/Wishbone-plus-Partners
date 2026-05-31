@@ -29,7 +29,12 @@ export function ftp() {
     // ! 2. Проверка доступов FTP
     if (!configFTP.host || !configFTP.user) {
         notify.warn(NOTIFICATION_HANDLER_TITLES.FTP, 'FTP credentials missing, skipping deploy.')
-        return gulp.src('.').pipe(gulp.dest('.'))
+
+        // ! иначе создаётся пустая папка в корне проекта
+        const emptyStream = through2.obj()
+        emptyStream.end()
+
+        return emptyStream
     }
 
     configFTP.log = (message) => {
