@@ -32,7 +32,7 @@ function metaWebManifest() {
 // * ----------------
 function metaFavicon() {
     return gulp
-        .src(path.src.meta.favicon.images)
+        .src(path.src.meta.favicon.images, { encoding: false })
         .pipe(
             env.buildMode.isDev
                 ? plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.META.FAVICON.IMAGES)
