@@ -24,6 +24,7 @@ const Configuration: UserConfig = {
                 // * --- my additions
                 // * ----------------
                 'wip', // work in progress
+                'deploy',
             ],
         ],
     },
