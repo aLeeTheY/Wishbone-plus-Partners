@@ -10,7 +10,6 @@ const srcFolder = './src'
 // const tempFolder = './temp'
 
 const zipFolder = './archive'
-const ftpFolder = 'test'
 
 // * --- EXPORT GULP PATHS
 // * ---------------------
@@ -107,5 +106,4 @@ export const path = {
         },
     },
     zip: `${zipFolder}`,
-    ftp: `${ftpFolder}`,
 }
