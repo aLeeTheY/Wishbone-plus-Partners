@@ -44,16 +44,14 @@ import htmlmin from 'gulp-html-minifier-terser'
 // * -----------------
 // const cacheVersion = `?v=${Date.now()}`
 
-// TODO: доделать <source> для video, audio и i18n
+// TODO: доделать <source> для video, audio и 'hreflang' i18n
 function createHtmlStream({
+    siteUrl,
     locale,
     localeData,
     destPath,
     allLocales,
     defaultLocale,
-    baseUrl,
-    baseUrlPostfix,
-    pageRelativePath,
     // * инлайн аргументы
     cssContent = '',
     jsContent = '',
@@ -63,6 +61,10 @@ function createHtmlStream({
     if (!env.isInlineCSS) {
         ignoreCustomComments.push(/CRITICAL CSS PLACEHOLDER/)
     }
+
+    // ! формируем итоговый prefix для ассетов
+    const pathPrefix = env.isLocal ? (locale !== defaultLocale ? '../' : './') : env.assetPrefix
+    // console.log(`ASSET_PREFIX: ${env.assetPrefix}`)
 
     return (
         gulp
@@ -88,15 +90,13 @@ function createHtmlStream({
             .pipe(
                 nunjucksRender({
                     // path: [`${path.projectRootFolderName}/src/`, `${path.projectRootFolderName}/src/templates/`, `${path.projectRootFolderName}/`],
-                    path: ['./src/', './'],
+                    path: ['./', './src/', './src/templates/', './src/templates/utils/'],
                     data: {
+                        siteUrl,
                         locale,
                         ...localeData,
                         allLocales,
                         defaultLocale,
-                        baseUrl,
-                        baseUrlPostfix,
-                        pageRelativePath,
                     },
                 }),
             )
@@ -110,120 +110,29 @@ function createHtmlStream({
             // )
 
             // * заменяем пути на корректные для каждого ресурса
-            .pipe(
-                gulpReplace(
-                    /@meta\//g,
-                    locale !== defaultLocale && env.isLocal
-                        ? `../`
-                        : env.isLocal
-                          ? `./`
-                          : `${env.baseUrlPostfix}/`,
-                ),
-            )
-            .pipe(
-                gulpReplace(
-                    /@(scss|css)\//g,
-                    locale !== defaultLocale && env.isLocal
-                        ? `../css/`
-                        : env.isLocal
-                          ? `./css/`
-                          : `${env.baseUrlPostfix}/css/`,
-                ),
-            )
-            .pipe(
-                gulpReplace(
-                    /@(ts|js)\//g,
-                    locale !== defaultLocale && env.isLocal
-                        ? `../js/`
-                        : env.isLocal
-                          ? `./js/`
-                          : `${env.baseUrlPostfix}/js/`,
-                ),
-            )
-            .pipe(
-                gulpReplace(
-                    /@audio\//g,
-                    locale !== defaultLocale && env.isLocal
-                        ? `../assets/audio/`
-                        : env.isLocal
-                          ? `./assets/audio/`
-                          : `${env.baseUrlPostfix}/assets/audio/`,
-                ),
-            )
-            // .pipe(gulpReplace(/@fonts\//g, `${env.baseUrlPostfix}/assets/fonts/`))
+            .pipe(gulpReplace(/@meta\//g, pathPrefix))
+            .pipe(gulpReplace(/@(scss|css)\//g, `${pathPrefix}css/`))
+            .pipe(gulpReplace(/@(ts|js)\//g, `${pathPrefix}js/`))
+            .pipe(gulpReplace(/@audio\//g, `${pathPrefix}assets/audio/`))
+            // .pipe(gulpReplace(/@fonts\//g, `${pathPrefix}assets/fonts/`))
             .pipe(
                 gulpReplace(/@icons\/(.+?)\.svg/g, (match, p1) => {
                     const id = p1.replace(/\//g, '--')
-                    if (env.isLocal || env.isInlineSprite) {
+
+                    // 1. Если спрайт инлайнится в сам HTML-документ
+                    if (env.isInlineSprite) {
                         return `#${id}`
                     }
-                    return `${env.baseUrlPostfix}/assets/icons/sprite.svg#${id}`
+
+                    // 2. Если спрайт лежит внешним файлом (дев, прод, github pages)
+                    // assetPrefix вернет, например, '/Wishbone-plus-Partners/' или '/'
+                    return `${pathPrefix}assets/icons/sprite.svg#${id}`
                 }),
             )
-            // .pipe(
-            //     gulpReplace('</body>', (match) => {
-            //         if (env.isLocal) {
-            //             try {
-            //                 const iconsDir = nodePath.resolve(path.build.icons)
-            //                 const files = fs.readdirSync(iconsDir)
-            //                 const spriteFile = files.find((f) => /^sprite.*\.svg$/.test(f))
-            //                 if (spriteFile) {
-            //                     const spriteContent = fs.readFileSync(
-            //                         nodePath.join(iconsDir, spriteFile),
-            //                         'utf-8',
-            //                     )
-            //                     return `<div style="display:none;">${spriteContent}</div>\n${match}`
-            //                 }
-            //             } catch (error) {
-            //                 notify.warn(
-            //                     NOTIFICATION_HANDLER_TITLES.HTML,
-            //                     `Ошибка инлайнинга спрайта: ${error.message}`,
-            //                 )
-            //             }
-            //         }
-            //         return match
-            //     }),
-            // )
-            .pipe(
-                gulpReplace(
-                    /@images\//g,
-                    locale !== defaultLocale && env.isLocal
-                        ? `../assets/images/`
-                        : env.isLocal
-                          ? `./assets/images/`
-                          : `${env.baseUrlPostfix}/assets/images/`,
-                ),
-            )
-            .pipe(
-                gulpReplace(
-                    /@videos\//g,
-                    locale !== defaultLocale && env.isLocal
-                        ? `../assets/videos/`
-                        : env.isLocal
-                          ? `./assets/videos/`
-                          : `${env.baseUrlPostfix}/assets/videos/`,
-                ),
-            )
-            .pipe(
-                gulpReplace(
-                    /@misc\//g,
-                    locale !== defaultLocale && env.isLocal
-                        ? `../assets/misc/`
-                        : env.isLocal
-                          ? `./assets/misc/`
-                          : `${env.baseUrlPostfix}/assets/misc/`,
-                ),
-            )
-            .pipe(
-                gulpReplace(
-                    /@libs\//g,
-                    locale !== defaultLocale && env.isLocal
-                        ? `../libs/`
-                        : env.isLocal
-                          ? `./libs/`
-                          : `${env.baseUrlPostfix}/libs/`,
-                ),
-            )
+            .pipe(gulpReplace(/@images\//g, `${pathPrefix}assets/images/`))
+            .pipe(gulpReplace(/@videos\//g, `${pathPrefix}assets/videos/`))
+            .pipe(gulpReplace(/@misc\//g, `${pathPrefix}assets/misc/`))
+            .pipe(gulpReplace(/@libs\//g, `${pathPrefix}assets/libs/`))
 
             // * замена расширений файлов .scss
             .pipe(gulpReplace(/\.scss(?=["'])/g, '.min.css'))
@@ -366,14 +275,12 @@ async function buildHtml() {
                     : nodePath.join(path.build.html, String(locale).toLowerCase())
 
             const stream = createHtmlStream({
+                siteUrl: env.siteUrl,
                 locale,
                 localeData,
                 destPath,
                 allLocales: locales,
                 defaultLocale,
-                baseUrl: env.baseUrl,
-                baseUrlPostfix: env.baseUrlPostfix,
-                pageRelativePath: '',
                 cssContent,
                 jsContent,
                 spriteContent,

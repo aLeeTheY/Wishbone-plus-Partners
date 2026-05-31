@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import fs from 'fs'
 import nodePath from 'node:path'
 
@@ -19,11 +20,13 @@ const appVersion = packageJson.version
 // * --- ARGV CONFIG
 // * ---------------
 const argv = yargs(hideBin(process.argv))
+    // * Разрешаем yargs автоматически превращать кебаб-регистр (--site-folder) в camelCase (argv.siteFolder)
+    .parserConfiguration({ 'camel-case-expansion': true })
     // * Выравнивание текста по ширине терминала
     .wrap(Math.min(100, yargs(hideBin(process.argv)).terminalWidth()))
     // * Настраиваем вывод версии приложения
-    .version('version', 'Displays current workspace semantic version', appVersion)
-    .alias('version', 'v')
+    .version('workspace-version', 'Displays current workspace semantic version', appVersion)
+    .alias('workspace-version', ['wv', 'W'])
     // * Настраиваем вывод help
     .help('info', 'Displays CLI options manual')
     .alias('info', 'i')
@@ -57,14 +60,14 @@ const argv = yargs(hideBin(process.argv))
     })
     // * Флаг internationalization
     .option('internationalization', {
-        alias: ['i18n'],
+        alias: ['i18n', 'I'],
         type: 'boolean',
         default: false,
         description: 'Activates localized multi-lingual document compilation',
     })
     // * Флаг inline-sprite
     .option('inline-sprite', {
-        alias: ['full-inline-sprite', 'is'],
+        alias: ['is'],
         type: 'boolean',
         default: false,
         description:
@@ -72,47 +75,64 @@ const argv = yargs(hideBin(process.argv))
     })
     // * Флаг inline-css
     .option('inline-css', {
-        alias: ['full-inline-css', 'ic'],
+        alias: ['ic'],
         type: 'boolean',
         default: false,
         description: 'Directly embeds production stylesheets inside the HTML layout payload',
     })
     // * Флаг inline-js
     .option('inline-js', {
-        alias: ['full-inline-js', 'ij'],
+        alias: ['ij'],
         type: 'boolean',
         default: false,
         description: 'Directly embeds processed client scripts inside the HTML layout payload',
     })
-    // * Флаг base-url
-    .option('base-url', {
-        alias: ['bu'],
+    // * Флаг obfuscation
+    .option('obfuscation', {
+        alias: ['obf', 'o'],
+        type: 'boolean',
+        default: false,
+        description:
+            'Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with `--inline-css`, `--inline-js`, and `--inline-sprite`',
+    })
+    // * Флаг domain
+    .option('domain', {
+        alias: ['site-url', 'url', 'd'],
         type: 'string',
         default: undefined,
+        defaultDescription: 'http://localhost:3000',
         description: 'Maps target deployment domain root, e.g., `https://example.com`',
     })
-    // * Флаг base-url-postfix
-    .option('base-url-postfix', {
-        alias: ['bup'],
+    // * Флаг site-folder
+    .option('site-folder', {
+        alias: ['folder', 'sf', 'F'],
         type: 'string',
         default: undefined,
+        defaultDescription: '/',
         description:
-            'Maps trailing repository paths for subdirectory deployments, e.g., `.../my-repo/...`',
+            'Folder name on the hosting server or GitHub repository name (e.g., `my-repo`, `www`, ...)',
     })
     // * Флаг production-server
-    .option('production-server', {
-        alias: ['prod-server', 'server', 'ps'],
+    .option('prod-server', {
+        alias: ['server', 'ps', 'P'],
         type: 'boolean',
         default: false,
         description: 'Launches a local server tracking the compiled production build footprint',
     })
-    // * Флаг obfuscation
-    .option('obfuscation', {
-        alias: ['obf'],
+    // * Флаг secure
+    .option('secure', {
+        alias: ['use-https', 'https', 'H'],
         type: 'boolean',
         default: false,
         description:
-            'Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with `--inline-*` options',
+            'Forces HTTPS protocol execution for both build paths and local development servers',
+    })
+    // * Флаг gh-pages
+    .option('gh-pages', {
+        alias: ['demo', 'gh', 'g'],
+        type: 'boolean',
+        default: false,
+        description: 'Enable GitHub Pages environment configurations (uses GitHub URLs)',
     })
 
     // ! group options
@@ -120,35 +140,142 @@ const argv = yargs(hideBin(process.argv))
 
     // ! check options mix
     .check((argv) => {
-        // Защита от смеси с девелопментом
-        if (argv.staging && NODE_ENV !== 'production') {
-            throw new Error(
-                'The --staging flag can only be used under production rules (cross-env NODE_ENV=production).',
-            )
+        // Получаем имя запущенной таски Gulp (первый позиционный аргумент)
+        const gulpTask = argv._[0]
+
+        // 1. Production environment rules (если запустили таску 'prod' в девелопменте)
+        if (NODE_ENV === 'production' && gulpTask === 'dev') {
+            throw new Error('Cannot run development tasks in NODE_ENV=production mode.')
         }
-        // Проверка обфускации и инлайнинга
+
+        // 2. Development environment rules (если запустили 'prod' или '--staging' в девелопменте)
+        if (NODE_ENV === 'development' && (gulpTask === 'prod' || argv.staging)) {
+            throw new Error('Cannot run production/staging tasks in NODE_ENV=development mode.')
+        }
+
+        // 3. Explicit staging rule (Safety measure)
+        if (argv.staging && NODE_ENV !== 'production') {
+            throw new Error('The --staging flag is only available in production environment.')
+        }
+
+        // 4. Obfuscation safety check
         if (
             argv.obfuscation &&
             (argv['inline-sprite'] || argv['inline-css'] || argv['inline-js'])
         ) {
-            throw new Error('Flags --obfuscation and --inline-* cannot be used together.')
+            throw new Error('--obfuscation and --inline-* flags cannot be used together.')
         }
+
         return true
     })
     .fail((msg, err) => {
-        // eslint-disable-next-line no-console
-        console.error('\n\x1b[31m%s\x1b[0m\n', `❌ Error: ${msg || err.message}`)
+        // * Выводим трейс ошибки (err.stack), если упал JS код, а не yargs валидация
+        console.error('\n\x1b[31m%s\x1b[0m\n', `❌ Error: ${msg || err.stack || err.message}`)
         process.exit(1)
     })
     .parse()
 
-// * --- CHECK STAGING MODE
-// * ----------------------
+// * --- CHECK ENVIRONMENT TYPE
+// * --------------------------
 const isStagingMode = NODE_ENV === 'production' && argv.staging
+const isLocalFileMode = argv.local || false
+const isGitHubPages = argv.ghPages || false
 
 // * --- LOAD CONFIG
 // * ---------------
 const siteConfig = JSON.parse(fs.readFileSync(`${path.src.base}/site.config.json`, 'utf-8'))
+
+// * --- BUILD SITE_URL & ASSET_PREFIX PATHS
+// * ---------------------------------------
+const sitePaths = (() => {
+    // 1. Автономный режим (file:///) — полностью зануляет url
+    // ! siteUrl и assetPrefix не используется когда активен `--local`
+    // ! каждый ресурс (script, html и т.д.) перестраивает пути относительно себя сам
+    if (isLocalFileMode) {
+        return { siteUrl: '', assetPrefix: '' }
+    }
+
+    // 2. Вытягиваем домен сайта по окружению (если в JSON пусто — берем дефолт 'https://localhost:3000')
+    let domain
+    if (argv.domain !== undefined) {
+        domain = argv.domain
+    } else if (argv.staging || argv.prodServer) {
+        // Если тестируем стейджинг или запускаем локальный прод-сервер — строго localhost
+        domain = siteConfig.domain || 'https://localhost:3000'
+    } else if (isGitHubPages) {
+        domain = siteConfig.domainGitHubPages || ''
+    } else if (NODE_ENV === 'production') {
+        domain = siteConfig.domainProduction || ''
+    } else {
+        domain = siteConfig.domain || 'https://localhost:3000'
+    }
+
+    // 3. Вытягиваем папку сайта по окружению (если в JSON пусто — берем дефолт '/')
+    let folder
+    if (argv.siteFolder !== undefined) {
+        folder = argv.siteFolder
+    } else if (argv.staging || argv.prodServer) {
+        // localhost обычно поднимается в корне, поэтому сбрасываем папку на '/'
+        folder = siteConfig.siteFolder || '/'
+    } else if (isGitHubPages) {
+        folder = siteConfig.siteFolderGitHubPages || ''
+    } else if (NODE_ENV === 'production') {
+        folder = siteConfig.siteFolderProduction || ''
+    } else {
+        folder = siteConfig.siteFolder || '/'
+    }
+
+    // 4.1. Зачистка от лишних пробелов и слэшей (защита от дурака)
+    let cleanDomain = domain.trim().replace(/\/$/, '')
+
+    // ! ЗАЩИТА: Проверяем, что домен не пустой, перед тем как мучить его регулярками
+    if (cleanDomain) {
+        // 4.2. Вытаскиваем протокол, если он был указан в строке домена
+        const match = cleanDomain.match(/^(https?):\/\//)
+        const protocolInDomain = match ? match[1] : null
+
+        // 4.3 Если в домене был протокол, берем его за основу. Если нет — смотрим на флаг --secure
+        const targetProtocol = protocolInDomain || (argv.secure ? 'https' : 'http')
+
+        // 4.4. Очищаем домен от протокола
+        cleanDomain = cleanDomain.replace(/^https?:\/\//, '')
+
+        // 4.5. Если юзер передал флаг --secure, но в домене написано http:// — тогда ругаемся и перезаписываем
+        if (argv.secure && protocolInDomain === 'http') {
+            console.warn(
+                `\x1b[33m⚠️ Warning: --domain has http:// but --secure flag forces https://. Overriding to https.\x1b[0m`,
+            )
+            cleanDomain = `https://${cleanDomain}`
+        } else {
+            cleanDomain = `${targetProtocol}://${cleanDomain}`
+        }
+    }
+
+    const cleanFolder = folder.trim().replace(/^\/|\/$/g, '')
+
+    // 5. Формируем ASSET PREFIX (пути для картинок/стилей без домена)
+    // Если мы в --local (все пусто) или домен забыли указать — префикс пустой
+    // Если папки нет (корень) — префикс '/', если есть — '/папка/'
+    const assetPrefix = !cleanDomain && !cleanFolder ? '' : cleanFolder ? `/${cleanFolder}/` : '/'
+
+    // 6. Формируем полный URL для SEO (с доменом, без слэша на конце)
+    const siteUrl = (() => {
+        // Если домен в итоге пустой (мало ли что в конфиге напутали) — отдаем пустую строку
+        if (!cleanDomain) {
+            return ''
+        }
+
+        // Если папки нет (или это был просто корень '/') — отдаем только чистый домен
+        if (!cleanFolder) {
+            return cleanDomain
+        }
+
+        // Склеиваем домен и папку через один красивый слэш
+        return `${cleanDomain}/${cleanFolder}`
+    })()
+
+    return { siteUrl, assetPrefix }
+})()
 
 // * --- EXPORT GULP ENV
 // * -------------------
@@ -158,22 +285,28 @@ export const env = {
         isStaging: isStagingMode,
         isProd: NODE_ENV === 'production' && !isStagingMode,
     },
+
     isVerbose: argv.verbose,
     isForceClean: argv.forceClean,
-    isObfuscation: argv.obfuscation,
+    isLocal: isLocalFileMode,
     isI18N: argv.internationalization,
-    baseUrl: argv.baseUrl !== undefined ? argv.baseUrl : siteConfig.baseUrl || '/',
-    baseUrlPostfix:
-        argv.baseUrlPostfix !== undefined
-            ? '/' + argv.baseUrlPostfix
-            : siteConfig.baseUrlPostfix !== null && siteConfig.baseUrlPostfix !== ''
-              ? '/' + siteConfig.baseUrlPostfix
-              : '',
-    isLocal: argv.local,
-    isInlineSprite: argv.inlineSprite || argv.local, // local подразумевает инлайн-спрайт
+
+    isInlineSprite: argv.inlineSprite || isLocalFileMode, // local подразумевает инлайн-спрайт
     isInlineCSS: argv.inlineCss,
     isInlineJS: argv.inlineJs,
-    isProdServer: argv.productionServer,
+
+    isObfuscation: argv.obfuscation,
+
+    // ! Result must be like that: `https://example.com` or `https://example.com/site-folder`
+    siteUrl: sitePaths.siteUrl,
+
+    // ! Префикс для ассетов, если не --local, то он будет absolute ('/')
+    // ! Если был задан siteFolder, то он будет ('/site-folder/')
+    assetPrefix: sitePaths.assetPrefix,
+
+    isProdServer: argv.prodServer,
+    isHttps: argv.secure,
+
     // placeholders: {
     //     webpInCssPolyfillScript: fs.readFileSync('node_modules/webp-in-css/polyfill.js', 'utf-8'),
     // },

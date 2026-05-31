@@ -20,7 +20,7 @@ function metaWebManifest() {
                 ? plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.META.FAVICON.WEB_MANIFEST)
                 : through2.obj(), // passthrough
         )
-        .pipe(gulpReplace(/\/?@meta\//g, `${env.baseUrlPostfix}/`))
+        .pipe(gulpReplace(/\/?@meta\//g, env.assetPrefix))
         .pipe(gulp.dest(path.build.meta))
         .on('end', () => {
             // * update dev server

@@ -1,6 +1,7 @@
 import gulp from 'gulp'
 import browserSync from 'browser-sync'
 
+import { env } from '../../../config/env.js'
 import { path } from '../../../config/path.js'
 
 // TODO: починить watchers
@@ -13,6 +14,8 @@ export function server(cb) {
             baseDir: path.build.html,
             directory: false,
         },
+        // * control `http` or `https` mode
+        https: env.isHttps,
         // TODO: test 'ghostMode' later
         // ghostMode: {
         //     clicks: true,

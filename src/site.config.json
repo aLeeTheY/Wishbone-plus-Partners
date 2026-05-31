@@ -1,8 +1,8 @@
 {
-    "baseUrl": "https://localhost:3000",
-    "baseUrlPostfix": "",
-    "baseUrlForGithub": "https://aleethey.github.io",
-    "baseUrlPostfixForGithub": "Wishbone-plus-Partners",
-    "baseUrlForDev": "https://localhost:3000",
-    "baseUrlPostfixForDev": ""
+    "domain": "http://localhost:3000",
+    "siteFolder": "/",
+    "domainProduction": "https://your.domain.com/",
+    "siteFolderProduction": "/www/",
+    "domainGitHubPages": "https://aleethey.github.io/",
+    "siteFolderGitHubPages": "/Wishbone-plus-Partners/"
 }

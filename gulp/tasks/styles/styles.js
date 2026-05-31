@@ -29,6 +29,8 @@ import {
 // * --- EXPORT GULP TASK FOR SCSS/CSS FILES
 // * ---------------------------------------
 export function styles() {
+    const cssToAssets = env.isInlineCSS ? './assets/' : '../assets/'
+
     return (
         gulp
             // * берем исходники
@@ -58,37 +60,20 @@ export function styles() {
             )
 
             // * заменяем пути на корректные для каждого ресурса
-            // .pipe(gulpReplace(/@meta\//g, '../'))
-            .pipe(gulpReplace(/@(scss|css)\//g, env.isInlineCSS ? './css' : './'))
-            // .pipe(gulpReplace(/@(ts|js)\//g, '../js/'))
-            .pipe(
-                gulpReplace(/@audio\//g, env.isInlineCSS ? './assets/audio/' : '../assets/audio/'),
-            )
-            .pipe(
-                gulpReplace(/@fonts\//g, env.isInlineCSS ? './assets/fonts/' : '../assets/fonts/'),
-            )
+
+            .pipe(gulpReplace(/@(scss|css)\//g, './'))
+
+            .pipe(gulpReplace(/@audio\//g, `${cssToAssets}audio/`))
+            .pipe(gulpReplace(/@fonts\//g, `${cssToAssets}fonts/`))
             .pipe(
                 gulpReplace(/@icons\/(.+?)\.svg/g, (match, p1) => {
                     const id = p1.replace(/\//g, '--')
-                    return env.isInlineCSS
-                        ? `./assets/icons/sprite.svg#${id}`
-                        : `../assets/icons/sprite.svg#${id}`
+                    return `${cssToAssets}icons/sprite.svg#${id}`
                 }),
             )
-            .pipe(
-                gulpReplace(
-                    /@images\//g,
-                    env.isInlineCSS ? './assets/images/' : '../assets/images/',
-                ),
-            )
-            .pipe(
-                gulpReplace(
-                    /@videos\//g,
-                    env.isInlineCSS ? './assets/videos/' : '../assets/videos/',
-                ),
-            )
-            .pipe(gulpReplace(/@misc\//g, env.isInlineCSS ? './assets/misc/' : '../assets/misc/'))
-            // .pipe(gulpReplace(/@libs\//g, '../libs/'))
+            .pipe(gulpReplace(/@images\//g, `${cssToAssets}images/`))
+            .pipe(gulpReplace(/@videos\//g, `${cssToAssets}videos/`))
+            .pipe(gulpReplace(/@misc\//g, `${cssToAssets}misc/`))
 
             // * удаляем неиспользуемые css классы
             // .pipe(
