@@ -3,117 +3,117 @@
 *,
 *::after,
 *::before {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 :where(html) {
-  color-scheme: light dark;
-  hanging-punctuation: first allow-end last;
+    color-scheme: light dark;
+    hanging-punctuation: first allow-end last;
 
-  // dont work in Alpine.js
-  // interpolate-size: allow-keywords;
+    // dont work in Alpine.js
+    // interpolate-size: allow-keywords;
 
-  scroll-behavior: smooth;
-  scrollbar-gutter: stable;
-  text-size-adjust: none;
-  -webkit-text-size-adjust: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
 }
 
 :where(html.translated-rtl) {
-  direction: rtl;
+    direction: rtl;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :where(html) {
-    scroll-behavior: auto;
-  }
+    :where(html) {
+        scroll-behavior: auto;
+    }
 }
 
 :where(body) {
-  min-block-size: 100svb;
-  min-inline-size: 300px;
+    min-block-size: 100svb;
+    min-inline-size: 300px;
 }
 
 :where(canvas, img, picture, svg, video) {
-  block-size: auto;
-  border: none;
-  display: block;
-  max-inline-size: 100%;
+    block-size: auto;
+    border: none;
+    display: block;
+    max-inline-size: 100%;
 }
 
 :where(button, input, progress, select, textarea) {
-  appearance: none;
-  background: transparent;
-  border: none;
-  color: inherit;
-  font: inherit;
-  hanging-punctuation: none;
-  line-height: inherit;
-  text-align: start;
-  touch-action: manipulation;
+    appearance: none;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font: inherit;
+    hanging-punctuation: none;
+    line-height: inherit;
+    text-align: start;
+    touch-action: manipulation;
 }
 
 :where(button) {
-  cursor: pointer;
-  user-select: none;
+    cursor: pointer;
+    user-select: none;
 }
 
 :where(textarea) {
-  resize: vertical;
+    resize: vertical;
 }
 
 :where(textarea:not([rows])) {
-  field-sizing: content;
+    field-sizing: content;
 }
 
 :where(fieldset, iframe) {
-  border: none;
+    border: none;
 }
 
 :where(p, li, h1, h2, h3, h4, h5, h6) {
-  overflow-wrap: break-word;
-  text-wrap: pretty;
+    overflow-wrap: break-word;
+    text-wrap: pretty;
 }
 
 :where(abbr[title]) {
-  border: none;
-  text-decoration: none;
+    border: none;
+    text-decoration: none;
 }
 
 :where(cite) {
-  font-style: inherit;
+    font-style: inherit;
 }
 
 :where(small) {
-  font-size: inherit;
+    font-size: inherit;
 }
 
 :where(li, ol, ul) {
-  list-style: none;
+    list-style: none;
 }
 
 :where(dialog, [popover]) {
-  background: transparent;
-  border: none;
-  color: inherit;
-  margin: auto;
-  max-block-size: none;
-  max-inline-size: none;
-  position: fixed;
+    background: transparent;
+    border: none;
+    color: inherit;
+    margin: auto;
+    max-block-size: none;
+    max-inline-size: none;
+    position: fixed;
 }
 
 :where([popover]) {
-  inset: auto;
+    inset: auto;
 }
 
 :where(dialog:not([open], [popover]), [popover]:not(:popover-open)) {
-  display: none;
+    display: none;
 }
 
-:where([hidden]:not([hidden="until-found"])) {
-  display: none !important;
+:where([hidden]:not([hidden='until-found'])) {
+    display: none !important;
 }
