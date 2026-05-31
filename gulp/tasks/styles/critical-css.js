@@ -10,7 +10,7 @@ import { path } from '../../config/path.js'
 import { notify, NOTIFICATION_HANDLER_TITLES } from '../../helpers/error-handler.js'
 
 import penthouse from 'penthouse'
-import puppeteer from 'puppeteer'
+// import puppeteer from 'puppeteer'
 
 // * --- EXPORT GULP TASK FOR INLINE CRITICAL CSS TO HTML FILES
 // * ----------------------------------------------------------
