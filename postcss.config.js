@@ -77,6 +77,9 @@ export default {
         ...(isProd && {
             '@fullhuman/postcss-purgecss': {
                 content: ['src/**/*.njk'],
+
+                // ! Защитит .page--ru, .page--en, .page--fr и т.д.
+                // ! safelist: [/--[a-z]{2}$/],
                 safelist: [/--ru$/, /--en$/],
             },
         }),
