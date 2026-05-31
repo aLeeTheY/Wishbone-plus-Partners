@@ -1,5 +1,11 @@
-# Browsers that we support
+# ! Browsers that aLeeTheY support
+# * ----------------------------------------------------------------------------
+# * --- NOTE: This config is sensitive to NODE_ENV / BROWSERSLIST_ENV variables.
+# * --- By default (and in VS Code / Linters), it falls back to [production].
+# * --- Run 'npm run dev' to trigger [development] for lightning-fast rebuilds.
+# * ----------------------------------------------------------------------------
 
+# * ≈ 93.33% global coverage | last checked: 05/31/2026
 [production]
 last 4 versions
 > 0.05%
@@ -8,7 +14,10 @@ not kaios > 0
 not and_qq > 0
 not op_mini all
 not ios_saf < 13.4
-# not safari < 15.6
+not safari < 15.6
 
+# * ≈ 0.67% global coverage | last checked: 05/31/2026
 [development]
-last 1 version
+last 1 chrome version
+last 1 firefox version
+last 1 safari version

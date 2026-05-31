@@ -1,3 +1,4 @@
+import { env } from 'node:process'
 import type { Config } from 'stylelint'
 
 export default {
@@ -16,6 +17,8 @@ export default {
                 // browsers: ['last 4 versions', '> 0.2%', 'not dead'],
                 ignore: ['css-nesting', 'multicolumn'],
                 severity: 'warning',
+                // * disabled by default
+                // ignorePartialSupport: true,
             },
         ],
         'scss/double-slash-comment-empty-line-before': null,
