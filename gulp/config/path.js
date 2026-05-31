@@ -46,8 +46,8 @@ export const path = {
     // },
     src: {
         base: `${srcFolder}`,
+        html: `${srcFolder}/*.html`,
         njk: `${srcFolder}/*.{nj,njk,nunjucks}`,
-        // html: `${srcFolder}/*.html`,
         meta: {
             favicon: {
                 images: `${srcFolder}/meta/favicon/**/*.{ico,svg,png}`,
@@ -77,8 +77,8 @@ export const path = {
     },
     watch: {
         base: `${srcFolder}`,
-        njk: `${srcFolder}/**/*.{nj,njk,nunjucks}`,
         html: `${srcFolder}/**/*.html`,
+        njk: `${srcFolder}/**/*.{nj,njk,nunjucks}`,
         meta: {
             favicon: {
                 images: `${srcFolder}/meta/favicon/**/*.{ico,svg,png}`,

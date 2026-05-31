@@ -17,7 +17,7 @@ import { misc } from '../../assets/misc.js'
 // * --- EXPORT GULP TASK FOR WATCH KEY FILES
 // * ----------------------------------------
 export function watch() {
-    gulp.watch(path.watch.html, html)
+    gulp.watch([path.watch.html, path.watch.njk, path.watch.i18n.files], html)
     gulp.watch(
         [
             // * смотрим все файлы
