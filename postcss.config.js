@@ -76,7 +76,7 @@ export default {
         // * удаление неиспользуемых CSS (только в staging/prod)
         ...(isProd && {
             '@fullhuman/postcss-purgecss': {
-                content: ['src/**/*.njk'],
+                content: ['src/**/*.njk', 'src/**/*.html'],
 
                 // ! Защитит .page--ru, .page--en, .page--fr и т.д.
                 // ! safelist: [/--[a-z]{2}$/],
