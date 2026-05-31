@@ -128,6 +128,7 @@
         "build": "cross-env NODE_ENV=production gulp prod --i18n --force-clean",
         "local": "cross-env NODE_ENV=production gulp prod --i18n --local --force-clean",
         "secure": "cross-env NODE_ENV=production gulp prod --i18n --https --force-clean",
+        "gh-pages": "cross-env NODE_ENV=production gulp prod --i18n --gh-pages --force-clean",
         "archive": "npm run build && gulp zip",
         "__LINT__": "",
         "lint:ts": "eslint . --max-warnings=0",
