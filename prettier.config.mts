@@ -2,7 +2,10 @@ import { type Config } from 'prettier'
 
 // TODO: забблочить переносы > [!NOTE] > в Markdown
 const config: Config = {
-    plugins: ['prettier-plugin-jinja-template', '@prettier/plugin-xml'],
+    plugins: ['prettier-plugin-jinja-template', '@prettier/plugin-xml', 'prettier-plugin-sh'],
+
+    // * --- default `prettier` options
+    // * ------------------------------
     semi: false,
     tabWidth: 4,
     useTabs: false,
@@ -23,6 +26,15 @@ const config: Config = {
     trailingComma: 'all',
     proseWrap: 'never',
     endOfLine: 'lf',
+
+    // * --- `prettier-plugin-sh` options
+    // * --------------------------------
+    keepComments: true,
+    binaryNextLine: true,
+    switchCaseIndent: true,
+    spaceRedirects: true,
+    functionNextLine: false,
+
     overrides: [
         { files: ['*.json', '*.webmanifest'], options: { tabWidth: 4 } },
         {
