@@ -1,4 +1,3 @@
-import { env } from 'node:process'
 import type { Config } from 'stylelint'
 
 export default {
