@@ -1,7 +1,7 @@
 # Default | For all text files
 *           text eol=lf
 
-# Source Files | Design Files
+# Source Files | Design Files (Figma + Adobe Photoshop)
 *.fig       binary
 *.psd       binary
 *.psb       binary
