@@ -77,6 +77,7 @@ export default {
         ...(isProd && {
             '@fullhuman/postcss-purgecss': {
                 content: ['src/**/*.njk'],
+                safelist: [/--ru$/, /--en$/],
             },
         }),
         // * сжатие CSS (только в prod и staging modes)
