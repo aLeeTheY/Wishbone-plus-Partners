@@ -69,7 +69,7 @@ function createHtmlStream({
     return (
         gulp
             // * берем исходники
-            .src(path.src.njk)
+            .src([path.src.njk, path.src.html])
             // * подключаем plumber, чтобы gulp не падал при ошибке
             .pipe(
                 env.buildMode.isDev
