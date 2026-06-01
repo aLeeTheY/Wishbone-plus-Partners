@@ -733,7 +733,7 @@ GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com
 [issues-shield]: https://img.shields.io/github/issues/aLeeTheY/Wishbone-plus-Partners.svg?style=for-the-badge
 [issues-url]: https://github.com/aLeeTheY/Wishbone-plus-Partners/issues
 [license-shield]: https://img.shields.io/github/license/aLeeTheY/Wishbone-plus-Partners.svg?style=for-the-badge
-[license-url]: https://github.com/aLeeTheY/Wishbone-plus-Partners/blob/main/LICENSE
+[license-url]: https://github.com/aLeeTheY/Wishbone-plus-Partners/blob/master/LICENSE
 [last-commit-shield]: https://img.shields.io/github/last-commit/aLeeTheY/Wishbone-plus-Partners?style=for-the-badge
 [repo-size-shield]: https://img.shields.io/github/repo-size/aLeeTheY/Wishbone-plus-Partners?style=for-the-badge
 
