@@ -87,6 +87,14 @@ const argv = yargs(hideBin(process.argv))
         default: false,
         description: 'Directly embeds processed client scripts inside the HTML layout payload',
     })
+    // * Флаг mobile-first
+    .option('mobile-first', {
+        alias: ['mf', 'M'],
+        type: 'boolean',
+        default: false,
+        description:
+            'Toggles the build layout pipeline. Sets PostCSS media query sorting to `mobile-first` and configures the HTML picture transformer to generate `min-width` source tags instead of `max-width`',
+    })
     // * Флаг obfuscation
     .option('obfuscation', {
         alias: ['obf', 'o'],
@@ -295,6 +303,7 @@ export const env = {
     isInlineCSS: argv.inlineCss,
     isInlineJS: argv.inlineJs,
 
+    isMobileFirst: argv.mobileFirst,
     isObfuscation: argv.obfuscation,
 
     // ! Result must be like that: `https://example.com` or `https://example.com/site-folder`

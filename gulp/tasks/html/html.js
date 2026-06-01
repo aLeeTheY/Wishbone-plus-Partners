@@ -101,7 +101,11 @@ function createHtmlStream({
                 }),
             )
             // * генерируем <img> в <picture>/<source> + responsive + avif/webp
-            .pipe(htmlImg2PictureTransformer(path.src.images.base, { desktopFirst: true }))
+            .pipe(
+                htmlImg2PictureTransformer(path.src.images.base, {
+                    desktopFirst: !env.isMobileFirst,
+                }),
+            )
             // .pipe(
             //     // nunjucksRender({
             //     //     path: ['src/partials'], // CRITICAL: Tell Nunjucks where to find header/footer

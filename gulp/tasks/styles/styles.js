@@ -93,7 +93,7 @@ export function styles() {
                 }),
             )
             // * далее обрабатываем полученный css с помощью postcss (dev mode by default)
-            .pipe(postcss())
+            .pipe(postcss(null, { config: { ctx: { isMobileFirst: env.isMobileFirst } } }))
             // * добавляем webp вариант к картинкам jpg,jpeg,png в css файле
             // ? на замену используется postcss/webp-in-css
             // .pipe(
