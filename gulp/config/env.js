@@ -140,7 +140,8 @@ const argv = yargs(hideBin(process.argv))
         alias: ['demo', 'gh', 'g'],
         type: 'boolean',
         default: false,
-        description: 'Enable GitHub Pages environment configurations (uses GitHub URLs)',
+        description:
+            'Enable GitHub Pages build configuration (uses GitHub URLs, see `site.config.json` in `src/`)',
     })
 
     // ! group options
