@@ -470,14 +470,22 @@ Before running the build, you can customize base domains and paths for different
 Feel free to adjust these fields according to your needs. The builder will automatically apply the correct values depending on the target execution mode.
 
 > [!TIP]
-> **CLI Alternative.**
+> **CLI Alternative**
 >
-> If you need to override the configuration on the fly without modifying the file, you can use the `--domain` (`-d`) and `--site-folder` (`-F`) CLI flags.
+> If you need to override the configuration on the fly without modifying the file, you can use the following command-line flags:
+>
+> - `--domain` (`-d`) — to override the target URL
+> - `--site-folder` (`-F`) — to override the subdirectory path
 
 > [!NOTE]
-> **Smart Normalization (Error Protection).**
+> **Smart Normalization (Error Protection)**
 >
-> The builder features automatic slash handling. You can specify them in any format (at the end, at the beginning, or omit them entirely) — the Gulp build pipeline will normalize the strings automatically, preventing broken resource paths.
+> The builder features automatic slash handling. You can specify them in any format (at the end, at the beginning, or omit them entirely):
+>
+> - `https://site.com` or `https://site.com/`
+> - `/www/` or `www`
+>
+> The Gulp build pipeline will normalize strings automatically, preventing broken resource paths.
 
 ### ⚙️ Build & Launch <a id="build-launch"></a>
 
@@ -633,7 +641,7 @@ _For convenience, the primary npm scripts available in the project are listed be
 - [x] Shipping live demo structures to GitHub Pages.
 - [x] Constructing workspace documentation architecture and engineering `README.md`.
 
-### 🔮 Future Roadmap
+### 🔮 Future Plans
 
 - [ ] **Backend Template Integration (Django/Jinja2):** Develop a compilation pipeline that allows decoupled frontend development while outputting templates fully compatible with the [Django][Django-url] architecture (Jinja2/Nunjucks), automating static asset path injection.
 - [ ] **Custom Gulp Plugin for FFmpeg:** Engineer a modern asset pipeline plugin for media processing (audio/video conversion and encoding), as the existing `gulp-fluent-ffmpeg` package is officially deprecated.
