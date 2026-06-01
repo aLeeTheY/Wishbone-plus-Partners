@@ -101,7 +101,7 @@ const argv = yargs(hideBin(process.argv))
         type: 'boolean',
         default: false,
         description:
-            'Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with `--inline-css`, `--inline-js`, and `--inline-sprite`',
+            'Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with `--inline-*` options',
     })
     // * Флаг domain
     .option('domain', {
