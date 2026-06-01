@@ -3,4 +3,4 @@ User-agent: *
 Disallow:
 
 # website sitemap
-Sitemap: https://aleethey.github.io/Wishbone-plus-Partners/sitemap.xml
+Sitemap: @meta__site-url/sitemap.xml

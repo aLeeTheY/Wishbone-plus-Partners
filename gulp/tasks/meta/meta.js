@@ -48,6 +48,17 @@ function metaFavicon() {
 // * --- TEXT META FILES COPY
 // * ------------------------
 function metaText() {
+    // const formattedDate = new Intl.DateTimeFormat('en-US', {
+    //     month: '2-digit',
+    //     day: '2-digit',
+    //     year: 'numeric',
+    // })
+    //     .format(new Date())
+    //     .replace(/\//g, '-')
+
+    // ! Date like that: yyyy-mm-dd
+    const formattedDate = new Date().toISOString().split('T')[0]
+
     return gulp
         .src(path.src.meta.text)
         .pipe(
@@ -55,6 +66,8 @@ function metaText() {
                 ? plumberWithErrorHandler(NOTIFICATION_HANDLER_TITLES.META.TEXT)
                 : through2.obj(), // passthrough
         )
+        .pipe(gulpReplace(/@meta__site-url/g, env.siteUrl))
+        .pipe(gulpReplace(/@meta__date/g, formattedDate))
         .pipe(gulp.dest(path.build.meta))
         .on('end', () => {
             // * update dev server
