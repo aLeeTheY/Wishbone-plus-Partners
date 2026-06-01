@@ -43,7 +43,7 @@
     <a href="https://github.com/aLeeTheY/Wishbone-plus-Partners/issues/new?labels=bug&template=bug-report---.md">Сообщить об ошибке</a>
   </p>
 
-[![Русский](https://img.shields.io/badge/Русский-blue)](README.md) [![English](https://img.shields.io/badge/English-blue)](README.ENG.md)
+[![Русский](https://img.shields.io/badge/Русский-blue)](README.md) [![English](https://img.shields.io/badge/English-blue)](README.EN.md)
 
 </div>
 
@@ -56,7 +56,13 @@
       <a href="#about-the-project">ℹ️ О проекте</a>
       <ul>
         <li><a href="#design">🎨 Дизайн</a></li>
-        <li><a href="#preview">👁️ Предпросмотр</a></li>
+        <li>
+          <a href="#preview">👁️ Предпросмотр</a>
+          <ul>
+            <li><a href="#interface-preview">🖥️📱 Интерфейс (Desktop + Mobile)</a></li>
+            <li><a href="#fluid-preview">💧 Демонстрация Fluid-адаптива</a></li>
+          </ul>
+        </li>
         <li>
           <a href="#key-features">✨ Ключевые особенности</a>
           <ul>
@@ -73,6 +79,7 @@
       <ul>
         <li><a href="#prerequisites">📋 Предварительные требования</a></li>
         <li><a href="#installation">📥 Установка зависимостей</a></li>
+        <li><a href="#deployment-path-config">🌐 Конфигурация путей развёртывания (опционально)</a></li>
         <li><a href="#build-launch">⚙️ Сборка и запуск</a></li>
       </ul>
     </li>
@@ -82,6 +89,7 @@
         <li>
         <a href="#configuration">🔧 Конфигурация</a>
           <ul>
+            <li><a href="#examples">🎛️ Примеры переопределения параметров через NPM-скрипты</a></li>
             <li><a href="#npm-scripts">🏃 NPM скрипты</a></li>
           </ul>
         </li>
@@ -109,86 +117,97 @@
 
 ### 👁️ Предпросмотр <a id="preview"></a>
 
-Ниже представлен **предварительный просмотр** сайта (_**Desktop + Mobile**, нажмите на изображение для перехода к демо_):
+Ниже представлена **интерактивная демонстрация** проекта (_нажмите на любое изображение для перехода к живому демо_):
 
 <div align="center">
 
-[![Предпросмотр сайта][website-preview]](https://aleethey.github.io/Wishbone-plus-Partners/)
+#### 🖥️📱 Интерфейс (Desktop + Mobile) <a id="interface-preview"></a>
+
+[![Интерфейс проекта][interface-preview-gif]](https://aleethey.github.io/Wishbone-plus-Partners/)
+
+<br />
+
+#### 💧 Демонстрация Fluid-адаптива <a id="fluid-preview"></a>
+
+[![Демонстрация Fluid Design][fluid-preview-gif]](https://aleethey.github.io/Wishbone-plus-Partners/)
 
 </div>
 
 ### ✨ Ключевые особенности <a id="key-features"></a>
 
-_Для удобства, вся информация разбита по категориям._
+_Для удобства вся информация разбита по категориям._
 
 <details>
   <summary>📐 Верстка, Архитектура и UI/UX</summary>
 
-- **Static & Modular Architecture:** Чистый статический фронтенд без CMS и SSR. HTML-код разбит на изолированные, переиспользуемые компоненты с помощью шаблонизатора **Nunjucks**.
-- **Internationalization (i18n):** Полноценная поддержка мультиязычности. Пайплайн компилирует страницы на основе JSON-словарей (`ru.json`, `en.json`), генерируя раздельные языковые версии. Активируется CLI-флагом `--i18n`.
+- **Static & Modular Architecture:** Чистый статический фронтенд без CMS и SSR overhead. HTML-код декомпозирован на изолированные, переиспользуемые компоненты с помощью шаблонизатора **Nunjucks**.
+- **Internationalization (i18n):** Полноценная поддержка мультиязычности. Пайплайн динамически компилирует страницы на основе JSON-словарей (`ru.json`, `en.json`), генерируя раздельные языковые версии со своими роутами. Активируется CLI-флагом `-I, --i18n`.
 - **Fluid & Responsive Design:** Полностью гибкая адаптивность (Desktop, Tablet, Mobile). Построена на современных CSS-функциях `clamp()`, `min()` и `max()` в связке с каскадными медиа-запросами.
+- **Bi-directional Layout Pipeline (--mobile-first):** Уникальный флаг `-M, --mobile-first` позволяет на лету переключать стратегию сборки: он перенастраивает PostCSS на сортировку медиа-запросов по `min-width` и заставляет кастомный `<picture>`-трансформер инвертировать логику генерации адаптивных тегов в режим Mobile-First вместо стандартного Desktop-First (`max-width`).
 - **Pixel Perfect Fidelity:** Высокоточное воссоздание макета из Figma с жестким соблюдением отступов и оригинальной дизайн-системы.
-- **BEM Methodology:** Именование классов по методологии БЭМ, гарантирующее изоляцию стилей и простоту поддержки.
-- **Улучшенный UI/UX и микро-взаимодействия:** Интеграция плавных анимаций скролла (AOS.js) и декларативного управления состоянием на клиенте (Alpine.js). Эффект дополнен кастомными CSS-переходами (transitions) с аппаратным ускорением, что обеспечивает отзывчивый `hover`-эффект для всех интерактивных элементов (кнопок, ссылок и карточек).
+- **BEM Methodology:** Именование классов по методологии БЭМ, гарантирующее полную изоляцию стилей и простоту поддержки.
+- **Advanced UI/UX & Micro-interactions:** Интеграция плавных анимаций скролла (AOS.js) и декларативного управления состоянием на клиенте (Alpine.js). Эффект дополнен кастомными CSS-переходами (transitions) с аппаратным ускорением для интерактивных элементов.
 
 </details>
 
 <details>
   <summary>⚙️ Автоматизация и Управление сборкой (CLI & Workflow)</summary>
 
-- **Gulp 5 Core & NODE_ENV:** Автоматизация построена на Gulp 5. Режимы запуска (`dev`, `staging`, `prod`) строго разграничены через `cross-env` и переменной окружения `NODE_ENV`.
-- **Умные алиасы путей (Smart Path Aliasing):** Сквозная поддержка алиасов (`@scss`, `@ts`, `@images`, `@audio`, `@libs` и др.) с автодополнением в VS Code. При сборке Gulp-пайплайны автоматически заменяют их во всех исходниках.
-- **Автономный режим (--local):** Флаг `--local` принудительно переводит пути в относительный формат и инлайнит SVG-спрайт, позволяя открывать сайт с локального диска по `file:///`.
-- **Продвинутое CLI-управление (Yargs):** Настройка параметров сборки «на лету»: флаги для логирования (`--verbose`), путей (`--base-url`, `--base-url-postfix`) и сервера (`--prod-server`). Полная справка — `gulp --info`.
-- **Валидация конфликтов (Strict CLI):** Автоматическое прерывание сборки с информативной ошибкой при вызове несовместимых флагов (например, одновременный вызов `--local` и `--obfuscation`).
-- **Умная очистка (Smart Clean):** Задача очистки `dist/` по умолчанию не трогает тяжелые медиа (видео, аудио, шрифты, картинки). Для полной очистки предусмотрен флаг `--force-clean`.
-- **Fast Dev Workflow:** В режиме разработки тяжелые оптимизации отключаются, а локальный сервер (**BrowserSync**) мгновенно отражает изменения благодаря `gulp-watch`.
-- **Deployment & Архивация:** Интегрированы таски отправки дистрибутива на удаленный сервер по FTP (`vinyl-ftp`) и упаковки проекта в ZIP-архив.
+- **Gulp 5 Core & Node Environments:** Автоматизация построена на Gulp 5. Режимы запуска разграничены через `cross-env`. При этом конфигурация `staging` активируется через выделенный CLI-флаг `-s, --staging` внутри правил продакшен-сборки.
+- **Smart Path Aliasing:** Сквозная поддержка алиасов (`@scss`, `@ts`, `@images`, `@audio`, `@libs` и др.) с автодополнением в VS Code. При сборке Gulp-пайплайны автоматически заменяют их во всех исходниках.
+- **Offline Autonomous Mode:** Флаг `-l, --local` принудительно переводит пути в относительный формат и автоматически инлайнит SVG-спрайт, позволяя запускать сайт напрямую с локального диска по протоколу `file:///`.
+- **Advanced CLI Management (Yargs):** Настройка параметров сборки «на лету»: управление логированием (`-V, --verbose`), конфигурация домена деплоя (`-d, --domain`), имени целевой папки (`-F, --site-folder`) и запуск сервера продакшена (`-P, --prod-server`). Полная справка доступна по команде `gulp -i`.
+- **Strict CLI Conflict Validation:** Автоматическое прерывание сборки с информативной ошибкой при вызове несовместимых флагов. Например, CLI заблокирует запуск экспериментальной обфускации `-o, --obfuscation` совместно с флагами инлайнинга (`--inline-css`, `--inline-js`, `--inline-sprite`).
+- **Smart Cache-Safe Clean:** Задача очистки папки `dist/` по умолчанию (флаг `-c, --force-clean` отключен) не трогает тяжелые медиаресурсы (видео, аудио, шрифты, картинки). Для принудительной полной очистки рабочей директории передается флаг `-c`.
+- **Fast Dev Workflow:** В режиме разработки тяжелые оптимизации отключаются, а локальный сервер (**BrowserSync**) мгновенно отражает изменения благодаря оптимизированному `gulp-watch`. Поддерживается протокол HTTPS через флаг `-H, --secure`.
+- **Deployment & Archiving:** Интегрированы автоматизированные таски отправки дистрибутива на удаленный сервер по FTP (`vinyl-ftp`) и упаковки готового проекта в ZIP-архив. Флаг `-g, --gh-pages` автоматически адаптирует пути под хостинг GitHub Pages.
 
 </details>
 
 <details>
   <summary>🧩 Самописные трансформеры и умные хелперы (Custom Gulp Helpers)</summary>
 
-- **Инкрементальная проверка ассетов (`asset-exists.js`):** Кастомные хелперы отслеживают актуальность медиа-файлов с учётом хешей ревизий, чтобы тяжёлые задачи (FFmpeg, Sharp, конвертация шрифтов) не запускались повторно без необходимости.
-- **Автоматический `<picture>`-трансформер:** Кастомный модуль (`html-img2picture-transformer.js`) автоматически парсит HTML, анализирует ширину изображений через `sharp`, нарезает их по брейкпоинтам под разные экраны и оборачивает `<img>`-теги в `<picture>` с генерацией AVIF/WebP и фолбеком на оригинальное изображение.
-- **Гибкий инлайн-хелпер (`inline-assets.js`):** Управляемая через метки в HTML инъекция финального CSS, JS и SVG-спрайта. Исключает лишние HTTP-запросы и поддерживает автономный режим (`--local`).
-- **Продвинутая инлайн-сборка:** Флаги `--inline-css`, `--inline-js` встраивают финальные бандлы прямо в HTML, исключая внешние запросы.
-- **Экспериментальная обфускация (PostCSS Obfuscator):** Переименование CSS-классов в случайные короткие хэши (до 5 символов) для снижения веса и защиты структуры (флаг `--obfuscation`). CLI-валидация гарантирует, что обфускация не будет запущена одновременно с инлайн-режимом.
-- **Интеграция нативных CLI-инструментов:** Пайплайн управляет внешними утилитами (`ffmpeg`, Python `ftcli`) через асинхронный `spawn` с проверкой их доступности в системе перед запуском задачи. Реализована атомарная запись результатов и защита от блокировки `Event Loop`.
+- **Incremental Asset Validation (`asset-exists.js`):** Кастомные хелперы отслеживают актуальность медиафайлов с учётом хешей ревизий, чтобы тяжёлые фоновые задачи (FFmpeg, Sharp, конвертация шрифтов) не запускались повторно без необходимости.
+- **Automated `<picture>` Transformer (`html-img2picture-transformer.js`):** Кастомный HTML-парсер на базе `htmlparser2`, интегрированный прямо в поток `html.js`. Он выступает в роли «DOM-архитектора»: анализирует исходники через `sharp` для считывания пропорций оригинала, после чего динамически перестраивает дерево тегов, оборачивая `<img>` в структуры `<picture>` с точной картой медиа-запросов. Пайплайн полностью изолирован от тяжелой графики (не вызывает race conditions) и аппаратно решает задачи Core Web Vitals: предотвращает CLS (инжектирует `width`/`height`) и оптимизирует LCP (вырезает `lazy loading` при наличии `fetchpriority="high"` и форсирует `decoding="async"`).
+- **Flexible Inline Helper (`inline-assets.js`):** Управляемая через метки в HTML инъекция финального CSS, JS и SVG-спрайта. Исключает лишние HTTP-запросы и поддерживает автономный режим (`-l, --local`).
+- **Advanced Inline Bundling:** Выделенные флаги `--inline-css` and `--inline-js` встраивают финальные скомпилированные бандлы стилей и скриптов прямо в HTML-код, полностью исключая внешние сетевые запросы на клиенте.
+- **Experimental Code Obfuscation:** Флаг `-o, --obfuscation` запускает переименование CSS-классов в случайные короткие хэши во всех HTML, CSS и JS файлах сборки для экстремального снижения веса и защиты структуры кода от прямого копирования.
+- **Native CLI Binary Integration:** Пайплайн управляет внешними системными утилитами (`ffmpeg`, Python `ftcli`) через асинхронный `spawn` с упреждающей проверкой их доступности в ОС. Реализована атомарная запись результатов и защита от блокировки `Event Loop`.
 
 </details>
 
 <details>
   <summary>⚡ Оптимизация и Производительность (Performance)</summary>
 
-- **Google Lighthouse:** Стабильные **100/100** баллов в категории **Performance** и **90+** по остальным метрикам (Accessibility, Best Practices, SEO).
-- **Супербыстрая сборка скриптов (ESBuild):** Транспиляция TypeScript/JavaScript компилятором `esbuild` в стандарт ES2018, минификация и эффективный Tree Shaking.
-- **Critical CSS & Penthouse:** Автоматическая генерация и инлайнинг критических стилей для мгновенной отрисовки первого экрана (отключается при полном инлайнинге: `--inline-css`).
-- **Адаптивные изображения:** Генерация адаптивных форматов AVIF/WebP и формирование `<picture>`-элементов через кастомный трансформер (описан в разделе _🧩 Самописные трансформеры и умные хелперы (Custom Gulp Helpers) - **Автоматический `<picture>`-трансформер**_).
-- **Оптимизация SVG (SVGO & Sprites):** Иконки очищаются утилитой SVGO и упаковываются в единый `sprite.svg`. При необходимости спрайт встраивается прямо в DOM (`--inline-sprite`).
-- **Медиа-оптимизация (FFmpeg & WOFF/WOFF2):** Шрифты пережимаются в WOFF/WOFF2 через Python FoundryTools CLI. Аудио и видео конвертируются в `.webm` с помощью пресетов FFmpeg.
-- **Кэширование (Asset Revisioning):** Хеширование имён файлов (`gulp-rev`) в режимах `staging` и `prod` для гарантированного сброса кэша у пользователей.
-- **SEO & Meta:** Пайплайн включает в `dist/` пользовательские мета-файлы (`favicon.ico`, `robots.txt`, `sitemap.xml` и др.).
+- **Google Lighthouse Metrics:** Стабильные **100/100** баллов в категории **Performance** и **90+** по остальным метрикам (Accessibility, Best Practices, SEO).
+- **Blazing Fast Script Compilation (ESBuild):** Сверхбыстрая транспиляция TypeScript/JavaScript компилятором `esbuild` в стандарт ES2018, глубокая минификация и эффективный Tree Shaking.
+- **Critical CSS Extraction (Penthouse):** Автоматическая генерация и инлайнинг критических стилей для мгновенной отрисовки первого экрана (автоматически отключается при полном инлайнинге стилей через `--inline-css`).
+- **Responsive Images Permutations Matrix (`images.js`):** Вычислительный пайплайн на базе чистого `sharp` для генерации адаптивной сетки графики. Извлекает метаданные оригиналов и формирует матрицу комбинаций `[Брейкпоинты × 3 Формата (Исходный, WebP, AVIF)]`. Скрипт защищен от апскейла (пропускает брейкпоинты, превышающие физическое разрешение исходника) и гибко адаптируется под окружение: в `dev` оптимизирует скорость (минимальный `effort`, качество 100%), а в `prod` включает максимальное сжатие (`mozjpeg`, оптимизация палитры PNG, глубокие проходы `effort`). Интегрирован с хелпером `asset-exists.js` для инкрементального пропуска уже скомпилированных пачек файлов.
+- **SVG Optimization (SVGO & Sprites):** Векторные иконки автоматически очищаются утилитой SVGO от технического мусора и упаковываются в единый `sprite.svg`. Принудительный инлайнинг в DOM-дерево доступен через флаг `--inline-sprite` (автоматически активируется в `-l, --local`).
+- **Media Optimization (FFmpeg & WOFF2):** Шрифты пережимаются в максимально эффективные форматы WOFF/WOFF2 через Python FoundryTools CLI. Аудио- и видеоресурсы конвертируются в медиаконтейнеры `.webm` с помощью пресетов FFmpeg.
+- **Asset Revisioning (Cache Busting):** Хеширование имён файлов (`gulp-rev`) в режимах `staging` (флаг `-s`) и `prod` для гарантированного сброса кэша на стороне пользователей после деплоя.
+- **SEO & Production Metadata:** Автоматическое включение в финальную сборку всех сопутствующих метафайлов (`favicon.ico`, `robots.txt`, `sitemap.xml`).
 
 </details>
 
 <details>
   <summary>🛡️ Линтинг, Форматирование и Качество кода (Code Quality)</summary>
 
-- **Кроссбраузерность (.browserslistrc):** Плагины автопрефиксации ориентируются на глобальный охват >95% активных браузеров (продакшен). В `dev`-режиме — последние версии.
-- **Продвинутый PostCSS Пайплайн:** Многоступенчатая обработка стилей: `postcss-preset-env`, минификация имён CSS-переменных, округление субпикселей, фолбеки для `font-variant` и `will-change`, автоматический `font-display: swap`, удаление неиспользуемых селекторов (`purgecss`), группировка медиа-запросов и сжатие через `cssnano`.
-- **Контроль стандартов (ESLint):** Flat-конфигурация ESLint с `typescript-eslint` и `@stylistic`. Строгая проверка типов и предупреждения для потенциально опасного кода.
-- **Проверка совместимости стилей (Stylelint):** Контроль синтаксиса SCSS с плагином `stylelint-no-unsupported-browser-features`, сверяющим CSS-свойства с `.browserslistrc`.
-- **Prettier:** Автоматическое форматирование кода «на лету» с поддержкой синтаксиса Nunjucks (`prettier-plugin-jinja-template`). Отступы синхронизированы через `.editorconfig`.
-- **Git Hooks (Husky & Commitlint):** `lint-staged` изолированно проверяет измененные файлы линтерами и форматирует их перед коммитом. `commitlint` следит за стандартом Conventional Commits с поддержкой типа `wip`.
+- **Cross-browser Compatibility (.browserslistrc):** PostCSS `autoprefixer` в составе `postcss-preset-env` ориентируется на глобальный охват >95% активных браузеров для продакшена. В `dev`-режиме компиляция ускорена за счет фокуса на последних версиях ПО.
+- **Advanced PostCSS Pipeline:** Многоступенчатая обработка стилей: `postcss-preset-env`, минификация имён CSS-переменных, округление субпикселей, фолбеки для `font-variant` и `will-change`, автоматический `font-display: swap`, удаление неиспользуемых селекторов (`purgecss`), группировка медиа-запросов и финальное сжатие через `cssnano`.
+- **Strict Linting Standards (ESLint):** Современная Flat-конфигурация ESLint с поддержкой `typescript-eslint` и `@stylistic`. Включена строгая проверка типов и предупреждения для потенциально опасного кода.
+- **Stylelint Architecture:** Контроль синтаксиса SCSS с плагином `stylelint-no-unsupported-browser-features`, автоматически сверяющим используемые CSS-свойства со спецификацией `.browserslistrc`.
+- **Automated Formatting (Prettier):** Автоматическое форматирование кода «на лету» с поддержкой синтаксиса Nunjucks (`prettier-plugin-jinja-template`). Отступы синхронизированы с конфигурацией `.editorconfig`.
+- **Git Hooks Automation (Husky & Commitlint):** Связка `lint-staged` изолированно проверяет измененные файлы линтерами и форматирует их перед коммитом. `commitlint` строго следит за соответствием стандарту Conventional Commits (с поддержкой типа `wip`).
 
 </details>
 
 <details>
   <summary>📋 Готовность к масштабированию (Template Versatility)</summary>
 
-- Проект имеет строгую модульную структуру, что позволяет использовать его как стартовый шаблон (Boilerplate) для быстрой развёртки аналогичных статических сайтов любой сложности.
+- **Production-Ready Boilerplate:** Проект имеет строгую модульную структуру, что позволяет использовать его как универсальный стартовый шаблон для развертки аналогичных статических сайтов любой сложности.
+- **Pure Static Output & Hosting Independence:** Сборка генерирует чистые статические файлы, которые не требуют Node.js на стороне сервера. Итоговый результат можно бесплатно запустить на GitHub Pages, залить на любой копеечный хостинг или открыть локально прямо из папки.
+- **Decoupled Architecture:** Логика сборщика полностью отделена от контентной части — конфигурационные файлы позволяют быстро перенастроить пайплайны под новые типы ассетов без переписывания ядра на Gulp.
 
 </details>
 
@@ -206,7 +225,7 @@ _Для удобства, вся информация разбита по кат
 
 ### 🛠️ Используемые технологии <a id="built-with"></a>
 
-_Для удобства, вся информация разбита по категориям._
+_Для удобства вся информация разбита по категориям._
 
 <details>
 <summary>🌐 Языки, препроцессоры и шаблонизация</summary>
@@ -231,7 +250,7 @@ _Для удобства, вся информация разбита по кат
     - [![Sharp][sharp-logo]][sharp-url] <sup>— автоматическая обработка растровых изображений и генерация AVIF/WebP в процессе сборки</sup>
     - [![SVGO][SVGO-logo]][SVGO-url] <sup>— автоматическая очистка и минификация SVG-иконок</sup>
   - **Внешние CLI-инструменты (автоматический вызов через Gulp Spawn):**
-    - [![FFmpeg][ffmpeg-logo]][ffmpeg-url] <sup>— конвертация аудио и видео-ассетов в формат `.webm` с поддержкой GPU-ускорения NVENC</sup>
+    - [![FFmpeg][ffmpeg-logo]][ffmpeg-url] <sup>— конвертация аудио- и видеоассетов в формат `.webm` с поддержкой GPU-ускорения NVENC</sup>
     - [![Foundry Tools CLI][FoundryToolsCLI-logo]][FoundryToolsCLI-url] <sup>— Python-утилита для конвертации клиентских шрифтов OTF/TTF в форматы WOFF и WOFF2</sup>
 - [![Browserslist][Browserslist-logo]][Browserslist-url] <sup>— управление конфигурацией целевых браузеров</sup>
 
@@ -246,7 +265,7 @@ _Для удобства, вся информация разбита по кат
 - [![Prettier][Prettier-logo]][Prettier-url] <sup>— автоматическое форматирование кода во всех типах файлов (включая Nunjucks)</sup>
 - [![Husky][Husky-logo]][Husky-url] <sup>— управление автоматическими Git-хуками на стороне клиента</sup>
   - [![Lint-staged][LintStaged-logo]][LintStaged-url] <sup>— линтинг и форматирование файлов перед коммитом (`pre-commit`)</sup>
-  - [![Commitlint][CommitLint-logo]][CommitLint-url] <sup>— строгая валидация сообщений по спецификации Conventional Commits (с кастомным типом `wip`)</sup>
+  - [![Commitlint][CommitLint-logo]][CommitLint-url] <sup>— строгая валидация сообщений по спецификации Conventional Commits (с кастомными типами `wip` и `deploy`)</sup>
 
 </details>
 
@@ -370,7 +389,8 @@ Wishbone-plus-Partners/
 ├── tests/                           # Здесь могут быть тесты
 │
 ├── .browserslistrc                  # Целевые браузеры
-├── .editorconfig                    # Настройки редактора
+├── .editorconfig                    # Настройки отступов редактора
+├── .editorconfig-checker.json
 ├── .gitattributes                   # Нормализация окончаний строк
 ├── .gitignore
 ├── .lintstagedrc.yml                # Сценарии проверки перед коммитом
@@ -432,17 +452,40 @@ git clone https://github.com/aLeeTheY/Wishbone-plus-Partners
 npm install
 ```
 
+### 🌐 Конфигурация путей развёртывания (опционально) <a id="deployment-path-config"></a>
+
+Перед запуском сборки вы можете изменить базовые домены и пути для различных сред в конфигурационном файле `src/site.config.json`:
+
+```json
+{
+  "domain": "http://localhost:3000",
+  "siteFolder": "/",
+  "domainProduction": "https://your.domain.com/",
+  "siteFolderProduction": "/www/",
+  "domainGitHubPages": "https://aleethey.github.io/",
+  "siteFolderGitHubPages": "/Wishbone-plus-Partners/"
+}
+```
+
+Вы можете настроить эти поля под свои нужды. Сборщик автоматически применит нужные значения в зависимости от целевого режима выполнения.
+
+> [!TIP]
+> **Альтернатива через CLI:** Если конфигурацию необходимо переопределить «на лету» без правки файла, можно использовать CLI-флаги `--domain` (`-d`) и `--site-folder` (`-F`).
+
+> [!NOTE]
+> **Умная нормализация (защита от ошибок):** В сборщик встроена автоматическая обработка слэшей. Вы можете указывать их в любом формате (ставить в конце, начале или вовсе опускать) — Gulp-сборка самостоятельно нормализует строки, предотвращая поломку путей к ресурсам.
+
 ### ⚙️ Сборка и запуск <a id="build-launch"></a>
 
 1. Для сборки и запуска проекта, выполните одну из следующих команд (_с учётом предпочтительного режима сборки_):
 
 <div align="center">
 
-| Режим сборки  |                            Команда                             |   `npm`-скрипт    |
-| :-----------: | :------------------------------------------------------------: | :---------------: |
-| `development` |        `cross-env NODE_ENV=development gulp dev --i18n`        |   `npm run dev`   |
-|   `staging`   |   `cross-env NODE_ENV=production gulp prod --staging --i18n`   | `npm run staging` |
-| `production`  | `cross-env NODE_ENV=production gulp prod --i18n --prod-server` |  `npm run prod`   |
+| Режим сборки  |                       Прямой вызов (CLI)                       | Альтернатива (NPM) |
+| :-----------: | :------------------------------------------------------------: | :----------------: |
+| `development` |        `cross-env NODE_ENV=development gulp dev --i18n`        |   `npm run dev`    |
+|   `staging`   |   `cross-env NODE_ENV=production gulp prod --staging --i18n`   | `npm run staging`  |
+| `production`  | `cross-env NODE_ENV=production gulp prod --i18n --prod-server` |   `npm run prod`   |
 
 </div>
 
@@ -464,21 +507,24 @@ gulp --info
 
 <div align="center">
 
-|                        Опция                         |    Тип    | Значение по-умолчанию |                                   Описание                                   |
-| :--------------------------------------------------: | :-------: | :-------------------: | :--------------------------------------------------------------------------: |
-|                   `-v, --version`                    | `boolean` |        `false`        |                       Показать текущую версию проекта                        |
-|                     `-i, --info`                     | `boolean` |        `false`        |                      Показать справку и доступные опции                      |
-|                   `-V, --verbose`                    | `boolean` |        `false`        |         Расширенный вывод логов при выполнении некоторых Gulp-тасков         |
-|                   `-s, --staging`                    | `boolean` |        `false`        | Включить конфигурацию `staging`-окружения на базе правил `production`-сборки |
-|                 `-c, --force-clean`                  | `boolean` |        `false`        |                         Полная очистка папки `dist/`                         |
-|                    `-l, --local`                     | `boolean` |        `false`        |                Сборка с относительными путями для `file:///`                 |
-|           `--internationalization, --i18n`           | `boolean` |        `false`        |                        Включить мультиязычную сборку                         |
-|    `--inline-sprite, --full-inline-sprite, --is`     | `boolean` |        `false`        |       Встроить SVG-спрайт в HTML (включен автоматически при `--local`)       |
-|       `--inline-css, --full-inline-css, --ic`        | `boolean` |        `false`        |                          Встроить CSS-стили в HTML                           |
-|        `--inline-js, --full-inline-js, --ij`         | `boolean` |        `false`        |                          Встроить JS-скрипты в HTML                          |
-|                  `--base-url, --bu`                  | `string`  |          `-`          |              Базовый URL сайта, например `https://example.com`               |
-|             `--base-url-postfix, --bup`              | `string`  |          `-`          |        Постфикс пути, где развёрнут сайт, например `.../my-repo/...`         |
-| `--production-server, --prod-server, --server, --ps` | `boolean` |        `false`        |               Запустить локальный сервер для продакшен-сборки                |
+|                Опция                 |    Тип    | Значение по&#8209;умолчанию |                                                                         Описание                                                                          |
+| :----------------------------------: | :-------: | :-------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|   `-W, --workspace-version, --wv`    | `boolean` |           `false`           |                                                              Показать текущую версию проекта                                                              |
+|             `-i, --info`             | `boolean` |           `false`           |                                                            Показать справку и доступные опции                                                             |
+|           `-V, --verbose`            | `boolean` |           `false`           |                                               Расширенный вывод логов при выполнении некоторых Gulp-тасков                                                |
+|           `-s, --staging`            | `boolean` |           `false`           |                                       Включить конфигурацию `staging`-окружения на базе правил `production`-сборки                                        |
+|         `-c, --force-clean`          | `boolean` |           `false`           |                                                               Полная очистка папки `dist/`                                                                |
+|            `-l, --local`             | `boolean` |           `false`           |                                                       Сборка с относительными путями для `file:///`                                                       |
+| `-I, --internationalization, --i18n` | `boolean` |           `false`           |                                                               Включить мультиязычную сборку                                                               |
+|       `--inline-sprite, --is`        | `boolean` |           `false`           |                                             Встроить SVG-спрайт в HTML (включен автоматически при `--local`)                                              |
+|         `--inline-css, --ic`         | `boolean` |           `false`           |                                                                 Встроить CSS-стили в HTML                                                                 |
+|         `--inline-js, --ij`          | `boolean` |           `false`           |                                                                Встроить JS-скрипты в HTML                                                                 |
+|      `-M, --mobile-first, --mf`      | `boolean` |           `false`           | Переключить сборочный пайплайн на mobile‑first: сортировка медиа‑запросов PostCSS по возрастанию, атрибуты `<picture>` как `min-width` вместо `max-width` |
+|  `-d, --domain, --site-url, --url`   | `string`  |   `http://localhost:3000`   |                                                     Базовый URL сайта, например `https://example.com`                                                     |
+| `-F, --site-folder, --folder, --sf`  | `string`  |             `/`             |                                       Имя папки на хостинге или репозитория GitHub (например, `my-repo`, `www`, …)                                        |
+| `-P, --prod-server, --server, --ps`  | `boolean` |           `false`           |                                                      Запустить локальный сервер для продакшен-сборки                                                      |
+| `-H, --secure, --use-https, --https` | `boolean` |           `false`           |                                 Принудительно использовать HTTPS при генерации путей и для локального сервера разработки                                  |
+|    `-g, --gh-pages, --demo, --gh`    | `boolean` |           `false`           |                             Включить сборку под GitHub Pages (использует URL-ы GitHub, см. файл `site.config.json` в `src/`)                              |
 
 </div>
 
@@ -486,35 +532,48 @@ gulp --info
 
 <div align="center">
 
-|         Опция          |    Тип    | Значение по-умолчанию |                                   Описание                                    |
-| :--------------------: | :-------: | :-------------------: | :---------------------------------------------------------------------------: |
-| `--obfuscation, --obf` | `boolean` |        `false`        | Обфускация имён классов в CSS, JS и HTML. Несовместима с `--inline-*` опциями |
+|         Опция          |    Тип    | Значение по&#8209;умолчанию |                                                             Описание                                                             |
+| :--------------------: | :-------: | :-------------------------: | :------------------------------------------------------------------------------------------------------------------------------: |
+| `--obfuscation, --obf` | `boolean` |           `false`           | Обфускация структурных селекторов CSS-классов в HTML, CSS и JS. Несовместимо с `--inline-css`, `--inline-js` и `--inline-sprite` |
 
 </div>
 
+#### 🎛️ Примеры переопределения параметров через NPM-скрипты <a id="examples"></a>
+
+Чтобы передать CLI-флаги без прямого вызова Gulp, используйте разделитель `--` после npm-команды:
+
+```sh
+# Пример сборки для production с кастомным доменом и папкой назначения
+npm run prod -- --domain https://my-custom-domain.com --site-folder /my-app/
+```
+
 #### 🏃 NPM скрипты <a id="npm-scripts"></a>
 
-_Для удобства, ниже продублированы основные npm-скрипты, доступные в проекте._
+_Для удобства ниже продублированы основные npm-скрипты, доступные в проекте._
 
 <div align="center">
 
-|       Скрипт        |                         Список команд                          |                         Описание                         |
-| :-----------------: | :------------------------------------------------------------: | :------------------------------------------------------: |
-|      `prepare`      |                            `husky`                             |  Автоматическая настройка Git-хуков после `npm install`  |
-|        `dev`        |          `cross-env NODE_ENV=development gulp --i18n`          |  Dev-сервер с горячей перезагрузкой и мультиязычностью   |
-|      `staging`      |   `cross-env NODE_ENV=production gulp prod --staging --i18n`   | Production-сборка с активированными отладочными флагами  |
-|       `prod`        | `cross-env NODE_ENV=production gulp prod --i18n --prod-server` | Production-сборка с локальным сервером для предпросмотра |
-|       `start`       |                         `npm run dev`                          |                 Алиас для `npm run dev`                  |
-|       `build`       | `cross-env NODE_ENV=production gulp prod --i18n --force-clean` |       Полная production-сборка с очисткой `dist/`        |
-|      `archive`      |                  `npm run build && gulp zip`                   |             Сборка и упаковка `dist/` в ZIP              |
-|      `lint:ts`      |                           `eslint .`                           |              Линтинг TypeScript/JavaScript               |
-|    `lint:ts:fix`    |                        `eslint . --fix`                        |      Автоисправление ошибок линтера в TS/JS-файлах       |
-|     `lint:scss`     |                    `stylelint "**/*.scss"`                     |                   Линтинг SCSS-файлов                    |
-|   `lint:scss:fix`   |                `stylelint \"**/*.scss\" --fix`                 |       Автоисправление ошибок линтера в SCSS-файлах       |
-|       `lint`        |           `npm-run-all --parallel lint:ts lint:scss`           |            Параллельный линтинг TS/JS и SCSS             |
-|     `lint:fix`      |       `npm-run-all --parallel lint:ts:fix lint:scss:fix`       |       Параллельное автоисправление в TS/JS и SCSS        |
-|      `format`       |                      `prettier . --write`                      |        Форматирование всех файлов через Prettier         |
-| `test:editorconfig` |                     `editorconfig-checker`                     |      Проверка соответствия правилам `.editorconfig`      |
+|    Скрипт (NPM)     |                            Исполняемая команда                            |                         Описание                         |
+| :-----------------: | :-----------------------------------------------------------------------: | :------------------------------------------------------: |
+|      `prepare`      |                                  `husky`                                  |  Автоматическая настройка Git-хуков после `npm install`  |
+|       `clean`       |                        `gulp clean --force-clean`                         |               Полная очистка папки `dist/`               |
+|        `dev`        |               `cross-env NODE_ENV=development gulp --i18n`                |  Dev-сервер с горячей перезагрузкой и мультиязычностью   |
+|      `staging`      |        `cross-env NODE_ENV=production gulp prod --staging --i18n`         | Production-сборка с активированными отладочными флагами  |
+|       `prod`        |      `cross-env NODE_ENV=production gulp prod --i18n --prod-server`       | Production-сборка с локальным сервером для предпросмотра |
+|       `start`       |                               `npm run dev`                               |                 Алиас для `npm run dev`                  |
+|       `build`       |      `cross-env NODE_ENV=production gulp prod --i18n --force-clean`       |       Полная production-сборка с очисткой `dist/`        |
+|       `local`       |  `cross-env NODE_ENV=production gulp prod --i18n --local --force-clean`   | Production-сборка с относительными путями для `file:///` |
+|      `secure`       |  `cross-env NODE_ENV=production gulp prod --i18n --https --force-clean`   |         Production-сборка с принудительным HTTPS         |
+|     `gh-pages`      | `cross-env NODE_ENV=production gulp prod --i18n --gh-pages --force-clean` |      Production-сборка для выгрузки в GitHub Pages       |
+|      `archive`      |                        `npm run build && gulp zip`                        |             Сборка и упаковка `dist/` в ZIP              |
+|      `lint:ts`      |                        `eslint . --max-warnings=0`                        |              Линтинг TypeScript/JavaScript               |
+|    `lint:ts:fix`    |                     `eslint . --max-warnings=0 --fix`                     |      Автоисправление ошибок линтера в TS/JS-файлах       |
+|     `lint:scss`     |                `stylelint \"**/*.scss\" --max-warnings=0`                 |                   Линтинг SCSS-файлов                    |
+|   `lint:scss:fix`   |             `stylelint \"**/*.scss\" --max-warnings=0 --fix`              |       Автоисправление ошибок линтера в SCSS-файлах       |
+|       `lint`        |                `npm-run-all --parallel lint:ts lint:scss`                 |            Параллельный линтинг TS/JS и SCSS             |
+|     `lint:fix`      |            `npm-run-all --parallel lint:ts:fix lint:scss:fix`             |       Параллельное автоисправление в TS/JS и SCSS        |
+|      `format`       |                           `prettier . --write`                            |        Форматирование всех файлов через Prettier         |
+| `test:editorconfig` |                          `editorconfig-checker`                           |      Проверка соответствия правилам `.editorconfig`      |
 
 </div>
 
@@ -522,23 +581,23 @@ _Для удобства, ниже продублированы основные
 
 ## 🧠 Сложности при разработке <a id="development-challenges"></a>
 
-- **Миграция с legacy-структуры на автоматизированный Gulp-воркфлоу.** Исходная кодовая база (v1.0.0) представляла собой обычный набор статичных файлов без сборщика, заточенный исключительно под десктоп. Перенос проекта на рельсы **Gulp 5** потребовал полной перестройки архитектуры: ручная верстка была разбита на модульные шаблоны Nunjucks, стили реструктуризированы под методологию БЭМ + `7-1 Pattern`, а сам сайт переписан в отзывчивый fluid-адаптив с нуля и без готовых мобильных макетов.
-- **Анализ и подбор npm/gulp-пакетов.** Многие библиотеки в экосистеме Gulp помечены как `deprecated`, поэтому часть времени ушла на поиск актуальных аналогов или создание собственных решений.
-- **Архитектура инкрементальных проверок ассетов.** Внедрение системы, отслеживающей актуальность медиа-файлов с учётом хешей ревизий. Стандартные плагины вроде `gulp-newer` оказались бесполезны после `gulp-rev`, поэтому был разработан кастомный подход, сравнивающий файлы по базовому имени, что многократно ускорило повторные сборки.
-- **Интеграция и адаптация ИИ-сгенерированного кода (FFmpeg, ftcli).** Настройка кроссплатформенного управления утилитами FFmpeg и ftcli через асинхронный `spawn`. Сгенерированные ИИ модули потребовали тщательной верификации, исправления ошибок экранирования путей на Windows и доработки логики инкрементальных проверок.
-- **Разрешение конфликта обфускации и инлайн-режимов.** Встраивание CSS в HTML с последующей обфускацией ломало стили, т.к. `postcss-obfuscator` не обрабатывает инлайн-стили. В связи с этим недостатком, флаги `--obfuscation` и `--inline-*` были помечены как несовместимые и в CLI-интерфейс добавлена упреждающая валидация этих флагов.
-- **Работа c Fluid Design** Для каждого значения, заданного через `clamp()`, приходилось вычислять линейную функцию `y = kx + b` по двум точкам — минимальному (`x1, y1`) и максимальному (`x2, y2`) состояниям свойства.
+- **Миграция с legacy-структуры на автоматизированный Gulp-воркфлоу:** Исходная кодовая база (v1.0.0) представляла собой обычный набор статичных файлов без сборщика, заточенный исключительно под десктоп. Перенос проекта на рельсы **Gulp 5** потребовал полной перестройки архитектуры: ручная верстка была разбита на модульные шаблоны Nunjucks, стили реструктуризированы под методологию БЭМ + `7-1 Pattern`, а сам сайт переписан в отзывчивый fluid-адаптив с нуля и без готовых мобильных макетов.
+- **Анализ и подбор npm/gulp-пакетов:** Многие библиотеки в экосистеме Gulp помечены как `deprecated`, поэтому часть времени ушла на поиск актуальных аналогов или создание собственных решений для сохранения безопасности и стабильности сборки.
+- **Архитектура инкрементальной проверки ресурсов:** Внедрение системы, отслеживающей актуальность медиафайлов с учётом хешей ревизий. Стандартные плагины (например, `gulp-newer`) оказались бесполезны после работы `gulp-rev`. Для решения этой проблемы был разработан кастомный подход, сравнивающий файлы по их базовому имени, что позволило избежать избыточных пересборок для ассетов с хэшем в названии.
+- **Интеграция и адаптация ИИ-сгенерированного кода (FFmpeg, ftcli):** Настройка кроссплатформенного управления утилитами FFmpeg и ftcli через асинхронный `spawn`. Сгенерированные ИИ модули потребовали тщательной верификации, исправления ошибок экранирования путей на Windows и доработки логики инкрементальных проверок.
+- **Разрешение конфликта обфускации и инлайн-режимов:** Встраивание CSS в HTML с последующей обфускацией ломало стили, так как `postcss-obfuscator` не обрабатывает инлайн-стили. В связи с этим ограничением флаги `--obfuscation` и `--inline-*` были объявлены взаимоисключающими, а в CLI-интерфейс добавлена упреждающая валидация.
+- **Математические вычисления для Fluid Design:** Для каждого адаптивного значения, заданного через `clamp()`, приходилось вручную или через кастомные SASS-миксины вычислять линейную функцию $y = kx + b$ по двум точкам — минимальному ($x_1, y_1$) и максимальному ($x_2, y_2$) состояниям свойства для точного масштабирования между брейкпоинтами.
 
 <p align="right">(<a href="#readme-top">наверх</a>)</p>
 
 ## 📈 Полученные навыки <a id="key-skills"></a>
 
-- **Верстка по принципу Fluid Design.** Создание "резиновой" верстки с помощью `clamp`, `min` и `max` и нескольких медиа-запросов.
-- **Локализация.** Добавление локализации к веб-сайту с помощью шаблонизатора Nunjucks и JSON-словарей под разные языки.
-- **Архитектура Gulp 5.** Создание пайплайнов с параллельным и последовательным выполнением (`gulp.series/parallel`), написание кастомных трансформеров на `through2` с помощью ИИ и работа с различными gulp-плагинами.
-- **Web Performance.** Внедрение полного цикла оптимизации: автоматическая генерация Critical CSS, адаптивные изображения (AVIF/WebP), отложенная загрузка, управление `fetch priority`, инлайнинг CSS/JS/SVG ассетов и кэширование через ревизии.
-- **Декларативное CLI-проектирование.** Настройка `yargs` для создания мощного интерфейса управления сборкой с собственной валидацией конфликтующих опций и кастомными обработчиками ошибок.
-- **Эффективная коллаборация с ИИ-инструментами.** Практический опыт использования генеративного ИИ для ускорения разработки сложных Gulp-тасков: от постановки задачи до верификации, отладки и адаптации кода под требования production-сборки.
+- **Реализация методологии Fluid Design:** Практическое освоение механики «текучей» вёрстки с использованием математических функций `clamp()`, `min()` и `max()` в сочетании с минимальным количеством медиа-запросов для создания бесшовной адаптивности.
+- **Интернационализация (i18n) и локализация:** Построение отказоустойчивой системы локализации веб-сайта на базе шаблонизатора Nunjucks и динамического рендеринга JSON-словарей для поддержки мультиязычности.
+- **Архитектура Gulp 5:** Проектирование сложных систем автоматизации потоков данных с использованием последовательной и параллельной синхронизации задач (`gulp.series`/`gulp.parallel`), а также разработка кастомных стрим-процессоров на базе пакета `through2` при поддержке ИИ.
+- **Инженерия веб-производительности (Web Performance):** Внедрение полного цикла оптимизации: автоматическая генерация и инъекция Critical CSS, адаптивная подгрузка современных форматов изображений (AVIF/WebP), тонкая настройка `fetch priority`, инлайнинг критических ресурсов и кэширование через генерацию хешей ревизий.
+- **Декларативное проектирование CLI-интерфейсов:** Создание гибкого интерфейса управления сборкой с помощью `yargs`, разработка логики упреждающей валидации конфликтующих параметров и кастомная обработка асинхронных исключений во время рантайма.
+- **Эффективный синергизм с ИИ-инструментами:** Практический опыт глубокой интеграции генеративного ИИ для ускорения разработки комплексных Gulp-сценариев: от проектирования промпт-схем до верификации, отладки и кастомизации кода под строгие требования production-окружения.
 
 <p align="right">(<a href="#readme-top">наверх</a>)</p>
 
@@ -548,31 +607,37 @@ _Для удобства, ниже продублированы основные
 
 ### 🏁 Фаза 1 – Статическая вёрстка ([v1.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/1.0.0))
 
-- [x] Верстка десктопного макета из Figma
+- [x] Реализация десктопного макета из Figma
   - [x] Разработка семантической HTML-структуры
-  - [x] Базовая стилизация на SCSS (BEM)
-- [x] Внедрение интерактивных элементов на базе AOS.js и Alpine.js
+  - [x] Создание базовой архитектуры стилей на SCSS по методологии BEM
+- [x] Интеграция динамических UI-компонентов и анимаций на базе AOS.js и Alpine.js
 
 ### 🚀 Фаза 2 – Gulp-интеграция и Fluid-адаптив ([v2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0))
 
 - [x] Создание современной сборки **Gulp 5**
-  - [x] Полная автоматизация линтинга и форматирования (Husky, ESLint, Stylelint, Prettier)
-  - [x] Оптимизация всех ресурсов: шрифты (WOFF2), изображения (AVIF/WebP), медиа (FFmpeg)
-  - [x] Настройка критического CSS, кэширования (`gulp-rev`), обфускации и CLI-управления через `yargs`
-  - [x] Внедрение модульного Nunjucks-шаблонизатора и мультиязычности (i18n)
-  - [x] Разработка самописных хелперов (инкрементальные проверки, `<picture>`-трансформер, инлайн-сборка)
+  - [x] Настройка автоматического линтинга коммитов и staged-файлов (Husky, lint-staged, commitlint)
+  - [x] Интеграция экосистемы проверки кода (Stylelint, ESLint, Prettier)
+  - [x] Связка Stylelint с [Browserslist][Browserslist-url] для валидации CSS-свойств под целевые браузеры
+  - [x] Внедрение модульного шаблонизатора Nunjucks и интернационализации (i18n)
+  - [x] Оптимизация статики: шрифты (WOFF2), изображения (AVIF/WebP/SVG-спрайты) и медиа (FFmpeg)
+  - [x] Настройка минификации, кеширования (`gulp-rev`), обфускации, критического CSS и очистки неиспользуемого кода (Purge)
+  - [x] Разработка кастомных стрим-хелперов (инлайнинг ресурсов, `<picture>`-трансформер)
+  - [x] Интеграция CLI-управления сборкой через `yargs`
 - [x] Переход на Fluid Design с использованием `clamp()`, `min()`, `max()`
-  - [x] Адаптив под Laptop
-  - [x] Адаптив под Tablet
-  - [x] Адаптив под Mobile
-- [x] Формирование демо на GitHub Pages
-- [x] Подготовка технической документации и `README.md`
+  - [x] Адаптивная оптимизация под Laptop, Tablet и Mobile вьюпорты
+  - [x] Локализационная адаптация (устранение багов отображения в русскоязычной версии сайта)
+- [x] Развёртывание живого демо на GitHub Pages
+- [x] Подготовка технической документации и написание `README.md`
 
-### 🔮 Возможное развитие
+### 🔮 Перспективы развития
 
-- [ ] Покрытие ключевых TypeScript-модулей unit-тестами (Mocha/Chai или Jest)
-- [ ] Расширение проекта на другие страницы или блоговый движок на основе Nunjucks
-- [ ] Интеграция с WordPress или другими CMS.
+- [ ] **Интеграция с бэкенд-шаблонами (Django/Jinja2):** Разработать пайплайн, позволяющий верстать изолированно от бэкенд-разработки, но генерировать на выходе шаблоны, полностью совместимые с архитектурой [Django][Django-url] (Jinja2/Nunjucks), автоматизируя подстановку статики.
+- [ ] **Кастомный Gulp-плагин для FFmpeg:** Разработать современный плагин для медиа-конвейера (конвертация и сжатие аудио/видео), так как существующий `gulp-fluent-ffmpeg` устарел (`deprecated`).
+- [ ] **Обновление пайплайна шрифтов:** Создать Gulp-плагин для интеграции с актуальным [ftcli][FoundryToolsCLI-url] (замена устаревшим пакетам `gulp-ttf2woff`, `gulp-ttf2woff2` и `gulp-fonter`).
+- [ ] **Кастомный Gulp-плагин для адаптивной графики:** Разработать новый плагин для сборки адаптивных картинок (автоматическая трансформация `<img>` в `<picture>` с поддержкой брейкпоинтов и расчетом пропорций), так как существующий `gulp-responsive` устарел (`deprecated`).
+- [ ] **Универсальный HTML-медиа-трансформер:** Создать комплексный Gulp-плагин для автоматического преобразования стандартных медиа-тегов в оптимизированные адаптивные структуры. Он должен на лету переносить обычные `<img>` в `<picture>` (с `srcset`), а базовые `<video>` и `<audio>` — в развернутые конструкции с вложенными тегами `<source>`, генерируя медиа-запросы с учетом подходов `mobile-first` или `desktop-first`.
+- [ ] **CMS Интеграция:** Добавить готовые пресеты для развертывания и посадки верстки на WordPress и другие популярные CMS.
+- [ ] **Поддержка React и аналогов:** Исследовать возможность использования текущей Gulp-сборки в связке с Vite/Webpack для полноценной поддержки React/Vue/Angular.
 
 > 💡 Полный список планируемых функций и известных проблем доступен в разделе [Issues][issues-url].
 
@@ -608,6 +673,7 @@ GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com
 - [Nunjucks](https://mozilla.github.io/nunjucks/), [Esbuild](https://esbuild.github.io/), [Sass](https://sass-lang.com/), [PostCSS](https://postcss.org/) — за модульную шаблонизацию, сверхбыструю компиляцию скриптов и продвинутую обработку стилей.
 - [Alpine.js](https://alpinejs.dev/), [AOS](https://michalsnik.github.io/aos/) — за легковесную реактивность интерфейса и анимации.
 - [Chocolatey](https://chocolatey.org/) — за легкую установку Command Line Tools.
+- [Python](https://www.python.org/) — за базу для работы CLI-инструментов компиляции шрифтов.
 
 ### ⚡ Оптимизация медиа, графики и шрифтов
 
@@ -626,7 +692,7 @@ GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com
 <details>
 <summary>📋 Показать список плагинов, решивших специфичные задачи проекта</summary>
 
-- **Системные зависимости и CLI:** [cross-env](https://github.com/kentcdodds/cross-env), [yargs](https://yargs.js.org/), [through2](https://github.com/rvagg/through2), [htmlparser2](https://github.com/fb55/htmlparser2).
+- **Системные зависимости и CLI:** [cross-env](https://github.com/kentcdodds/cross-env), [yargs](https://yargs.js.org/), [through2](https://github.com/rvagg/through2), [htmlparser2](https://github.com/fb55/htmlparser2), [domutils](https://github.com/fb55/domutils), [domhandler](https://github.com/fb55/domhandler).
 - **Critical CSS:** [penthouse](https://github.com/pocketjoso/penthouse), [puppeteer](https://github.com/puppeteer/puppeteer).
 - **Оптимизация и минификация CSS:** [cssnano](https://cssnano.github.io/cssnano/), [PurgeCSS](https://purgecss.com/), [postcss-preset-env](https://github.com/csstools/postcss-plugins/tree/main/plugin-packs/postcss-preset-env), [postcss-sort-media-queries](https://github.com/yunusga/postcss-sort-media-queries), [postcss-clamp](https://github.com/polemius/postcss-clamp), [postcss-combine-duplicated-selectors](https://github.com/ChristianMurphy/postcss-combine-duplicated-selectors), [postcss-will-change](https://github.com/postcss/postcss-will-change), [postcss-font-display](https://github.com/dkrnl/postcss-font-display), [postcss-font-variant](https://github.com/postcss/postcss-font-variant), [postcss-round-subpixels](https://github.com/himynameisdave/postcss-round-subpixels), [postcss-obfuscator](https://n4j1Br4ch1D/postcss-obfuscator), [postcss-rename](https://github.com/google/postcss-rename).
 - **Кэширование, версионирование и деплой:** [gulp-rev](https://github.com/sindresorhus/gulp-rev), [gulp-rev-rewrite](https://github.com/thomasvantuycom/gulp-rev-rewrite), [gulp-rev-delete-original](https://github.com/nib-health-funds/gulp-rev-delete-original), [vinyl-ftp](https://github.com/morris/vinyl-ftp), [gulp-zip](https://github.com/sindresorhus/gulp-zip).
@@ -692,6 +758,7 @@ GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com
 [Sharp-logo]: https://custom-icon-badges.demolab.com/badge/Sharp-1f2a1c?logo=sharp&style=for-the-badge
 [Sharp-url]: https://sharp.pixelplumbing.com/
 [Python-url]: https://www.python.org/
+[Django-url]: https://www.djangoproject.com/
 
 <!-- linters & code format --->
 
@@ -739,4 +806,5 @@ GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com
 
 <!-- preview --->
 
-[website-preview]: project/preview/preview.gif
+[interface-preview-gif]: project/preview/interface-preview.gif
+[fluid-preview-gif]: project/preview/fluid-design-preview.gif
