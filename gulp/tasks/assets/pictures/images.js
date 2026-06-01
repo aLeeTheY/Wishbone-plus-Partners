@@ -1,3 +1,7 @@
+// ! ------------------------------------------------------------
+// ! PRODUCTION CODEBASE: ASSISTED BY DEEPSEEK & GOOGLE AI
+// ! Logic verified by output results. Maintained by aLeeTheY.
+// ! ------------------------------------------------------------
 /* eslint-disable no-console */
 
 import gulp from 'gulp'

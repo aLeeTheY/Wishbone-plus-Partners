@@ -1,3 +1,8 @@
+// ! ------------------------------------------------------------
+// ! PRODUCTION CODEBASE: ASSISTED BY DEEPSEEK & GOOGLE AI
+// ! Logic verified by output results. Maintained by aLeeTheY.
+// ! ------------------------------------------------------------
+
 import path from 'path'
 import fs from 'fs/promises'
 import through2 from 'through2'
