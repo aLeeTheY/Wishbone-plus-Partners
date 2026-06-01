@@ -424,7 +424,7 @@ The codebase is validated to ensure visual consistency and script execution stab
 > [!IMPORTANT]
 > This information applies to version **[2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0)**. At the time of verification, the project was rendered correctly in the latest stable versions of all [supported browsers](#supported-browsers).
 >
-> **Last Verification Date: May 31, 2026**
+> **Last Verification Date: June 2, 2026**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -446,7 +446,7 @@ git clone https://github.com/aLeeTheY/Wishbone-plus-Partners
 
 ### 📥 Installation <a id="installation"></a>
 
-1. Navigate to the project directory and install all required dependencies:
+3. Navigate to the project directory and install all required dependencies:
 
 ```sh
 npm install
@@ -470,14 +470,18 @@ Before running the build, you can customize base domains and paths for different
 Feel free to adjust these fields according to your needs. The builder will automatically apply the correct values depending on the target execution mode.
 
 > [!TIP]
-> **CLI Alternative:** If you need to override the configuration on the fly without modifying the file, you can use the `--domain` (`-d`) and `--site-folder` (`-F`) CLI flags.
+> **CLI Alternative.**
+>
+> If you need to override the configuration on the fly without modifying the file, you can use the `--domain` (`-d`) and `--site-folder` (`-F`) CLI flags.
 
 > [!NOTE]
-> **Smart Normalization (Error Protection):** The builder features automatic slash handling. You can specify them in any format (at the end, at the beginning, or omit them entirely) — the Gulp build pipeline will normalize the strings automatically, preventing broken resource paths.
+> **Smart Normalization (Error Protection).**
+>
+> The builder features automatic slash handling. You can specify them in any format (at the end, at the beginning, or omit them entirely) — the Gulp build pipeline will normalize the strings automatically, preventing broken resource paths.
 
 ### ⚙️ Build & Launch <a id="build-launch"></a>
 
-1. To build and launch the project, execute one of the following commands (_depending on your preferred build mode_):
+4. To build and launch the project, execute one of the following commands (_depending on your preferred build mode_):
 
 <div align="center">
 
