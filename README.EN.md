@@ -199,6 +199,7 @@ _For convenience, all features are categorized below._
 - **Stylelint Architecture:** Robust SCSS syntax control integrated with the <code>stylelint&#8209;no&#8209;unsupported&#8209;browser&#8209;features</code> plugin, automatically cross-referencing utilized CSS properties against the project's target <code>.browserslistrc</code> specification.
 - **Automated Formatting (Prettier):** On-the-fly automated code formatting with native Nunjucks syntax support (<code>prettier&#8209;plugin&#8209;jinja&#8209;template</code>). Code indentation rules are synchronized with the <code>.editorconfig</code> specification.
 - **Git Hooks Automation (Husky & Commitlint):** A <code>lint&#8209;staged</code> workflow isolates and validates modified files through active linters and formatters prior to committing. <code>commitlint</code> strictly monitors adherence to the Conventional Commits specification (including explicit support for the <code>wip</code> commit type).
+- **Automated Markdown Processing (transform-md.ts):** Automated adaptation and preparation of README layouts for publication. The <code>cli/transform&#8209;md.ts</code> script isolates and locks the documentation's layout and typography before it is pushed to the repository, and then seamlessly restores the standard Markdown format for convenient local editing. Detailed technical information is available by running the utility with the <code>&#8209;&#8209;help</code> flag.
 
 </details>
 
@@ -294,7 +295,8 @@ Wishbone-plus-Partners/
 ├── .vscode/                         # IDE workspace settings
 │
 ├── cli/                             # Automation scripts and CLI utilities
-│   └── transform-md.ts              # CLI utility to escape inline code and hyphens in Markdown
+│   ├── transform-md.ts              # CLI utility to escape inline code and hyphens in Markdown
+│   └── tsconfig.json
 │
 ├── dist/                            # Automatically generated distribution directory
 ├── docs/                            # Documentation assets
@@ -571,9 +573,9 @@ _For convenience, the primary npm scripts available in the project are listed be
 |          Script (NPM)          |                                                            Complete CLI Command                                                            |                                     Description                                     |
 | :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------: |
 |      <code>prepare</code>      |                                                             <code>husky</code>                                                             |           Automatically sets up Git hooks after <code>npm install</code>            |
-|    <code>postinstall</code>    |                                                       <code>npm run md:decode</code>                                                       |   Automatically decodes and formats README files after dependencies are installed   |
-|     <code>md:encode</code>     |       <code>npx tsx cli/transform&#8209;md.ts encode README.md README.EN.md && npx prettier &#8209;&#8209;write \"\*_/_.md\"</code>        |  Transforms inline code blocks to HTML tags to preserve hyphens before committing   |
-|     <code>md:decode</code>     |       <code>npx tsx cli/transform&#8209;md.ts decode README.md README.EN.md && npx prettier &#8209;&#8209;write \"\*_/_.md\"</code>        |    Reverts HTML code tags back to standard Markdown backticks for local editing     |
+|    <code>postinstall</code>    |                                                       <code>npm run md:decode</code>                                                       |      Automatically restores README files to standard format after installation      |
+|     <code>md:encode</code>     |       <code>npx tsx cli/transform&#8209;md.ts encode README.md README.EN.md && npx prettier &#8209;&#8209;write \"\*_/_.md\"</code>        |   Prepares README layout and fixes typography issues for repository distribution    |
+|     <code>md:decode</code>     |       <code>npx tsx cli/transform&#8209;md.ts decode README.md README.EN.md && npx prettier &#8209;&#8209;write \"\*_/_.md\"</code>        | Restores README source files back to standard Markdown for convenient local editing |
 |       <code>clean</code>       |                                          <code>gulp clean &#8209;&#8209;force&#8209;clean</code>                                           |              Full cleanup of the compiled <code>dist/</code> directory              |
 |        <code>dev</code>        |                                 <code>cross&#8209;env NODE_ENV=development gulp &#8209;&#8209;i18n</code>                                  |                 Dev server with hot reload and multilingual support                 |
 |      <code>staging</code>      |                    <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;staging &#8209;&#8209;i18n</code>                     |                    Production build with debugging flags enabled                    |
