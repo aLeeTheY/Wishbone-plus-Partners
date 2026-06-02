@@ -675,15 +675,15 @@ Copyright © 2025 [aLeeTheY](https://github.com/aLeeTheY) <br/> Проект р�
 
 ## 🤝 Контакты <a id="contact"></a>
 
-[![GitHub][GitHub-logo]](https://github.com/aLeeTheY)
+<!-- [![GitHub][GitHub-logo]](https://github.com/aLeeTheY)
 [![Telegram][Telegram-logo]](https://t.me/aLeeTheY)
-[![Gmail][Gmail-logo]](mailto:aleethey@gmail.com)
+[![Gmail][Gmail-logo]](mailto:aleethey@gmail.com) -->
 
-<!-- GitHub: [aLeeTheY](https://github.com/aLeeTheY)
+GitHub: [aLeeTheY](https://github.com/aLeeTheY)
 <br/>
 Telegram: [@aLeeTheY](https://t.me/aLeeTheY)
 <br/>
-Email: [aleethey@gmail.com](mailto:aleethey@gmail.com) -->
+Email: [aleethey@gmail.com](mailto:aleethey@gmail.com)
 
 <p align="right">(<a href="#readme-top">наверх</a>)</p>
 
