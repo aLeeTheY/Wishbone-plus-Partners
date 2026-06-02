@@ -118,8 +118,6 @@
         }
     },
     "scripts": {
-        "__PREPARE__": "",
-        "prepare": "husky",
         "__WORKFLOW__": "",
         "clean": "gulp clean --force-clean",
         "dev": "cross-env NODE_ENV=development gulp --i18n",
@@ -141,8 +139,11 @@
         "format": "prettier . --write",
         "__TEST__": "",
         "test:editorconfig": "editorconfig-checker",
+        "__MARKDOWN__": "",
+        "md:encode": "npx tsx cli/transform-md.ts encode README.md README.EN.md && npx prettier --write \"**/*.md\"",
+        "md:decode": "npx tsx cli/transform-md.ts decode README.md README.EN.md && npx prettier --write \"**/*.md\"",
         "__POST_INSTALL__": "",
-        "postinstall": "npx tsx cli/transform-md.ts decode README.md README.EN.md && npx prettier --write \"**/*.md\"",
-        "test:postinstall": "npx tsx cli/transform-md.ts decode README.md README.EN.md && npx prettier --write \"**/*.md\""
+        "prepare": "husky",
+        "postinstall": "npm run md:decode"
     }
 }

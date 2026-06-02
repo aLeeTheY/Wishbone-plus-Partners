@@ -293,6 +293,9 @@ Wishbone-plus-Partners/
 ├── .husky/                          # Локальные Git-хуки
 ├── .vscode/                         # Файлы для VSCode
 │
+├── cli/                             # Скрипты автоматизации и CLI-утилиты
+│   └── transform-md.ts              # Утилита экранирования инлайн-кода и дефисов в Markdown
+│
 ├── dist/                            # Папка сборки (генерируется автоматически)
 ├── docs/                            # Здесь могут быть файлы документации
 │
@@ -565,27 +568,30 @@ _Для удобства ниже продублированы основные 
 
 <div align="center">
 
-|          Скрипт (NPM)          |                                                            Исполняемая команда                                                             |                              Описание                               |
-| :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------: |
-|      <code>prepare</code>      |                                                             <code>husky</code>                                                             |  Автоматическая настройка Git-хуков после <code>npm install</code>  |
-|       <code>clean</code>       |                                          <code>gulp clean &#8209;&#8209;force&#8209;clean</code>                                           |               Полная очистка папки <code>dist/</code>               |
-|        <code>dev</code>        |                                 <code>cross&#8209;env NODE_ENV=development gulp &#8209;&#8209;i18n</code>                                  |        Dev-сервер с горячей перезагрузкой и мультиязычностью        |
-|      <code>staging</code>      |                    <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;staging &#8209;&#8209;i18n</code>                     |       Production-сборка с активированными отладочными флагами       |
-|       <code>prod</code>        |               <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;prod&#8209;server</code>                |      Production-сборка с локальным сервером для предпросмотра       |
-|       <code>start</code>       |                                                          <code>npm run dev</code>                                                          |                 Алиас для <code>npm run dev</code>                  |
-|       <code>build</code>       |               <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;force&#8209;clean</code>                |       Полная production-сборка с очисткой <code>dist/</code>        |
-|       <code>local</code>       |     <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;local &#8209;&#8209;force&#8209;clean</code>      | Production-сборка с относительными путями для <code>file:///</code> |
-|      <code>secure</code>       |     <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;https &#8209;&#8209;force&#8209;clean</code>      |              Production-сборка с принудительным HTTPS               |
-|  <code>gh&#8209;pages</code>   | <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;gh&#8209;pages &#8209;&#8209;force&#8209;clean</code> |            Production-сборка для выгрузки в GitHub Pages            |
-|      <code>archive</code>      |                                                   <code>npm run build && gulp zip</code>                                                   |             Сборка и упаковка <code>dist/</code> в ZIP              |
-|      <code>lint:ts</code>      |                                          <code>eslint . &#8209;&#8209;max&#8209;warnings=0</code>                                          |                    Линтинг TypeScript/JavaScript                    |
-|    <code>lint:ts:fix</code>    |                                 <code>eslint . &#8209;&#8209;max&#8209;warnings=0 &#8209;&#8209;fix</code>                                 |            Автоисправление ошибок линтера в TS/JS-файлах            |
-|     <code>lint:scss</code>     |                                  <code>stylelint \"\*_/_.scss\" &#8209;&#8209;max&#8209;warnings=0</code>                                  |                         Линтинг SCSS-файлов                         |
-|   <code>lint:scss:fix</code>   |                         <code>stylelint \"\*_/_.scss\" &#8209;&#8209;max&#8209;warnings=0 &#8209;&#8209;fix</code>                         |            Автоисправление ошибок линтера в SCSS-файлах             |
-|       <code>lint</code>        |                               <code>npm&#8209;run&#8209;all &#8209;&#8209;parallel lint:ts lint:scss</code>                                |                  Параллельный линтинг TS/JS и SCSS                  |
-|     <code>lint:fix</code>      |                           <code>npm&#8209;run&#8209;all &#8209;&#8209;parallel lint:ts:fix lint:scss:fix</code>                            |             Параллельное автоисправление в TS/JS и SCSS             |
-|      <code>format</code>       |                                                <code>prettier . &#8209;&#8209;write</code>                                                 |              Форматирование всех файлов через Prettier              |
-| <code>test:editorconfig</code> |                                                  <code>editorconfig&#8209;checker</code>                                                   |      Проверка соответствия правилам <code>.editorconfig</code>      |
+|          Скрипт (NPM)          |                                                            Исполняемая команда                                                             |                                         Описание                                         |
+| :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: |
+|      <code>prepare</code>      |                                                             <code>husky</code>                                                             |            Автоматическая настройка Git-хуков после <code>npm install</code>             |
+|    <code>postinstall</code>    |                                                       <code>npm run md:decode</code>                                                       | Автоматическое декодирование и форматирование README-файлов после установки зависимостей |
+|     <code>md:encode</code>     |       <code>npx tsx cli/transform&#8209;md.ts encode README.md README.EN.md && npx prettier &#8209;&#8209;write \"\*_/_.md\"</code>        |       Преобразование инлайн-кода в HTML-теги для сохранения дефисов перед коммитом       |
+|     <code>md:decode</code>     |       <code>npx tsx cli/transform&#8209;md.ts decode README.md README.EN.md && npx prettier &#8209;&#8209;write \"\*_/_.md\"</code>        | Возврат HTML-тегов обратно в стандартные бэктики Markdown для локального редактирования  |
+|       <code>clean</code>       |                                          <code>gulp clean &#8209;&#8209;force&#8209;clean</code>                                           |                         Полная очистка папки <code>dist/</code>                          |
+|        <code>dev</code>        |                                 <code>cross&#8209;env NODE_ENV=development gulp &#8209;&#8209;i18n</code>                                  |                  Dev-сервер с горячей перезагрузкой и мультиязычностью                   |
+|      <code>staging</code>      |                    <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;staging &#8209;&#8209;i18n</code>                     |                 Production-сборка с активированными отладочными флагами                  |
+|       <code>prod</code>        |               <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;prod&#8209;server</code>                |                 Production-сборка с локальным сервером для предпросмотра                 |
+|       <code>start</code>       |                                                          <code>npm run dev</code>                                                          |                            Алиас для <code>npm run dev</code>                            |
+|       <code>build</code>       |               <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;force&#8209;clean</code>                |                  Полная production-сборка с очисткой <code>dist/</code>                  |
+|       <code>local</code>       |     <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;local &#8209;&#8209;force&#8209;clean</code>      |           Production-сборка с относительными путями для <code>file:///</code>            |
+|      <code>secure</code>       |     <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;https &#8209;&#8209;force&#8209;clean</code>      |                         Production-сборка с принудительным HTTPS                         |
+|  <code>gh&#8209;pages</code>   | <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;gh&#8209;pages &#8209;&#8209;force&#8209;clean</code> |                      Production-сборка для выгрузки в GitHub Pages                       |
+|      <code>archive</code>      |                                                   <code>npm run build && gulp zip</code>                                                   |                        Сборка и упаковка <code>dist/</code> в ZIP                        |
+|      <code>lint:ts</code>      |                                          <code>eslint . &#8209;&#8209;max&#8209;warnings=0</code>                                          |                              Линтинг TypeScript/JavaScript                               |
+|    <code>lint:ts:fix</code>    |                                 <code>eslint . &#8209;&#8209;max&#8209;warnings=0 &#8209;&#8209;fix</code>                                 |                      Автоисправление ошибок линтера в TS/JS-файлах                       |
+|     <code>lint:scss</code>     |                                  <code>stylelint \"\*_/_.scss\" &#8209;&#8209;max&#8209;warnings=0</code>                                  |                                   Линтинг SCSS-файлов                                    |
+|   <code>lint:scss:fix</code>   |                         <code>stylelint \"\*_/_.scss\" &#8209;&#8209;max&#8209;warnings=0 &#8209;&#8209;fix</code>                         |                       Автоисправление ошибок линтера в SCSS-файлах                       |
+|       <code>lint</code>        |                               <code>npm&#8209;run&#8209;all &#8209;&#8209;parallel lint:ts lint:scss</code>                                |                            Параллельный линтинг TS/JS и SCSS                             |
+|     <code>lint:fix</code>      |                           <code>npm&#8209;run&#8209;all &#8209;&#8209;parallel lint:ts:fix lint:scss:fix</code>                            |                       Параллельное автоисправление в TS/JS и SCSS                        |
+|      <code>format</code>       |                                                <code>prettier . &#8209;&#8209;write</code>                                                 |                        Форматирование всех файлов через Prettier                         |
+| <code>test:editorconfig</code> |                                                  <code>editorconfig&#8209;checker</code>                                                   |                Проверка соответствия правилам <code>.editorconfig</code>                 |
 
 </div>
 
@@ -834,8 +840,3 @@ Email: [aleethey@gmail.com](mailto:aleethey@gmail.com) -->
 
 [interface-preview-gif]: project/preview/interface-preview.gif
 [fluid-preview-gif]: project/preview/fluid-design-preview.gif
-
-<!-- ! 🚀 ┌────────────────────────────────────────────────────────────────────────┐ -->
-<!-- ! 🚀 │  README MAINTENANCE CHEAT SHEET / ШПАРГАЛКА ПО ПОДГОТОВКЕ README       │ -->
-<!-- ! 🚀 └────────────────────────────────────────────────────────────────────────┘ -->
-<!-- ! 💡 See / См. файл: docs/CHEATSHEET.md -->

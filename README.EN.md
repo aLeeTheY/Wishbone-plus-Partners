@@ -293,6 +293,9 @@ Wishbone-plus-Partners/
 ├── .husky/                          # Local Git Hooks configurations
 ├── .vscode/                         # IDE workspace settings
 │
+├── cli/                             # Automation scripts and CLI utilities
+│   └── transform-md.ts              # CLI utility to escape inline code and hyphens in Markdown
+│
 ├── dist/                            # Automatically generated distribution directory
 ├── docs/                            # Documentation assets
 │
@@ -568,6 +571,9 @@ _For convenience, the primary npm scripts available in the project are listed be
 |          Script (NPM)          |                                                            Complete CLI Command                                                            |                                     Description                                     |
 | :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------: |
 |      <code>prepare</code>      |                                                             <code>husky</code>                                                             |           Automatically sets up Git hooks after <code>npm install</code>            |
+|    <code>postinstall</code>    |                                                       <code>npm run md:decode</code>                                                       |   Automatically decodes and formats README files after dependencies are installed   |
+|     <code>md:encode</code>     |       <code>npx tsx cli/transform&#8209;md.ts encode README.md README.EN.md && npx prettier &#8209;&#8209;write \"\*_/_.md\"</code>        |  Transforms inline code blocks to HTML tags to preserve hyphens before committing   |
+|     <code>md:decode</code>     |       <code>npx tsx cli/transform&#8209;md.ts decode README.md README.EN.md && npx prettier &#8209;&#8209;write \"\*_/_.md\"</code>        |    Reverts HTML code tags back to standard Markdown backticks for local editing     |
 |       <code>clean</code>       |                                          <code>gulp clean &#8209;&#8209;force&#8209;clean</code>                                           |              Full cleanup of the compiled <code>dist/</code> directory              |
 |        <code>dev</code>        |                                 <code>cross&#8209;env NODE_ENV=development gulp &#8209;&#8209;i18n</code>                                  |                 Dev server with hot reload and multilingual support                 |
 |      <code>staging</code>      |                    <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;staging &#8209;&#8209;i18n</code>                     |                    Production build with debugging flags enabled                    |
@@ -834,8 +840,3 @@ Email: [aleethey@gmail.com](mailto:aleethey@gmail.com) -->
 
 [interface-preview-gif]: project/preview/interface-preview.gif
 [fluid-preview-gif]: project/preview/fluid-design-preview.gif
-
-<!-- ! 🚀 ┌────────────────────────────────────────────────────────────────────────┐ -->
-<!-- ! 🚀 │  README MAINTENANCE CHEAT SHEET / ШПАРГАЛКА ПО ПОДГОТОВКЕ README       │ -->
-<!-- ! 🚀 └────────────────────────────────────────────────────────────────────────┘ -->
-<!-- ! 💡 See / См. файл: docs/CHEATSHEET.md -->
