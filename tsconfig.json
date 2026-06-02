@@ -1,11 +1,13 @@
 {
     // Visit https://aka.ms/tsconfig to read more about this file
     "compilerOptions": {
+        "types": ["node"],
+
         "rootDir": "./src/ts", // исходники TS
         "outDir": "./public/js", // куда компилируем JS
 
-        "module": "esnext", // современный модульный синтаксис
         "target": "es2018", // таргет - es2018
+        "module": "esnext", // современный модульный синтаксис
 
         "lib": ["DOM", "ES2018"], // библиотеки для TS
 
@@ -20,9 +22,7 @@
 
         "sourceMap": true, // генерировать sourcemap
         "removeComments": true, // удалять комментарии из JS
-        "incremental": true, // ускоренная компиляция
-
-        "types": ["node"]
+        "incremental": true // ускоренная компиляция
     },
     "include": ["src/ts/**/*.ts"], // какие файлы компилировать
     "exclude": ["node_modules"] // что игнорировать
