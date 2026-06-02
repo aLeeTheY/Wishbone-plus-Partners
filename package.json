@@ -140,7 +140,7 @@
         "__TEST__": "",
         "test:editorconfig": "editorconfig-checker",
         "__MARKDOWN__": "",
-        "md:encode": "npx tsx cli/transform-md.ts encode README.md README.EN.md && npx prettier --write \"**/*.md\"",
+        "md:encode": "npx prettier --write \"**/*.md\" && npx tsx cli/transform-md.ts encode README.md README.EN.md",
         "md:decode": "npx tsx cli/transform-md.ts decode README.md README.EN.md && npx prettier --write \"**/*.md\"",
         "__POST_INSTALL__": "",
         "prepare": "husky",
