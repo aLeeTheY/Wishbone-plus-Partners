@@ -89,7 +89,7 @@
         <li>
         <a href="#configuration">🔧 Configuration</a>
           <ul>
-            <li><a href="#examples">🎛️ Examples of Overriding Parameters via NPM Scripts</a></li>
+            <li><a href="#examples">📖 Examples of Overriding Parameters via NPM Scripts</a></li>
             <li><a href="#npm-scripts">🏃 NPM Scripts</a></li>
           </ul>
         </li>
@@ -109,7 +109,7 @@
 
 The primary objective of this project is the development of a responsive corporate landing page with a strict focus on full build automation, internationalization, and achieving maximum web performance metrics.
 
-The project is engineered as a modular architecture driven by Gulp 5: the Nunjucks templating engine compiles HTML with native localization (i18n) support, SCSS is processed using the BEM methodology via a multi-stage PostCSS pipeline, and client-side logic is written in TypeScript, compiling into an optimized bundle. All media assets pass through dedicated optimization pipelines to minimize page load overhead, while build configurations are exposed through a comprehensive CLI interface supporting `dev`, `staging`, and `production` environments.
+The project is engineered as a modular architecture driven by Gulp 5: the Nunjucks templating engine compiles HTML with native localization (i18n) support, SCSS is processed using the BEM methodology via a multi-stage PostCSS pipeline, and client-side logic is written in TypeScript, compiling into an optimized bundle. All media assets pass through dedicated optimization pipelines to minimize page load overhead, while build configurations are exposed through a comprehensive CLI interface supporting <nobr>`dev`</nobr>, <nobr>`staging`</nobr>, and <nobr>`production`</nobr> environments.
 
 ### 🎨 Design <a id="design"></a>
 
@@ -141,38 +141,38 @@ _For convenience, all features are categorized below._
   <summary>📐 Layout, Architecture & UI/UX</summary>
 
 - **Static & Modular Architecture:** Clean static frontend design entirely free of CMS overhead or SSR bottlenecks. HTML code is decomposed into isolated, highly reusable component layers using the **Nunjucks** templating engine.
-- **Internationalization (i18n):** Full native multi-language routing support. The pipeline dynamically cross-compiles pages using localized JSON dictionaries (`ru.json`, `en.json`), yielding separate language routes with distinct entry points. Triggered via the `-I, --i18n` CLI flag.
-- **Fluid & Responsive Design:** Fully fluid responsiveness across Desktop, Tablet, and Mobile viewport bounds. Engineered using modern CSS layout equations (`clamp()`, `min()`, and `max()`) bound to cascading media query rulesets.
-- **Bi-directional Layout Pipeline (--mobile-first):** A unique `-M, --mobile-first` flag allows switching the core build strategy on the fly. It reconfigures PostCSS to sort media queries using `min-width` rules and forces the custom `<picture>` transformer to invert its tag generation logic into Mobile-First mode instead of the default Desktop-First (`max-width`) matrix.
+- **Internationalization (i18n):** Full native multi-language routing support. The pipeline dynamically cross-compiles pages using localized JSON dictionaries (<nobr>`ru.json`</nobr>, <nobr>`en.json`</nobr>), yielding separate language routes with distinct entry points. Triggered via the <nobr>`-I, --i18n`</nobr> CLI flag.
+- **Fluid & Responsive Design:** Fully fluid responsiveness across Desktop, Tablet, and Mobile viewport bounds. Engineered using modern CSS layout equations (<nobr>`clamp()`</nobr>, <nobr>`min()`</nobr>, and <nobr>`max()`</nobr>) bound to cascading media query rulesets.
+- **Bi-directional Layout Pipeline (--mobile-first):** A unique <nobr>`-M, --mobile-first`</nobr> flag allows switching the core build strategy on the fly. It reconfigures PostCSS to sort media queries using <nobr>`min-width`</nobr> rules and forces the custom <nobr>`<picture>`</nobr> transformer to invert its tag generation logic into Mobile-First mode instead of the default Desktop-First (<nobr>`max-width`</nobr>) matrix.
 - **Pixel Perfect Fidelity:** High-precision translation of Figma mockups into functional code with strict, zero-tolerance adherence to layout paddings, margins, and the underlying design system.
 - **BEM Methodology:** Standardized class naming conventions based on the BEM methodology, guaranteeing complete style isolation and long-term codebase maintainability.
-- **Advanced UI/UX & Micro-interactions:** Seamless integration of smooth scroll animations (AOS.js) paired with declarative client-side state management (Alpine.js). Enhanced with hardware-accelerated custom CSS transitions to ensure a highly responsive `hover` feedback matrix for all interactive nodes.
+- **Advanced UI/UX & Micro-interactions:** Seamless integration of smooth scroll animations (AOS.js) paired with declarative client-side state management (Alpine.js). Enhanced with hardware-accelerated custom CSS transitions to ensure a highly responsive <nobr>`hover`</nobr> feedback matrix for all interactive nodes.
 
 </details>
 
 <details>
   <summary>⚙️ Automation & Build Management (CLI & Workflow)</summary>
 
-- **Gulp 5 Core & Node Environments:** Build automation is driven by Gulp 5 core APIs. Execution scopes are decoupled via `cross-env`, featuring a dedicated `staging` configuration activated via the `-s, --staging` CLI flag embedded within production build rulesets.
-- **Smart Path Aliasing:** Universal, cross-pipeline path aliasing support (`@scss`, `@ts`, `@images`, `@audio`, `@libs`, etc.) with integrated VS Code autocomplete definition mapping. Gulp tasks dynamically resolve and parse these aliases across all source files during asset processing.
-- **Offline Autonomous Mode:** The `-l, --local` flag forces all asset references into strict relative pathing and automatically inlines the SVG sprite, enabling the project to run flawlessly directly from a local drive via the `file:///` protocol.
-- **Advanced CLI Management (Yargs):** Fine-grained, on-the-fly build orchestration: verbose logging toggle (`-V, --verbose`), deployment target domain override (`-d, --domain`), output directory naming (`-F, --site-folder`), and production preview server execution (`-P, --prod-server`). A comprehensive interactive help menu is accessible via `gulp -i`.
-- **Strict CLI Conflict Validation:** Automated, pre-flight build termination with explicit error printing when incompatible CLI flags are passed together. For instance, the engine explicitly blocks running experimental obfuscation (`-o, --obfuscation`) in tandem with asset inlining parameters (`--inline-css`, `--inline-js`, `--inline-sprite`).
-- **Smart Cache-Safe Clean:** The default directory cleanup task (when the `-c, --force-clean` flag is omitted) preserves heavy media distributions (videos, audio, fonts, images) inside the `dist/` workspace. Passing the `-c` flag forces a destructive, total purge of the target build directory.
-- **Fast Dev Workflow:** Heavy computing optimizations are bypassed entirely during local development, while local server synchronization (**BrowserSync**) instantly mirrors hot-reloaded source modifications thanks to a highly optimized `gulp-watch` tracking grid. Secure HTTPS tunneling is natively supported via the `-H, --secure` flag.
-- **Deployment & Archiving:** Features integrated automated tasks for streaming the distribution bundle to remote production hosts over FTP (`vinyl-ftp`) and packaging the compiled project into an optimized ZIP archive. The `-g, --gh-pages` flag automatically recalibrates asset routing configurations for GitHub Pages environments.
+- **Gulp 5 Core & Node Environments:** Build automation is driven by Gulp 5 core APIs. Execution scopes are decoupled via <nobr>`cross-env`</nobr>, featuring a dedicated <nobr>`staging`</nobr> configuration activated via the <nobr>`-s, --staging`</nobr> CLI flag embedded within production build rulesets.
+- **Smart Path Aliasing:** Universal, cross-pipeline path aliasing support (<nobr>`@scss`</nobr>, <nobr>`@ts`</nobr>, <nobr>`@images`</nobr>, <nobr>`@audio`</nobr>, <nobr>`@libs`</nobr>, etc.) with integrated VS Code autocomplete definition mapping. Gulp tasks dynamically resolve and parse these aliases across all source files during asset processing.
+- **Offline Autonomous Mode:** The <nobr>`-l, --local`</nobr> flag forces all asset references into strict relative pathing and automatically inlines the SVG sprite, enabling the project to run flawlessly directly from a local drive via the <nobr>`file:///`</nobr> protocol.
+- **Advanced CLI Management (Yargs):** Fine-grained, on-the-fly build orchestration: verbose logging toggle (<nobr>`-V, --verbose`</nobr>), deployment target domain override (<nobr>`-d, --domain`</nobr>), output directory naming (<nobr>`-F, --site-folder`</nobr>), and production preview server execution (<nobr>`-P, --prod-server`</nobr>). A comprehensive interactive help menu is accessible via <nobr>`gulp -i`</nobr>.
+- **Strict CLI Conflict Validation:** Automated, pre-flight build termination with explicit error printing when incompatible CLI flags are passed together. For instance, the engine explicitly blocks running experimental obfuscation (<nobr>`-o, --obfuscation`</nobr>) in tandem with asset inlining parameters (<nobr>`--inline-css`</nobr>, <nobr>`--inline-js`</nobr>, <nobr>`--inline-sprite`</nobr>).
+- **Smart Cache-Safe Clean:** The default directory cleanup task (when the <nobr>`-c, --force-clean`</nobr> flag is omitted) preserves heavy media distributions (videos, audio, fonts, images) inside the <nobr>`dist/`</nobr> workspace. Passing the <nobr>`-c`</nobr> flag forces a destructive, total purge of the target build directory.
+- **Fast Dev Workflow:** Heavy computing optimizations are bypassed entirely during local development, while local server synchronization (**BrowserSync**) instantly mirrors hot-reloaded source modifications thanks to a highly optimized <nobr>`gulp-watch`</nobr> tracking grid. Secure HTTPS tunneling is natively supported via the <nobr>`-H, --secure`</nobr> flag.
+- **Deployment & Archiving:** Features integrated automated tasks for streaming the distribution bundle to remote production hosts over FTP (<nobr>`vinyl-ftp`</nobr>) and packaging the compiled project into an optimized ZIP archive. The <nobr>`-g, --gh-pages`</nobr> flag automatically recalibrates asset routing configurations for GitHub Pages environments.
 
 </details>
 
 <details>
   <summary>🧩 Custom Gulp Transformers & Smart Helpers</summary>
 
-- **Incremental Asset Validation (`asset-exists.js`):** Custom helper scripts track media asset validity states using persistent revision hashes, completely preventing heavy background routines (FFmpeg processing, Sharp execution, font compilation formats) from redundant execution loops if source targets remain unchanged.
-- **Automated `<picture>` Transformer (`html-img2picture-transformer.js`):** A custom HTML parser built on top of `htmlparser2` and integrated directly into the `html.js` execution pipeline. Operating as a "DOM topology architect", it reads raw source assets via `sharp` to analyze original bounds, then dynamically rewires the tree to wrap standard `<img>` nodes inside structured `<picture>` blocks with a precise media query map. The task is cleanly isolated from heavy graphics generation to eliminate race conditions, while natively solving Core Web Vitals targets: blocks CLS by injecting strict `width`/`height` dimensions and automates LCP heuristics (bypassing `lazy loading` for `fetchpriority="high"` elements while forcing `decoding="async"`).
-- **Flexible Inline Helper (`inline-assets.js`):** HTML attribute-driven injection of final CSS, JS, and SVG sprites. Eliminates redundant HTTP roundtrips on the client side and natively supports the offline autonomous mode (`-l, --local`).
-- **Advanced Inline Bundling:** Dedicated `--inline-css` and `--inline-js` flags embed the final compiled production style and script bundles directly into the HTML document node, completely cutting out external network overhead on the client end.
-- **Experimental Code Obfuscation:** The `-o, --obfuscation` flag initiates the rewriting of CSS classes into randomized short cryptographic hashes across all HTML, CSS, and JS compilation outputs, maximizing asset weight reduction and shielding the layout structure from direct copying.
-- **Native CLI Binary Integration:** The compilation pipeline directly orchestrates external native binaries (`ffmpeg`, Python-based `ftcli`) via asynchronous child processes using `spawn` routines with pre-flight OS environment availability checking. Features atomic file writing and robust protection against blocking the Node.js Event Loop.
+- **Incremental Asset Validation (<nobr>`asset-exists.js`</nobr>):** Custom helper scripts track media asset validity states using persistent revision hashes, completely preventing heavy background routines (FFmpeg processing, Sharp execution, font compilation formats) from redundant execution loops if source targets remain unchanged.
+- **Automated <nobr>`<picture>`</nobr> Transformer (<nobr>`html-img2picture-transformer.js`</nobr>):** A custom HTML parser built on top of <nobr>`htmlparser2`</nobr> and integrated directly into the <nobr>`html.js`</nobr> execution pipeline. Operating as a "DOM topology architect", it reads raw source assets via <nobr>`sharp`</nobr> to analyze original bounds, then dynamically rewires the tree to wrap standard <nobr>`<img>`</nobr> nodes inside structured <nobr>`<picture>`</nobr> blocks with a precise media query map. The task is cleanly isolated from heavy graphics generation to eliminate race conditions, while natively solving Core Web Vitals targets: blocks CLS by injecting strict <nobr>`width`</nobr>/<nobr>`height`</nobr> dimensions and automates LCP heuristics (bypassing <nobr>`lazy loading`</nobr> for <nobr>`fetchpriority="high"`</nobr> elements while forcing <nobr>`decoding="async"`</nobr>).
+- **Flexible Inline Helper (<nobr>`inline-assets.js`</nobr>):** HTML attribute-driven injection of final CSS, JS, and SVG sprites. Eliminates redundant HTTP roundtrips on the client side and natively supports the offline autonomous mode (<nobr>`-l, --local`</nobr>).
+- **Advanced Inline Bundling:** Dedicated <nobr>`--inline-css`</nobr> and <nobr>`--inline-js`</nobr> flags embed the final compiled production style and script bundles directly into the HTML document node, completely cutting out external network overhead on the client end.
+- **Experimental Code Obfuscation:** The <nobr>`-o, --obfuscation`</nobr> flag initiates the rewriting of CSS classes into randomized short cryptographic hashes across all HTML, CSS, and JS compilation outputs, maximizing asset weight reduction and shielding the layout structure from direct copying.
+- **Native CLI Binary Integration:** The compilation pipeline directly orchestrates external native binaries (<nobr>`ffmpeg`</nobr>, Python-based <nobr>`ftcli`</nobr>) via asynchronous child processes using <nobr>`spawn`</nobr> routines with pre-flight OS environment availability checking. Features atomic file writing and robust protection against blocking the Node.js Event Loop.
 
 </details>
 
@@ -180,25 +180,25 @@ _For convenience, all features are categorized below._
   <summary>⚡ Optimization & Performance</summary>
 
 - **Google Lighthouse Metrics:** Consistent, reproducible **100/100** score in the **Performance** audit category and **90+** across all remaining core metrics (Accessibility, Best Practices, SEO).
-- **Blazing Fast Script Compilation (ESBuild):** Ultra-fast TypeScript/JavaScript transpilation down to standard ES2018 targets using the `esbuild` compiler engine, incorporating deep minification schemes and highly efficient Tree Shaking algorithms.
-- **Critical CSS Extraction (Penthouse):** Automated extraction and inlining of above-the-fold critical style blocks for instantaneous initial paint rendering (automatically bypassed if full stylesheet inlining is forced via `--inline-css`).
-- **Responsive Images Permutations Matrix (`images.js`):** A heavy-duty computing pipeline powered by pure `sharp` to generate a responsive graphics grid. It extracts source image metadata to construct a complete permutation matrix: `[Target Breakpoints × 3 Formats (Original, WebP, AVIF)]`. The script prevents image upscaling (skipping breakpoint targets wider than the physical resolution of the source asset) and dynamically adapts to execution environments: prioritizing compilation velocity in `dev` modes (minimal compression `effort`, 100% quality) while unlocking extreme compression profiles during production (`mozjpeg` encoding pipelines, structured PNG palettization, and maxed-out compression `effort` passes). Fully integrated with the `asset-exists.js` helper for incremental skip execution of already compiled asset batches.
-- **SVG Optimization (SVGO & Sprites):** Vector iconography assets are automatically stripped of technical metadata and editor clutter via SVGO, then consolidated into a single unified `sprite.svg` map. Explicit DOM embedding is managed via the `--inline-sprite` flag (forced automatically when running under `-l, --local`).
-- **Media Optimization (FFmpeg & WOFF2):** Typography packages are heavily compressed into highly efficient WOFF/WOFF2 web distribution formats using Python-based FoundryTools CLI wrappers. Audio and video assets are converted to modern `.webm` media containers via fine-tuned FFmpeg encoding presets.
-- **Asset Revisioning (Cache Busting):** Manifest-driven filename hashing (`gulp-rev`) is automatically applied during `staging` (via the `-s` flag) and production builds to guarantee instantaneous cache busting on the user client side upon deployment.
-- **SEO & Production Metadata:** Automated injection of all critical production meta-assets (`favicon.ico`, `robots.txt`, `sitemap.xml`) into the root distribution output directory.
+- **Blazing Fast Script Compilation (ESBuild):** Ultra-fast TypeScript/JavaScript transpilation down to standard ES2018 targets using the <nobr>`esbuild`</nobr> compiler engine, incorporating deep minification schemes and highly efficient Tree Shaking algorithms.
+- **Critical CSS Extraction (Penthouse):** Automated extraction and inlining of above-the-fold critical style blocks for instantaneous initial paint rendering (automatically bypassed if full stylesheet inlining is forced via <nobr>`--inline-css`</nobr>).
+- **Responsive Images Permutations Matrix (<nobr>`images.js`</nobr>):** A heavy-duty computing pipeline powered by pure <nobr>`sharp`</nobr> to generate a responsive graphics grid. It extracts source image metadata to construct a complete permutation matrix: <nobr>`[Target Breakpoints × 3 Formats (Original, WebP, AVIF)]`</nobr>. The script prevents image upscaling (skipping breakpoint targets wider than the physical resolution of the source asset) and dynamically adapts to execution environments: prioritizing compilation velocity in <nobr>`dev`</nobr> modes (minimal compression <nobr>`effort`</nobr>, 100% quality) while unlocking extreme compression profiles during production (<nobr>`mozjpeg`</nobr> encoding pipelines, structured PNG palettization, and maxed-out compression <nobr>`effort`</nobr> passes). Fully integrated with the <nobr>`asset-exists.js`</nobr> helper for incremental skip execution of already compiled asset batches.
+- **SVG Optimization (SVGO & Sprites):** Vector iconography assets are automatically stripped of technical metadata and editor clutter via SVGO, then consolidated into a single unified <nobr>`sprite.svg`</nobr> map. Explicit DOM embedding is managed via the <nobr>`--inline-sprite`</nobr> flag (forced automatically when running under <nobr>`-l, --local`</nobr>).
+- **Media Optimization (FFmpeg & WOFF2):** Typography packages are heavily compressed into highly efficient WOFF/WOFF2 web distribution formats using Python-based FoundryTools CLI wrappers. Audio and video assets are converted to modern <nobr>`.webm`</nobr> media containers via fine-tuned FFmpeg encoding presets.
+- **Asset Revisioning (Cache Busting):** Manifest-driven filename hashing (<nobr>`gulp-rev`</nobr>) is automatically applied during <nobr>`staging`</nobr> (via the <nobr>`-s`</nobr> flag) and production builds to guarantee instantaneous cache busting on the user client side upon deployment.
+- **SEO & Production Metadata:** Automated injection of all critical production meta-assets (<nobr>`favicon.ico`</nobr>, <nobr>`robots.txt`</nobr>, <nobr>`sitemap.xml`</nobr>) into the root distribution output directory.
 
 </details>
 
 <details>
   <summary>🛡️ Linting, Formatting & Code Quality</summary>
 
-- **Cross-browser Compatibility (.browserslistrc):** PostCSS `autoprefixer` driven by `postcss-preset-env` targets a global active browser market share coverage of >95% for production distributions. In `dev` mode, compilation speed is optimized by focusing strictly on the latest software versions.
-- **Advanced PostCSS Pipeline:** Multi-stage stylesheet transformation utilizing `postcss-preset-env`, CSS variable name minification, subpixel value rounding, fallbacks for `font-variant` and `will-change`, automated `font-display: swap` injection, dead-code elimination (`purgecss`), media query grouping, and final compression via `cssnano`.
-- **Strict Linting Standards (ESLint):** Modern Flat ESLint configuration powered by `typescript-eslint` and `@stylistic`. Enforces rigorous type checking and proactive alerts for potentially hazardous code patterns.
-- **Stylelint Architecture:** Robust SCSS syntax control integrated with the `stylelint-no-unsupported-browser-features` plugin, automatically cross-referencing utilized CSS properties against the project's target `.browserslistrc` specification.
-- **Automated Formatting (Prettier):** On-the-fly automated code formatting with native Nunjucks syntax support (`prettier-plugin-jinja-template`). Code indentation rules are synchronized with the `.editorconfig` specification.
-- **Git Hooks Automation (Husky & Commitlint):** A `lint-staged` workflow isolates and validates modified files through active linters and formatters prior to committing. `commitlint` strictly monitors adherence to the Conventional Commits specification (including explicit support for the `wip` commit type).
+- **Cross-browser Compatibility (.browserslistrc):** PostCSS <nobr>`autoprefixer`</nobr> driven by <nobr>`postcss-preset-env`</nobr> targets a global active browser market share coverage of >95% for production distributions. In <nobr>`dev`</nobr> mode, compilation speed is optimized by focusing strictly on the latest software versions.
+- **Advanced PostCSS Pipeline:** Multi-stage stylesheet transformation utilizing <nobr>`postcss-preset-env`</nobr>, CSS variable name minification, subpixel value rounding, fallbacks for <nobr>`font-variant`</nobr> and <nobr>`will-change`</nobr>, automated <nobr>`font-display: swap`</nobr> injection, dead-code elimination (<nobr>`purgecss`</nobr>), media query grouping, and final compression via <nobr>`cssnano`</nobr>.
+- **Strict Linting Standards (ESLint):** Modern Flat ESLint configuration powered by <nobr>`typescript-eslint`</nobr> and <nobr>`@stylistic`</nobr>. Enforces rigorous type checking and proactive alerts for potentially hazardous code patterns.
+- **Stylelint Architecture:** Robust SCSS syntax control integrated with the <nobr>`stylelint-no-unsupported-browser-features`</nobr> plugin, automatically cross-referencing utilized CSS properties against the project's target <nobr>`.browserslistrc`</nobr> specification.
+- **Automated Formatting (Prettier):** On-the-fly automated code formatting with native Nunjucks syntax support (<nobr>`prettier-plugin-jinja-template`</nobr>). Code indentation rules are synchronized with the <nobr>`.editorconfig`</nobr> specification.
+- **Git Hooks Automation (Husky & Commitlint):** A <nobr>`lint-staged`</nobr> workflow isolates and validates modified files through active linters and formatters prior to committing. <nobr>`commitlint`</nobr> strictly monitors adherence to the Conventional Commits specification (including explicit support for the <nobr>`wip`</nobr> commit type).
 
 </details>
 
@@ -250,7 +250,7 @@ _For convenience, all technologies are categorized below._
     - [![Sharp][sharp-logo]][sharp-url] <sup>— automated raster image processing and AVIF/WebP generation during the build</sup>
     - [![SVGO][SVGO-logo]][SVGO-url] <sup>— automated SVG icon optimization and minification</sup>
   - **External CLI Tools (Orchestrated via Gulp Spawn):**
-    - [![FFmpeg][ffmpeg-logo]][ffmpeg-url] <sup>— audio and video asset conversion to `.webm` with NVENC GPU acceleration support</sup>
+    - [![FFmpeg][ffmpeg-logo]][ffmpeg-url] <sup>— audio and video asset conversion to <nobr>`.webm`</nobr> with NVENC GPU acceleration support</sup>
     - [![Foundry Tools CLI][FoundryToolsCLI-logo]][FoundryToolsCLI-url] <sup>— Python utility for converting client OTF/TTF fonts to WOFF and WOFF2 formats</sup>
 - [![Browserslist][Browserslist-logo]][Browserslist-url] <sup>— target browser matrix configuration management</sup>
 
@@ -264,8 +264,8 @@ _For convenience, all technologies are categorized below._
 - [![ESLint][ESLint-logo]][ESLint-url] <sup>— deep static analysis and linting for TypeScript/JavaScript code</sup>
 - [![Prettier][Prettier-logo]][Prettier-url] <sup>— automated multi-format code formatting (including native Nunjucks templates)</sup>
 - [![Husky][Husky-logo]][Husky-url] <sup>— client-side automated Git hooks management</sup>
-  - [![Lint-staged][LintStaged-logo]][LintStaged-url] <sup>— isolated linting and formatting for staged files (`pre-commit`)</sup>
-  - [![Commitlint][CommitLint-logo]][CommitLint-url] <sup>— strict commit message validation matching Conventional Commits (with custom `wip` & `deploy` types)</sup>
+  - [![Lint-staged][LintStaged-logo]][LintStaged-url] <sup>— isolated linting and formatting for staged files (<nobr>`pre-commit`</nobr>)</sup>
+  - [![Commitlint][CommitLint-logo]][CommitLint-url] <sup>— strict commit message validation matching Conventional Commits (with custom <nobr>`wip`</nobr> & <nobr>`deploy`</nobr> types)</sup>
 
 </details>
 
@@ -454,7 +454,7 @@ npm install
 
 ### 🌐 Deployment Paths Configuration (Optional) <a id="deployment-path-config"></a>
 
-Before running the build, you can customize base domains and paths for different environments in the `src/site.config.json` configuration file:
+Before running the build, you can customize base domains and paths for different environments in the <nobr>`src/site.config.json`</nobr> configuration file:
 
 ```json
 {
@@ -467,25 +467,25 @@ Before running the build, you can customize base domains and paths for different
 }
 ```
 
-Feel free to adjust these fields according to your needs. The builder will automatically apply the correct values depending on the target execution mode.
+You can customize these parameters to suit your needs. The builder automatically maps the correct values: the base fields (`domain` and `siteFolder`) are used for the <nobr>`dev`</nobr>, <nobr>`prod --staging`</nobr> and <nobr>`prod --prod-server`</nobr> scenarios, while the suffixed keys correspond to the <nobr>`prod`</nobr> and <nobr>`prod --gh-pages`</nobr> scenarios respectively.
 
 > [!TIP]
 > **CLI Alternative**
 >
 > If you need to override the configuration on the fly without modifying the file, you can use the following command-line flags:
 >
-> - `--domain` (`-d`) — to override the target URL
-> - `--site-folder` (`-F`) — to override the subdirectory path
+> - <nobr>`--domain`</nobr> (<nobr>`-d`</nobr>) — to override the target URL
+> - <nobr>`--site-folder`</nobr> (<nobr>`-F`</nobr>) — to override the subdirectory path
 
 > [!NOTE]
 > **Smart Normalization (Error Protection)**
 >
 > The builder features automatic slash handling. You can specify them in any format (at the end, at the beginning, or omit them entirely):
 >
-> - `https://site.com` or `https://site.com/`
-> - `/www/` or `www`
+> - <nobr>`https://site.com`</nobr> or <nobr>`https://site.com/`</nobr>
+> - <nobr>`/www/`</nobr> or <nobr>`www`</nobr>
 >
-> The Gulp build pipeline will normalize strings automatically, preventing broken resource paths.
+> This Gulp build automatically normalizes lines, preventing broken paths to assets.
 
 ### ⚙️ Build & Launch <a id="build-launch"></a>
 
@@ -493,11 +493,11 @@ Feel free to adjust these fields according to your needs. The builder will autom
 
 <div align="center">
 
-|  Build Mode   |                       Direct Call (CLI)                        | Alternative (NPM) |
-| :-----------: | :------------------------------------------------------------: | :---------------: |
-| `development` |        `cross-env NODE_ENV=development gulp dev --i18n`        |   `npm run dev`   |
-|   `staging`   |   `cross-env NODE_ENV=production gulp prod --staging --i18n`   | `npm run staging` |
-| `production`  | `cross-env NODE_ENV=production gulp prod --i18n --prod-server` |  `npm run prod`   |
+|         Build Mode         |                              Direct Call (CLI)                              |       Alternative (NPM)        |
+| :------------------------: | :-------------------------------------------------------------------------: | :----------------------------: |
+| <nobr>`development`</nobr> |        <nobr>`cross-env NODE_ENV=development gulp dev --i18n`</nobr>        |   <nobr>`npm run dev`</nobr>   |
+|   <nobr>`staging`</nobr>   |   <nobr>`cross-env NODE_ENV=production gulp prod --staging --i18n`</nobr>   | <nobr>`npm run staging`</nobr> |
+| <nobr>`production`</nobr>  | <nobr>`cross-env NODE_ENV=production gulp prod --i18n --prod-server`</nobr> |  <nobr>`npm run prod`</nobr>   |
 
 </div>
 
@@ -519,24 +519,24 @@ The complete list of options is duplicated below for reference:
 
 <div align="center">
 
-|                         Option                         |   Type    |      Default Value      |                                                                                         Description                                                                                          |
-| :----------------------------------------------------: | :-------: | :---------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|      `-W`<br />`--workspace-version`<br />`--wv`       | `boolean` |         `false`         |                                                                         Displays current workspace semantic version                                                                          |
-|                   `-i`<br />`--info`                   | `boolean` |         `false`         |                                                                                 Displays CLI options manual                                                                                  |
-|                 `-V`<br />`--verbose`                  | `boolean` |         `false`         |                                                               Unlocks extended console logging during task streaming execution                                                               |
-|                 `-s`<br />`--staging`                  | `boolean` |         `false`         |                                                         Enables `staging` environment configurations under `production` build rules                                                          |
-|               `-c`<br />`--force-clean`                | `boolean` |         `false`         |                                                              Triggers a hard sweep of the compiled `dist/` workspace directory                                                               |
-|                  `-l`<br />`--local`                   | `boolean` |         `false`         |                                                   Switches paths to strict relative links, satisfying standalone execution via `file:///`                                                    |
-|    `-I`<br />`--internationalization`<br />`--i18n`    | `boolean` |         `false`         |                                                                    Activates localized multi-lingual document compilation                                                                    |
-|             `--inline-sprite`<br />`--is`              | `boolean` |         `false`         |                                              Directly embeds the SVG vector asset grid inside the document (forced automatically via `--local`)                                              |
-|               `--inline-css`<br />`--ic`               | `boolean` |         `false`         |                                                            Directly embeds production stylesheets inside the HTML layout payload                                                             |
-|               `--inline-js`<br />`--ij`                | `boolean` |         `false`         |                                                           Directly embeds processed client scripts inside the HTML layout payload                                                            |
-|         `-M`<br />`--mobile-first`<br />`--mf`         | `boolean` |         `false`         | Toggles the build layout pipeline. Sets PostCSS media query sorting to `mobile-first` and configures the HTML picture transformer to generate `min-width` source tags instead of `max-width` |
-|  `-d`<br />`--domain`<br />`--site-url`<br />`--url`   | `string`  | `http://localhost:3000` |                                                               Maps target deployment domain root, e.g., `https://example.com`                                                                |
-| `-F`<br />`--site-folder`<br />`--folder`<br />`--sf`  | `string`  |           `/`           |                                                  Folder name on the hosting server or GitHub repository name (e.g., `my-repo`, `www`, ...)                                                   |
-| `-P`<br />`--prod-server`<br />`--server`<br />`--ps`  | `boolean` |         `false`         |                                                           Launches a local server tracking the compiled production build footprint                                                           |
-| `-H`<br />`--secure`<br />`--use-https`<br />`--https` | `boolean` |         `false`         |                                                      Forces HTTPS protocol execution for both build paths and local development servers                                                      |
-|    `-g`<br />`--gh-pages`<br />`--demo`<br />`--gh`    | `boolean` |         `false`         |                                                Enables GitHub Pages build configuration (uses GitHub URLs, see `site.config.json` in `src/`)                                                 |
+|                                                   Option                                                   |          Type          |            Default Value             |                                                                                                             Description                                                                                                             |
+| :--------------------------------------------------------------------------------------------------------: | :--------------------: | :----------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|             <nobr>`-W`</nobr><br /><nobr>`--workspace-version`</nobr><br /><nobr>`--wv`</nobr>             | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         |                                                                                             Displays current workspace semantic version                                                                                             |
+|                                <nobr>`-i`</nobr><br /><nobr>`--info`</nobr>                                | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         |                                                                                                     Displays CLI options manual                                                                                                     |
+|                              <nobr>`-V`</nobr><br /><nobr>`--verbose`</nobr>                               | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         |                                                                                  Unlocks extended console logging during task streaming execution                                                                                   |
+|                              <nobr>`-s`</nobr><br /><nobr>`--staging`</nobr>                               | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         |                                                                Enables <nobr>`staging`</nobr> environment configurations under <nobr>`production`</nobr> build rules                                                                |
+|                            <nobr>`-c`</nobr><br /><nobr>`--force-clean`</nobr>                             | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         |                                                                           Triggers a hard sweep of the compiled <nobr>`dist/`</nobr> workspace directory                                                                            |
+|                               <nobr>`-l`</nobr><br /><nobr>`--local`</nobr>                                | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         |                                                                Switches paths to strict relative links, satisfying standalone execution via <nobr>`file:///`</nobr>                                                                 |
+|          <nobr>`-I`</nobr><br /><nobr>`--internationalization`</nobr><br /><nobr>`--i18n`</nobr>           | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         |                                                                                       Activates localized multi-lingual document compilation                                                                                        |
+|                          <nobr>`--inline-sprite`</nobr><br /><nobr>`--is`</nobr>                           | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         |                                                           Directly embeds the SVG vector asset grid inside the document (forced automatically via <nobr>`--local`</nobr>)                                                           |
+|                            <nobr>`--inline-css`</nobr><br /><nobr>`--ic`</nobr>                            | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         |                                                                                Directly embeds production stylesheets inside the HTML layout payload                                                                                |
+|                            <nobr>`--inline-js`</nobr><br /><nobr>`--ij`</nobr>                             | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         |                                                                               Directly embeds processed client scripts inside the HTML layout payload                                                                               |
+|               <nobr>`-M`</nobr><br /><nobr>`--mobile-first`</nobr><br /><nobr>`--mf`</nobr>                | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         | Toggles the build layout pipeline. Sets PostCSS media query sorting to <nobr>`mobile-first`</nobr> and configures the HTML picture transformer to generate <nobr>`min-width`</nobr> source tags instead of <nobr>`max-width`</nobr> |
+|  <nobr>`-d`</nobr><br /><nobr>`--domain`</nobr><br /><nobr>`--site-url`</nobr><br /><nobr>`--url`</nobr>   | <nobr>`string`</nobr>  | <nobr>`http://localhost:3000`</nobr> |                                                                            Maps target deployment domain root, e.g., <nobr>`https://example.com`</nobr>                                                                             |
+| <nobr>`-F`</nobr><br /><nobr>`--site-folder`</nobr><br /><nobr>`--folder`</nobr><br /><nobr>`--sf`</nobr>  | <nobr>`string`</nobr>  |           <nobr>`/`</nobr>           |                                                         Folder name on the hosting server or GitHub repository name (e.g., <nobr>`my-repo`</nobr>, <nobr>`www`</nobr>, ...)                                                         |
+| <nobr>`-P`</nobr><br /><nobr>`--prod-server`</nobr><br /><nobr>`--server`</nobr><br /><nobr>`--ps`</nobr>  | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         |                                                                              Launches a local server tracking the compiled production build footprint                                                                               |
+| <nobr>`-H`</nobr><br /><nobr>`--secure`</nobr><br /><nobr>`--use-https`</nobr><br /><nobr>`--https`</nobr> | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         |                                                                         Forces HTTPS protocol execution for both build paths and local development servers                                                                          |
+|    <nobr>`-g`</nobr><br /><nobr>`--gh-pages`</nobr><br /><nobr>`--demo`</nobr><br /><nobr>`--gh`</nobr>    | <nobr>`boolean`</nobr> |         <nobr>`false`</nobr>         |                                                       Enables GitHub Pages build configuration (uses GitHub URLs, see <nobr>`site.config.json`</nobr> in <nobr>`src/`</nobr>)                                                       |
 
 </div>
 
@@ -544,15 +544,15 @@ Experimental Features parameters:
 
 <div align="center">
 
-|            Option            |   Type    | Default Value |                                                Description                                                 |
-| :--------------------------: | :-------: | :-----------: | :--------------------------------------------------------------------------------------------------------: |
-| `--obfuscation`<br />`--obf` | `boolean` |    `false`    | Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with `--inline-*` options |
+|                         Option                         |          Type          |    Default Value     |                                                       Description                                                       |
+| :----------------------------------------------------: | :--------------------: | :------------------: | :---------------------------------------------------------------------------------------------------------------------: |
+| <nobr>`--obfuscation`</nobr><br /><nobr>`--obf`</nobr> | <nobr>`boolean`</nobr> | <nobr>`false`</nobr> | Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with <nobr>`--inline-*`</nobr> options |
 
 </div>
 
-#### 🎛️ Examples of Overriding Parameters via NPM Scripts <a id="examples"></a>
+#### 📖 Examples of Overriding Parameters via NPM Scripts <a id="examples"></a>
 
-To pass CLI flags without calling Gulp directly, use the `--` separator after the npm command:
+To pass CLI flags without calling Gulp directly, use the <nobr>`--`</nobr> separator after the npm command:
 
 ```sh
 # Example of production build with custom domain and destination folder
@@ -565,27 +565,27 @@ _For convenience, the primary npm scripts available in the project are listed be
 
 <div align="center">
 
-|    Script (NPM)     |                           Complete CLI Command                            |                               Description                                |
-| :-----------------: | :-----------------------------------------------------------------------: | :----------------------------------------------------------------------: |
-|      `prepare`      |                                  `husky`                                  |           Automatically sets up Git hooks after `npm install`            |
-|       `clean`       |                        `gulp clean --force-clean`                         |              Full cleanup of the compiled `dist/` directory              |
-|        `dev`        |               `cross-env NODE_ENV=development gulp --i18n`                |           Dev server with hot reload and multilingual support            |
-|      `staging`      |        `cross-env NODE_ENV=production gulp prod --staging --i18n`         |              Production build with debugging flags enabled               |
-|       `prod`        |      `cross-env NODE_ENV=production gulp prod --i18n --prod-server`       |               Production build with a local preview server               |
-|       `start`       |                               `npm run dev`                               |                         Alias for `npm run dev`                          |
-|       `build`       |      `cross-env NODE_ENV=production gulp prod --i18n --force-clean`       |                Full production build with `dist/` cleanup                |
-|       `local`       |  `cross-env NODE_ENV=production gulp prod --i18n --local --force-clean`   | Production build with relative paths for standalone `file:///` execution |
-|      `secure`       |  `cross-env NODE_ENV=production gulp prod --i18n --https --force-clean`   |            Production build forcing HTTPS protocol execution             |
-|     `gh-pages`      | `cross-env NODE_ENV=production gulp prod --i18n --gh-pages --force-clean` |         Production build configured for GitHub Pages deployment          |
-|      `archive`      |                        `npm run build && gulp zip`                        |                   Build and package `dist/` into a ZIP                   |
-|      `lint:ts`      |                        `eslint . --max-warnings=0`                        |                   Lint TypeScript/JavaScript codebase                    |
-|    `lint:ts:fix`    |                     `eslint . --max-warnings=0 --fix`                     |                  Auto-fix linter errors in TS/JS files                   |
-|     `lint:scss`     |                `stylelint \"**/*.scss\" --max-warnings=0`                 |                          Lint SCSS stylesheets                           |
-|   `lint:scss:fix`   |             `stylelint \"**/*.scss\" --max-warnings=0 --fix`              |                   Auto-fix linter errors in SCSS files                   |
-|       `lint`        |                `npm-run-all --parallel lint:ts lint:scss`                 |                   Parallel linting for TS/JS and SCSS                    |
-|     `lint:fix`      |            `npm-run-all --parallel lint:ts:fix lint:scss:fix`             |                   Parallel auto-fix for TS/JS and SCSS                   |
-|      `format`       |                           `prettier . --write`                            |               Format all files according to Prettier rules               |
-| `test:editorconfig` |                          `editorconfig-checker`                           |             Verify compliance with `.editorconfig` settings              |
+|           Script (NPM)           |                                  Complete CLI Command                                  |                                      Description                                      |
+| :------------------------------: | :------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: |
+|      <nobr>`prepare`</nobr>      |                                  <nobr>`husky`</nobr>                                  |           Automatically sets up Git hooks after <nobr>`npm install`</nobr>            |
+|       <nobr>`clean`</nobr>       |                        <nobr>`gulp clean --force-clean`</nobr>                         |              Full cleanup of the compiled <nobr>`dist/`</nobr> directory              |
+|        <nobr>`dev`</nobr>        |               <nobr>`cross-env NODE_ENV=development gulp --i18n`</nobr>                |                  Dev server with hot reload and multilingual support                  |
+|      <nobr>`staging`</nobr>      |        <nobr>`cross-env NODE_ENV=production gulp prod --staging --i18n`</nobr>         |                     Production build with debugging flags enabled                     |
+|       <nobr>`prod`</nobr>        |      <nobr>`cross-env NODE_ENV=production gulp prod --i18n --prod-server`</nobr>       |                     Production build with a local preview server                      |
+|       <nobr>`start`</nobr>       |                               <nobr>`npm run dev`</nobr>                               |                         Alias for <nobr>`npm run dev`</nobr>                          |
+|       <nobr>`build`</nobr>       |      <nobr>`cross-env NODE_ENV=production gulp prod --i18n --force-clean`</nobr>       |                Full production build with <nobr>`dist/`</nobr> cleanup                |
+|       <nobr>`local`</nobr>       |  <nobr>`cross-env NODE_ENV=production gulp prod --i18n --local --force-clean`</nobr>   | Production build with relative paths for standalone <nobr>`file:///`</nobr> execution |
+|      <nobr>`secure`</nobr>       |  <nobr>`cross-env NODE_ENV=production gulp prod --i18n --https --force-clean`</nobr>   |                   Production build forcing HTTPS protocol execution                   |
+|     <nobr>`gh-pages`</nobr>      | <nobr>`cross-env NODE_ENV=production gulp prod --i18n --gh-pages --force-clean`</nobr> |                Production build configured for GitHub Pages deployment                |
+|      <nobr>`archive`</nobr>      |                        <nobr>`npm run build && gulp zip`</nobr>                        |                   Build and package <nobr>`dist/`</nobr> into a ZIP                   |
+|      <nobr>`lint:ts`</nobr>      |                        <nobr>`eslint . --max-warnings=0`</nobr>                        |                          Lint TypeScript/JavaScript codebase                          |
+|    <nobr>`lint:ts:fix`</nobr>    |                     <nobr>`eslint . --max-warnings=0 --fix`</nobr>                     |                         Auto-fix linter errors in TS/JS files                         |
+|     <nobr>`lint:scss`</nobr>     |                <nobr>`stylelint \"**/*.scss\" --max-warnings=0`</nobr>                 |                                 Lint SCSS stylesheets                                 |
+|   <nobr>`lint:scss:fix`</nobr>   |             <nobr>`stylelint \"**/*.scss\" --max-warnings=0 --fix`</nobr>              |                         Auto-fix linter errors in SCSS files                          |
+|       <nobr>`lint`</nobr>        |                <nobr>`npm-run-all --parallel lint:ts lint:scss`</nobr>                 |                          Parallel linting for TS/JS and SCSS                          |
+|     <nobr>`lint:fix`</nobr>      |            <nobr>`npm-run-all --parallel lint:ts:fix lint:scss:fix`</nobr>             |                         Parallel auto-fix for TS/JS and SCSS                          |
+|      <nobr>`format`</nobr>       |                           <nobr>`prettier . --write`</nobr>                            |                     Format all files according to Prettier rules                      |
+| <nobr>`test:editorconfig`</nobr> |                          <nobr>`editorconfig-checker`</nobr>                           |             Verify compliance with <nobr>`.editorconfig`</nobr> settings              |
 
 </div>
 
@@ -593,22 +593,22 @@ _For convenience, the primary npm scripts available in the project are listed be
 
 ## 🧠 Development Challenges <a id="development-challenges"></a>
 
-- **Migrating Legacy Static Infrastructure to an Automated Gulp Workflow:** The original codebase (v1.0.0) was a loose collection of uncompiled static files built strictly for desktop viewports without any build-tool orchestration. Transitioning this structure into a robust Gulp 5 ecosystem required a complete architectural overhaul: manual HTML strings were modularized into Nunjucks templates, styles re-engineered into a strict BEM + `7-1 Pattern` system, and the layout rewritten from scratch into a fluid, responsive environment without the aid of mobile Figma wireframes.
-- **Evaluating and Selecting npm/gulp Packages:** Many libraries inside the Gulp module graph are currently flagged as `deprecated`. Significant effort was allocated to isolating modern equivalents or engineering bespoke custom script blocks to maintain build security and stability.
-- **Incremental Asset Validation Architecture:** Implementing a pipeline tracking media asset state against revision hashes. Standard plugins like `gulp-newer` proved ineffective post-`gulp-rev` execution. To overcome this, a custom approach was designed to compare files by their base name, effectively eliminating redundant rebuilds for revision-hashed assets.
-- **Integrating and Adapting AI-Generated Code (FFmpeg, ftcli):** Mapping cross-platform operational control logic over host binaries (FFmpeg, ftcli) using asynchronous `spawn` workers. LLM-generated scaffold streams required close verification, path escaping corrections to handle Windows system edge-cases, and integration into the custom incremental file state tracker.
-- **Resolving Conflicts Between Obfuscation and Inline Modes:** Embedding production styles inside HTML files prior to performing obfuscation routines routinely broke browser rendering pipelines, as `postcss-obfuscator` was unable to map mutations onto inline markup styles. To address this functional deficit, `--obfuscation` and `--inline-*` parameters were explicitly separated as mutually exclusive flags, validated by preemptive CLI error-checking hooks.
-- **Mathematical Calculations for Fluid Design:** For every responsive value defined via `clamp()`, it was necessary to compute a linear function ($y = kx + b$) based on two coordinate points—the minimum ($x_1, y_1$) and maximum ($x_2, y_2$) boundary states of the property to ensure flawless scaling between breakpoints.
+- **Migrating Legacy Static Infrastructure to an Automated Gulp Workflow:** The original codebase (v1.0.0) was a loose collection of uncompiled static files built strictly for desktop viewports without any build-tool orchestration. Transitioning this structure into a robust Gulp 5 ecosystem required a complete architectural overhaul: manual HTML strings were modularized into Nunjucks templates, styles re-engineered into a strict BEM + <nobr>`7-1 Pattern`</nobr> system, and the layout rewritten from scratch into a fluid, responsive environment without the aid of mobile Figma wireframes.
+- **Evaluating and Selecting npm/gulp Packages:** Many libraries inside the Gulp module graph are currently flagged as <nobr>`deprecated`</nobr>. Significant effort was allocated to isolating modern equivalents or engineering bespoke custom script blocks to maintain build security and stability.
+- **Incremental Asset Validation Architecture:** Implementing a pipeline tracking media asset state against revision hashes. Standard plugins like <nobr>`gulp-newer`</nobr> proved ineffective post-<nobr>`gulp-rev`</nobr> execution. To overcome this, a custom approach was designed to compare files by their base name, effectively eliminating redundant rebuilds for revision-hashed assets.
+- **Integrating and Adapting AI-Generated Code (FFmpeg, ftcli):** Mapping cross-platform operational control logic over host binaries (FFmpeg, ftcli) using asynchronous <nobr>`spawn`</nobr> workers. LLM-generated scaffold streams required close verification, path escaping corrections to handle Windows system edge-cases, and integration into the custom incremental file state tracker.
+- **Resolving Conflicts Between Obfuscation and Inline Modes:** Embedding production styles inside HTML files prior to performing obfuscation routines routinely broke browser rendering pipelines, as <nobr>`postcss-obfuscator`</nobr> was unable to map mutations onto inline markup styles. To address this functional deficit, <nobr>`--obfuscation`</nobr> and <nobr>`--inline-*`</nobr> parameters were explicitly separated as mutually exclusive flags, validated by preemptive CLI error-checking hooks.
+- **Mathematical Calculations for Fluid Design:** For every responsive value defined via <nobr>`clamp()`</nobr>, it was necessary to compute a linear function (<nobr>`y = kx + b`</nobr>) based on two coordinate points—the minimum (<nobr>`x_1, y_1`</nobr>) and maximum (<nobr>`x_2, y_2`</nobr>) boundary states of the property to ensure flawless scaling between breakpoints.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 📈 Key Skills <a id="key-skills"></a>
 
-- **Fluid Design Implementation:** Practical mastery over fluid rendering mechanics using `clamp()`, `min()`, and `max()` operations combined with minimal media-query overrides to produce clean layout fluidity.
+- **Fluid Design Implementation:** Practical mastery over fluid rendering mechanics using <nobr>`clamp()`</nobr>, <nobr>`min()`</nobr>, and <nobr>`max()`</nobr> operations combined with minimal media-query overrides to produce clean layout fluidity.
 - **Internationalization (i18n):** Orchestrating robust site localization pipelines powered by Nunjucks templates rendering key/value JSON structures dynamically across multi-language domains.
-- **Gulp 5 Architecture:** Structuring industrial-grade stream automation engines using task synchronization sequences (`gulp.series`/`gulp.parallel`), and engineering tailored streaming processors over Node.js `through2` systems with the aid of AI.
-- **Web Performance Engineering:** Implementing complete optimization mechanics, including atomic Critical CSS injections, multi-breakpoint responsive image delivery templates (AVIF/WebP), structural lazy loading configurations, `fetch priority` budgeting, layout inlining toggles, and cache optimization routines driven by content hashing.
-- **Declarative CLI Design:** Developing custom user interfaces via `yargs`, embedding preemptive validation logic to identify overlapping configuration profiles, and managing asynchronous runtime exception handling.
+- **Gulp 5 Architecture:** Structuring industrial-grade stream automation engines using task synchronization sequences (<nobr>`gulp.series`</nobr>/<nobr>`gulp.parallel`</nobr>), and engineering tailored streaming processors over Node.js <nobr>`through2`</nobr> systems with the aid of AI.
+- **Web Performance Engineering:** Implementing complete optimization mechanics, including atomic Critical CSS injections, multi-breakpoint responsive image delivery templates (AVIF/WebP), structural lazy loading configurations, <nobr>`fetch priority`</nobr> budgeting, layout inlining toggles, and cache optimization routines driven by content hashing.
+- **Declarative CLI Design:** Developing custom user interfaces via <nobr>`yargs`</nobr>, embedding preemptive validation logic to identify overlapping configuration profiles, and managing asynchronous runtime exception handling.
 - **Effective AI Collaboration:** Gaining practical experience leveraging generative AI to accelerate the construction of complex Gulp workflows—from defining prompt schemas to verifying, debugging, and tailoring generated code to meet production requirements.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -632,22 +632,22 @@ _For convenience, the primary npm scripts available in the project are listed be
   - [x] Binding Stylelint with [Browserslist][Browserslist-url] for real-time target browser compatibility checks.
   - [x] Implementation of the Nunjucks modular document generator and language localization routines (i18n).
   - [x] Static asset optimization: Web fonts (WOFF2), Graphics (AVIF/WebP/SVG Sprites), and Media layers (FFmpeg).
-  - [x] Setting up asset production pipelines: Minification, PurgeCSS, Critical CSS pathing, cache hashing (`gulp-rev`), and code obfuscation.
-  - [x] Authoring custom stream wrappers (asset inline processors, `<picture>` DOM transformers).
-  - [x] Mapping command-line build controls and flags execution via `yargs`.
-- [x] Achieving a Fluid Design using `clamp()`, `min()`, and `max()` functions.
+  - [x] Setting up asset production pipelines: Minification, PurgeCSS, Critical CSS pathing, cache hashing (<nobr>`gulp-rev`</nobr>), and code obfuscation.
+  - [x] Authoring custom stream wrappers (asset inline processors, <nobr>`<picture>`</nobr> DOM transformers).
+  - [x] Mapping command-line build controls and flags execution via <nobr>`yargs`</nobr>.
+- [x] Achieving a Fluid Design using <nobr>`clamp()`</nobr>, <nobr>`min()`</nobr>, and <nobr>`max()`</nobr> functions.
   - [x] Viewport layout optimization across Laptop, Tablet, and Mobile breakpoints.
   - [x] Localization-specific UI testing (fixing layout and rendering bugs for the Russian version).
 - [x] Shipping live demo structures to GitHub Pages.
-- [x] Constructing workspace documentation architecture and engineering `README.md`.
+- [x] Constructing workspace documentation architecture and engineering <nobr>`README.md`</nobr>.
 
 ### 🔮 Future Plans
 
 - [ ] **Backend Template Integration (Django/Jinja2):** Develop a compilation pipeline that allows decoupled frontend development while outputting templates fully compatible with the [Django][Django-url] architecture (Jinja2/Nunjucks), automating static asset path injection.
-- [ ] **Custom Gulp Plugin for FFmpeg:** Engineer a modern asset pipeline plugin for media processing (audio/video conversion and encoding), as the existing `gulp-fluent-ffmpeg` package is officially deprecated.
-- [ ] **Font Pipeline Overhaul:** Create a dedicated Gulp plugin to interface natively with the modern [ftcli][FoundryToolsCLI-url] binary, replacing obsolete packages like `gulp-ttf2woff`, `gulp-ttf2woff2`, and `gulp-fonter`.
-- [ ] **Custom Gulp Plugin for Responsive Images:** Develop a new plugin for adaptive graphics generation (automated transformation of `<img>` into `<picture>` with breakpoint support and aspect-ratio calculation), as the existing `gulp-responsive` is deprecated.
-- [ ] **Universal HTML Media Transformer:** Build a comprehensive Gulp plugin to automatically morph standard media elements into optimized responsive layouts. It should dynamically transform basic `<img>` tags into adaptive `<picture>` trees (with automated `srcset`), and map raw `<video>` or `<audio>` containers into deep structures with nested `<source>` tracks, respecting `mobile-first` or `desktop-first` parameters.
+- [ ] **Custom Gulp Plugin for FFmpeg:** Engineer a modern asset pipeline plugin for media processing (audio/video conversion and encoding), as the existing <nobr>`gulp-fluent-ffmpeg`</nobr> package is officially deprecated.
+- [ ] **Font Pipeline Overhaul:** Create a dedicated Gulp plugin to interface natively with the modern [ftcli][FoundryToolsCLI-url] binary, replacing obsolete packages like <nobr>`gulp-ttf2woff`</nobr>, <nobr>`gulp-ttf2woff2`</nobr>, and <nobr>`gulp-fonter`</nobr>.
+- [ ] **Custom Gulp Plugin for Responsive Images:** Develop a new plugin for adaptive graphics generation (automated transformation of <nobr>`<img>`</nobr> into <nobr>`<picture>`</nobr> with breakpoint support and aspect-ratio calculation), as the existing <nobr>`gulp-responsive`</nobr> is deprecated.
+- [ ] **Universal HTML Media Transformer:** Build a comprehensive Gulp plugin to automatically morph standard media elements into optimized responsive layouts. It should dynamically transform basic <nobr>`<img>`</nobr> tags into adaptive <nobr>`<picture>`</nobr> trees (with automated <nobr>`srcset`</nobr>), and map raw <nobr>`<video>`</nobr> or <nobr>`<audio>`</nobr> containers into deep structures with nested <nobr>`<source>`</nobr> tracks, respecting <nobr>`mobile-first`</nobr> or <nobr>`desktop-first`</nobr> parameters.
 - [ ] **CMS Integration:** Provide out-of-the-box configuration presets for porting static code distributions over to WordPress and other popular CMS platforms.
 - [ ] **React & Modern Framework Support:** Explore integration boundaries to bundle this Gulp environment with Vite/Webpack, bringing full development capabilities to React, Vue, or Angular applications.
 
@@ -659,7 +659,7 @@ _For convenience, the primary npm scripts available in the project are listed be
 
 ## 📄 License <a id="license"></a>
 
-Copyright © 2025 [aLeeTheY](https://github.com/aLeeTheY) <br/> Distributed under the [MIT][license-url] License. See `LICENSE` file for more information.
+Copyright © 2025 [aLeeTheY](https://github.com/aLeeTheY) <br/> Distributed under the [MIT][license-url] License. See <nobr>`LICENSE`</nobr> file for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -667,7 +667,18 @@ Copyright © 2025 [aLeeTheY](https://github.com/aLeeTheY) <br/> Distributed unde
 
 ## 🤝 Contact <a id="contact"></a>
 
-GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com](mailto:aleethey@gmail.com)
+[![GitHub][GitHub-logo]](https://github.com/aLeeTheY)
+[![Telegram][Telegram-logo]](https://t.me/aLeeTheY)
+[![Gmail][Gmail-logo]](mailto:aleethey@gmail.com)
+
+<!-- GitHub: [aLeeTheY](https://github.com/aLeeTheY)
+<br/>
+Telegram: [@aLeeTheY](https://t.me/aLeeTheY)
+<br/>
+Email: [aleethey@gmail.com](mailto:aleethey@gmail.com) -->
+
+<br/>
+Email: [aleethey@gmail.com](mailto:aleethey@gmail.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -675,29 +686,29 @@ GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com
 
 ## 💖 Acknowledgments <a id="acknowledgments"></a>
 
-[aLeeTheY](https://github.com/aLeeTheY) expresses gratitude to the developers and communities of the following projects:
+[aLeeTheY](https://github.com/aLeeTheY) is grateful to the developers and communities behind the following projects.
 
 ### 🏛️ Core Technologies & Ecosystem Foundations
 
-- [Figma](https://www.figma.com/), [Visual Studio Code](https://code.visualstudio.com/) — For interface design environments and the ultimate IDE.
-- [Node.js](https://nodejs.org/), [Npm](https://www.npmjs.com/), [Git](https://git-scm.com/), [GitHub](https://github.com/) — For runtime primitives, dependency management, and version control architecture.
-- [Gulp](https://gulpjs.com/), [Browsersync](https://browsersync.io/) — For stream pipeline orchestration and real-time livereload functionality.
-- [Nunjucks](https://mozilla.github.io/nunjucks/), [Esbuild](https://esbuild.github.io/), [Sass](https://sass-lang.com/), [PostCSS](https://postcss.org/) — For design component processing, blazing fast script compilation, and advanced style mutations.
-- [Alpine.js](https://alpinejs.dev/), [AOS](https://michalsnik.github.io/aos/) — For lightweight client reactive frameworks and programmatic UI animations.
-- [Chocolatey](https://chocolatey.org/) — For simplifying terminal-level package dependency management.
+- [Figma](https://www.figma.com/), [Visual Studio Code](https://code.visualstudio.com/) — for a convenient layout environment and code editor.
+- [Node.js](https://nodejs.org/), [Npm](https://www.npmjs.com/), [Git](https://git-scm.com/), [GitHub](https://github.com/) — for runtime primitives, dependency management, and version control architecture.
+- [Gulp](https://gulpjs.com/), [Browsersync](https://browsersync.io/) — for stream pipeline orchestration and real-time livereload functionality.
+- [Nunjucks](https://mozilla.github.io/nunjucks/), [Esbuild](https://esbuild.github.io/), [Sass](https://sass-lang.com/), [PostCSS](https://postcss.org/) — for design component processing, blazing fast script compilation, and advanced style mutations.
+- [Alpine.js](https://alpinejs.dev/), [AOS](https://michalsnik.github.io/aos/) — for lightweight client reactive frameworks and programmatic UI animations.
+- [Chocolatey](https://chocolatey.org/) — for simplifying terminal-level package dependency management.
 - [Python](https://www.python.org/) — for providing the execution runtime for font compilation CLI tools.
 
 ### ⚡ Media, Typography & Graphical Optimizers
 
-- [FFmpeg](https://www.ffmpeg.org/) — For low-level media transcoding pipelines.
-- [Sharp](https://sharp.pixelplumbing.com/), [SVGO](https://github.com/svg/svgo), [gifsicle](https://github.com/kohler/gifsicle) — For extreme raster and vector optimization curves.
-- [FoundryTools-CLI](https://github.com/ftCLI/FoundryTools-CLI) — For granular automated web-font reconstruction matrices.
+- [FFmpeg](https://www.ffmpeg.org/) — for low-level media transcoding pipelines.
+- [Sharp](https://sharp.pixelplumbing.com/), [SVGO](https://github.com/svg/svgo), [gifsicle](https://github.com/kohler/gifsicle) — for extreme raster and vector optimization curves.
+- [FoundryTools-CLI](https://github.com/ftCLI/FoundryTools-CLI) — for granular automated web-font reconstruction matrices.
 
 ### 🛠️ Code Quality Frameworks, Linters & Auditing
 
-- [ESLint](https://eslint.org/), [Stylelint](https://stylelint.io/), [Prettier](https://prettier.io/), [EditorConfig](https://editorconfig.org/) — For unified enforcement of code styles and static typing parameters.
-- [Husky](https://typicode.github.io/husky/), [Lint-staged](https://github.com/lint-staged/lint-staged), [Commitlint](https://github.com/conventional-changelog/commitlint) — For rigid automation protocols executed at the pre-commit layer.
-- [Browserslist](https://github.com/browserslist/browserslist), [Chrome DevTools](https://developer.chrome.com/docs/devtools), [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview) — For target runtime scoping, live environment inspection, and performance logging.
+- [ESLint](https://eslint.org/), [Stylelint](https://stylelint.io/), [Prettier](https://prettier.io/), [EditorConfig](https://editorconfig.org/) — for unified enforcement of code styles and static typing parameters.
+- [Husky](https://typicode.github.io/husky/), [Lint-staged](https://github.com/lint-staged/lint-staged), [Commitlint](https://github.com/conventional-changelog/commitlint) — for rigid automation protocols executed at the pre-commit layer.
+- [Browserslist](https://github.com/browserslist/browserslist), [Chrome DevTools](https://developer.chrome.com/docs/devtools), [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview) — for target runtime scoping, live environment inspection, and performance logging.
 
 ### 🔌 Ecosystem Extensions & Utility Packages
 
@@ -816,7 +827,18 @@ GitHub: [aLeeTheY](https://github.com/aLeeTheY) <br/> Email: [aleethey@gmail.com
 [Yandex-logo]: https://custom-icon-badges.demolab.com/badge/Yandex%20Browser-F03911?logo=yandex-browser&style=for-the-badge
 [Yandex-url]: https://browser.yandex.com/
 
+<!-- contacts --->
+
+[GitHub-logo]: https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white
+[Telegram-logo]: https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white
+[Gmail-logo]: https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white
+
 <!-- preview --->
 
 [interface-preview-gif]: project/preview/interface-preview.gif
 [fluid-preview-gif]: project/preview/fluid-design-preview.gif
+
+<!-- ! 🚀 ┌────────────────────────────────────────────────────────────────────────┐ -->
+<!-- ! 🚀 │  README MAINTENANCE CHEAT SHEET / ШПАРГАЛКА ПО ПОДГОТОВКЕ README       │ -->
+<!-- ! 🚀 └────────────────────────────────────────────────────────────────────────┘ -->
+<!-- ! 💡 See / См. файл: docs/CHEATSHEET.md -->
