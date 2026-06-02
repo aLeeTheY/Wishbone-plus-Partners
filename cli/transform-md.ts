@@ -21,7 +21,7 @@ yargs(hideBin(process.argv))
 
     .command(
         'encode [files...]',
-        'Replace `code` with <code> and hyphens inside with &#8209;',
+        'Convert inline `--my-kebab` to <code>--my-kebab</code> and replace internal hyphens with &#8209;',
         (y) =>
             y.positional('files', {
                 describe: '.md files',
@@ -36,7 +36,7 @@ yargs(hideBin(process.argv))
 
     .command(
         'decode [files...]',
-        'Revert &#8209; → - and <code> → `',
+        'Revert <code>--my-kebab</code> to `--my-kebab` and restore standard hyphens inside',
         (y) =>
             y.positional('files', {
                 describe: '.md files',
@@ -98,10 +98,11 @@ function processFiles(files: string[], command: 'encode' | 'decode', verbose: bo
                 return codeBlocks[Number(index)]
             })
         } else {
-            // При декодировании сначала возвращаем дефисы
-            content = content.replace(/&#8209;/g, '-')
-            // Убираем теги code, учитывая возможные атрибуты внутри <code ...>
-            content = content.replace(/<code[^>]*>/g, '`').replace(/<\/code>/g, '`')
+            // Безопасный декод в один проход: обрабатываем только то, что внутри тегов <code>
+            content = content.replace(
+                /<code[^>]*>([\s\S]*?)<\/code>/g,
+                (_, inner) => `\`${inner.replace(/&#8209;/g, '-')}\``,
+            )
         }
 
         fs.writeFileSync(file, content, 'utf-8')
