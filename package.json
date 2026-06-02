@@ -30,6 +30,7 @@
         "@prettier/plugin-xml": "^3.4.2",
         "@stylistic/eslint-plugin": "^5.10.0",
         "@types/node": "^25.9.0",
+        "@types/yargs": "^17.0.35",
         "browser-sync": "^3.0.4",
         "chokidar-cli": "^3.0.0",
         "cross-env": "^10.1.0",
@@ -139,6 +140,9 @@
         "lint:fix": "npm-run-all --parallel lint:ts:fix lint:scss:fix",
         "format": "prettier . --write",
         "__TEST__": "",
-        "test:editorconfig": "editorconfig-checker"
+        "test:editorconfig": "editorconfig-checker",
+        "__POST_INSTALL__": "",
+        "postinstall": "npx tsx cli/transform-md.ts decode README.md README.EN.md && npx prettier --write \"**/*.md\"",
+        "test:postinstall": "npx tsx cli/transform-md.ts decode README.md README.EN.md && npx prettier --write \"**/*.md\""
     }
 }
