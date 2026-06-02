@@ -29,7 +29,7 @@
         "@fullhuman/postcss-purgecss": "^8.0.0",
         "@prettier/plugin-xml": "^3.4.2",
         "@stylistic/eslint-plugin": "^5.10.0",
-        "@types/node": "^25.9.0",
+        "@types/node": "^25.9.1",
         "@types/yargs": "^17.0.35",
         "browser-sync": "^3.0.4",
         "chokidar-cli": "^3.0.0",
