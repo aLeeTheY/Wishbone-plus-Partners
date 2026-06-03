@@ -1,7 +1,7 @@
 {
     "name": "wishbone-plus-partners",
-    "version": "1.0.0",
-    "description": "A desktop-focused single-page website built with HTML and Sass, using Alpine.js for collapsible sections and AOS for scroll animations. Features custom CSS transitions and is not optimized for mobile.",
+    "version": "2.0.0",
+    "description": "💼 Corporate landing page for the Wishbone + Partners architectural bureau with localization and fluid layout.",
     "private": true,
     "homepage": "https://github.com/aLeeTheY/Wishbone-plus-Partners#readme",
     "repository": {
