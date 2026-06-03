@@ -218,9 +218,9 @@ As confirmation of the project's optimization, below are the benchmark metrics o
 
 <div align="center">
 
-|                        🖥️ Desktop Version                         |                        📱 Mobile Version                        |
-| :---------------------------------------------------------------: | :-------------------------------------------------------------: |
-| ![Lighthouse Desktop](project/lighthouse_benchmark__desktop.avif) | ![Lighthouse Mobile](project/lighthouse_benchmark__mobile.avif) |
+|                       🖥️ Desktop Version                       |                      📱 Mobile Version                       |
+| :------------------------------------------------------------: | :----------------------------------------------------------: |
+| ![Lighthouse Desktop](docs/benchmark/lighthouse__desktop.avif) | ![Lighthouse Mobile](docs/benchmark/lighthouse__mobile.avif) |
 
 </div>
 
@@ -299,7 +299,13 @@ Wishbone-plus-Partners/
 │   └── tsconfig.json
 │
 ├── dist/                            # Automatically generated distribution directory
-├── docs/                            # Documentation assets
+├── docs/                            # Project documentation
+│   ├── benchmark/
+│   │   ├── lighthouse__desktop.avif
+│   │   └── lighthouse__mobile.avif
+│   └── preview/
+│       ├── fluid-design-preview.gif
+│       └── interface-preview.gif
 │
 ├── gulp/                            # Gulp build system root folder
 │   ├── config/                      # Environment, routing, and deployment configurations
@@ -342,11 +348,6 @@ Wishbone-plus-Partners/
 │           ├── ftp.js
 │           ├── revision.js
 │           └── zip.js
-│
-├── project/                         # Workspace references excluded from distribution pipelines
-│   ├── preview/
-│   ├── lighthouse_benchmark__desktop.png
-│   └── lighthouse_benchmark__mobile.png
 │
 ├── src/                             # Source workspace root
 │   ├── assets/                      # Raw uncompiled static media (Fonts, graphics, audio layers)
@@ -429,7 +430,7 @@ The codebase is validated to ensure visual consistency and script execution stab
 > [!IMPORTANT]
 > This information applies to version **[2.0.0](https://github.com/aLeeTheY/Wishbone-plus-Partners/releases/tag/2.0.0)**. At the time of verification, the project was rendered correctly in the latest stable versions of all [supported browsers](#supported-browsers).
 >
-> **Last Verification Date: June 2, 2026**
+> **Last Verification Date: June 3, 2026**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -498,10 +499,10 @@ You can customize these parameters to suit your needs. The builder automatically
 
 <div align="center">
 
-|  Build Mode   |                       Direct Call (CLI)                        | Alternative (NPM) |
-| :-----------: | :------------------------------------------------------------: | :---------------: |
-| <code>development</code> |        <code>cross&#8209;env NODE_ENV=development gulp dev &#8209;&#8209;i18n</code>        |   <code>npm run dev</code>   |
-|   <code>staging</code>   |   <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;staging &#8209;&#8209;i18n</code>   | <code>npm run staging</code> |
+|        Build Mode        |                                               Direct Call (CLI)                                               |      Alternative (NPM)       |
+| :----------------------: | :-----------------------------------------------------------------------------------------------------------: | :--------------------------: |
+| <code>development</code> |                 <code>cross&#8209;env NODE_ENV=development gulp dev &#8209;&#8209;i18n</code>                 |   <code>npm run dev</code>   |
+|   <code>staging</code>   |      <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;staging &#8209;&#8209;i18n</code>      | <code>npm run staging</code> |
 | <code>production</code>  | <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;prod&#8209;server</code> |  <code>npm run prod</code>   |
 
 </div>
@@ -524,24 +525,24 @@ The complete list of options is duplicated below for reference:
 
 <div align="center">
 
-|                         Option                         |   Type    |      Default Value      |                                                                                         Description                                                                                          |
-| :----------------------------------------------------: | :-------: | :---------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|      <code>&#8209;W</code><br /><code>&#8209;&#8209;workspace&#8209;version</code><br /><code>&#8209;&#8209;wv</code>       | <code>boolean</code> |         <code>false</code>         |                                                                         Displays current workspace semantic version                                                                          |
-|                   <code>&#8209;i</code><br /><code>&#8209;&#8209;info</code>                   | <code>boolean</code> |         <code>false</code>         |                                                                                 Displays CLI options manual                                                                                  |
-|                 <code>&#8209;V</code><br /><code>&#8209;&#8209;verbose</code>                  | <code>boolean</code> |         <code>false</code>         |                                                               Unlocks extended console logging during task streaming execution                                                               |
-|                 <code>&#8209;s</code><br /><code>&#8209;&#8209;staging</code>                  | <code>boolean</code> |         <code>false</code>         |                                                         Enables <code>staging</code> environment configurations under <code>production</code> build rules                                                          |
-|               <code>&#8209;c</code><br /><code>&#8209;&#8209;force&#8209;clean</code>                | <code>boolean</code> |         <code>false</code>         |                                                              Triggers a hard sweep of the compiled <code>dist/</code> workspace directory                                                               |
-|                  <code>&#8209;l</code><br /><code>&#8209;&#8209;local</code>                   | <code>boolean</code> |         <code>false</code>         |                                                   Switches paths to strict relative links, satisfying standalone execution via <code>file:///</code>                                                    |
-|    <code>&#8209;I</code><br /><code>&#8209;&#8209;internationalization</code><br /><code>&#8209;&#8209;i18n</code>    | <code>boolean</code> |         <code>false</code>         |                                                                    Activates localized multi-lingual document compilation                                                                    |
-|             <code>&#8209;&#8209;inline&#8209;sprite</code><br /><code>&#8209;&#8209;is</code>              | <code>boolean</code> |         <code>false</code>         |                                              Directly embeds the SVG vector asset grid inside the document (forced automatically via <code>&#8209;&#8209;local</code>)                                              |
-|               <code>&#8209;&#8209;inline&#8209;css</code><br /><code>&#8209;&#8209;ic</code>               | <code>boolean</code> |         <code>false</code>         |                                                            Directly embeds production stylesheets inside the HTML layout payload                                                             |
-|               <code>&#8209;&#8209;inline&#8209;js</code><br /><code>&#8209;&#8209;ij</code>                | <code>boolean</code> |         <code>false</code>         |                                                           Directly embeds processed client scripts inside the HTML layout payload                                                            |
-|         <code>&#8209;M</code><br /><code>&#8209;&#8209;mobile&#8209;first</code><br /><code>&#8209;&#8209;mf</code>         | <code>boolean</code> |         <code>false</code>         | Toggles the build layout pipeline. Sets PostCSS media query sorting to <code>mobile&#8209;first</code> and configures the HTML picture transformer to generate <code>min&#8209;width</code> source tags instead of <code>max&#8209;width</code> |
-|  <code>&#8209;d</code><br /><code>&#8209;&#8209;domain</code><br /><code>&#8209;&#8209;site&#8209;url</code><br /><code>&#8209;&#8209;url</code>   | <code>string</code>  | <code>http://localhost:3000</code> |                                                               Maps target deployment domain root, e.g., <code>https://example.com</code>                                                                |
-| <code>&#8209;F</code><br /><code>&#8209;&#8209;site&#8209;folder</code><br /><code>&#8209;&#8209;folder</code><br /><code>&#8209;&#8209;sf</code>  | <code>string</code>  |           <code>/</code>           |                                                  Folder name on the hosting server or GitHub repository name (e.g., <code>my&#8209;repo</code>, <code>www</code>, ...)                                                   |
-| <code>&#8209;P</code><br /><code>&#8209;&#8209;prod&#8209;server</code><br /><code>&#8209;&#8209;server</code><br /><code>&#8209;&#8209;ps</code>  | <code>boolean</code> |         <code>false</code>         |                                                           Launches a local server tracking the compiled production build footprint                                                           |
-| <code>&#8209;H</code><br /><code>&#8209;&#8209;secure</code><br /><code>&#8209;&#8209;use&#8209;https</code><br /><code>&#8209;&#8209;https</code> | <code>boolean</code> |         <code>false</code>         |                                                      Forces HTTPS protocol execution for both build paths and local development servers                                                      |
-|    <code>&#8209;g</code><br /><code>&#8209;&#8209;gh&#8209;pages</code><br /><code>&#8209;&#8209;demo</code><br /><code>&#8209;&#8209;gh</code>    | <code>boolean</code> |         <code>false</code>         |                                                Enables GitHub Pages build configuration (uses GitHub URLs, see <code>site.config.json</code> in <code>src/</code>)                                                 |
+|                                                                       Option                                                                       |         Type         |           Default Value            |                                                                                                                   Description                                                                                                                   |
+| :------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------: | :--------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                  <code>&#8209;W</code><br /><code>&#8209;&#8209;workspace&#8209;version</code><br /><code>&#8209;&#8209;wv</code>                  | <code>boolean</code> |         <code>false</code>         |                                                                                                   Displays current workspace semantic version                                                                                                   |
+|                                             <code>&#8209;i</code><br /><code>&#8209;&#8209;info</code>                                             | <code>boolean</code> |         <code>false</code>         |                                                                                                           Displays CLI options manual                                                                                                           |
+|                                           <code>&#8209;V</code><br /><code>&#8209;&#8209;verbose</code>                                            | <code>boolean</code> |         <code>false</code>         |                                                                                        Unlocks extended console logging during task streaming execution                                                                                         |
+|                                           <code>&#8209;s</code><br /><code>&#8209;&#8209;staging</code>                                            | <code>boolean</code> |         <code>false</code>         |                                                                        Enables <code>staging</code> environment configurations under <code>production</code> build rules                                                                        |
+|                                      <code>&#8209;c</code><br /><code>&#8209;&#8209;force&#8209;clean</code>                                       | <code>boolean</code> |         <code>false</code>         |                                                                                  Triggers a hard sweep of the compiled <code>dist/</code> workspace directory                                                                                   |
+|                                            <code>&#8209;l</code><br /><code>&#8209;&#8209;local</code>                                             | <code>boolean</code> |         <code>false</code>         |                                                                       Switches paths to strict relative links, satisfying standalone execution via <code>file:///</code>                                                                        |
+|                  <code>&#8209;I</code><br /><code>&#8209;&#8209;internationalization</code><br /><code>&#8209;&#8209;i18n</code>                   | <code>boolean</code> |         <code>false</code>         |                                                                                             Activates localized multi-lingual document compilation                                                                                              |
+|                                 <code>&#8209;&#8209;inline&#8209;sprite</code><br /><code>&#8209;&#8209;is</code>                                  | <code>boolean</code> |         <code>false</code>         |                                                            Directly embeds the SVG vector asset grid inside the document (forced automatically via <code>&#8209;&#8209;local</code>)                                                            |
+|                                   <code>&#8209;&#8209;inline&#8209;css</code><br /><code>&#8209;&#8209;ic</code>                                   | <code>boolean</code> |         <code>false</code>         |                                                                                      Directly embeds production stylesheets inside the HTML layout payload                                                                                      |
+|                                   <code>&#8209;&#8209;inline&#8209;js</code><br /><code>&#8209;&#8209;ij</code>                                    | <code>boolean</code> |         <code>false</code>         |                                                                                     Directly embeds processed client scripts inside the HTML layout payload                                                                                     |
+|                    <code>&#8209;M</code><br /><code>&#8209;&#8209;mobile&#8209;first</code><br /><code>&#8209;&#8209;mf</code>                     | <code>boolean</code> |         <code>false</code>         | Toggles the build layout pipeline. Sets PostCSS media query sorting to <code>mobile&#8209;first</code> and configures the HTML picture transformer to generate <code>min&#8209;width</code> source tags instead of <code>max&#8209;width</code> |
+|  <code>&#8209;d</code><br /><code>&#8209;&#8209;domain</code><br /><code>&#8209;&#8209;site&#8209;url</code><br /><code>&#8209;&#8209;url</code>   | <code>string</code>  | <code>http://localhost:3000</code> |                                                                                   Maps target deployment domain root, e.g., <code>https://example.com</code>                                                                                    |
+| <code>&#8209;F</code><br /><code>&#8209;&#8209;site&#8209;folder</code><br /><code>&#8209;&#8209;folder</code><br /><code>&#8209;&#8209;sf</code>  | <code>string</code>  |           <code>/</code>           |                                                              Folder name on the hosting server or GitHub repository name (e.g., <code>my&#8209;repo</code>, <code>www</code>, ...)                                                              |
+| <code>&#8209;P</code><br /><code>&#8209;&#8209;prod&#8209;server</code><br /><code>&#8209;&#8209;server</code><br /><code>&#8209;&#8209;ps</code>  | <code>boolean</code> |         <code>false</code>         |                                                                                    Launches a local server tracking the compiled production build footprint                                                                                     |
+| <code>&#8209;H</code><br /><code>&#8209;&#8209;secure</code><br /><code>&#8209;&#8209;use&#8209;https</code><br /><code>&#8209;&#8209;https</code> | <code>boolean</code> |         <code>false</code>         |                                                                               Forces HTTPS protocol execution for both build paths and local development servers                                                                                |
+|    <code>&#8209;g</code><br /><code>&#8209;&#8209;gh&#8209;pages</code><br /><code>&#8209;&#8209;demo</code><br /><code>&#8209;&#8209;gh</code>    | <code>boolean</code> |         <code>false</code>         |                                                               Enables GitHub Pages build configuration (uses GitHub URLs, see <code>site.config.json</code> in <code>src/</code>)                                                               |
 
 </div>
 
@@ -549,9 +550,9 @@ Experimental Features parameters:
 
 <div align="center">
 
-|            Option            |   Type    | Default Value |                                                Description                                                 |
-| :--------------------------: | :-------: | :-----------: | :--------------------------------------------------------------------------------------------------------: |
-| <code>&#8209;&#8209;obfuscation</code><br /><code>&#8209;&#8209;obf</code> | <code>boolean</code> |    <code>false</code>    | Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with <code>&#8209;&#8209;inline&#8209;*</code> options |
+|                                   Option                                   |         Type         |   Default Value    |                                                               Description                                                                |
+| :------------------------------------------------------------------------: | :------------------: | :----------------: | :--------------------------------------------------------------------------------------------------------------------------------------: |
+| <code>&#8209;&#8209;obfuscation</code><br /><code>&#8209;&#8209;obf</code> | <code>boolean</code> | <code>false</code> | Obfuscates structural CSS class selectors across HTML, CSS, and JS. Incompatible with <code>&#8209;&#8209;inline&#8209;\*</code> options |
 
 </div>
 
@@ -570,30 +571,30 @@ _For convenience, the primary npm scripts available in the project are listed be
 
 <div align="center">
 
-|    Script (NPM)     |                                      Complete CLI Command                                       |                                                       Description                                                       |
-| :-----------------: | :---------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------: |
-|      <code>prepare</code>      |                                             <code>husky</code>                                             |                                   Automatically sets up Git hooks after <code>npm install</code>                                   |
-|    <code>postinstall</code>    |                                       <code>npm run md:decode</code>                                       |                      Restores README to standard Markdown right after <code>npm install</code> for local work                      |
-|     <code>md:encode</code>     | <code>npx prettier &#8209;&#8209;write \"**/*.md\" && npx tsx cli/transform&#8209;md.ts encode README.md README.EN.md</code> | Prettier formatting + protects inline code layout via <code>transform&#8209;md.ts</code> (details: <code>npx tsx cli/transform&#8209;md.ts &#8209;&#8209;help</code>) |
-|     <code>md:decode</code>     | <code>npx tsx cli/transform&#8209;md.ts decode README.md README.EN.md && npx prettier &#8209;&#8209;write \"**/*.md\"</code> |     Reverts changes back to standard Markdown + Prettier formatting (details: <code>npx tsx cli/transform&#8209;md.ts &#8209;&#8209;help</code>)     |
-|       <code>clean</code>       |                                   <code>gulp clean &#8209;&#8209;force&#8209;clean</code>                                    |                                     Full cleanup of the compiled <code>dist/</code> directory                                      |
-|        <code>dev</code>        |                          <code>cross&#8209;env NODE_ENV=development gulp &#8209;&#8209;i18n</code>                           |                                   Dev server with hot reload and multilingual support                                   |
-|      <code>staging</code>      |                   <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;staging &#8209;&#8209;i18n</code>                    |                                      Production build with debugging flags enabled                                      |
-|       <code>prod</code>        |                 <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;prod&#8209;server</code>                  |                                      Production build with a local preview server                                       |
-|       <code>start</code>       |                                          <code>npm run dev</code>                                          |                                                 Alias for <code>npm run dev</code>                                                 |
-|       <code>build</code>       |                 <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;force&#8209;clean</code>                  |                                       Full production build with <code>dist/</code> cleanup                                        |
-|       <code>local</code>       |             <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;local &#8209;&#8209;force&#8209;clean</code>              |                        Production build with relative paths for standalone <code>file:///</code> execution                         |
-|      <code>secure</code>       |             <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;https &#8209;&#8209;force&#8209;clean</code>              |                                    Production build forcing HTTPS protocol execution                                    |
-|     <code>gh&#8209;pages</code>      |            <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;gh&#8209;pages &#8209;&#8209;force&#8209;clean</code>            |                                 Production build configured for GitHub Pages deployment                                 |
-|      <code>archive</code>      |                                   <code>npm run build && gulp zip</code>                                   |                                          Build and package <code>dist/</code> into a ZIP                                           |
-|      <code>lint:ts</code>      |                                   <code>eslint . &#8209;&#8209;max&#8209;warnings=0</code>                                   |                                           Lint TypeScript/JavaScript codebase                                           |
-|    <code>lint:ts:fix</code>    |                                <code>eslint . &#8209;&#8209;max&#8209;warnings=0 &#8209;&#8209;fix</code>                                |                                          Auto-fix linter errors in TS/JS files                                          |
-|     <code>lint:scss</code>     |                           <code>stylelint \"**/*.scss\" &#8209;&#8209;max&#8209;warnings=0</code>                            |                                                  Lint SCSS stylesheets                                                  |
-|   <code>lint:scss:fix</code>   |                        <code>stylelint \"**/*.scss\" &#8209;&#8209;max&#8209;warnings=0 &#8209;&#8209;fix</code>                         |                                          Auto-fix linter errors in SCSS files                                           |
-|       <code>lint</code>        |                           <code>npm&#8209;run&#8209;all &#8209;&#8209;parallel lint:ts lint:scss</code>                            |                                           Parallel linting for TS/JS and SCSS                                           |
-|     <code>lint:fix</code>      |                       <code>npm&#8209;run&#8209;all &#8209;&#8209;parallel lint:ts:fix lint:scss:fix</code>                        |                                          Parallel auto-fix for TS/JS and SCSS                                           |
-|      <code>format</code>       |                                      <code>prettier . &#8209;&#8209;write</code>                                       |                                      Format all files according to Prettier rules                                       |
-| <code>test:editorconfig</code> |                                     <code>editorconfig&#8209;checker</code>                                      |                                     Verify compliance with <code>.editorconfig</code> settings                                     |
+|          Script (NPM)          |                                                            Complete CLI Command                                                            |                                                                              Description                                                                              |
+| :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|      <code>prepare</code>      |                                                             <code>husky</code>                                                             |                                                    Automatically sets up Git hooks after <code>npm install</code>                                                     |
+|    <code>postinstall</code>    |                                                       <code>npm run md:decode</code>                                                       |                                       Restores README to standard Markdown right after <code>npm install</code> for local work                                        |
+|     <code>md:encode</code>     |       <code>npx prettier &#8209;&#8209;write \"\*_/_.md\" && npx tsx cli/transform&#8209;md.ts encode README.md README.EN.md</code>        | Prettier formatting + protects inline code layout via <code>transform&#8209;md.ts</code> (details: <code>npx tsx cli/transform&#8209;md.ts &#8209;&#8209;help</code>) |
+|     <code>md:decode</code>     |       <code>npx tsx cli/transform&#8209;md.ts decode README.md README.EN.md && npx prettier &#8209;&#8209;write \"\*_/_.md\"</code>        |             Reverts changes back to standard Markdown + Prettier formatting (details: <code>npx tsx cli/transform&#8209;md.ts &#8209;&#8209;help</code>)              |
+|       <code>clean</code>       |                                          <code>gulp clean &#8209;&#8209;force&#8209;clean</code>                                           |                                                       Full cleanup of the compiled <code>dist/</code> directory                                                       |
+|        <code>dev</code>        |                                 <code>cross&#8209;env NODE_ENV=development gulp &#8209;&#8209;i18n</code>                                  |                                                          Dev server with hot reload and multilingual support                                                          |
+|      <code>staging</code>      |                    <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;staging &#8209;&#8209;i18n</code>                     |                                                             Production build with debugging flags enabled                                                             |
+|       <code>prod</code>        |               <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;prod&#8209;server</code>                |                                                             Production build with a local preview server                                                              |
+|       <code>start</code>       |                                                          <code>npm run dev</code>                                                          |                                                                  Alias for <code>npm run dev</code>                                                                   |
+|       <code>build</code>       |               <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;force&#8209;clean</code>                |                                                         Full production build with <code>dist/</code> cleanup                                                         |
+|       <code>local</code>       |     <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;local &#8209;&#8209;force&#8209;clean</code>      |                                          Production build with relative paths for standalone <code>file:///</code> execution                                          |
+|      <code>secure</code>       |     <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;https &#8209;&#8209;force&#8209;clean</code>      |                                                           Production build forcing HTTPS protocol execution                                                           |
+|  <code>gh&#8209;pages</code>   | <code>cross&#8209;env NODE_ENV=production gulp prod &#8209;&#8209;i18n &#8209;&#8209;gh&#8209;pages &#8209;&#8209;force&#8209;clean</code> |                                                        Production build configured for GitHub Pages deployment                                                        |
+|      <code>archive</code>      |                                                   <code>npm run build && gulp zip</code>                                                   |                                                            Build and package <code>dist/</code> into a ZIP                                                            |
+|      <code>lint:ts</code>      |                                          <code>eslint . &#8209;&#8209;max&#8209;warnings=0</code>                                          |                                                                  Lint TypeScript/JavaScript codebase                                                                  |
+|    <code>lint:ts:fix</code>    |                                 <code>eslint . &#8209;&#8209;max&#8209;warnings=0 &#8209;&#8209;fix</code>                                 |                                                                 Auto-fix linter errors in TS/JS files                                                                 |
+|     <code>lint:scss</code>     |                                  <code>stylelint \"\*_/_.scss\" &#8209;&#8209;max&#8209;warnings=0</code>                                  |                                                                         Lint SCSS stylesheets                                                                         |
+|   <code>lint:scss:fix</code>   |                         <code>stylelint \"\*_/_.scss\" &#8209;&#8209;max&#8209;warnings=0 &#8209;&#8209;fix</code>                         |                                                                 Auto-fix linter errors in SCSS files                                                                  |
+|       <code>lint</code>        |                               <code>npm&#8209;run&#8209;all &#8209;&#8209;parallel lint:ts lint:scss</code>                                |                                                                  Parallel linting for TS/JS and SCSS                                                                  |
+|     <code>lint:fix</code>      |                           <code>npm&#8209;run&#8209;all &#8209;&#8209;parallel lint:ts:fix lint:scss:fix</code>                            |                                                                 Parallel auto-fix for TS/JS and SCSS                                                                  |
+|      <code>format</code>       |                                                <code>prettier . &#8209;&#8209;write</code>                                                 |                                                             Format all files according to Prettier rules                                                              |
+| <code>test:editorconfig</code> |                                                  <code>editorconfig&#8209;checker</code>                                                   |                                                      Verify compliance with <code>.editorconfig</code> settings                                                       |
 
 </div>
 
@@ -605,7 +606,7 @@ _For convenience, the primary npm scripts available in the project are listed be
 - **Evaluating and Selecting npm/gulp Packages:** Many libraries inside the Gulp module graph are currently flagged as <code>deprecated</code>. Significant effort was allocated to isolating modern equivalents or engineering bespoke custom script blocks to maintain build security and stability.
 - **Incremental Asset Validation Architecture:** Implementing a pipeline tracking media asset state against revision hashes. Standard plugins like <code>gulp&#8209;newer</code> proved ineffective post-<code>gulp&#8209;rev</code> execution. To overcome this, a custom approach was designed to compare files by their base name, effectively eliminating redundant rebuilds for revision-hashed assets.
 - **Integrating and Adapting AI-Generated Code (FFmpeg, ftcli):** Mapping cross-platform operational control logic over host binaries (FFmpeg, ftcli) using asynchronous <code>spawn</code> workers. LLM-generated scaffold streams required close verification, path escaping corrections to handle Windows system edge-cases, and integration into the custom incremental file state tracker.
-- **Resolving Conflicts Between Obfuscation and Inline Modes:** Embedding production styles inside HTML files prior to performing obfuscation routines routinely broke browser rendering pipelines, as <code>postcss&#8209;obfuscator</code> was unable to map mutations onto inline markup styles. To address this functional deficit, <code>&#8209;&#8209;obfuscation</code> and <code>&#8209;&#8209;inline&#8209;*</code> parameters were explicitly separated as mutually exclusive flags, validated by preemptive CLI error-checking hooks.
+- **Resolving Conflicts Between Obfuscation and Inline Modes:** Embedding production styles inside HTML files prior to performing obfuscation routines routinely broke browser rendering pipelines, as <code>postcss&#8209;obfuscator</code> was unable to map mutations onto inline markup styles. To address this functional deficit, <code>&#8209;&#8209;obfuscation</code> and <code>&#8209;&#8209;inline&#8209;\*</code> parameters were explicitly separated as mutually exclusive flags, validated by preemptive CLI error-checking hooks.
 - **Mathematical Calculations for Fluid Design:** For every responsive value defined via <code>clamp()</code>, it was necessary to compute a linear function (<code>y = kx + b</code>) based on two coordinate points—the minimum (<code>x_1, y_1</code>) and maximum (<code>x_2, y_2</code>) boundary states of the property to ensure flawless scaling between breakpoints.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -840,5 +841,24 @@ Email: [aleethey@gmail.com](mailto:aleethey@gmail.com)
 
 <!-- preview --->
 
-[interface-preview-gif]: project/preview/interface-preview.gif
-[fluid-preview-gif]: project/preview/fluid-design-preview.gif
+[interface-preview-gif]: docs/preview/interface-preview.gif
+[fluid-preview-gif]: docs/preview/fluid-design-preview.gif
+
+<!-- ! 🚀 ┌──────────────────────────────────────┐ -->
+<!-- ! 🚀 │       GIF MERGE & OPTIMIZATION       │ -->
+<!-- ! 🚀 └──────────────────────────────────────┘ -->
+<!-- ! ⚠️ WARNING: Input GIFs must have the EXACT SAME HEIGHT, or FFmpeg will fail! -->
+
+<!-- * 🛠️ STEP 1: HORIZONTAL MERGE (FFmpeg) -->
+<!-- * ffmpeg -i desktop.gif -i mobile.gif -filter_complex "[0]pad=iw+12:ih:0:0:color=0x00000000[left];[left][1]hstack,fps=20,split[x][z];[x]palettegen=stats_mode=diff[p];[z][p]paletteuse=dither=bayer:bayer_scale=3" combined.gif -->
+
+<!-- * Under the hood: -->
+<!-- * 💡 [0]pad=iw+12 -> adds a 12px transparent gap between GIFs -->
+<!-- * 💡 hstack       -> stacks horizontally (use vstack for vertical) -->
+<!-- * 💡 fps=20       -> caps the framerate -->
+
+<!-- ? ⚡ STEP 2: COMPRESSION (Gifsicle) -->
+<!-- ? gifsicle -O3 combined.gif -o combined_optimized.gif -->
+
+<!-- ? Under the hood: -->
+<!-- ? 💡 -O3 -> enables maximum optimization level (drastically drops file size) -->
