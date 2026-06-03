@@ -305,8 +305,8 @@ Wishbone-plus-Partners/
 │   │   ├── lighthouse__desktop.avif
 │   │   └── lighthouse__mobile.avif
 │   └── preview/
-│       ├── fluid-design-preview.gif
-│       └── interface-preview.gif
+│       ├── preview__fluid_design.gif
+│       └── preview__interface.gif
 │
 ├── gulp/                            # Скрипты сборщика Gulp
 │   ├── config/                      # Конфигурационные файлы среды, путей и FTP
@@ -842,8 +842,8 @@ Email: [aleethey@gmail.com](mailto:aleethey@gmail.com)
 
 <!-- preview --->
 
-[interface-preview-gif]: docs/preview/interface-preview.gif
-[fluid-preview-gif]: docs/preview/fluid-design-preview.gif
+[interface-preview-gif]: docs/preview/preview__interface.gif
+[fluid-preview-gif]: docs/preview/preview__fluid_design.gif
 
 <!-- ! 🚀 ┌──────────────────────────────────────┐ -->
 <!-- ! 🚀 │       GIF MERGE & OPTIMIZATION       │ -->
