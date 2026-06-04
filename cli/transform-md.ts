@@ -74,34 +74,42 @@ function processFiles(files: string[], command: 'encode' | 'decode', verbose: bo
         let content = fs.readFileSync(file, 'utf-8')
 
         if (command === 'encode') {
-            // Изолируем многострочные блоки кода (```...```), временно заменяя их на плейсхолдеры
+            // 1. Изолируем многострочные блоки кода (```...```)
             const codeBlocks: string[] = []
             content = content.replace(/(```[\s\S]*?```)/g, (match) => {
                 codeBlocks.push(match)
                 return `__CODE_BLOCK_PLACEHOLDER_${codeBlocks.length - 1}__`
             })
 
-            // Теперь безопасно обрабатываем инлайновые бэктики
-            content = content.replace(
-                /(?<!`)(`[^`\r\n]+`)(?!`)/g,
-                (_, p1) => `<code>${p1.slice(1, -1)}</code>`,
-            )
+            // 2. Безопасно обрабатываем инлайновые бэктики (учитывая экранирование внутри)
+            content = content.replace(/(?<!`)(`[^`\r\n\\]*(?:\\.[^`\r\n\\]*)*`)(?!`)/g, (_, p1) => {
+                const inner = p1
+                    .slice(1, -1)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/-/g, '&#8209;')
 
-            // Заменяем дефисы на неразрывные внутри тегов <code>
-            content = content.replace(
-                /<code[^>]*>([\s\S]*?)<\/code>/g,
-                (_, inner) => `<code>${inner.replace(/-/g, '&#8209;')}</code>`,
-            )
+                // Добавляем маркер encoded-by-transform-md, чтобы decode не зацепил чужие теги <code>
+                return `<code encoded-by-transform-md="true">${inner}</code>`
+            })
 
-            // Возвращаем многострочные блоки кода обратно в неизменном виде
+            // 3. Возвращаем многострочные блоки кода обратно
             content = content.replace(/__CODE_BLOCK_PLACEHOLDER_(\d+)__/g, (_, index) => {
                 return codeBlocks[Number(index)]
             })
         } else {
-            // Безопасный декод в один проход: обрабатываем только то, что внутри тегов <code>
+            // Безопасный декод: обрабатываем ТОЛЬКО теги с нашим маркером
             content = content.replace(
-                /<code[^>]*>([\s\S]*?)<\/code>/g,
-                (_, inner) => `\`${inner.replace(/&#8209;/g, '-')}\``,
+                /<code\s+encoded-by-transform-md="true">([\s\S]*?)<\/code>/g,
+                (_, inner) => {
+                    const decodedInner = inner
+                        .replace(/&#8209;/g, '-')
+                        .replace(/&lt;/g, '<')
+                        .replace(/&gt;/g, '>')
+                        .replace(/&amp;/g, '&')
+                    return `\`${decodedInner}\``
+                },
             )
         }
 
