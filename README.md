@@ -59,8 +59,8 @@
         <li>
           <a href="#preview">👁️ Предпросмотр</a>
           <ul>
-            <li><a href="#interface-preview">🖥️📱 Интерфейс (Desktop + Mobile)</a></li>
-            <li><a href="#fluid-preview">💧 Демонстрация Fluid-адаптива</a></li>
+            <li><a href="#interface-preview">🖥️📱 Демонстрация интерфейса (Desktop + Mobile)</a></li>
+            <li><a href="#fluid-preview">💧 Демонстрация fluid-адаптива (DevTools Stretch Test)</a></li>
           </ul>
         </li>
         <li>
@@ -117,19 +117,19 @@
 
 ### 👁️ Предпросмотр <a id="preview"></a>
 
-Ниже представлена **интерактивная демонстрация** проекта (_нажмите на любое изображение для перехода к живому демо_):
+Ниже представлена **интерактивная демонстрация** проекта (_нажмите на любое изображение для перехода к live&#8209;демо_):
 
 <div align="center">
 
-#### 🖥️📱 Интерфейс (Desktop + Mobile) <a id="interface-preview"></a>
+#### 🖥️📱 Демонстрация интерфейса (Desktop + Mobile) <a id="interface-preview"></a>
 
-[![Интерфейс проекта][interface-preview-gif]](https://aleethey.github.io/Wishbone-plus-Partners/)
+[![Демонстрация интерфейса][interface-preview-gif]](https://aleethey.github.io/Wishbone-plus-Partners/)
 
 <br />
 
-#### 💧 Демонстрация Fluid-адаптива <a id="fluid-preview"></a>
+#### 💧 Демонстрация fluid-адаптива (DevTools Stretch Test) <a id="fluid-preview"></a>
 
-[![Демонстрация Fluid Design][fluid-preview-gif]](https://aleethey.github.io/Wishbone-plus-Partners/)
+[![Демонстрация fluid-адаптива][fluid-preview-gif]](https://aleethey.github.io/Wishbone-plus-Partners/)
 
 </div>
 
@@ -836,9 +836,9 @@ Email: [aleethey@gmail.com](mailto:aleethey@gmail.com)
 
 <!-- contacts --->
 
-[GitHub-logo]: https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white
+<!-- [GitHub-logo]: https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white
 [Telegram-logo]: https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white
-[Gmail-logo]: https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white
+[Gmail-logo]: https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white -->
 
 <!-- preview --->
 
