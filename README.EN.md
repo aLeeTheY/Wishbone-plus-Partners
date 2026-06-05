@@ -477,7 +477,7 @@ git clone https://github.com/aLeeTheY/Wishbone-plus-Partners
 
 ### 📥 Installation <a id="installation"></a>
 
-1. Navigate to the project directory and install all required dependencies:
+3. Navigate to the project directory and install all required dependencies:
 
 ```sh
 npm install
@@ -520,7 +520,7 @@ You can customize these parameters to suit your needs. The builder automatically
 
 ### ⚙️ Build & Launch <a id="build-launch"></a>
 
-1. To build and launch the project, execute one of the following commands (_depending on your preferred build mode_):
+4. To build and launch the project, execute one of the following commands (_depending on your preferred build mode_):
 
 <div align="center">
 
