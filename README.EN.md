@@ -438,7 +438,8 @@ Wishbone-plus-Partners/
 ├── README.ENG.md
 ├── README.md
 ├── stylelint.config.ts              # Core Stylelint validation map
-├── svgo.config.mjs                  # SVG rendering optimization
+├── svgo.config.mjs                  # SVG rendering optimization constraints
+└── tsconfig.json
 ```
 
 ### 🌐 Supported Browsers <a id="supported-browsers"></a>
